@@ -35,54 +35,6 @@ paths:
       responses:
         500:
           "$ref": "#/components/responses/500"
-        
-
-    get:
-      parameters:
-        - in: path
-          required: true
-          name: settlementAccountID
-          schema:
-            type: string
-        - in: query
-          name: date
-          example: 2022-01-20
-          schema:
-            type: string
-        - in: query
-          name: fromDate
-          example: 2022-01-20
-          schema:
-            type: string
-        - in: query
-          name: toDate
-          example: 2022-01-22
-          schema:
-            type: string
-        - in: query
-          name: inPayout
-          example: 2000010
-          schema:
-            type: string
-        - in: query
-          name: sincePayout
-          example: 2000010
-          schema:
-            type: string
-        - in: query
-          name: fromTime
-          example: 2022-01-20T03:00:00+02
-          schema:
-            type: string
-        - in: query
-          name: toTime
-          example: 2022-01-22T04:00:00+02
-          schema:
-            type: string
-
-      responses:
-        500:
-          "$ref": "#/components/responses/500"
         200:
           description: "OK"
           content:
