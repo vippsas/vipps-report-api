@@ -6,7 +6,7 @@ info:
 servers:
 - url: https://api.server.asdasd/
 paths:
-  "/settlementAccounts":
+  "/ledgers":
     get:
       responses:
         500:
@@ -18,13 +18,13 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/SettlementAccount"
-  "/settlementAccount/{settlementAccountID}/report":
+                  "$ref": "#/components/schemas/ledger"
+  "/ledgers/{ledgerID}/report":
     post:
       parameters:
         - in: path
           required: true
-          name: settlementAccountID
+          name: ledgerID
           schema:
             type: string
       requestBody:
@@ -127,10 +127,10 @@ components:
             sincePayout:
               type: string
               example: 2000010
-    SettlementAccount:
+    ledger:
       type: object
       properties:
-        settlementAccountID:
+        ledgerID:
           type: string
           example: '2000001'
         associatedMSNs:
