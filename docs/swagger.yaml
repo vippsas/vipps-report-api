@@ -1,0 +1,198 @@
+---
+openapi: 3.0.2
+info:
+  title: Report API
+  version: '0.1'
+servers:
+- url: https://api.server.asdasd/
+paths:
+  "/settlementAccounts":
+    get:
+      responses:
+        500:
+          "$ref": "#/components/responses/500"
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/SettlementAccount"
+  "/settlementAccount/{settlementAccountID}/report":
+    post:
+      parameters:
+        - in: path
+          required: true
+          name: settlementAccountID
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportInput"
+      responses:
+        500:
+          "$ref": "#/components/responses/500"
+        
+
+    get:
+      parameters:
+        - in: path
+          required: true
+          name: settlementAccountID
+          schema:
+            type: string
+        - in: query
+          name: date
+          example: 2022-01-20
+          schema:
+            type: string
+        - in: query
+          name: fromDate
+          example: 2022-01-20
+          schema:
+            type: string
+        - in: query
+          name: toDate
+          example: 2022-01-22
+          schema:
+            type: string
+        - in: query
+          name: inPayout
+          example: 2000010
+          schema:
+            type: string
+        - in: query
+          name: sincePayout
+          example: 2000010
+          schema:
+            type: string
+        - in: query
+          name: fromTime
+          example: 2022-01-20T03:00:00+02
+          schema:
+            type: string
+        - in: query
+          name: toTime
+          example: 2022-01-22T04:00:00+02
+          schema:
+            type: string
+
+      responses:
+        500:
+          "$ref": "#/components/responses/500"
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Report"
+            text/csv:
+              schema:
+                type: string
+              examples:
+                csv table:
+                  summary: Summary of table
+                  value: 'cell 1, cell 2'
+components:
+  responses:
+    500:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: An URI-reference that identities the proble type
+              title:
+                type: string
+                description: A human readable summary of the problem
+              instance:
+                type: string
+                description: Unique ID for the request which can be used to find related events (logs)
+    401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code: 
+                type: string
+                example: 
+              message:
+                type: string
+  schemas:
+    ReportInput: 
+      oneOf:
+        - type: object
+          required:
+            - date
+          properties:
+            date:
+              type: string
+              format: date
+              example: 2022-01-20
+        - type: object
+          required:
+            - fromDate
+            - toDate
+          properties:
+            fromDate:
+              type: string
+              example: 2022-01-20
+            toDate:
+              type: string
+              example: 2022-01-22
+        - type: object
+          required:
+            - fromTime
+            - toTime
+          properties:
+            fromTime:
+              type: string
+              example: 2022-01-20T03:00:00+02
+            toTime:
+              type: string
+              example: 2022-01-22T04:00:00+02
+        - type: object
+          required:
+            - inPayout
+          properties:
+            inPayout:
+              type: string
+              example: 2000010
+        - type: object
+          required:
+            - sincePayout
+          properties:
+            sincePayout:
+              type: string
+              example: 2000010
+    SettlementAccount:
+      type: object
+      properties:
+        settlementAccountID:
+          type: string
+          example: '2000001'
+        associatedMSNs:
+          type: array
+          items:
+            type: "string"
+            example: '123123123'
+    Report:
+      type: object
+      properties:
+        settlementID:
+          type: string
+          example: '2000001'
+          description: An increasing number that is unique in each settlement-account.
+        settlementAccountID:
+          type: string
+          example: '1'
