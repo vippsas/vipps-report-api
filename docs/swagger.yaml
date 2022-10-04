@@ -4,7 +4,8 @@ info:
   title: Report API
   version: '0.1'
 servers:
-- url: https://api.server.asdasd/
+- url: https://apitest.vipps.no
+- url: https://api.vipps.no
 paths:
   "/ledgers":
     get:
@@ -18,7 +19,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/ledger"
+                  "$ref": "#/components/schemas/Ledger"
   "/ledgers/{ledgerID}/report":
     post:
       parameters:
@@ -127,17 +128,38 @@ components:
             sincePayout:
               type: string
               example: 2000010
-    ledger:
+    Ledger:
       type: object
       properties:
         ledgerID:
           type: string
           example: '2000001'
-        associatedMSNs:
+        settlesFor:
           type: array
           items:
-            type: "string"
-            example: '123123123'
+            oneOf:
+              - $ref: "#/components/schemas/LedgerSettlesForEpayment" 
+              - $ref: "#/components/schemas/LedgerSettlesForVippsnummer" 
+    LedgerSettlesForEpayment:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - epayment
+        epaymentMSN:
+          type: string
+    LedgerSettlesForVippsnummer:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - vippsnummer
+        vippsnummer: 
+          type: string
+        country: 
+          type: string
     Report:
       type: object
       properties:
