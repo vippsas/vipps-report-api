@@ -134,6 +134,19 @@ components:
         ledgerID:
           type: string
           example: '2000001'
+        settlementAccountNumber:
+          type: string
+          example: "86011117947"
+        firstPayout:
+          type: string
+          nullable: true
+          example: 2022-01-20T03:00:00+02
+        lastPayout:
+          type: string
+          nullable: true
+          example: 2022-01-22T04:00:00+02 
+        org:
+          $ref: "#/components/schemas/Organization"
         settlesFor:
           type: array
           items:
@@ -170,3 +183,14 @@ components:
         settlementAccountID:
           type: string
           example: '1'
+    Organization:
+      type: object
+      properties:
+        orgno:
+          type: number
+          example: 987654321
+        jurisdiction:
+          type: string
+          enum:
+            - "NO"
+          example: "NO"
