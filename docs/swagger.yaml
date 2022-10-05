@@ -20,19 +20,61 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Ledger"
-  "/ledgers/{ledgerID}/report":
-    post:
+  "/ledgers/{ledgerID}/transactions":
+    get:
       parameters:
         - in: path
           required: true
           name: ledgerID
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ReportInput"
+        - in: query
+          required: false
+          name: specificLedgerDate
+          schema:
+            type: string
+            format: Date
+            example: 2022-01-20
+        - in: query
+          required: false
+          name: fromLedgerDate
+          schema:
+            type: string
+            format: Date
+            example: 2022-01-19
+        - in: query
+          required: false
+          name: toLedgerDate
+          schema:
+            type: string
+            format: Date
+            example: 2022-01-22
+        - in: query
+          required: false
+          name: fromTimestamp
+          schema: 
+            type: string
+            format: DateTime
+            example: 2022-09-22T08:00:00+00:00
+        - in: query
+          required: false
+          name: toTimestamp
+          schema:
+            type: string
+            format: DateTime
+            example: 2022-09-22T10:00:00+00:00
+        - in: query
+          required: false
+          name: inPayout
+          schema:
+            type: string
+            example: 2000010
+        - in: query
+          required: false
+          name: sincePayout
+          schema:
+            type: string
+            example: 2000010
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -41,16 +83,22 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Transaction"
+                type: object
+                properties:
+                  transactions:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/Transaction"
             text/csv:
               schema:
                 type: string
               examples:
                 csv table:
-                  summary: Summary of table
-                  value: 'cell 1, cell 2'
+                  summary: List of transactions
+                  value: |-
+                    transactionID, timestamp, ledgerDate, ledgerID, transactionType, orderID, ledgerAmount.value, ledgerAmount.currency, grossAmount.value, grossAmount.currency, fee.value, fee.currency, priceRate, priceFixed.value, priceFixed.currency, storeID, storeName
+                    2000001, 2022-09-22T09:31:28+00:00, 2022-09-22, 1, refund, 1, 0, NOK, 0, NOK, 0, NOK, 1.25, 0, NOK, msn/1234, Lokalbutikk Løkka
+
 components:
   responses:
     500:
@@ -83,51 +131,58 @@ components:
                 type: string
   schemas:
     ReportInput: 
-      oneOf:
-        - type: object
-          required:
-            - date
-          properties:
-            date:
-              type: string
-              format: date
-              example: 2022-01-20
-        - type: object
-          required:
-            - fromDate
-            - toDate
-          properties:
-            fromDate:
-              type: string
-              example: 2022-01-20
-            toDate:
-              type: string
-              example: 2022-01-22
-        - type: object
-          required:
-            - fromTime
-            - toTime
-          properties:
-            fromTime:
-              type: string
-              example: 2022-01-20T03:00:00+02
-            toTime:
-              type: string
-              example: 2022-01-22T04:00:00+02
-        - type: object
-          required:
-            - inPayout
-          properties:
-            inPayout:
-              type: string
-              example: 2000010
-        - type: object
-          required:
-            - sincePayout
-          properties:
-            sincePayout:
-              type: string
-              example: 2000010
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            type: string
+        filters:
+          oneOf:
+            - type: object
+              required:
+                - date
+              properties:
+                date:
+                  type: string
+                  format: date
+                  example: 2022-01-20
+            - type: object
+              required:
+                - fromDate
+                - toDate
+              properties:
+                fromDate:
+                  type: string
+                  example: 2022-01-20
+                toDate:
+                  type: string
+                  example: 2022-01-22
+            - type: object
+              required:
+                - fromTime
+                - toTime
+              properties:
+                fromTime:
+                  type: string
+                  example: 2022-01-20T03:00:00+02
+                toTime:
+                  type: string
+                  example: 2022-01-22T04:00:00+02
+            - type: object
+              required:
+                - inPayout
+              properties:
+                inPayout:
+                  type: string
+                  example: 2000010
+            - type: object
+              required:
+                - sincePayout
+              properties:
+                sincePayout:
+                  type: string
+                  example: 2000010
     Ledger:
       type: object
       properties:
@@ -211,6 +266,8 @@ components:
           $ref : "#/components/schemas/Money"
         priceRate:
           type: number
+          format: double
+          example: 1.25
           description: |-
             The percentage rate used.
         priceFixed:
@@ -222,7 +279,7 @@ components:
             The store id. Can be msn/1234 or vippsnummer/1234.
         storeName:
           type: string
-          example: "Kitch'n Netthandel"
+          example: "Lokalbutikk Løkka"
     Organization:
       type: object
       properties:
