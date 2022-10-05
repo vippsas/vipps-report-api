@@ -9,6 +9,8 @@ END_METADATA -->
 
 💥 DRAFT! Unfinished work in progress. API specification changes are still coming. 💥
 
+The reporting API gives you or a third-party acting on your behalf the ability to fetch 
+
 ## Getting started
 
 Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, contribution guidelines, etc.

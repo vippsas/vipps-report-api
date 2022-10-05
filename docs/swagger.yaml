@@ -43,7 +43,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/Report"
+                  "$ref": "#/components/schemas/Transaction"
             text/csv:
               schema:
                 type: string
@@ -133,7 +133,7 @@ components:
       properties:
         ledgerID:
           type: string
-          example: '2000001'
+          example: '1'
         settlementAccountNumber:
           type: string
           example: "86011117947"
@@ -173,16 +173,56 @@ components:
           type: string
         country: 
           type: string
-    Report:
+    Transaction:
       type: object
       properties:
-        settlementID:
+        transactionID:
           type: string
           example: '2000001'
-          description: An increasing number that is unique in each settlement-account.
-        settlementAccountID:
+        timestamp:
+          type: string
+          format: DateTime
+          example: '2022-09-22T09:31:28+00:00'
+        ledgerDate:
+          type: string
+          format: Date
+          example: '2022-09-22'
+        ledgerID:
           type: string
           example: '1'
+        transactionType:
+          type: string
+          enum:
+            - refund
+            - capture
+            - invoice
+            - payout
+        orderID:
+          type: string
+          description: |-
+            Is also called End-To-End-Reference
+        ledgerAmount:
+          $ref : "#/components/schemas/Money"
+          description: |-
+            Contribution to the ledger balance.
+        grossAmount:
+          $ref : "#/components/schemas/Money"
+        fee:
+          $ref : "#/components/schemas/Money"
+        priceRate:
+          type: number
+          description: |-
+            The percentage rate used.
+        priceFixed:
+          $ref : "#/components/schemas/Money"
+        storeID:
+          type: string
+          example: msn/1234
+          description: |-
+            The store id. Can be msn/1234 or vippsnummer/1234.
+        storeName:
+          type: string
+          example: "Kitch'n Netthandel"
     Organization:
       type: object
       properties:
@@ -194,3 +234,17 @@ components:
           enum:
             - "NO"
           example: "NO"
+    Money:
+      type: object
+      properties:
+        value:
+          type: number
+          format: int32
+          description: |-
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        currency:
+          type: string
+          example: 'NOK'
+          description: |-
+            Currency code as defined in ISO 4217
