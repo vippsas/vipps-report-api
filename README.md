@@ -9,15 +9,18 @@ END_METADATA -->
 
 💥 DRAFT! Unfinished work in progress. API specification changes are still coming. 💥
 
-The report API gives you or a third-party acting on your behalf the ability to fetch information about payment events that have been processed by vipps.
+The report API gives you or a third-party acting on your behalf the ability to fetch information
+about payments that have been processed by Vipps.
 
-## Getting started
+Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
+for general information about Vipps APIs: API keys, product activation,
+contact information, contribution guidelines, etc.
 
-Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, contribution guidelines, etc.
-
-## Report API
-- [API Setup](./vipps-setup.md): Prerequisites for using the API
-- [API Guide](./vipps-usage-api.md): Usage guide
+## Report API documentation
+- [Authentication and authorization](./auth.md)
+  - [About accounting partners](./auth.md)
+- API reference: TODO SWAGGER
+- [Settlement data](./settlement-guide.md): How to use the Report API to fetch settlement data
 - [API FAQ](./vipps-faq.md): Frequently asked questions
 
 ## Questions?
