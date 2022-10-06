@@ -9,6 +9,8 @@ servers:
 paths:
   "/ledgers":
     get:
+      parameters:
+        - $ref: "#/components/parameters/JWT"
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -23,6 +25,7 @@ paths:
   "/ledgers/{ledgerID}/transactions":
     get:
       parameters:
+        - $ref: "#/components/parameters/JWT"
         - in: path
           required: true
           name: ledgerID
@@ -100,6 +103,19 @@ paths:
                     2000001, 2022-09-22T09:31:28+00:00, 2022-09-22, 1, refund, 1, 0, NOK, 0, NOK, 0, NOK, 1.25, 0, NOK, msn/1234, Lokalbutikk Løkka
 
 components:
+  parameters:
+    JWT:
+      name: Authorization
+      in: header
+      description: |-
+        The access token is a base64-encoded string that is required for all API calls.
+        It is a JWT (JSON Web Token).
+        It is valid for 1 hour in the test environment and 24 hours in the production environment.
+      required: true
+      schema:
+        type: string
+        example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
+
   responses:
     500:
       description: Server error

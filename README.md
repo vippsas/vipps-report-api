@@ -9,7 +9,7 @@ END_METADATA -->
 
 💥 DRAFT! Unfinished work in progress. API specification changes are still coming. 💥
 
-The reporting API gives you or a third-party acting on your behalf the ability to fetch 
+The reporting API gives you or a third-party acting on your behalf the ability to fetch information about payment events that have been processed by vipps.
 
 ## Getting started
 
