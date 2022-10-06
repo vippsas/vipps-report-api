@@ -49,7 +49,7 @@ The response from this will include the ledgers you have access to, some meta-in
 ]
 ```
 
-Then, by using the `ledgerID` field from the respose, you can use the [`GET:/transactions`]() endpoint to fetch the transactions for that ledger.
+Then, by using the `ledgerID` field from the respose, you can use the `GET:/transactions` endpoint to fetch the transactions for that ledger.
 This endpoint can be used to get the data required to generate a settlement report.
 It gives you as the consumer a lot of flexibility for how and what you want retrieved, so we recommend looking at the API documentation for all of the options available.
 
