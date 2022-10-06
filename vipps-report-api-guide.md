@@ -9,11 +9,13 @@ END_METADATA -->
 
 # API Usage
 
-Before you can use this api, you will need to aquire a Authorization token. This field is named "Authorization" in the request-header and is used to identify your identity and permissions.
+Before you can use this API, you will need to aquire a Authorization token.
+This field is named "Authorization" in the request-header and is used to identify your identity and permissions.
 
-`TODO: Text about how to fetch the JWT`
+See:
+[Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
 
-When you have aquired the token, you can request information about your ledgers.
+When you have acquired the token, you can request information about your ledgers.
 This is done with the `GET:/ledgers` endpoint.
 
 ```http
@@ -55,3 +57,15 @@ It gives you as the consumer a lot of flexibility for how and what you want retr
 
 `TODO: Rename to the correct terms and endpoint with parameters.`
 ![Settlement](./images/adr-settlement-0001.png)
+
+## Questions?
+
+When contacting us about API issues, we are usually able to help faster if you send us
+the complete request and response.
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-developers/issues),
+a [pull request](https://github.com/vippsas/vipps-developers/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
