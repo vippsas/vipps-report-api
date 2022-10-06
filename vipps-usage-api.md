@@ -1,8 +1,10 @@
-<!-- START_METADATA
----
+## <!-- START_METADATA
+
 title: API Usage
 sidebar_position: 3
+
 ---
+
 END_METADATA -->
 
 # API Usage
@@ -12,7 +14,7 @@ Before you can use this api, you will need to aquire a Authorization token. This
 `TODO: Text about how to fetch the JWT`
 
 When you have aquired the token, you can request information about your ledgers.
-This is done with the [`GET:/ledgers`]() endpoint.
+This is done with the `GET:/ledgers` endpoint.
 
 ```http
 GET https://api.vipps.no/reports/ledgers
@@ -47,11 +49,9 @@ The response from this will include the ledgers you have access to, some meta-in
 ]
 ```
 
-Then, by using the `ledgerID` field from the respose, you can use the [`GET:/transactions`]() endpoint to fetch the transactions for that ledger. 
-This endpoint can be used to get the data required to generate a settlement report. 
+Then, by using the `ledgerID` field from the respose, you can use the [`GET:/transactions`]() endpoint to fetch the transactions for that ledger.
+This endpoint can be used to get the data required to generate a settlement report.
 It gives you as the consumer a lot of flexibility for how and what you want retrieved, so we recommend looking at the API documentation for all of the options available.
-
 
 `TODO: Rename to the correct terms and endpoint with parameters.`
 ![Settlement](./images/adr-settlement-0001.png)
-
