@@ -16,7 +16,7 @@ END_METADATA -->
 
 💥 DRAFT! Unfinished work in progress. API specification changes are still coming. 💥
 
-The report API gives you or a third-party acting on your behalf the ability to fetch information about payment events that have been processed by vipps.
+The report API gives you or a third-party acting on your behalf the ability to fetch information about payment events that have been processed by Vipps.
 
 ## Getting started
 
