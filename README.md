@@ -16,9 +16,10 @@ The report API gives you or a third-party acting on your behalf the ability to f
 Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, contribution guidelines, etc.
 
 ## Report API
-- [API Setup](./vipps-setup.md): Prerequisites for using the API
-- [API Guide](./vipps-usage-api.md): Usage guide
-- [API FAQ](./vipps-faq.md): Frequently asked questions
+* [API Setup](./vipps-setup.md): Prerequisites for using the API
+* [API Guide](./vipps-usage-api.md): Usage guide
+* [API FAQ](./vipps-faq.md): Frequently asked questions
+* [Swagger UI](https://vippsas.github.io/vipps-report-api/)
 
 ## Questions?
 
