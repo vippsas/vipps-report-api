@@ -16,12 +16,17 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
+Document version: 0.0.2.
+
 Before you can use this API, you will need to aquire a Authorization token.
 This field is named "Authorization" in the request-header and is used to
 identify your identity and permissions.
 
 See:
 [Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
+
+
+## Get a ledger
 
 When you have acquired the token, you can request information about your ledgers.
 This is done with the `GET:/ledgers` endpoint.
@@ -72,6 +77,45 @@ options available.
 
 `TODO: Rename to the correct terms and endpoint with parameters.`
 ![Settlement](./images/adr-settlement-0001.png)
+
+## Get transactions
+
+When you have the `ledgerId` you can get the transactions with
+`/ledgers/{ledgerID}/transactions` and get a response similar to this:
+
+```json
+{
+   "transactions":[
+      {
+         "transactionID":"2000001",
+         "timestamp":"2022-09-22T09:31:28+00:00",
+         "ledgerDate":"2022-09-22",
+         "ledgerID":"1",
+         "transactionType":"refund",
+         "orderID":"string",
+         "ledgerAmount":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "grossAmount":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "fee":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "priceRate":1.25,
+         "priceFixed":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "storeID":"msn/1234",
+         "storeName":"Lokalbutikk Løkka"
+      }
+   ]
+}
+```
 
 ## Questions?
 
