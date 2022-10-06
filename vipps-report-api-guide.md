@@ -91,7 +91,7 @@ options available.
 ## Get transactions
 
 When you have the `ledgerId` you can get the transactions with
-`/ledgers/{ledgerID}/transactions` and get a response similar to this:
+`GET:/ledgers/{ledgerID}/transactions` and get a response similar to this:
 
 ```json
 {
