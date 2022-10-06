@@ -16,6 +16,16 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
+<!-- START_TOC -->
+
+# Table of contents
+
+* [Get a ledger](#get-a-ledger)
+* [Get transactions](#get-transactions)
+* [Questions?](#questions)
+
+<!-- END_TOC -->
+
 Document version: 0.0.2.
 
 Before you can use this API, you will need to aquire a Authorization token.
