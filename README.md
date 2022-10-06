@@ -20,6 +20,8 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 - [API Guide](./vipps-usage-api.md): Usage guide
 - [API FAQ](./vipps-faq.md): Frequently asked questions
 
+- [Swagger UI](https://vippsas.github.io/vipps-report-api/)
+
 ## Questions?
 
 For more information, see:
