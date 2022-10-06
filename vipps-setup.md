@@ -7,6 +7,13 @@ END_METADATA -->
 
 # Setup and prerequisite
 
+<!-- START_COMMENT -->
+
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
 (Can this be added to the main API Guide?)
 
 ## Give access to an accounting-partner
