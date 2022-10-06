@@ -127,12 +127,15 @@ components:
               type:
                 type: string
                 description: An URI-reference that identities the problem type
+                example: "https://example.net/validation-error"
               title:
                 type: string
                 description: A human readable summary of the problem
+                example: "Your request parameters didn't validate."
               instance:
                 type: string
                 description: Unique id for the request which can be used to find related events (logs)
+                example: "123e4567-e89b-12d3-a456-426655440000"
     401:
       description: Unauthorized
       content:
@@ -142,9 +145,10 @@ components:
             properties:
               code:
                 type: string
-                example:
+                example: Unauthorized
               message:
                 type: string
+                example: "Please check your API keys"
   schemas:
     ReportInput:
       type: object
@@ -243,7 +247,7 @@ components:
             - vippsnummer
         vippsnummer:
           type: string
-          example: 654321
+          example: 123456
         country:
           type: string
           example: 'NO'
@@ -320,6 +324,7 @@ components:
           description: |-
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+          example: 49900
         currency:
           type: string
           example: 'NOK'
