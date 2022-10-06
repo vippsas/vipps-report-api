@@ -2,7 +2,7 @@
 openapi: 3.0.2
 info:
   title: Report API
-  version: '0.1'
+  version: '0.2'
 servers:
 - url: https://apitest.vipps.no
 - url: https://api.vipps.no
@@ -22,13 +22,13 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Ledger"
-  "/ledgers/{ledgerID}/transactions":
+  "/ledgers/{ledgerId}/transactions":
     get:
       parameters:
         - $ref: "#/components/parameters/JWT"
         - in: path
           required: true
-          name: ledgerID
+          name: ledgerId
           schema:
             type: string
         - in: query
@@ -55,7 +55,7 @@ paths:
         - in: query
           required: false
           name: fromTimestamp
-          schema: 
+          schema:
             type: string
             format: DateTime
             example: 2022-09-22T08:00:00+00:00
@@ -99,7 +99,7 @@ paths:
                 csv table:
                   summary: List of transactions
                   value: |-
-                    transactionID, timestamp, ledgerDate, ledgerID, transactionType, orderID, ledgerAmount.value, ledgerAmount.currency, grossAmount.value, grossAmount.currency, fee.value, fee.currency, priceRate, priceFixed.value, priceFixed.currency, storeID, storeName
+                    transactionId, timestamp, ledgerDate, ledgerId, transactionType, orderId, ledgerAmount.value, ledgerAmount.currency, grossAmount.value, grossAmount.currency, fee.value, fee.currency, priceRate, priceFixed.value, priceFixed.currency, storeID, storeName
                     2000001, 2022-09-22T09:31:28+00:00, 2022-09-22, 1, refund, 1, 0, NOK, 0, NOK, 0, NOK, 1.25, 0, NOK, msn/1234, Lokalbutikk Løkka
 
 components:
@@ -140,13 +140,13 @@ components:
           schema:
             type: object
             properties:
-              code: 
+              code:
                 type: string
-                example: 
+                example:
               message:
                 type: string
   schemas:
-    ReportInput: 
+    ReportInput:
       type: object
       properties:
         columns:
@@ -202,7 +202,7 @@ components:
     Ledger:
       type: object
       properties:
-        ledgerID:
+        ledgerId:
           type: string
           example: '1'
         settlementAccountNumber:
@@ -215,15 +215,15 @@ components:
         lastPayout:
           type: string
           nullable: true
-          example: 2022-01-22T04:00:00+02 
+          example: 2022-01-22T04:00:00+02
         org:
           $ref: "#/components/schemas/Organization"
         settlesFor:
           type: array
           items:
             oneOf:
-              - $ref: "#/components/schemas/LedgerSettlesForEpayment" 
-              - $ref: "#/components/schemas/LedgerSettlesForVippsnummer" 
+              - $ref: "#/components/schemas/LedgerSettlesForEpayment"
+              - $ref: "#/components/schemas/LedgerSettlesForVippsnummer"
     LedgerSettlesForEpayment:
       type: object
       properties:
@@ -240,14 +240,14 @@ components:
           type: string
           enum:
             - vippsnummer
-        vippsnummer: 
+        vippsnummer:
           type: string
-        country: 
+        country:
           type: string
     Transaction:
       type: object
       properties:
-        transactionID:
+        transactionId:
           type: string
           example: '2000001'
         timestamp:
@@ -258,7 +258,7 @@ components:
           type: string
           format: Date
           example: '2022-09-22'
-        ledgerID:
+        ledgerId:
           type: string
           example: '1'
         transactionType:
@@ -268,7 +268,7 @@ components:
             - capture
             - invoice
             - payout
-        orderID:
+        orderId:
           type: string
           description: |-
             Is also called End-To-End-Reference
