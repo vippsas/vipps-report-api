@@ -100,7 +100,7 @@ paths:
                   summary: List of transactions
                   value: |-
                     transactionId, timestamp, ledgerDate, ledgerId, transactionType, orderId, ledgerAmount.value, ledgerAmount.currency, grossAmount.value, grossAmount.currency, fee.value, fee.currency, priceRate, priceFixed.value, priceFixed.currency, storeId, storeName
-                    2000001, 2022-09-22T09:31:28+00:00, 2022-09-22, 1, refund, 1, 0, NOK, 0, NOK, 0, NOK, 1.25, 0, NOK, msn/1234, Lokalbutikk Løkka
+                    2000001, 2022-09-22T09:31:28+00:00, 2022-09-22, 1, refund, 1, 0, NOK, 0, NOK, 0, NOK, 1.25, 0, NOK, msn/123456, Lokalbutikk Løkka
 
 components:
   parameters:
@@ -233,6 +233,7 @@ components:
             - epayment
         epaymentMSN:
           type: string
+          example: 123456
     LedgerSettlesForVippsnummer:
       type: object
       properties:
@@ -242,8 +243,10 @@ components:
             - vippsnummer
         vippsnummer:
           type: string
+          example: 654321
         country:
           type: string
+          example: 'NO'
     Transaction:
       type: object
       properties:
@@ -272,6 +275,7 @@ components:
           type: string
           description: |-
             Is also called End-To-End-Reference
+          example: acme-shop-123-order123abc
         ledgerAmount:
           $ref : "#/components/schemas/Money"
           description: |-
@@ -290,9 +294,9 @@ components:
           $ref : "#/components/schemas/Money"
         storeId:
           type: string
-          example: msn/1234
+          example: msn/123456
           description: |-
-            The store id. Can be msn/1234 or vippsnummer/1234.
+            The store id. Can be 'msn/123456' or 'vippsnummer/123456'.
         storeName:
           type: string
           example: "Lokalbutikk Løkka"
