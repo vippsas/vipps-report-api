@@ -1,13 +1,20 @@
 <!-- START_METADATA
 ---
-title: API Usage
+title: API Guide
 sidebar_position: 3
 
 ---
 
 END_METADATA -->
 
-# API Usage
+# Vipps Report API
+
+<!-- START_COMMENT -->
+
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
 
 Before you can use this API, you will need to aquire a Authorization token.
 This field is named "Authorization" in the request-header and is used to identify your identity and permissions.
