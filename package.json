@@ -1,5 +1,5 @@
 {
-  "name": "vipps-reporting-api",
+  "name": "vipps-report-api",
   "version": "1.0.0",
   "description": "<!-- START_METADATA --- title: Introduction sidebar_position: 1 --- END_METADATA -->",
   "main": "index.js",
@@ -11,13 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vippsas/vipps-reporting-api.git"
+    "url": "git+https://github.com/vippsas/vipps-report-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vippsas/vipps-reporting-api/issues"
+    "url": "https://github.com/vippsas/vipps-report-api/issues"
   },
-  "homepage": "https://github.com/vippsas/vipps-reporting-api#readme"
+  "homepage": "https://github.com/vippsas/vipps-report-api#readme"
 }
