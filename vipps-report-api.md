@@ -356,10 +356,11 @@ specification for details):
 * price
 * description
 
-An example combining the options above:
+An example combining the options above (line break added for readability):
 
 ```
-GET:/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price,description
+GET:/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=
+transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price,description
 ```
 
 ## Formats
