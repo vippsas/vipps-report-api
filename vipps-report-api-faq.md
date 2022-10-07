@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: FAQ
-sidebar_position: 4
+sidebar_position: 30
 ---
 END_METADATA -->
 
@@ -13,6 +13,9 @@ END_METADATA -->
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 <!-- END_COMMENT -->
+
+See:
+[Settlement guide](settlement-guide.md).
 
 ## Questions?
 
