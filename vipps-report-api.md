@@ -147,15 +147,24 @@ single settlement payout:
 
 ![ledgers vs units, many to one](./images/ledger-vs-units-one-to-many.png)
 
-### Get a ledger
+### Get ledgers
 
-The ledger has its own `ledgerId`, so the first step in using the report API is
-to fetch the list of ledgers you have access to. If you are integrating a single
+All ledger have their own `ledgerId`, so the first step in using the report API is
+to fetch the list of ledgers you have access to. This is managed as
+described in
+[Give access to an accounting partner](#give-access-to-an-accounting-partner).
+
+The ledgers are fetched with
+`GET:/report/v1/report/v1/ledgers`.
+
+If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`.
 
-An example response from
-`GET:/report/v1/report/v1/ledgers` is:
+**Please note:** There is no need to specify the merchant or sale unit.
+The response contains all ledgers that are available for the API keys used.
+
+#### Example for eCom/ePayments
 
 ```json
 {
@@ -184,6 +193,8 @@ An example response from
 }
 ```
 
+#### Example for Vippsnummer
+
 A Vippsnummer will have a different `settlesFor` structure:
 
 ```json
@@ -199,14 +210,17 @@ A Vippsnummer will have a different `settlesFor` structure:
 ```
 
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
-may use the `msn` or `vippsnummer` arguments to filter the response.
+may use the `msn` or `vippsnummer` arguments to filter the response:
+* `GET:/report/v1/report/v1/ledgers?msn=123456`
+* `GET:/report/v1/report/v1/ledgers?vippsnummer=123456`
 
-**TODO:** Add examples.
+**TODO:** Check these examples. 👆
 
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
 ledgers appear for different customers as they add you as accounting partner.
-See: [Adding a new accounting partner](#adding-a-new-accounting-partner).
+See:
+[Adding a new accounting partner](#adding-a-new-accounting-partner).
 
 ## Transaction types
 
@@ -294,10 +308,13 @@ Days are bank days, Monday - Friday, excluding banking holidays. In other words,
 a capture made on Monday will be on merchant's account on Wednesday, while a
 capture made on Friday will be on merchant's account on Tuesday.
 
+A day starts and ends at midnight, Oslo time: Start `00:00:00`, end `23:59:59`
+(subseconds not specified).
+
 The payout will be marked with the text `Utbet. 2000101 Vippsnr <ledgername>`.
 
-**Please note:** We plan to later add a `payouts/` endpoint to the API
-that provides more information about the status of a payout.
+**Please note:** We plan to later add a `GET:/report/v1/report/v1/payouts`
+endpoint to the API that provides more information about the status of payouts.
 
 ### Other transactions
 
@@ -317,10 +334,23 @@ above:
 One can request a report from this ledger by
 calling `GET:/report/v1/ledgers/{ledgerId}/transactions`
 and using the `columns` parameter to specify a comma-separated list of which
-data to include in the response. For instance:
+data to include in the response:
+* transactionId
+* transactionType
+* reference
+* ledgerDate
+* ledgerAmount
+* grossAmount
+* fee
+* msn
+* time
+* price
+* description
+
+For instance:
 
 ```
-GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
+GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price,description
 ```
 
 The endpoint can return either CSV or JSON depending on the `Accept` header;
