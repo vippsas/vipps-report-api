@@ -27,7 +27,6 @@ END_METADATA -->
   * [Get ledgers](#get-ledgers)
     * [Example for eCom/ePayments](#example-for-ecomepayments)
     * [Example for Vippsnummer](#example-for-vippsnummer)
-* [Settlements](#settlements)
 * [Reports](#reports)
 * [Formats](#formats)
   * [JSON](#json)
@@ -147,12 +146,6 @@ relevant to poll this endpoint many times as you will continue to see new
 ledgers appear for different customers as they add you as accounting partner.
 See:
 [Adding a new accounting partner](#adding-a-new-accounting-partner).
-
-## Settlements
-
-See:
-[Settlement guide](settlement-guide.md)
-for all details about settlements,
 
 ## Reports
 
