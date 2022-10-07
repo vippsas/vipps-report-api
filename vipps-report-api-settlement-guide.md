@@ -298,11 +298,15 @@ has ended.
 
 ### Periodization
 
-The `transactions` endpoint has several parameters for selecting a range of
+The
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+endpoint has several parameters for selecting a range of
 transactions to return, which can be used for an initial data import.
 
 Most users of the API will want to set up an automated job to call
-the `transactions` endpoint on a daily basis to download the data for the
+the
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+endpoint on a daily basis to download the data for the
 preceding day. Such synchronization can be done in two ways: Date-based indexing
 and payout-based indexing. Often they will give the same results; the difference
 is:
