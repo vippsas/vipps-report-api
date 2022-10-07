@@ -80,7 +80,7 @@ described in
 [Give access to an accounting partner](#give-access-to-an-accounting-partner).
 
 The ledgers are fetched with
-`GET:/report/v1/report/v1/ledgers`.
+[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers/get)
 
 If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
