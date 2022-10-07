@@ -1,13 +1,11 @@
 <!-- START_METADATA
-
-title: Vipps settlement concepts
-sidebar_position: 5
-
 ---
-
+title: API Guide: Overview
+sidebar_position: 5
+---
 END_METADATA -->
 
-# Vipps Report API
+# Vipps Report API: Overview
 
 <!-- START_COMMENT -->
 
@@ -18,7 +16,7 @@ END_METADATA -->
 
 <!-- START_TOC -->
 
-# Table of contents
+## Table of contents
 
 - [About the Report API](#about-the-report-api)
 - [Authenticating to the Report API](#authenticating-to-the-report-api)
@@ -32,10 +30,9 @@ END_METADATA -->
   - [Adding a new accounting partner](#adding-a-new-accounting-partner)
 - [Questions?](#questions)
 
-
 <!-- END_TOC -->
 
-Document version: 0.0.5.
+Document version: 0.0.6.
 
 ## About the Report API
 
@@ -101,9 +98,10 @@ for downloading in *pages* of data at a later point.
 ### CSV vs JSON
 
 For report endpoints, both CSV and JSON response is available.
-The response format is controlled by whether 
+The response format is controlled by whether
 the `Accept` header is set to `application/json` or `text/csv`.
-It is indicated in the [API Spec](https://vippsas.github.io/vipps-report-api/)
+It is indicated in the
+[API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
 whether the CSV format is available.
 
 For report endpoints a large number of columns (CSV)/fields(JSON)
@@ -113,12 +111,15 @@ to receive back, so that only the data the caller wants is returned.
 
 The CSV and JSON formats always contain the same data. For instance,
 if this is the CSV response:
+
 ```text
 transactionId,reference,price.description
 2023432783,payment-123,3% + 0.00
 3023423423,payment-124,3% + 0.00
 ```
+
 then we can know that the JSON will look like this:
+
 ```json
 {
   "items": [
@@ -139,6 +140,7 @@ then we can know that the JSON will look like this:
   ]
 }
 ```
+
 The only difference is that in JSON, the fields do not have a given
 order and that the distinction between numbers and strings disappear in CSV.
 JSON sub-structures become dotted column names in CSV.
@@ -165,7 +167,7 @@ TODO: Add the missing documentation.
 | reference         |            |                                                                                 |
 | **ledger/**       |            |                                                                                 |
 | transactionId     | Numeric ID |                                                                                 |
-| transactionType   | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) | 
+| transactionType   | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) |
 | ledgerDate        |            |                                                                                 |
 | ledgerAmount      |            |                                                                                 |      
 | grossAmount       |            |                                                                                 |  
@@ -173,8 +175,6 @@ TODO: Add the missing documentation.
 | msn               |            |                                                                                 |
 | time              |            |                                                                                 |
 | price.description |            |                                                                                 |
-|                    |           |                                                                                 |
-
 
 ## Give access to an accounting partner
 
@@ -197,7 +197,6 @@ shows how to add an accounting partners, and how to specify which ledgers the
 accounting partner will have access to.
 
 ![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Regnskapspartner oversikt")
-
 
 ## Questions?
 

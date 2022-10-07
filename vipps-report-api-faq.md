@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: FAQ
-sidebar_position: 4
+sidebar_position: 15
 ---
 END_METADATA -->
 
@@ -13,6 +13,10 @@ END_METADATA -->
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 <!-- END_COMMENT -->
+
+Document version: 0.0.1.
+
+(Nothing here yet)
 
 ## Questions?
 

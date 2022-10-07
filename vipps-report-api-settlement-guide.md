@@ -1,10 +1,8 @@
 <!-- START_METADATA
-
-title: Vipps Report API - Settlements
-sidebar_position: 3
-
 ---
-
+title: API Guide: Settlements
+sidebar_position: 7
+---
 END_METADATA -->
 
 <!-- START_COMMENT -->
@@ -14,7 +12,26 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-# Vipps Report API - Settlements
+# Vipps Report API: Settlements
+
+<!-- START_TOC -->
+
+## Table of contents
+
+* [Overview](#overview)
+* [Ledgers](#ledgers)
+* [Transaction types](#transaction-types)
+  * [Capture transactions](#capture-transactions)
+  * [Refund transactions](#refund-transactions)
+  * [Payout transactions](#payout-transactions)
+  * [Other transactions](#other-transactions)
+* [Reports](#reports)
+  * [Periodization](#periodization)
+* [Questions?](#questions)
+
+<!-- END_TOC -->
+
+Document version: 0.0.6.
 
 ## Overview
 
@@ -71,7 +88,8 @@ The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`. An example response from
-`GET https://api.vipps.no/report/v1/ledgers` is:
+[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers/get)
+is:
 
 ```json
 {
@@ -96,10 +114,12 @@ the `ledgerId`. An example response from
         }
       ]
     }
-  ] 
+  ]
 }
 ```
+
 A Vippsnummer will have a different `settlesFor` structure:
+
 ```json
 {
   "settlesFor": [
@@ -111,13 +131,14 @@ A Vippsnummer will have a different `settlesFor` structure:
   ]
 }
 ```
+
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
 may use the `msn` or `vippsnummer` arguments to filter the response.
 
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
-ledgers appear for different customers as they [grant your accounting system
-access to their data](grant-access-to-accounting-system.md).
+ledgers appear for different customers as they
+[grant your accounting system access to their data](vipps-report-api.md#give-access-to-an-accounting-partner).
 
 ## Transaction types
 
@@ -201,8 +222,9 @@ capture made on Friday will be on merchant's account on Tuesday.
 
 The payout will be marked with the text `Utbet. 2000101 Vippsnr <ledgername>`.
 
-In the future, we plan to add a `payouts/` endpoint to the API
-that provides more information about the status of a payout.
+In the future, we plan to add a
+`GET:/report/v1/payouts`
+endpoint to the API that provides more information about the status of a payout.
 
 ### Other transactions
 
@@ -220,7 +242,9 @@ above:
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
 One can request a report from this ledger by
-calling `GET:ledgers/<ledgerId>/transactions`, for instance:
+calling
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
+for instance:
 
 ```
 GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
@@ -307,3 +331,11 @@ transaction by transaction based on `reference`.
 
 ![Settlement](./images/report-periods.png)
 
+## Questions?
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-ecom-api/issues),
+a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
