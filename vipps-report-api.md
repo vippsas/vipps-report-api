@@ -110,12 +110,15 @@ to receive back, so that only the data the caller wants is returned.
 
 The CSV and JSON formats always contain the same data. For instance,
 if this is the CSV response:
+
 ```text
 transactionId,reference,price.description
 2023432783,payment-123,3% + 0.00
 3023423423,payment-124,3% + 0.00
 ```
+
 then we can know that the JSON will look like this:
+
 ```json
 {
   "items": [
@@ -136,6 +139,7 @@ then we can know that the JSON will look like this:
   ]
 }
 ```
+
 The only difference is that in JSON, the fields do not have a given
 order and that the distinction between numbers and strings disappear in CSV.
 JSON sub-structures become dotted column names in CSV.
@@ -170,8 +174,6 @@ TODO: Add the missing documentation.
 | msn               |            |                                                                                 |
 | time              |            |                                                                                 |
 | price.description |            |                                                                                 |
-|                    |           |                                                                                 |
-
 
 ## Give access to an accounting partner
 
@@ -194,7 +196,6 @@ shows how to add an accounting partners, and how to specify which ledgers the
 accounting partner will have access to.
 
 ![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Regnskapspartner oversikt")
-
 
 ## Questions?
 
