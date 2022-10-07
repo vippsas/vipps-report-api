@@ -78,9 +78,20 @@ Merchants must give access to their accounting partner on
 
 ### Overview of accounting partners
 
+A merchant may have zero or more accounting partners.
+
+This page on
+[portal.vipps.no](https://portsal.vipps.no)
+shows the accounting partners for one sale unit.
+
 ![Overview over accounting-partners](./images/portal-regnskapspartnere-oversikt.png "Regnskapspartner oversikt")
 
 ### Adding a new accounting partner
+
+This page on
+[portal.vipps.no](https://portsal.vipps.no)
+shows how to add an accounting partners, and how to specify which ledgers the
+accounting partner will have access to.
 
 ![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Regnskapspartner oversikt")
 
