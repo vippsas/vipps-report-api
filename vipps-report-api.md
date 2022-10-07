@@ -58,7 +58,7 @@ day. In these bulk payment we have summed together all payments for the day,
 subtracting refunds and fees to Vipps. It is therefore necessary to download
 reports that explain the bulk payment, so that it can be correctly filed in the
 merchant's accounting system. Such reports can be fetched either
-in [the portal](https://portal.vipps.no) or by using the Report API.
+on [portal.vipps.no](https://portal.vipps.no) or by using the Report API.
 
 Usually, you will wish to implement a *reconciliation process*, where
 you download a report from Vipps each day, and check that contents
@@ -66,8 +66,9 @@ of the report match the data you have on your own side.
 We recommended that you do this by matching per transaction on transaction IDs.
 
 This guide will focus on using the Report API, but may also be useful reading
-for those who rely on using reports from the portal for their reconciliation
-processes.
+for those who rely on using reports on
+[portal.vipps.no](https://portal.vipps.no)
+for their reconciliation processes.
 
 ## Give access to an accounting partner
 
