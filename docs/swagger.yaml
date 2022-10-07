@@ -128,7 +128,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  transactions:
+                  items:
                     type: array
                     items:
                       "$ref": "#/components/schemas/Transaction"
