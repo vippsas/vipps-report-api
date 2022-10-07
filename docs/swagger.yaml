@@ -11,18 +11,19 @@ paths:
   "/v1/ledgers":
     get:
       description: |
-        Returns the ledgers you have access to. For a description of ledgers 
-        see TODO.
-        
+        Returns the ledgers you have access to.
+
+        For a description of ledgers see TODO.
+
         If you are integrating a single
         merchant it may be enough to hit this endpoint once manually to identify
         the `ledgerId`.
 
         There is no need to specify the merchant or sale unit.
         The response contains all ledgers that are available for the API keys used.
-        
-        The `settlesFor` part of the response looks a bit different for e-com sales
-        units and Vippsnummer. For e-com it looks like this:
+
+        The `settlesFor` part of the response looks a bit different for eCom sales
+        units and Vippsnummer. For eCom it looks like this:
         ```json
         {
           "settlesFor": [
@@ -34,7 +35,7 @@ paths:
         }
         ```
         while for a Vippsnummer you will get
-        
+
         ```json
         {
           "settlesFor": [
@@ -46,7 +47,7 @@ paths:
         }
         ```
 
-        The full response example below displays the e-com case.
+        The full response example below displays the eCom case.
 
       parameters:
         - $ref: "#/components/parameters/JWT"
@@ -56,14 +57,14 @@ paths:
           schema:
             type: string
             example: 123456
-            description: Filters for ledgers that settles for the given msn
+            description: Filters for ledgers that settles for the given MSN
         - in: query
           name: vippsnummer
           required: false
           schema:
             type: string
             example: 123456
-            description: Filters for ledgers that settles for the given vippsnummer
+            description: Filters for ledgers that settles for the given Vippsnummer
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -108,6 +109,8 @@ paths:
 
   "/v1/ledgers/{ledgerId}/transactions":
     get:
+      description: |
+        Returns a list of payments/transactions.
       parameters:
         - $ref: "#/components/parameters/JWT"
         - in: path
