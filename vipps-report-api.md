@@ -136,8 +136,8 @@ A Vippsnummer will have a different `settlesFor` structure:
 
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
 may use the `msn` or `vippsnummer` arguments to filter the response:
-* `GET:/report/v1/report/v1/ledgers?msn=123456`
-* `GET:/report/v1/report/v1/ledgers?vippsnummer=123456`
+* [`GET:/report/v1/report/v1/ledgers?msn=123456`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers/get)
+* [`GET:/report/v1/report/v1/ledgers?vippsnummer=123456`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers/get)
 
 **TODO:** Check these examples. 👆
 
@@ -285,7 +285,7 @@ preceding day.
 
 ## Accounting partners
 
-The Report APP can be used by the merchant itself, and by the merchant's
+The Report API can be used by the merchant itself, and by the merchant's
 accounting partner.
 
 Merchants must give access to their accounting partner on
