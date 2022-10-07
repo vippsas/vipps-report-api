@@ -20,6 +20,7 @@ END_METADATA -->
 
 # Table of contents
 
+* [Settlements in Vipps](#settlements-in-vipps)
 * [Authenticating to the Report API](#authenticating-to-the-report-api)
   * [Using the merchant's API keys](#using-the-merchants-api-keys)
   * [Using the partner's partner keys](#using-the-partners-partner-keys)
@@ -40,6 +41,12 @@ END_METADATA -->
 <!-- END_TOC -->
 
 Document version: 0.0.4.
+
+## Settlements in Vipps
+
+Please see the
+[Settlement guide](settlement-guide.md)
+for an overview of how settlements work in Vipps.
 
 ## Authenticating to the Report API
 
