@@ -88,7 +88,8 @@ The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`. An example response from
-`GET https://api.vipps.no/report/v1/ledgers` is:
+[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers/get)
+is:
 
 ```json
 {
@@ -240,7 +241,9 @@ above:
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
 One can request a report from this ledger by
-calling `GET:ledgers/<ledgerId>/transactions`, for instance:
+calling
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
+for instance:
 
 ```
 GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
