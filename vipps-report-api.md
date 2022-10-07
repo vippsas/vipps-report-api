@@ -76,10 +76,6 @@ Partner API users do not have access to any ledgers by default. Such
 access must be granted by the merchant:
 [Adding a new accounting partner](#adding-a-new-accounting-partner).
 
-See:
-[Adding a new accounting partner](#adding-a-new-accounting-partner).
-
-
 ## About report endpoints
 
 Some of the endpoints in the report API return a "report"; a list of
