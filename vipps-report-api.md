@@ -30,7 +30,9 @@ END_METADATA -->
 * [Ledgers](#ledgers)
   * [Bulk payments](#bulk-payments)
   * [Ledgers and sale units](#ledgers-and-sale-units)
-  * [Get a ledger](#get-a-ledger)
+  * [Get ledgers](#get-ledgers)
+    * [Example for eCom/ePayments](#example-for-ecomepayments)
+    * [Example for Vippsnummer](#example-for-vippsnummer)
 * [Transaction types](#transaction-types)
   * [Capture transactions](#capture-transactions)
   * [Refund transactions](#refund-transactions)
@@ -38,6 +40,7 @@ END_METADATA -->
   * [Payout process](#payout-process)
   * [Other transactions](#other-transactions)
 * [Reports](#reports)
+* [Formats](#formats)
   * [JSON](#json)
   * [CSV](#csv)
   * [Notes](#notes)
@@ -331,10 +334,16 @@ that has happened on a specific ledger. To continue with our simple example from
 above:
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
-One can request a report from this ledger by
-calling `GET:/report/v1/ledgers/{ledgerId}/transactions`
-and using the `columns` parameter to specify a comma-separated list of which
-data to include in the response:
+You can, at any time, request a report from this ledger by
+calling `GET:/report/v1/ledgers/{ledgerId}/transactions`.
+
+And also specify the time interval:
+`GET:/report/v1/ledgers/{ledgerId}/transactions?ledgerDate={YYYY-MM-DD}`
+
+You can use the `columns` parameter to specify a comma-separated list of which
+data to include in the response. These columns are available (see the API
+specification for details):
+
 * transactionId
 * transactionType
 * reference
@@ -347,11 +356,13 @@ data to include in the response:
 * price
 * description
 
-For instance:
+An example combining the options above:
 
 ```
-GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price,description
+GET:/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price,description
 ```
+
+## Formats
 
 The endpoint can return either CSV or JSON depending on the `Accept` header;
 both always contain the exactly same data just in different representations.
