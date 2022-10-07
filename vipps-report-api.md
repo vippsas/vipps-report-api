@@ -7,6 +7,8 @@ sidebar_position: 3
 
 END_METADATA -->
 
+# Vipps Report API
+
 <!-- START_COMMENT -->
 
 ℹ️ Please use the new documentation:
@@ -14,7 +16,42 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-# Vipps Report API: Settlement data
+<!-- START_TOC -->
+
+# Table of contents
+
+* [Overview](#overview)
+* [Give access to an accounting partner](#give-access-to-an-accounting-partner)
+  * [Overview of accounting partners](#overview-of-accounting-partners)
+  * [Adding a new accounting partner](#adding-a-new-accounting-partner)
+* [Authenticating to the Report API](#authenticating-to-the-report-api)
+  * [Single MSN token](#single-msn-token)
+  * [Partner tokens](#partner-tokens)
+* [Ledgers](#ledgers)
+  * [Get a ledger](#get-a-ledger)
+* [Transaction types](#transaction-types)
+  * [Capture transactions](#capture-transactions)
+  * [Refund transactions](#refund-transactions)
+  * [Payout transactions](#payout-transactions)
+  * [Other transactions](#other-transactions)
+* [Reports](#reports)
+  * [JSON](#json)
+  * [CSV](#csv)
+  * [Periodization](#periodization)
+* [Questions?](#questions)
+
+<!-- END_TOC -->
+
+Document version: 0.0.2.
+
+Before you can use this API, you will need to aquire a Authorization token.
+This field is named "Authorization" in the request-header and is used to
+identify your identity and permissions.
+
+See:
+[Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
+
+
 
 ## Overview
 
@@ -87,7 +124,7 @@ Recurring API.
 
 Vipps does not transfer money to/from the merchant for every payment made.
 Instead, all transactions are put on a *ledger*
-that track the funds that Vipps owes the merchant. During the day transactions
+that tracks the funds that Vipps owes the merchant. During the day transactions
 occur that usually increase, and sometimes decrease, the balance the merchant
 has in Vipps and thus the *ledger balance*. Periodically, usually daily, the
 balance of the ledger is paid out to a configured account number and the balance
@@ -115,7 +152,11 @@ single settlement payout:
 The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
-the `ledgerId`. An example response from
+the `ledgerId`.
+
+### Get a ledger
+
+An example response from
 `GET https://api.vipps.no/report/v1/ledgers` is:
 
 ```json
@@ -144,7 +185,9 @@ the `ledgerId`. An example response from
   ]
 }
 ```
+
 A Vippsnummer will have a different `settlesFor` structure:
+
 ```json
 {
   "settlesFor": [
@@ -156,6 +199,7 @@ A Vippsnummer will have a different `settlesFor` structure:
   ]
 }
 ```
+
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
 may use the `msn` or `vippsnummer` arguments to filter the response.
 
@@ -272,8 +316,50 @@ GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-1
 ```
 
 The endpoint can return either CSV or JSON depending on the `Accept` header;
-both always contain the exactly same data just in different representations. An
-example CSV response for the call above that matches the illustration above:
+both always contain the exactly same data just in different representations.
+
+### JSON
+
+When you have the `ledgerId` you can get the transactions with
+`GET:/ledgers/{ledgerID}/transactions` and get a response similar to this:
+
+```json
+{
+   "transactions":[
+      {
+         "transactionID":"2000001",
+         "timestamp":"2022-09-22T09:31:28+00:00",
+         "ledgerDate":"2022-09-22",
+         "ledgerID":"1",
+         "transactionType":"refund",
+         "orderID":"string",
+         "ledgerAmount":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "grossAmount":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "fee":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "priceRate":1.25,
+         "priceFixed":{
+            "value":0,
+            "currency":"NOK"
+         },
+         "storeID":"msn/1234",
+         "storeName":"Lokalbutikk Løkka"
+      }
+   ]
+}
+```
+
+### CSV
+
+An example CSV response for the call above that matches the illustration above:
 
 ```
 transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
