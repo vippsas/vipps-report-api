@@ -24,10 +24,9 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## Report API documentation
 
-* [Getting access](./auth.md)
-* [Reference](https://vippsas.github.io/vipps-report-api/)
-* [Settlement guide](./settlement-guide.md): How to use the Report API to fetch settlement data
-* [FAQ](./faq.md): Frequently asked questions
+* [API Guide](vipps-report-api.md)
+* [API Spec](https://vippsas.github.io/vipps-report-api/)
+* [FAQ](vipps-report-api-faq.md): Frequently asked questions
 
 ## Questions?
 
