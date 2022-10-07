@@ -270,6 +270,9 @@ For more details about individual columns available, please see the API specific
 
 ### Periodization
 
+See:
+[Settlement guide: Periodization](settlement-guide.md#periodization).
+
 The
 [`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint has several parameters for selecting a range of
@@ -279,12 +282,6 @@ Most users of the API will want to set up an automated job to call
 [`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 on a daily basis to download the data for the
 preceding day.
-
-![Settlement](./images/report-periods.png)
-
-See:
-[Settlement guide: Periodization](settlement-guide.md#periodization)
-for more details.
 
 ## Accounting partners
 
