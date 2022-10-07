@@ -22,11 +22,12 @@ The report API gives you or a third-party acting on your behalf the ability to f
 
 Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, contribution guidelines, etc.
 
-## Report API
-* [API Setup](./vipps-report-api-setup.md): Prerequisites for using the API
-* [API Guide](./vipps-report-api-guide.md): API guide
-* [API FAQ](./vipps-report-api-faq.md): Frequently asked questions
-* [Swagger UI](https://vippsas.github.io/vipps-report-api/)
+## Report API documentation
+
+* [Getting access](./auth.md)
+* [Reference](https://vippsas.github.io/vipps-report-api/)
+* [Settlement guide](./settlement-guide.md): How to use the Report API to fetch settlement data
+* [FAQ](./faq.md): Frequently asked questions
 
 ## Questions?
 
