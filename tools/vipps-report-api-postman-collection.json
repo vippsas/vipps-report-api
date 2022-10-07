@@ -1,1 +1,378 @@
-TODO
+{
+	"info": {
+		"_postman_id": "852d1715-0724-4b7d-adea-a177bc2be8b2",
+		"name": "Report API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v1/ledgers",
+			"item": [
+				{
+					"name": "/v1/ledgers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/ledgers?msn=Lorem est sunt&vippsnummer=do dolor cillum sunt",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"ledgers"
+							],
+							"query": [
+								{
+									"key": "msn",
+									"value": "Lorem est sunt"
+								},
+								{
+									"key": "vippsnummer",
+									"value": "do dolor cillum sunt"
+								}
+							]
+						},
+						"description": "Returns the ledgers you have access to.\n\nFor a description of ledgers see TODO.\n\nIf you are integrating a single\nmerchant it may be enough to hit this endpoint once manually to identify\nthe `ledgerId`.\n\nThere is no need to specify the merchant or sale unit.\nThe response contains all ledgers that are available for the API keys used.\n\nThe `settlesFor` part of the response looks a bit different for eCom sales\nunits and Vippsnummer. For eCom it looks like this:\n```json\n{\n  \"settlesFor\": [\n      {\n       \"type\": \"epayment\",\n       \"msn\": \"123455\"\n      }\n    ]\n}\n```\nwhile for a Vippsnummer you will get\n\n```json\n{\n  \"settlesFor\": [\n    {\n      \"type\": \"vippsnummer\",\n      \"vippsnummer\": \"NO/123455\"\n    }\n  ]\n}\n```\n\nThe full response example below displays the eCom case.\n"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) The access token is a base64-encoded string that is required for all API calls.\nIt is a JWT (JSON Web Token).\nIt is valid for 1 hour in the test environment and 24 hours in the production environment.",
+										"key": "Authorization",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v1/ledgers?msn=Lorem est sunt&vippsnummer=do dolor cillum sunt",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"ledgers"
+									],
+									"query": [
+										{
+											"key": "msn",
+											"value": "Lorem est sunt"
+										},
+										{
+											"key": "vippsnummer",
+											"value": "do dolor cillum sunt"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"items\": [\n    {\n      \"ledgerId\": \"302321\",\n      \"currency\": \"NOK\",\n      \"payoutBankAccount\": {\n        \"country\": \"NO\",\n        \"accountNumber\": \"86011117947\"\n      },\n      \"firstPayout\": \"2000001\",\n      \"lastPayout\": \"2000045\",\n      \"owner\": {\n        \"jurisdiction\": \"NO\"\n      },\n      \"settlesFor\": [\n        {\n          \"type\": \"epayment\",\n          \"msn\": \"123455\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						{
+							"name": "Server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) The access token is a base64-encoded string that is required for all API calls.\nIt is a JWT (JSON Web Token).\nIt is valid for 1 hour in the test environment and 24 hours in the production environment.",
+										"key": "Authorization",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v1/ledgers?msn=Lorem est sunt&vippsnummer=do dolor cillum sunt",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"ledgers"
+									],
+									"query": [
+										{
+											"key": "msn",
+											"value": "Lorem est sunt"
+										},
+										{
+											"key": "vippsnummer",
+											"value": "do dolor cillum sunt"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"type\": \"https://example.net/validation-error\",\n  \"title\": \"Your request parameters didn't validate.\",\n  \"instance\": \"123e4567-e89b-12d3-a456-426655440000\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/v1/ledgers/:ledgerId/transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/ledgers/:ledgerId/transactions?ledgerDate=in proide&fromLedgerDate=dolor minim&toLedgerDate=proident dolore irure ut reprehenderit&fromTimestamp=dolore&toTimestamp=Duis commodo in culpa&inPayout=Duis L&sincePayout=Duis L&columns=ledgerId&columns=time",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"ledgers",
+								":ledgerId",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "ledgerDate",
+									"value": "in proide"
+								},
+								{
+									"key": "fromLedgerDate",
+									"value": "dolor minim"
+								},
+								{
+									"key": "toLedgerDate",
+									"value": "proident dolore irure ut reprehenderit"
+								},
+								{
+									"key": "fromTimestamp",
+									"value": "dolore"
+								},
+								{
+									"key": "toTimestamp",
+									"value": "Duis commodo in culpa"
+								},
+								{
+									"key": "inPayout",
+									"value": "Duis L"
+								},
+								{
+									"key": "sincePayout",
+									"value": "Duis L"
+								},
+								{
+									"key": "columns",
+									"value": "ledgerId"
+								},
+								{
+									"key": "columns",
+									"value": "time"
+								}
+							],
+							"variable": [
+								{
+									"key": "ledgerId",
+									"value": "est exercitation",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Returns a list of payments/transactions.\n"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) The access token is a base64-encoded string that is required for all API calls.\nIt is a JWT (JSON Web Token).\nIt is valid for 1 hour in the test environment and 24 hours in the production environment.",
+										"key": "Authorization",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v1/ledgers/:ledgerId/transactions?ledgerDate=in proide&fromLedgerDate=dolor minim&toLedgerDate=proident dolore irure ut reprehenderit&fromTimestamp=dolore&toTimestamp=Duis commodo in culpa&inPayout=Duis L&sincePayout=Duis L&columns=ledgerId&columns=fee",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"ledgers",
+										":ledgerId",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "ledgerDate",
+											"value": "in proide"
+										},
+										{
+											"key": "fromLedgerDate",
+											"value": "dolor minim"
+										},
+										{
+											"key": "toLedgerDate",
+											"value": "proident dolore irure ut reprehenderit"
+										},
+										{
+											"key": "fromTimestamp",
+											"value": "dolore"
+										},
+										{
+											"key": "toTimestamp",
+											"value": "Duis commodo in culpa"
+										},
+										{
+											"key": "inPayout",
+											"value": "Duis L"
+										},
+										{
+											"key": "sincePayout",
+											"value": "Duis L"
+										},
+										{
+											"key": "columns",
+											"value": "ledgerId"
+										},
+										{
+											"key": "columns",
+											"value": "fee"
+										}
+									],
+									"variable": [
+										{
+											"key": "ledgerId",
+											"value": "est exercitation",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"items\": [\n    {\n      \"transactionId\": \"2000001\",\n      \"timestamp\": \"2022-09-22T09:31:28+00:00\",\n      \"ledgerDate\": \"2022-09-22\",\n      \"ledgerId\": \"1\",\n      \"transactionType\": \"payout\",\n      \"orderId\": \"acme-shop-123-order123abc\",\n      \"ledgerAmount\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"grossAmount\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"fee\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"priceRate\": 1.25,\n      \"priceFixed\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"storeId\": \"msn/123456\",\n      \"storeName\": \"Lokalbutikk Løkka\"\n    },\n    {\n      \"transactionId\": \"2000001\",\n      \"timestamp\": \"2022-09-22T09:31:28+00:00\",\n      \"ledgerDate\": \"2022-09-22\",\n      \"ledgerId\": \"1\",\n      \"transactionType\": \"invoice\",\n      \"orderId\": \"acme-shop-123-order123abc\",\n      \"ledgerAmount\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"grossAmount\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"fee\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"priceRate\": 1.25,\n      \"priceFixed\": {\n        \"value\": 49900,\n        \"currency\": \"NOK\"\n      },\n      \"storeId\": \"msn/123456\",\n      \"storeName\": \"Lokalbutikk Løkka\"\n    }\n  ]\n}"
+						},
+						{
+							"name": "Server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) The access token is a base64-encoded string that is required for all API calls.\nIt is a JWT (JSON Web Token).\nIt is valid for 1 hour in the test environment and 24 hours in the production environment.",
+										"key": "Authorization",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v1/ledgers/:ledgerId/transactions?ledgerDate=in proide&fromLedgerDate=dolor minim&toLedgerDate=proident dolore irure ut reprehenderit&fromTimestamp=dolore&toTimestamp=Duis commodo in culpa&inPayout=Duis L&sincePayout=Duis L&columns=ledgerId&columns=fee",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"ledgers",
+										":ledgerId",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "ledgerDate",
+											"value": "in proide"
+										},
+										{
+											"key": "fromLedgerDate",
+											"value": "dolor minim"
+										},
+										{
+											"key": "toLedgerDate",
+											"value": "proident dolore irure ut reprehenderit"
+										},
+										{
+											"key": "fromTimestamp",
+											"value": "dolore"
+										},
+										{
+											"key": "toTimestamp",
+											"value": "Duis commodo in culpa"
+										},
+										{
+											"key": "inPayout",
+											"value": "Duis L"
+										},
+										{
+											"key": "sincePayout",
+											"value": "Duis L"
+										},
+										{
+											"key": "columns",
+											"value": "ledgerId"
+										},
+										{
+											"key": "columns",
+											"value": "fee"
+										}
+									],
+									"variable": [
+										{
+											"key": "ledgerId",
+											"value": "est exercitation",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"type\": \"https://example.net/validation-error\",\n  \"title\": \"Your request parameters didn't validate.\",\n  \"instance\": \"123e4567-e89b-12d3-a456-426655440000\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://apitest.vipps.no",
+			"type": "string"
+		}
+	]
+}
