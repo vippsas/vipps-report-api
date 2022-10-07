@@ -16,11 +16,6 @@ END_METADATA -->
 
 💥 Unfinished, and possibly unusable. 🙈 💥
 
-When you have retrieved the `ledgerId` with
-[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
-you can get the transactions with
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers~1%7BledgerId%7D~1transactions/get)
-
 # Postman
 
 ### Prerequisites
@@ -62,6 +57,14 @@ and 24 hours in the production environment.
 See the
 [API reference](https://vippsas.github.io/vipps-developer-docs/api/report)
 for details about the calls.
+
+### Get ledgers
+
+[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
+
+### Get transactions
+
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers~1%7BledgerId%7D~1transactions/get)
 
 ## Questions?
 
