@@ -21,7 +21,7 @@ END_METADATA -->
 # Table of contents
 
 * [Settlements in Vipps](#settlements-in-vipps)
-* [Authenticating to the Report API](#authenticating-to-the-report-api)
+* [Authentication](#authenticatiion)
   * [Using the merchant's API keys](#using-the-merchants-api-keys)
   * [Using the partner's partner keys](#using-the-partners-partner-keys)
 * [Ledgers](#ledgers)
@@ -32,7 +32,7 @@ END_METADATA -->
     * [JSON](#json)
     * [CSV](#csv)
   * [Periodization](#periodization)
-* [Give access to an accounting partner](#give-access-to-an-accounting-partner)
+* [Accounting partners](#accounting-partners)
   * [Overview of accounting partners](#overview-of-accounting-partners)
   * [Adding a new accounting partner](#adding-a-new-accounting-partner)
 * [Questions?](#questions)
@@ -47,7 +47,7 @@ Please see the
 [Settlement guide](settlement-guide.md)
 for an overview of how settlements work in Vipps.
 
-## Authenticating to the Report API
+## Authentication
 
 There are two ways to connect to the Report API:
 * Using the merchant's own API keys for the sale unit.
@@ -286,7 +286,10 @@ See:
 [Settlement guide: Periodization](settlement-guide.md#periodization)
 for more details.
 
-## Give access to an accounting partner
+## Accounting partners
+
+The Report APPI can be used by the merchant itself, and by the merchant's
+accounting partner.
 
 Merchants must give access to their accounting partner on
 [portal.vipps.no](https://portal.vipps.no).
