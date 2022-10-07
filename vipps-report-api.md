@@ -40,6 +40,7 @@ END_METADATA -->
 * [Reports](#reports)
   * [JSON](#json)
   * [CSV](#csv)
+  * [Notes](#notes)
   * [Periodization](#periodization)
 * [Questions?](#questions)
 
@@ -332,7 +333,8 @@ both always contain the exactly same data just in different representations.
 When you have retrieved the `ledgerId` with
 `GET:/report/v1/ledgers`,
 you can get the transactions with
-`GET:/report/v1/ledgers/{ledgerId}/transactions` and get a response similar to this:
+`GET:/report/v1/ledgers/{ledgerId}/transactions` and get a response similar to this
+when using the `Accept: application/json` header:
 
 ```json
 {
@@ -370,7 +372,11 @@ you can get the transactions with
 
 ### CSV
 
-An example CSV response for the call above that matches the illustration above:
+When you have retrieved the `ledgerId` with
+`GET:/report/v1/ledgers`,
+you can get the transactions with
+`GET:/report/v1/ledgers/{ledgerId}/transactions` and get a response similar to this
+when using the `Accept: text/csv` header:
 
 ```
 transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
@@ -391,7 +397,7 @@ Formatted as a table:
 | 2049872323           | refund          | purchase-12 | 2022-10-01  |      -100.00 |     -100.00 | 3.00 | 123455 | 2022-10-01T14:32:17.324342+02:00 |              |
 | 18000302321002000045 | payout          | 2000045     | 2022-10-01  |      -288.00 |     -288.00 | 0.00 |        | 2022-10-02T00:00:00.000000+02:00 |              |
 
-Some notes:
+### Notes
 
 * You should be prepared to receive a new *transactionType* that you do not
   already know about.
@@ -416,11 +422,14 @@ has ended.
 
 ### Periodization
 
-The `transactions` endpoint has several parameters for selecting a range of
+The
+`GET:/report/v1/ledgers/{ledgerId}/transactions`
+endpoint has several parameters for selecting a range of
 transactions to return, which can be used for an initial data import.
 
 Most users of the API will want to set up an automated job to call
-the `transactions` endpoint on a daily basis to download the data for the
+`GET:/report/v1/ledgers/{ledgerId}/transactions`
+on a daily basis to download the data for the
 preceding day. Such synchronization can be done in two ways: Date-based indexing
 and payout-based indexing. Often they will give the same results; the difference
 is:
