@@ -1,10 +1,8 @@
 <!-- START_METADATA
-
-title: Vipps Report API - Settlements
-sidebar_position: 3
-
 ---
-
+title: API Guide: Settlements
+sidebar_position: 7
+---
 END_METADATA -->
 
 <!-- START_COMMENT -->
@@ -14,7 +12,7 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-# Vipps Report API - Settlements
+# Vipps Report API: Settlements
 
 ## Overview
 
@@ -96,7 +94,7 @@ the `ledgerId`. An example response from
         }
       ]
     }
-  ] 
+  ]
 }
 ```
 A Vippsnummer will have a different `settlesFor` structure:
@@ -306,4 +304,3 @@ routines, but in general we recommend fetching by date, and to do reconciliation
 transaction by transaction based on `reference`.
 
 ![Settlement](./images/report-periods.png)
-
