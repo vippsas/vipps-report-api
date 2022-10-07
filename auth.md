@@ -18,9 +18,9 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...
 
 ## Single MSN token
 
-Individual merchants that have an API token 
+Individual merchants that have an API token
 for using the e-com/epayment APIs may use this to access a single
-Ledger connected to the MSN. 
+Ledger connected to the MSN.
 
 See https://vippsas.github.io/vipps-developer-docs/api/ecom/#tag/Authorization-Service
 for information about how to obtain such a token.
