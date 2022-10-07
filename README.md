@@ -24,9 +24,10 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## Report API documentation
 
-* [Quick start](vipps-report-api-quick-start.md)
-* [API Guide](vipps-report-api.md)
-* [API Spec](https://vippsas.github.io/vipps-report-api/)
+* [Settlement guide](settlement-guide.md): A guide to Vipps settlements. Not too technical.
+* [API Guide](vipps-report-api.md): Technical information for developers to integrate with the API.
+* [API Spec](https://vippsas.github.io/vipps-report-api/): API reference.
+* [Quick start](vipps-report-api-quick-start.md): For developers: How to use Postman to test the API.
 * [FAQ](vipps-report-api-faq.md): Frequently asked questions
 
 ## Questions?
