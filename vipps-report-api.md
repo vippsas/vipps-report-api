@@ -150,7 +150,7 @@ See:
 ## Reports
 
 See:
-[Settlement guide: Ledgers](settlement-guide.md#reports).
+[Settlement guide: Reports](settlement-guide.md#reports).
 
 You can, at any time, request a report from a ledger by
 calling
