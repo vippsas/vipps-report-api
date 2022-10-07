@@ -285,7 +285,7 @@ preceding day.
 
 ## Accounting partners
 
-The Report APPI can be used by the merchant itself, and by the merchant's
+The Report APP can be used by the merchant itself, and by the merchant's
 accounting partner.
 
 Merchants must give access to their accounting partner on
