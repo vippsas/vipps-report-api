@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: API Guide - Overview
+title: "API Guide: Overview"
 sidebar_position: 5
 ---
 END_METADATA -->
