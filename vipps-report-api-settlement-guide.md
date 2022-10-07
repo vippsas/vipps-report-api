@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: API Guide: Settlements
+title: API Guide - Settlements
 sidebar_position: 7
 ---
 END_METADATA -->
