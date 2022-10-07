@@ -52,9 +52,9 @@ We also have guides for specific usecases:
 
 **Please note:** The information fetched from the Report API is
 asynchronous and trailing behind the other APIs. Usually it is behind
-by a second or so, but if we have operational problems it could be
-behind hours. You should therefore always use other Vipps APIs
-as the source of truth to figure out the status of an operation.
+by a second or so, but if we have operational problems it could worst
+case be behind by several hours. Therefore, you should always use other
+Vipps APIs as the source of truth for the status of an operation.
 
 ## Authenticating to the Report API
 
@@ -141,6 +141,7 @@ then we can know that the JSON will look like this:
 ```
 The only difference is that in JSON, the fields do not have a given
 order and that the distinction between numbers and strings disappear in CSV.
+JSON sub-structures become dotted column names in CSV.
 
 
 ## Field/column documentation
