@@ -121,6 +121,8 @@ Vipps settlements work in the same way for all Vipps payment products; whether
 one is using Vippsnummer, the eCom/ePayment API, the Checkout API or the
 Recurring API.
 
+### Bulk payments
+
 Vipps does not transfer money to/from the merchant for every payment made.
 Instead, all transactions are put on a *ledger*
 that tracks the funds that Vipps owes the merchant. During the day transactions
@@ -136,8 +138,10 @@ the balance is paid out. The payout is itself a transaction on the ledger,
 adjusting the balance down to zero.
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
+### Ledgers and sale units
+
 For the large majority of merchants, there is a direct correspondence between a
-Vippsnummer or eCom Merchant Serial Number (MSNs) to a ledger:
+sale unit, for Vippsnummer or eCom Merchant Serial Number (MSNs), to a ledger:
 
 ![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
 
@@ -148,12 +152,12 @@ single settlement payout:
 
 ![ledgers vs units, many to one](./images/ledger-vs-units-one-to-many.png)
 
+### Get a ledger
+
 The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`.
-
-### Get a ledger
 
 An example response from
 `GET https://api.vipps.no/report/v1/ledgers` is:
