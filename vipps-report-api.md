@@ -100,7 +100,8 @@ for downloading in *pages* of data at a later point.
 For report endpoints, both CSV and JSON response is available.
 The response format is controlled by whether
 the `Accept` header is set to `application/json` or `text/csv`.
-It is indicated in the [API Spec](https://vippsas.github.io/vipps-report-api/)
+It is indicated in the
+[API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
 whether the CSV format is available.
 
 For report endpoints a large number of columns (CSV)/fields(JSON)
