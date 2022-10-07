@@ -137,8 +137,8 @@ may use the `msn` or `vippsnummer` arguments to filter the response.
 
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
-ledgers appear for different customers as they [grant your accounting system
-access to their data](grant-access-to-accounting-system.md).
+ledgers appear for different customers as they
+[grant your accounting system access to their data](vipps-report-api.md#give-access-to-an-accounting-partner).
 
 ## Transaction types
 
@@ -222,8 +222,9 @@ capture made on Friday will be on merchant's account on Tuesday.
 
 The payout will be marked with the text `Utbet. 2000101 Vippsnr <ledgername>`.
 
-In the future, we plan to add a `payouts/` endpoint to the API
-that provides more information about the status of a payout.
+In the future, we plan to add a
+`GET:/report/v1/payouts`
+endpoint to the API that provides more information about the status of a payout.
 
 ### Other transactions
 
