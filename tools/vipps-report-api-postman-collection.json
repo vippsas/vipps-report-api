@@ -19,7 +19,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/ledgers?msn=Lorem est sunt&vippsnummer=do dolor cillum sunt",
+							"raw": "{{baseUrl}}/v1/ledgers?msn=123456&vippsnummer=123456",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -30,11 +30,11 @@
 							"query": [
 								{
 									"key": "msn",
-									"value": "Lorem est sunt"
+									"value": "123456"
 								},
 								{
 									"key": "vippsnummer",
-									"value": "do dolor cillum sunt"
+									"value": "123456"
 								}
 							]
 						},
@@ -53,7 +53,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/v1/ledgers?msn=Lorem est sunt&vippsnummer=do dolor cillum sunt",
+									"raw": "{{baseUrl}}/v1/ledgers?msn=123456&vippsnummer=123456",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -64,11 +64,11 @@
 									"query": [
 										{
 											"key": "msn",
-											"value": "Lorem est sunt"
+											"value": "123456"
 										},
 										{
 											"key": "vippsnummer",
-											"value": "do dolor cillum sunt"
+											"value": "123456"
 										}
 									]
 								}
@@ -142,7 +142,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/ledgers/:ledgerId/transactions?ledgerDate=in proide&fromLedgerDate=dolor minim&toLedgerDate=proident dolore irure ut reprehenderit&fromTimestamp=dolore&toTimestamp=Duis commodo in culpa&inPayout=Duis L&sincePayout=Duis L&columns=ledgerId&columns=time",
+							"raw": "{{baseUrl}}/v1/ledgers/:ledgerId/transactions?ledgerDate=2022-10-01&fromLedgerDate=2022-10-01&toLedgerDate=2022-10-31&fromTimestamp=2022-10-01T08:00:00+00:00&toTimestamp=2022-10-31T23:59:59+00:00&inPayout=2000102&sincePayout=2000101&columns=ledgerId&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -155,31 +155,31 @@
 							"query": [
 								{
 									"key": "ledgerDate",
-									"value": "in proide"
+									"value": "2022-10-01"
 								},
 								{
 									"key": "fromLedgerDate",
-									"value": "dolor minim"
+									"value": "2022-10-01"
 								},
 								{
 									"key": "toLedgerDate",
-									"value": "proident dolore irure ut reprehenderit"
+									"value": "2022-10-31"
 								},
 								{
 									"key": "fromTimestamp",
-									"value": "dolore"
+									"value": "2022-10-01T08:00:00+00:00"
 								},
 								{
 									"key": "toTimestamp",
-									"value": "Duis commodo in culpa"
+									"value": "2022-10-31T23:59:59+00:00"
 								},
 								{
 									"key": "inPayout",
-									"value": "Duis L"
+									"value": "2000102"
 								},
 								{
 									"key": "sincePayout",
-									"value": "Duis L"
+									"value": "2000101"
 								},
 								{
 									"key": "columns",
@@ -187,7 +187,7 @@
 								},
 								{
 									"key": "columns",
-									"value": "time"
+									"value": "transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description"
 								}
 							],
 							"variable": [
