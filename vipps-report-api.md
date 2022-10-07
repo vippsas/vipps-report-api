@@ -78,9 +78,7 @@ Merchants must give access to their accounting partner on
 
 ### Overview of accounting partners
 
-A merchant may have zero or more accounting partners.
-
-This page on
+A merchant may have zero or more accounting partners. This page on
 [portal.vipps.no](https://portsal.vipps.no)
 shows the accounting partners for one sale unit.
 
@@ -95,37 +93,27 @@ accounting partner will have access to.
 
 ![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Regnskapspartner oversikt")
 
-
 ## Authenticating to the Report API
 
-There are currently two ways to connect to the Report API. Either way,
-the token obtained is passed as a bearer token in the `Authorization` HTTP
-header:
+There are currently two ways to connect to the Report API:
+* Using the merchant's own API keys for the sale unit.
+* Using the partner's API keys, called
+  [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-keys).
 
-```text
-GET https://api.vipps.no/report/v1/ledgers
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...
-```
+Either way, the authentication is as documented in
+[Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
 
-### Single MSN token
+### Using the merchant's API keys
 
-Individual merchants that have an API token
-for using the e-com/epayment APIs may use this to access a single
-Ledger connected to the MSN.
+Individual merchants that have API keys
+for using the eCom/ePayment APIs may use this to access a single
+Ledger connected to the sale unit (identified with MSN).
 
-See https://vippsas.github.io/vipps-developer-docs/api/ecom/#tag/Authorization-Service
-for information about how to obtain such a token.
-
-### Partner tokens
-
-TODO: Link to getting partner token
+### Using the partner's partner keys
 
 Partner API users do not have access to any ledgers by default. Such
-access must be granted by the merchant on
-[portal.vipps.no](https://portal.vipps.no).
-
-See [permissions for accounting partners](grant-access-to-accounting-system.md)
-for more information and screenshots for the process.
+access must be granted by the merchant:
+[Adding a new accounting partner](#adding-a-new-accounting-partner).
 
 ## Ledgers
 
@@ -149,12 +137,12 @@ adjusting the balance down to zero.
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
 For the large majority of merchants, there is a direct correspondence between a
-Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
+Vippsnummer or eCom Merchant Serial Number (MSNs) to a ledger:
 
 ![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
 
 However, for merchants who require it, Vipps have
-limited support for multiple Vippsnummers/e-com MSNs to be settled together.
+limited support for multiple Vippsnummers/eCom MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 
