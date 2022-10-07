@@ -16,7 +16,7 @@ END_METADATA -->
 
 <!-- START_TOC -->
 
-# Table of contents
+## Table of contents
 
 * [Overview](#overview)
 * [Ledgers](#ledgers)

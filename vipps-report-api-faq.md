@@ -14,6 +14,8 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
+Document version: 0.0.1.
+
 (Nothing here yet)
 
 ## Questions?

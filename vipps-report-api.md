@@ -16,7 +16,7 @@ END_METADATA -->
 
 <!-- START_TOC -->
 
-# Table of contents
+## Table of contents
 
 - [About the Report API](#about-the-report-api)
 - [Authenticating to the Report API](#authenticating-to-the-report-api)
