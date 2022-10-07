@@ -40,7 +40,7 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version: 0.0.4.
+Document version: 0.0.5.
 
 ## Settlements in Vipps
 
@@ -50,7 +50,7 @@ for an overview of how settlements work in Vipps.
 
 ## Authenticating to the Report API
 
-There are currently two ways to connect to the Report API:
+There are two ways to connect to the Report API:
 * Using the merchant's own API keys for the sale unit.
 * Using the partner's API keys, called
   [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-keys).
@@ -72,7 +72,10 @@ access must be granted by the merchant:
 
 ### Get ledgers
 
-All ledger have their own `ledgerId`, so the first step in using the report API is
+See:
+[Settlement guide: Ledgers](settlement-guide.md#ledgers).
+
+All ledgers have their own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. This is managed as
 described in
 [Give access to an accounting partner](#give-access-to-an-accounting-partner).
@@ -152,6 +155,9 @@ See:
 for all details about settlements,
 
 ## Reports
+
+See:
+[Settlement guide: Ledgers](settlement-guide.md#reports).
 
 You can, at any time, request a report from a ledger by
 calling `GET:/report/v1/ledgers/{ledgerId}/transactions`.
