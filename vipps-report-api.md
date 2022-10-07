@@ -34,6 +34,51 @@ This guide will focus on using the Report API, but may also be useful reading
 for those who rely on using reports from the portal for their reconciliation
 processes.
 
+## Give access to an accounting partner
+
+Merchants must give access to their accounting partner on
+[portal.vipps.no](https://portsal.vipps.no).
+
+### Overview of accounting partners
+
+![Overview over accounting-partners](./images/portal-regnskapspartnere-oversikt.png "Regnskapspartner oversikt")
+
+### Adding a new accounting partner
+
+![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Regnskapspartner oversikt")
+
+
+## Authenticating to the Report API
+
+There are currently two ways to connect to the Report API. Either way,
+the token obtained is passed as a bearer token in the `Authorization` HTTP
+header:
+
+```text
+GET https://api.vipps.no/report/v1/ledgers
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...
+```
+
+### Single MSN token
+
+Individual merchants that have an API token
+for using the e-com/epayment APIs may use this to access a single
+Ledger connected to the MSN.
+
+See https://vippsas.github.io/vipps-developer-docs/api/ecom/#tag/Authorization-Service
+for information about how to obtain such a token.
+
+### Partner tokens
+
+TODO: Link to getting partner token
+
+Partner API users do not have access to any ledgers by default. Such
+access must be granted by the merchant on
+[portal.vipps.no](https://portal.vipps.no).
+
+See [permissions for accounting partners](grant-access-to-accounting-system.md)
+for more information and screenshots for the process.
+
 ## Ledgers
 
 Vipps settlements work in the same way for all Vipps payment products; whether
@@ -96,7 +141,7 @@ the `ledgerId`. An example response from
         }
       ]
     }
-  ] 
+  ]
 }
 ```
 A Vippsnummer will have a different `settlesFor` structure:
@@ -306,3 +351,12 @@ routines, but in general we recommend fetching by date, and to do reconciliation
 transaction by transaction based on `reference`.
 
 ![Settlement](./images/report-periods.png)
+
+## Questions?
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-ecom-api/issues),
+a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
