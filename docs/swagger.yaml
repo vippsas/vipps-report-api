@@ -7,10 +7,25 @@ servers:
 - url: https://apitest.vipps.no
 - url: https://api.vipps.no
 paths:
-  "/ledgers":
+
+  "/v1/ledgers":
     get:
       parameters:
         - $ref: "#/components/parameters/JWT"
+        - in: query
+          name: msn
+          required: false
+          schema:
+            type: string
+            example: 123456
+            description: Filters for ledgers that settles for the given msn
+        - in: query
+          name: vippsnummer
+          required: false
+          schema:
+            type: string
+            example: 123456
+            description: Filters for ledgers that settles for the given vippsnummer
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -19,10 +34,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Ledger"
-  "/ledgers/{ledgerId}/transactions":
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/Ledger"
+
+  "/v1/ledgers/{ledgerId}/transactions":
     get:
       parameters:
         - $ref: "#/components/parameters/JWT"
@@ -78,6 +97,27 @@ paths:
           schema:
             type: string
             example: 2000010
+        - in: query
+          required: false
+          name: columns
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - transactionId
+                - timestamp
+                - transactionType
+                - reference
+                - orderId
+                - ledgerId
+                - ledgerDate
+                - ledgerAmount
+                - grossAmount
+                - fee
+                - msn
+                - time
+                - price.description
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -150,77 +190,32 @@ components:
                 type: string
                 example: "Please check your API keys"
   schemas:
-    ReportInput:
+    BankAccount:
       type: object
       properties:
-        columns:
-          type: array
-          items:
-            type: string
-        filters:
-          oneOf:
-            - type: object
-              required:
-                - date
-              properties:
-                date:
-                  type: string
-                  format: date
-                  example: 2022-01-20
-            - type: object
-              required:
-                - fromDate
-                - toDate
-              properties:
-                fromDate:
-                  type: string
-                  example: 2022-01-20
-                toDate:
-                  type: string
-                  example: 2022-01-22
-            - type: object
-              required:
-                - fromTime
-                - toTime
-              properties:
-                fromTime:
-                  type: string
-                  example: 2022-01-20T03:00:00+02
-                toTime:
-                  type: string
-                  example: 2022-01-22T04:00:00+02
-            - type: object
-              required:
-                - inPayout
-              properties:
-                inPayout:
-                  type: string
-                  example: 2000010
-            - type: object
-              required:
-                - sincePayout
-              properties:
-                sincePayout:
-                  type: string
-                  example: 2000010
+        country:
+          type: string
+          example: "NO"
+        accountNumber:
+          type: string
+          example: "86011117947"
     Ledger:
       type: object
       properties:
         ledgerId:
           type: string
-          example: '1'
-        settlementAccountNumber:
-          type: string
-          example: "86011117947"
+          example: "302321"
+        payoutBankAccount:
+          $ref: "#/components/schemas/BankAccount"
         firstPayout:
           type: string
           nullable: true
-          example: 2022-01-20T03:00:00+02
+          example: "2000001"
         lastPayout:
           type: string
           nullable: true
-          example: 2022-01-22T04:00:00+02
-        org:
+          example: "2000045"
+        owner:
           $ref: "#/components/schemas/Organization"
         settlesFor:
           type: array
@@ -235,9 +230,9 @@ components:
           type: string
           enum:
             - epayment
-        epaymentMSN:
+        msn:
           type: string
-          example: 123456
+          example: "123456"
     LedgerSettlesForVippsnummer:
       type: object
       properties:
@@ -247,7 +242,7 @@ components:
             - vippsnummer
         vippsnummer:
           type: string
-          example: 123456
+          example: "123456"
         country:
           type: string
           example: 'NO'
@@ -307,9 +302,9 @@ components:
     Organization:
       type: object
       properties:
-        orgno:
-          type: number
-          example: 987654321
+        id:
+          type: string
+          example: "987654321"
         jurisdiction:
           type: string
           enum:
