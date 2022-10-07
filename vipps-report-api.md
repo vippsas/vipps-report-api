@@ -25,14 +25,17 @@ END_METADATA -->
   * [Overview of accounting partners](#overview-of-accounting-partners)
   * [Adding a new accounting partner](#adding-a-new-accounting-partner)
 * [Authenticating to the Report API](#authenticating-to-the-report-api)
-  * [Single MSN token](#single-msn-token)
-  * [Partner tokens](#partner-tokens)
+  * [Using the merchant's API keys](#using-the-merchants-api-keys)
+  * [Using the partner's partner keys](#using-the-partners-partner-keys)
 * [Ledgers](#ledgers)
+  * [Bulk payments](#bulk-payments)
+  * [Ledgers and sale units](#ledgers-and-sale-units)
   * [Get a ledger](#get-a-ledger)
 * [Transaction types](#transaction-types)
   * [Capture transactions](#capture-transactions)
   * [Refund transactions](#refund-transactions)
   * [Payout transactions](#payout-transactions)
+  * [Payout process](#payout-process)
   * [Other transactions](#other-transactions)
 * [Reports](#reports)
   * [JSON](#json)
@@ -42,16 +45,7 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version: 0.0.2.
-
-Before you can use this API, you will need to aquire a Authorization token.
-This field is named "Authorization" in the request-header and is used to
-identify your identity and permissions.
-
-See:
-[Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
-
-
+Document version: 0.0.3.
 
 ## Overview
 
@@ -74,12 +68,12 @@ processes.
 ## Give access to an accounting partner
 
 Merchants must give access to their accounting partner on
-[portal.vipps.no](https://portsal.vipps.no).
+[portal.vipps.no](https://portal.vipps.no).
 
 ### Overview of accounting partners
 
 A merchant may have zero or more accounting partners. This page on
-[portal.vipps.no](https://portsal.vipps.no)
+[portal.vipps.no](https://portal.vipps.no)
 shows the accounting partners for one sale unit.
 
 ![Overview over accounting-partners](./images/portal-regnskapspartnere-oversikt.png "Regnskapspartner oversikt")
@@ -87,7 +81,7 @@ shows the accounting partners for one sale unit.
 ### Adding a new accounting partner
 
 This page on
-[portal.vipps.no](https://portsal.vipps.no)
+[portal.vipps.no](https://portal.vipps.no)
 shows how to add an accounting partners, and how to specify which ledgers the
 accounting partner will have access to.
 
@@ -100,7 +94,7 @@ There are currently two ways to connect to the Report API:
 * Using the partner's API keys, called
   [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-keys).
 
-Either way, the authentication is as documented in
+See:
 [Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
 
 ### Using the merchant's API keys
@@ -160,7 +154,7 @@ merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`.
 
 An example response from
-`GET https://api.vipps.no/report/v1/ledgers` is:
+`GET:/report/v1/report/v1/ledgers` is:
 
 ```json
 {
@@ -206,10 +200,12 @@ A Vippsnummer will have a different `settlesFor` structure:
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
 may use the `msn` or `vippsnummer` arguments to filter the response.
 
+**TODO:** Add examples.
+
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
-ledgers appear for different customers as they [grant your accounting system
-access to their data](grant-access-to-accounting-system.md).
+ledgers appear for different customers as they add you as accounting partner.
+See: [Adding a new accounting partner](#adding-a-new-accounting-partner).
 
 ## Transaction types
 
@@ -234,9 +230,12 @@ to the merchant through Vipps. Reservations are not relevant to
 the settlement process.
 
 ### Refund transactions
+
 Refunds represent transfers in the other direction. These are
 initiated by the merchant; either by using the API or
-through [portal.vipps.no](https://portal.vipps.no). Refunds are always deducted
+through
+[portal.vipps.no](https://portal.vipps.no).
+Refunds are always deducted
 from the next settlement payout, also if you have a gross settlement setup.
 Currently, refunds always have zero fees.
 
@@ -272,6 +271,9 @@ exceptions to this:
 
 The presence of a payout transaction on the ledger simply indicates
 a *decision to pay the money out*.
+
+### Payout process
+
 There is a two-day delay in the bank transfer process itself:
 
 * Day 1: A *sale* or *capture* happens. Since a merchant should not capture the
@@ -293,7 +295,7 @@ capture made on Friday will be on merchant's account on Tuesday.
 
 The payout will be marked with the text `Utbet. 2000101 Vippsnr <ledgername>`.
 
-In the future, we plan to add a `payouts/` endpoint to the API
+**Please note:** We plan to later add a `payouts/` endpoint to the API
 that provides more information about the status of a payout.
 
 ### Other transactions
@@ -301,7 +303,7 @@ that provides more information about the status of a payout.
 Users of this API has to account for the possibility of
 more transaction types than just capture and refunds. Likely examples in the
 future are invoices, chargebacks, manual adjustments, and weekly or
-monthly fees. The reference documentation has more details about
+monthly fees. The rAPI specification has more details about
 transaction types.
 
 ## Reports
@@ -312,7 +314,9 @@ above:
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
 One can request a report from this ledger by
-calling `GET:ledgers/<ledgerId>/transactions`, for instance:
+calling `GET:/report/v1/ledgers/{ledgerId}/transactions`
+and using the `columns` parameter to specify a comma-separated list of which
+data to include in the response. For instance:
 
 ```
 GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
@@ -320,11 +324,15 @@ GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-1
 
 The endpoint can return either CSV or JSON depending on the `Accept` header;
 both always contain the exactly same data just in different representations.
+* CSV: `Accept: text/csv`
+* JSON: `Accept: application/json`
 
 ### JSON
 
-When you have the `ledgerId` you can get the transactions with
-`GET:/ledgers/{ledgerID}/transactions` and get a response similar to this:
+When you have retrieved the `ledgerId` with
+`GET:/report/v1/ledgers`,
+you can get the transactions with
+`GET:/report/v1/ledgers/{ledgerId}/transactions` and get a response similar to this:
 
 ```json
 {
