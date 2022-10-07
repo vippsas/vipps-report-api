@@ -24,13 +24,13 @@ END_METADATA -->
 * [Authenticating to the Report API](#authenticating-to-the-report-api)
   * [Using the merchant's API keys](#using-the-merchants-api-keys)
   * [Using the partner's partner keys](#using-the-partners-partner-keys)
-  * [Get ledgers](#get-ledgers)
+* [Ledgers](#ledgers)
     * [Example for eCom/ePayments](#example-for-ecomepayments)
     * [Example for Vippsnummer](#example-for-vippsnummer)
 * [Reports](#reports)
-* [Formats](#formats)
-  * [JSON](#json)
-  * [CSV](#csv)
+  * [Formats](#formats)
+    * [JSON](#json)
+    * [CSV](#csv)
   * [Periodization](#periodization)
 * [Give access to an accounting partner](#give-access-to-an-accounting-partner)
   * [Overview of accounting partners](#overview-of-accounting-partners)
@@ -69,7 +69,7 @@ Partner API users do not have access to any ledgers by default. Such
 access must be granted by the merchant:
 [Adding a new accounting partner](#adding-a-new-accounting-partner).
 
-### Get ledgers
+## Ledgers
 
 See:
 [Settlement guide: Ledgers](settlement-guide.md#ledgers).
@@ -153,10 +153,11 @@ See:
 [Settlement guide: Ledgers](settlement-guide.md#reports).
 
 You can, at any time, request a report from a ledger by
-calling `GET:/report/v1/ledgers/{ledgerId}/transactions`.
+calling
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 
 And also specify the time interval:
-`GET:/report/v1/ledgers/{ledgerId}/transactions?ledgerDate={YYYY-MM-DD}`
+[]`GET:/report/v1/ledgers/{ledgerId}/transactions?ledgerDate={YYYY-MM-DD}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 
 You can use the `columns` parameter to specify a comma-separated list of which
 data to include in the response. These columns are available (see the API
@@ -180,14 +181,20 @@ GET:/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=
 transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
 ```
 
-## Formats
+**Please note**: Data is not available in the API until some time after
+the `ledgerDate` has ended. This is primarily because Vipps in some
+cases compute fees based on the volume throughout the entire day,
+so that the `fee` and `ledgerAmount` can not be computed before the day
+has ended.
+
+### Formats
 
 The endpoint can return either CSV or JSON depending on the `Accept` header;
 both always contain the exactly same data just in different representations.
 * CSV: `Accept: text/csv`
 * JSON: `Accept: application/json`
 
-### JSON
+#### JSON
 
 When you have retrieved the `ledgerId` with
 [`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
@@ -230,7 +237,7 @@ when using the `Accept: application/json` header:
 }
 ```
 
-### CSV
+#### CSV
 
 When you have retrieved the `ledgerId` with
 [`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
@@ -261,21 +268,15 @@ Formatted as a table:
 
 For more details about individual columns available, please see the API specification.
 
-**Please note**: Data is not available in the API until some time after
-the `ledgerDate` has ended. This is primarily because Vipps in some
-cases compute fees based on the volume throughout the entire day,
-so that the `fee` and `ledgerAmount` can not be computed before the day
-has ended.
-
 ### Periodization
 
 The
-`GET:/report/v1/ledgers/{ledgerId}/transactions`
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint has several parameters for selecting a range of
 transactions to return, which can be used for an initial data import.
 
 Most users of the API will want to set up an automated job to call
-`GET:/report/v1/ledgers/{ledgerId}/transactions`
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 on a daily basis to download the data for the
 preceding day.
 
