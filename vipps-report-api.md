@@ -49,7 +49,7 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version: 0.0.3.
+Document version: 0.0.4.
 
 ## Overview
 
@@ -372,9 +372,10 @@ both always contain the exactly same data just in different representations.
 ### JSON
 
 When you have retrieved the `ledgerId` with
-`GET:/report/v1/ledgers`,
+[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
 you can get the transactions with
-`GET:/report/v1/ledgers/{ledgerId}/transactions` and get a response similar to this
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers~1%7BledgerId%7D~1transactions/get)
+and get a response similar to this
 when using the `Accept: application/json` header:
 
 ```json
@@ -414,9 +415,10 @@ when using the `Accept: application/json` header:
 ### CSV
 
 When you have retrieved the `ledgerId` with
-`GET:/report/v1/ledgers`,
+[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
 you can get the transactions with
-`GET:/report/v1/ledgers/{ledgerId}/transactions` and get a response similar to this
+[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers~1%7BledgerId%7D~1transactions/get)
+and get a response similar to this
 when using the `Accept: text/csv` header:
 
 ```
