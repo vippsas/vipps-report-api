@@ -4,12 +4,50 @@ info:
   title: Report API
   version: '0.2'
 servers:
-- url: https://apitest.vipps.no
-- url: https://api.vipps.no
+  - url: https://apitest.vipps.no
+  - url: https://api.vipps.no
 paths:
 
   "/v1/ledgers":
     get:
+      description: |
+        Returns the ledgers you have access to. For a description of ledgers 
+        see TODO.
+        
+        If you are integrating a single
+        merchant it may be enough to hit this endpoint once manually to identify
+        the `ledgerId`.
+
+        There is no need to specify the merchant or sale unit.
+        The response contains all ledgers that are available for the API keys used.
+        
+        The `settlesFor` part of the response looks a bit different for e-com sales
+        units and Vippsnummer. For e-com it looks like this:
+        ```json
+        {
+          "settlesFor": [
+              {
+               "type": "epayment",
+               "msn": "123455"
+              }
+            ]
+        }
+        ```
+        while for a Vippsnummer you will get
+        
+        ```json
+        {
+          "settlesFor": [
+            {
+              "type": "vippsnummer",
+              "vippsnummer": "NO/123455"
+            }
+          ]
+        }
+        ```
+
+        The full response example below displays the e-com case.
+
       parameters:
         - $ref: "#/components/parameters/JWT"
         - in: query
@@ -40,6 +78,33 @@ paths:
                     type: array
                     items:
                       "$ref": "#/components/schemas/Ledger"
+                example:
+                  {
+                    "items": [
+                      {
+                        "ledgerId": "302321",
+                        "currency": "NOK",
+                        "payoutBankAccount": {
+                          "country": "NO",
+                          "accountNumber": "86011117947"
+                        },
+                        "firstPayout": "2000001",
+                        "lastPayout": "2000045",
+                        "owner": {
+                          "jurisdiction": "NO",
+                          "id": "987654321"
+                        },
+                        "settlesFor": [
+                          {
+                            "type": "epayment",
+                            "msn": "123455"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+
+
 
   "/v1/ledgers/{ledgerId}/transactions":
     get:

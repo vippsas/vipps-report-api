@@ -1,13 +1,11 @@
 <!-- START_METADATA
 
-title: Settlement Guide
+title: Vipps Report API - Settlements
 sidebar_position: 3
 
 ---
 
 END_METADATA -->
-
-# Vipps Settlement Guide
 
 <!-- START_COMMENT -->
 
@@ -16,28 +14,7 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-<!-- START_TOC -->
-
-# Table of contents
-
-* [Overview](#overview)
-* [Ledgers](#ledgers)
-  * [Bulk payments](#bulk-payments)
-  * [Ledgers and sale units](#ledgers-and-sale-units)
-* [Transaction types](#transaction-types)
-  * [Capture transactions](#capture-transactions)
-  * [Refund transactions](#refund-transactions)
-  * [Payout transactions](#payout-transactions)
-  * [Payout process](#payout-process)
-  * [Other transactions](#other-transactions)
-* [Reports](#reports)
-  * [Notes](#notes)
-  * [Periodization](#periodization)
-* [Questions?](#questions)
-
-<!-- END_TOC -->
-
-Document version: 0.0.4.
+# Vipps Report API - Settlements
 
 ## Overview
 
@@ -46,7 +23,7 @@ day. In these bulk payment we have summed together all payments for the day,
 subtracting refunds and fees to Vipps. It is therefore necessary to download
 reports that explain the bulk payment, so that it can be correctly filed in the
 merchant's accounting system. Such reports can be fetched either
-on [portal.vipps.no](https://portal.vipps.no) or by using the Report API.
+in [the portal](https://portal.vipps.no) or by using the Report API.
 
 Usually, you will wish to implement a *reconciliation process*, where
 you download a report from Vipps each day, and check that contents
@@ -54,9 +31,8 @@ of the report match the data you have on your own side.
 We recommended that you do this by matching per transaction on transaction IDs.
 
 This guide will focus on using the Report API, but may also be useful reading
-for those who rely on using reports on
-[portal.vipps.no](https://portal.vipps.no)
-for their reconciliation processes.
+for those who rely on using reports from the portal for their reconciliation
+processes.
 
 ## Ledgers
 
@@ -64,11 +40,9 @@ Vipps settlements work in the same way for all Vipps payment products; whether
 one is using Vippsnummer, the eCom/ePayment API, the Checkout API or the
 Recurring API.
 
-### Bulk payments
-
 Vipps does not transfer money to/from the merchant for every payment made.
 Instead, all transactions are put on a *ledger*
-that tracks the funds that Vipps owes the merchant. During the day transactions
+that track the funds that Vipps owes the merchant. During the day transactions
 occur that usually increase, and sometimes decrease, the balance the merchant
 has in Vipps and thus the *ledger balance*. Periodically, usually daily, the
 balance of the ledger is paid out to a configured account number and the balance
@@ -81,19 +55,69 @@ the balance is paid out. The payout is itself a transaction on the ledger,
 adjusting the balance down to zero.
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
-### Ledgers and sale units
-
 For the large majority of merchants, there is a direct correspondence between a
-sale unit, for Vippsnummer or eCom Merchant Serial Number (MSNs), to a ledger:
+Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 
 ![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
 
 However, for merchants who require it, Vipps have
-limited support for multiple Vippsnummers/eCom MSNs to be settled together.
+limited support for multiple Vippsnummers/e-com MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 
 ![ledgers vs units, many to one](./images/ledger-vs-units-one-to-many.png)
+
+The ledger has its own `ledgerId`, so the first step in using the report API is
+to fetch the list of ledgers you have access to. If you are integrating a single
+merchant it may be enough to hit this endpoint once manually to identify
+the `ledgerId`. An example response from
+`GET https://api.vipps.no/report/v1/ledgers` is:
+
+```json
+{
+  "items": [
+    {
+      "ledgerId": "302321",
+      "currency": "NOK",
+      "payoutBankAccount": {
+        "country": "NO",
+        "accountNumber": "86011117947"
+      },
+      "firstPayout": "2000001",
+      "lastPayout": "2000045",
+      "owner": {
+        "jurisdiction": "NO",
+        "id": "987654321"
+      },
+      "settlesFor": [
+        {
+          "type": "epayment",
+          "msn": "123455"
+        }
+      ]
+    }
+  ] 
+}
+```
+A Vippsnummer will have a different `settlesFor` structure:
+```json
+{
+  "settlesFor": [
+    {
+      "type": "vippsnummer",
+      "country": "NO",
+      "vippsnummer": "123455"
+    }
+  ]
+}
+```
+If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
+may use the `msn` or `vippsnummer` arguments to filter the response.
+
+If you are integrating an accounting system for many customers, it can be
+relevant to poll this endpoint many times as you will continue to see new
+ledgers appear for different customers as they [grant your accounting system
+access to their data](grant-access-to-accounting-system.md).
 
 ## Transaction types
 
@@ -118,12 +142,9 @@ to the merchant through Vipps. Reservations are not relevant to
 the settlement process.
 
 ### Refund transactions
-
 Refunds represent transfers in the other direction. These are
 initiated by the merchant; either by using the API or
-through
-[portal.vipps.no](https://portal.vipps.no).
-Refunds are always deducted
+through [portal.vipps.no](https://portal.vipps.no). Refunds are always deducted
 from the next settlement payout, also if you have a gross settlement setup.
 Currently, refunds always have zero fees.
 
@@ -159,9 +180,6 @@ exceptions to this:
 
 The presence of a payout transaction on the ledger simply indicates
 a *decision to pay the money out*.
-
-### Payout process
-
 There is a two-day delay in the bank transfer process itself:
 
 * Day 1: A *sale* or *capture* happens. Since a merchant should not capture the
@@ -181,17 +199,17 @@ Days are bank days, Monday - Friday, excluding banking holidays. In other words,
 a capture made on Monday will be on merchant's account on Wednesday, while a
 capture made on Friday will be on merchant's account on Tuesday.
 
-A day starts and ends at midnight, Oslo time: Start `00:00:00`, end `23:59:59`
-(subseconds not specified).
-
 The payout will be marked with the text `Utbet. 2000101 Vippsnr <ledgername>`.
+
+In the future, we plan to add a `payouts/` endpoint to the API
+that provides more information about the status of a payout.
 
 ### Other transactions
 
 Users of this API has to account for the possibility of
 more transaction types than just capture and refunds. Likely examples in the
 future are invoices, chargebacks, manual adjustments, and weekly or
-monthly fees. The rAPI specification has more details about
+monthly fees. The reference documentation has more details about
 transaction types.
 
 ## Reports
@@ -201,7 +219,27 @@ that has happened on a specific ledger. To continue with our simple example from
 above:
 ![ledger balance illustration](./images/ledger-balance-simple.png)
 
-An example report, formatted as a table:
+One can request a report from this ledger by
+calling `GET:ledgers/<ledgerId>/transactions`, for instance:
+
+```
+GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
+```
+
+The endpoint can return either CSV or JSON depending on the `Accept` header;
+both always contain the exactly same data just in different representations. An
+example CSV response for the call above that matches the illustration above:
+
+```
+transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
+3343121302,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T10:23:43.422143+02:00,3.00% + 0.00
+2342128799,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T11:04:12.234234+02:00,3.00% + 0.00
+2442145459,capture,purchase-13,2022-10-01,194.00,200.00,6.00,123455,2022-10-01T13:11:40.234234+02:00,3.00% + 0.00
+2049872323,refund,purchase-12,2022-10-01,-100.00,-100.00,0.00,123455,2022-10-01T14:32:17.324342+02:00,
+18000302321002000045,payout,2000045,2022-10-01,-288.00,-288.00,0.00,,2022-10-02T00:00:00.000000+02:00,
+```
+
+Formatted as a table:
 
 | transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | msn    | time                              | price.description |
 |----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------|-----------------------------------|--------------|
@@ -211,11 +249,7 @@ An example report, formatted as a table:
 | 2049872323           | refund          | purchase-12 | 2022-10-01  |      -100.00 |     -100.00 | 3.00 | 123455 | 2022-10-01T14:32:17.324342+02:00 |              |
 | 18000302321002000045 | payout          | 2000045     | 2022-10-01  |      -288.00 |     -288.00 | 0.00 |        | 2022-10-02T00:00:00.000000+02:00 |              |
 
-See:
-[Vipps Report API: Reports](vipps-report-api#reports)
-for the technical details of how to fetch a report.
-
-### Notes
+Some notes:
 
 * You should be prepared to receive a new *transactionType* that you do not
   already know about.
@@ -229,10 +263,22 @@ for the technical details of how to fetch a report.
   field, it represents metadata about a transaction. For Vippsnummer, `msn`
   is blank and instead the `vippsnummer` column can be requested.
 
+For more details about individual columns available, please consult the
+Swagger [TODO].
+
+**Please note**: Data is not available in the API until some time after
+the `ledgerDate` has ended. This is primarily because Vipps in some
+cases compute fees based on the volume throughout the entire day,
+so that the `fee` and `ledgerAmount` can not be computed before the day
+has ended.
+
 ### Periodization
 
-Most users of the Report API will want to set up an automated job to
-fetch transactions on a daily basis to download the data for the
+The `transactions` endpoint has several parameters for selecting a range of
+transactions to return, which can be used for an initial data import.
+
+Most users of the API will want to set up an automated job to call
+the `transactions` endpoint on a daily basis to download the data for the
 preceding day. Such synchronization can be done in two ways: Date-based indexing
 and payout-based indexing. Often they will give the same results; the difference
 is:
@@ -259,13 +305,5 @@ Both modes can be useful depending on the specifics of your reconciliation
 routines, but in general we recommend fetching by date, and to do reconciliation
 transaction by transaction based on `reference`.
 
-![Settlement](./images/report-periods.png)  
+![Settlement](./images/report-periods.png)
 
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-ecom-api/issues),
-a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
-
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
