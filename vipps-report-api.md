@@ -20,77 +20,26 @@ END_METADATA -->
 
 # Table of contents
 
-* [Overview](#overview)
-* [Give access to an accounting partner](#give-access-to-an-accounting-partner)
-  * [Overview of accounting partners](#overview-of-accounting-partners)
-  * [Adding a new accounting partner](#adding-a-new-accounting-partner)
 * [Authenticating to the Report API](#authenticating-to-the-report-api)
   * [Using the merchant's API keys](#using-the-merchants-api-keys)
   * [Using the partner's partner keys](#using-the-partners-partner-keys)
-* [Ledgers](#ledgers)
-  * [Bulk payments](#bulk-payments)
-  * [Ledgers and sale units](#ledgers-and-sale-units)
   * [Get ledgers](#get-ledgers)
     * [Example for eCom/ePayments](#example-for-ecomepayments)
     * [Example for Vippsnummer](#example-for-vippsnummer)
-* [Transaction types](#transaction-types)
-  * [Capture transactions](#capture-transactions)
-  * [Refund transactions](#refund-transactions)
-  * [Payout transactions](#payout-transactions)
-  * [Payout process](#payout-process)
-  * [Other transactions](#other-transactions)
+* [Settlements](#settlements)
 * [Reports](#reports)
 * [Formats](#formats)
   * [JSON](#json)
   * [CSV](#csv)
-  * [Notes](#notes)
   * [Periodization](#periodization)
+* [Give access to an accounting partner](#give-access-to-an-accounting-partner)
+  * [Overview of accounting partners](#overview-of-accounting-partners)
+  * [Adding a new accounting partner](#adding-a-new-accounting-partner)
 * [Questions?](#questions)
 
 <!-- END_TOC -->
 
 Document version: 0.0.4.
-
-## Overview
-
-Merchants using Vipps will receive the money in bulk payments, usually one per
-day. In these bulk payment we have summed together all payments for the day,
-subtracting refunds and fees to Vipps. It is therefore necessary to download
-reports that explain the bulk payment, so that it can be correctly filed in the
-merchant's accounting system. Such reports can be fetched either
-on [portal.vipps.no](https://portal.vipps.no) or by using the Report API.
-
-Usually, you will wish to implement a *reconciliation process*, where
-you download a report from Vipps each day, and check that contents
-of the report match the data you have on your own side.
-We recommended that you do this by matching per transaction on transaction IDs.
-
-This guide will focus on using the Report API, but may also be useful reading
-for those who rely on using reports on
-[portal.vipps.no](https://portal.vipps.no)
-for their reconciliation processes.
-
-## Give access to an accounting partner
-
-Merchants must give access to their accounting partner on
-[portal.vipps.no](https://portal.vipps.no).
-
-### Overview of accounting partners
-
-A merchant may have zero or more accounting partners. This page on
-[portal.vipps.no](https://portal.vipps.no)
-shows the accounting partners for one sale unit.
-
-![Overview over accounting-partners](./images/portal-regnskapspartnere-oversikt.png "Regnskapspartner oversikt")
-
-### Adding a new accounting partner
-
-This page on
-[portal.vipps.no](https://portal.vipps.no)
-shows how to add an accounting partners, and how to specify which ledgers the
-accounting partner will have access to.
-
-![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Regnskapspartner oversikt")
 
 ## Authenticating to the Report API
 
@@ -113,43 +62,6 @@ Ledger connected to the sale unit (identified with MSN).
 Partner API users do not have access to any ledgers by default. Such
 access must be granted by the merchant:
 [Adding a new accounting partner](#adding-a-new-accounting-partner).
-
-## Ledgers
-
-Vipps settlements work in the same way for all Vipps payment products; whether
-one is using Vippsnummer, the eCom/ePayment API, the Checkout API or the
-Recurring API.
-
-### Bulk payments
-
-Vipps does not transfer money to/from the merchant for every payment made.
-Instead, all transactions are put on a *ledger*
-that tracks the funds that Vipps owes the merchant. During the day transactions
-occur that usually increase, and sometimes decrease, the balance the merchant
-has in Vipps and thus the *ledger balance*. Periodically, usually daily, the
-balance of the ledger is paid out to a configured account number and the balance
-is reset.
-
-The following illustration shows an example day at a low traffic merchant.
-*Captures* and *refunds* (described in further detail below) are added to the
-ledger, changing the balance of funds that Vipps owes the merchant. In the end,
-the balance is paid out. The payout is itself a transaction on the ledger,
-adjusting the balance down to zero.
-![ledger balance illustration](./images/ledger-balance-simple.png)
-
-### Ledgers and sale units
-
-For the large majority of merchants, there is a direct correspondence between a
-sale unit, for Vippsnummer or eCom Merchant Serial Number (MSNs), to a ledger:
-
-![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
-
-However, for merchants who require it, Vipps have
-limited support for multiple Vippsnummers/eCom MSNs to be settled together.
-The payments to multiple different units are then combined in a
-single settlement payout:
-
-![ledgers vs units, many to one](./images/ledger-vs-units-one-to-many.png)
 
 ### Get ledgers
 
@@ -230,16 +142,11 @@ See:
 
 See:
 [Settlement guide](settlement-guide.md)
-for all details about settlements, 
+for all details about settlements,
 
 ## Reports
 
-To perform reconciliation you download a *report* that lists the transactions
-that has happened on a specific ledger. To continue with our simple example from
-above:
-![ledger balance illustration](./images/ledger-balance-simple.png)
-
-You can, at any time, request a report from this ledger by
+You can, at any time, request a report from a ledger by
 calling `GET:/report/v1/ledgers/{ledgerId}/transactions`.
 
 And also specify the time interval:
@@ -345,22 +252,8 @@ Formatted as a table:
 | 2049872323           | refund          | purchase-12 | 2022-10-01  |      -100.00 |     -100.00 | 3.00 | 123455 | 2022-10-01T14:32:17.324342+02:00 |              |
 | 18000302321002000045 | payout          | 2000045     | 2022-10-01  |      -288.00 |     -288.00 | 0.00 |        | 2022-10-02T00:00:00.000000+02:00 |              |
 
-### Notes
 
-* You should be prepared to receive a new *transactionType* that you do not
-  already know about.
-* *ledgerAmount* is always the contribution the transaction has to the ledger
-  balance. This means that if you are set up with gross settlements, it will be
-  equal to `grossAmount`, unlike the case above.
-* *ledgerDate* is the accounting date used to group transactions for payouts. In
-  the future it may be possible to set this to something else than midnight
-  local time, and in that case this will deviate from `time`.
-* The payout transaction does not have an `msn`. The `msn` is not a required
-  field, it represents metadata about a transaction. For Vippsnummer, `msn`
-  is blank and instead the `vippsnummer` column can be requested.
-
-For more details about individual columns available, please consult the
-Swagger [TODO].
+For more details about individual columns available, please see the API specification.
 
 **Please note**: Data is not available in the API until some time after
 the `ledgerDate` has ended. This is primarily because Vipps in some
@@ -378,33 +271,36 @@ transactions to return, which can be used for an initial data import.
 Most users of the API will want to set up an automated job to call
 `GET:/report/v1/ledgers/{ledgerId}/transactions`
 on a daily basis to download the data for the
-preceding day. Such synchronization can be done in two ways: Date-based indexing
-and payout-based indexing. Often they will give the same results; the difference
-is:
-
-* When weekly or daily settlements are configured; then a payout is only
-  generated the 1st day of the week or month
-* When the balance is negative, a payout is not generated
-
-The last scenario is depicted in the figure below. On the
-time `2022-09-03 00:00:00`, the balance is negative, and so no payout is
-generated for `ledgerDate=2022-09-02`.
-
-* By fetching transactions by `?ledgerDate=`, one will get one report per date.
-  This is indicated by the blue bands on top of the figure. The advantage is
-  that one consistently gets more data each day, also for monthly/weekly
-  settlements and negative balance.
-
-* By fetching transactions by `?inPayout=`, transactions for several days
-  may be returned in the same report. See the red bands at the bottom
-  of the figure below. The advantage is that the sum of `ledgerAmount` in the
-  report will exactly match the payout bank transfer amount.
-
-Both modes can be useful depending on the specifics of your reconciliation
-routines, but in general we recommend fetching by date, and to do reconciliation
-transaction by transaction based on `reference`.
+preceding day.
 
 ![Settlement](./images/report-periods.png)
+
+See:
+[Settlement guide: Periodization](settlement-guide.md#periodization)
+for more details.
+
+## Give access to an accounting partner
+
+Merchants must give access to their accounting partner on
+[portal.vipps.no](https://portal.vipps.no).
+
+### Overview of accounting partners
+
+A merchant may have zero or more accounting partners. This page on
+[portal.vipps.no](https://portal.vipps.no)
+shows the accounting partners for one sale unit.
+
+![Overview over accounting-partners](./images/portal-regnskapspartnere-oversikt.png "Regnskapspartner oversikt")
+
+### Adding a new accounting partner
+
+This page on
+[portal.vipps.no](https://portal.vipps.no)
+shows how to add an accounting partners, and how to specify which ledgers the
+accounting partner will have access to.
+
+![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Regnskapspartner oversikt")
+
 
 ## Questions?
 
