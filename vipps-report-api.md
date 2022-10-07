@@ -1,13 +1,11 @@
 <!-- START_METADATA
-
-title: Vipps settlement concepts
-sidebar_position: 5
-
 ---
-
+title: API Guide: Overview
+sidebar_position: 5
+---
 END_METADATA -->
 
-# Vipps Report API
+# Vipps Report API: Overview
 
 <!-- START_COMMENT -->
 
@@ -32,10 +30,9 @@ END_METADATA -->
   - [Adding a new accounting partner](#adding-a-new-accounting-partner)
 - [Questions?](#questions)
 
-
 <!-- END_TOC -->
 
-Document version: 0.0.5.
+Document version: 0.0.6.
 
 ## About the Report API
 
@@ -101,7 +98,7 @@ for downloading in *pages* of data at a later point.
 ### CSV vs JSON
 
 For report endpoints, both CSV and JSON response is available.
-The response format is controlled by whether 
+The response format is controlled by whether
 the `Accept` header is set to `application/json` or `text/csv`.
 It is indicated in the [API Spec](https://vippsas.github.io/vipps-report-api/)
 whether the CSV format is available.
@@ -165,7 +162,7 @@ TODO: Add the missing documentation.
 | reference         |            |                                                                                 |
 | **ledger/**       |            |                                                                                 |
 | transactionId     | Numeric ID |                                                                                 |
-| transactionType   | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) | 
+| transactionType   | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) |
 | ledgerDate        |            |                                                                                 |
 | ledgerAmount      |            |                                                                                 |      
 | grossAmount       |            |                                                                                 |  
