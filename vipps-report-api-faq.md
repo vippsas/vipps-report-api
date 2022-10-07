@@ -14,9 +14,6 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-See:
-[Settlement guide](settlement-guide.md).
-
 ## Questions?
 
 We're always happy to help with code or other questions you might have!

@@ -20,26 +20,41 @@ END_METADATA -->
 
 # Table of contents
 
-* [Authenticating to the Report API](#authenticating-to-the-report-api)
-  * [Using the merchant's API keys](#using-the-merchants-api-keys)
-  * [Using the partner's partner keys](#using-the-partners-partner-keys)
-  * [Get ledgers](#get-ledgers)
-    * [Example for eCom/ePayments](#example-for-ecomepayments)
-    * [Example for Vippsnummer](#example-for-vippsnummer)
-* [Settlements](#settlements)
-* [Reports](#reports)
-* [Formats](#formats)
-  * [JSON](#json)
-  * [CSV](#csv)
-  * [Periodization](#periodization)
-* [Give access to an accounting partner](#give-access-to-an-accounting-partner)
-  * [Overview of accounting partners](#overview-of-accounting-partners)
-  * [Adding a new accounting partner](#adding-a-new-accounting-partner)
-* [Questions?](#questions)
+- [About the Report API](#about-the-report-api)
+- [Authenticating to the Report API](#authenticating-to-the-report-api)
+  - [Using the merchant's API keys](#using-the-merchants-api-keys)
+  - [Using the partner's partner keys](#using-the-partners-partner-keys)
+- [About report endpoints](#about-report-endpoints)
+  - [CSV vs JSON](#csv-vs-json)
+- [Field/column documentation](#fieldcolumn-documentation)
+- [Give access to an accounting partner](#give-access-to-an-accounting-partner)
+  - [Overview of accounting partners](#overview-of-accounting-partners)
+  - [Adding a new accounting partner](#adding-a-new-accounting-partner)
+- [Questions?](#questions)
+
 
 <!-- END_TOC -->
 
-Document version: 0.0.4.
+Document version: 0.0.5.
+
+## About the Report API
+
+The Report API serves data about your payments with Vipps, in particular
+aggregate information across APIs, and reports containing data for many
+payments at once.
+
+This document contains common traits of the entire API.
+We also have guides for specific usecases:
+
+* [Settlement guide](vipps-report-api-settlement-guide.md) explains the settlement process and the Ledger
+* Coming later: Endpoints for recent/non-settled transactions.
+
+
+**Please note:** The information fetched from the Report API is
+asynchronous and trailing behind the other APIs. Usually it is behind
+by a second or so, but if we have operational problems it could be
+behind hours. You should therefore always use other Vipps APIs
+as the source of truth to figure out the status of an operation.
 
 ## Authenticating to the Report API
 
@@ -55,7 +70,8 @@ See:
 
 Individual merchants that have API keys
 for using the eCom/ePayment APIs may use this to access a single
-Ledger connected to the sale unit (identified with MSN).
+Ledger connected to the sale unit (identified with MSN). If there
+is more than one sale unit connected to the Ledger, access will be denied.
 
 ### Using the partner's partner keys
 
@@ -63,221 +79,101 @@ Partner API users do not have access to any ledgers by default. Such
 access must be granted by the merchant:
 [Adding a new accounting partner](#adding-a-new-accounting-partner).
 
-### Get ledgers
+See:
+[Adding a new accounting partner](#adding-a-new-accounting-partner).
 
-All ledger have their own `ledgerId`, so the first step in using the report API is
-to fetch the list of ledgers you have access to. This is managed as
-described in
-[Give access to an accounting partner](#give-access-to-an-accounting-partner).
 
-The ledgers are fetched with
-`GET:/report/v1/report/v1/ledgers`.
+## About report endpoints
 
-If you are integrating a single
-merchant it may be enough to hit this endpoint once manually to identify
-the `ledgerId`.
+Some of the endpoints in the report API return a "report"; a list of
+payments/transactions. These have a common response format and is
+used in the same way.
 
-**Please note:** There is no need to specify the merchant or sale unit.
-The response contains all ledgers that are available for the API keys used.
+**Please note:** Depending on the merchant's traffic volume and
+selected time intervals, some reports can become quite large
+(hundred thousands of rows returned). Currently we only support
+downloading a full report in one go. We will not time out a
+request server side, so it is OK if the download takes several
+minutes and is multiple megabytes. We may provide features
+for downloading in *pages* of data at a later point.
 
-#### Example for eCom/ePayments
 
+### CSV vs JSON
+
+For report endpoints, both CSV and JSON response is available.
+The response format is controlled by whether 
+the `Accept` header is set to `application/json` or `text/csv`.
+It is indicated in the [API Spec](https://vippsas.github.io/vipps-report-api/)
+whether the CSV format is available.
+
+For report endpoints a large number of columns (CSV)/fields(JSON)
+may be available, and we will keep adding new ones from more sources
+of data. Therefore, the caller always pass inn all the columns it wants
+to receive back, so that only the data the caller wants is returned.
+
+The CSV and JSON formats always contain the same data. For instance,
+if this is the CSV response:
+```text
+transactionId,reference,price.description
+2023432783,payment-123,3% + 0.00
+3023423423,payment-124,3% + 0.00
+```
+then we can know that the JSON will look like this:
 ```json
 {
   "items": [
     {
-      "ledgerId": "302321",
-      "currency": "NOK",
-      "payoutBankAccount": {
-        "country": "NO",
-        "accountNumber": "86011117947"
-      },
-      "firstPayout": "2000001",
-      "lastPayout": "2000045",
-      "owner": {
-        "jurisdiction": "NO",
-        "id": "987654321"
-      },
-      "settlesFor": [
-        {
-          "type": "epayment",
-          "msn": "123455"
-        }
-      ]
-    }
-  ]
-}
-```
-
-#### Example for Vippsnummer
-
-A Vippsnummer will have a different `settlesFor` structure:
-
-```json
-{
-  "settlesFor": [
-    {
-      "type": "vippsnummer",
-      "country": "NO",
-      "vippsnummer": "123455"
-    }
-  ]
-}
-```
-
-If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
-may use the `msn` or `vippsnummer` arguments to filter the response:
-* `GET:/report/v1/report/v1/ledgers?msn=123456`
-* `GET:/report/v1/report/v1/ledgers?vippsnummer=123456`
-
-**TODO:** Check these examples. 👆
-
-If you are integrating an accounting system for many customers, it can be
-relevant to poll this endpoint many times as you will continue to see new
-ledgers appear for different customers as they add you as accounting partner.
-See:
-[Adding a new accounting partner](#adding-a-new-accounting-partner).
-
-## Settlements
-
-See:
-[Settlement guide](settlement-guide.md)
-for all details about settlements,
-
-## Reports
-
-You can, at any time, request a report from a ledger by
-calling `GET:/report/v1/ledgers/{ledgerId}/transactions`.
-
-And also specify the time interval:
-`GET:/report/v1/ledgers/{ledgerId}/transactions?ledgerDate={YYYY-MM-DD}`
-
-You can use the `columns` parameter to specify a comma-separated list of which
-data to include in the response. These columns are available (see the API
-specification for details):
-
-* transactionId
-* transactionType
-* reference
-* ledgerDate
-* ledgerAmount
-* grossAmount
-* fee
-* msn
-* time
-* price.description
-
-An example combining the options above (line break added for readability):
-
-```
-GET:/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=
-transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
-```
-
-## Formats
-
-The endpoint can return either CSV or JSON depending on the `Accept` header;
-both always contain the exactly same data just in different representations.
-* CSV: `Accept: text/csv`
-* JSON: `Accept: application/json`
-
-### JSON
-
-When you have retrieved the `ledgerId` with
-[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
-you can get the transactions with
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers~1%7BledgerId%7D~1transactions/get)
-and get a response similar to this
-when using the `Accept: application/json` header:
-
-```json
-{
-   "transactions":[
-      {
-         "transactionID":"2000001",
-         "timestamp":"2022-09-22T09:31:28+00:00",
-         "ledgerDate":"2022-09-22",
-         "ledgerID":"1",
-         "transactionType":"refund",
-         "orderID":"string",
-         "ledgerAmount":{
-            "value":0,
-            "currency":"NOK"
-         },
-         "grossAmount":{
-            "value":0,
-            "currency":"NOK"
-         },
-         "fee":{
-            "value":0,
-            "currency":"NOK"
-         },
-         "priceRate":1.25,
-         "priceFixed":{
-            "value":0,
-            "currency":"NOK"
-         },
-         "storeID":"msn/1234",
-         "storeName":"Lokalbutikk Løkka"
+      "transactionId": "2023432783",
+      "reference": "payment-123",
+      "price": {
+        "description": "3% + 0.00",
       }
-   ]
+    },
+    {
+      "transactionId": "3023423423",
+      "reference": "payment-124",
+      "price": {
+        "description": "3% + 0.00",
+      }
+    }
+  ]
 }
 ```
-
-### CSV
-
-When you have retrieved the `ledgerId` with
-[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
-you can get the transactions with
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers~1%7BledgerId%7D~1transactions/get)
-and get a response similar to this
-when using the `Accept: text/csv` header:
-
-```
-transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
-3343121302,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T10:23:43.422143+02:00,3.00% + 0.00
-2342128799,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T11:04:12.234234+02:00,3.00% + 0.00
-2442145459,capture,purchase-13,2022-10-01,194.00,200.00,6.00,123455,2022-10-01T13:11:40.234234+02:00,3.00% + 0.00
-2049872323,refund,purchase-12,2022-10-01,-100.00,-100.00,0.00,123455,2022-10-01T14:32:17.324342+02:00,3.00% + 0.00
-18000302321002000045,payout,2000045,2022-10-01,-288.00,-288.00,0.00,,2022-10-02T00:00:00.000000+02:00,
-```
-
-Formatted as a table:
-
-| transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | msn    | time                              | price.description |
-|----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------|-----------------------------------|--------------|
-| 3343121302           | capture         | purchase-12 | 2022-10-01  |        97.00 |      100.00 | 3.00 | 123455 | 2022-10-01T10:23:43.422143+02:00 | 3.00% + 0.00 |
-| 2342128799           | capture         | purchase-12 | 2022-10-01  |        97.00 |      100.00 | 3.00 | 123455 | 2022-10-01T11:04:12.234234+02:00 | 3.00% + 0.00 |
-| 2442145459           | capture         | purchase-13 | 2022-10-01  |       194.00 |      200.00 | 3.00 | 123455 | 2022-10-01T13:11:40.234234+02:00 | 3.00% + 0.00 |
-| 2049872323           | refund          | purchase-12 | 2022-10-01  |      -100.00 |     -100.00 | 3.00 | 123455 | 2022-10-01T14:32:17.324342+02:00 |              |
-| 18000302321002000045 | payout          | 2000045     | 2022-10-01  |      -288.00 |     -288.00 | 0.00 |        | 2022-10-02T00:00:00.000000+02:00 |              |
+The only difference is that in JSON, the fields do not have a given
+order and that the distinction between numbers and strings disappear in CSV.
 
 
-For more details about individual columns available, please see the API specification.
+## Field/column documentation
 
-**Please note**: Data is not available in the API until some time after
-the `ledgerDate` has ended. This is primarily because Vipps in some
-cases compute fees based on the volume throughout the entire day,
-so that the `fee` and `ledgerAmount` can not be computed before the day
-has ended.
+This table lists all of the fields (or columns, in CSV) available for
+all of the reports. Not all fields apply to all kinds of data, so the
+table indicates in which contexts the fields are available.
 
-### Periodization
+The fields indicated to be "Numeric ID" are returned as **string** in JSON,
+but are positive integers smaller than 2^63.
+We use a string because IDs should in general
+be passed as strings in JSON, and because some JSON parsers and JavaScript
+can only handle numbers as floating point (so, restricted to 2^53). However,
+it is safe to parse these and use them as a 64-bit integer key in a database.
 
-The
-`GET:/report/v1/ledgers/{ledgerId}/transactions`
-endpoint has several parameters for selecting a range of
-transactions to return, which can be used for an initial data import.
+TODO: Add the missing documentation.
 
-Most users of the API will want to set up an automated job to call
-`GET:/report/v1/ledgers/{ledgerId}/transactions`
-on a daily basis to download the data for the
-preceding day.
+| Field name        | Type       | Description                                                                     |
+|-------------------|------------|---------------------------------------------------------------------------------|
+| **Common/**       |            |                                                                                 |
+| reference         |            |                                                                                 |
+| **ledger/**       |            |                                                                                 |
+| transactionId     | Numeric ID |                                                                                 |
+| transactionType   | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) | 
+| ledgerDate        |            |                                                                                 |
+| ledgerAmount      |            |                                                                                 |      
+| grossAmount       |            |                                                                                 |  
+| fee               |            |                                                                                 |
+| msn               |            |                                                                                 |
+| time              |            |                                                                                 |
+| price.description |            |                                                                                 |
+|                    |           |                                                                                 |
 
-![Settlement](./images/report-periods.png)
-
-See:
-[Settlement guide: Periodization](settlement-guide.md#periodization)
-for more details.
 
 ## Give access to an accounting partner
 
