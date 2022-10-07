@@ -26,7 +26,7 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 * [API Guide: Overview](vipps-report-api.md)
 * [API Guide: Settlements](vipps-report-api-settlement-guide.md)
-* [API Spec](https://vippsas.github.io/vipps-report-api/)
+* [API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
 * [API Quick start](vipps-report-api-quick-start.md)
 * [API FAQ](vipps-report-api-faq.md): Frequently asked questions
 
