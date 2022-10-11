@@ -14,9 +14,24 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
+<!-- START_TOC -->
+
+## Table of contents
+
+* [When will the API be available?](#when-will-the-api-be-available)
+* [Questions?](#questions)
+
+<!-- END_TOC -->
+
 Document version: 0.0.1.
 
-(Nothing here yet)
+## When will the API be available?
+
+We can not give a date, month or any kind of ETA yet.
+
+We are still quite early in the planning and design phase and will use the
+draft documentation here to discuss with potential users of the API
+and make sure we are developing the right solution.
 
 ## Questions?
 
