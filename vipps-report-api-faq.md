@@ -23,7 +23,7 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version: 0.0.1.
+Document version: 0.0.2.
 
 ## When will the API be available?
 
