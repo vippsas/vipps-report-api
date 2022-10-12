@@ -19,6 +19,11 @@ END_METADATA -->
 The report API gives you or a third-party acting on your behalf the ability to
 fetch information about payment events that have been processed by Vipps.
 
+If you are interested in this not-yet-available API:
+* Partners: Please contact your partner manager.
+* Merchants: Please send us an email, on the address
+ [here](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
+
 ## Getting started
 
 See
