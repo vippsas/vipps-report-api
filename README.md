@@ -23,6 +23,9 @@ If you are interested in this not-yet-available API:
 * Partners: Please contact your partner manager.
 * Merchants: Please send us an email, on the address
  [here](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
+* You can also
+  [submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues)
+  if you have feedback.
 
 ## Getting started
 
