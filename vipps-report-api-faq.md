@@ -61,6 +61,10 @@ the platform partner can use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
 to make requests to the Report API.
 
+[Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
+lets a partner make payments on behalf of a merchant, and the same API keys
+also give access to the Report API.
+
 ## Specifying a accounting partner
 
 In addition to the above, the merchant may add one or more accounting partners.
