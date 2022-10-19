@@ -4,15 +4,13 @@ title: "API Guide: Settlements"
 sidebar_position: 7
 ---
 END_METADATA -->
-
+# Vipps Report API: Settlements
 <!-- START_COMMENT -->
 
 ℹ️ Please use the new documentation:
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 <!-- END_COMMENT -->
-
-# Vipps Report API: Settlements
 
 <!-- START_TOC -->
 
@@ -31,7 +29,7 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version: 0.0.6.
+Document version: 0.0.7.
 
 ## Overview
 
@@ -77,8 +75,8 @@ Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 
 ![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
 
-However, for merchants who require it, Vipps have
-limited support for multiple Vippsnummers/e-com MSNs to be settled together.
+However, for merchants who require it, Vipps has
+limited support for multiple Vipps numbers/ecom MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 
@@ -163,6 +161,7 @@ to the merchant through Vipps. Reservations are not relevant to
 the settlement process.
 
 ### Refund transactions
+
 Refunds represent transfers in the other direction. These are
 initiated by the merchant; either by using the API or
 through [portal.vipps.no](https://portal.vipps.no). Refunds are always deducted
@@ -246,7 +245,7 @@ calling
 [`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
 for instance:
 
-```
+```HTTP
 GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
 ```
 
@@ -254,7 +253,7 @@ The endpoint can return either CSV or JSON depending on the `Accept` header;
 both always contain the exactly same data just in different representations. An
 example CSV response for the call above that matches the illustration above:
 
-```
+```csv
 transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
 3343121302,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T10:23:43.422143+02:00,3.00% + 0.00
 2342128799,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T11:04:12.234234+02:00,3.00% + 0.00
