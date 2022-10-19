@@ -52,8 +52,9 @@ processes.
 ## Ledgers
 
 Vipps settlements work in the same way for all Vipps payment products; whether
-one is using Vippsnummer, the eCom/ePayment API, the Checkout API or the
-Recurring API.
+one is using
+[Vippsnummer](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-i-butikk/ta-betalt-med-vipps/#kom-i-gang)
+or one of the Vipps APIs.
 
 Vipps does not transfer money to/from the merchant for every payment made.
 Instead, all transactions are put on a *ledger*
@@ -76,7 +77,7 @@ Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 ![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
 
 However, for merchants who require it, Vipps has
-limited support for multiple Vipps numbers/ecom MSNs to be settled together.
+limited support for multiple Vippsnummer and eCom MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 

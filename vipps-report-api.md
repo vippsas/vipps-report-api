@@ -43,7 +43,7 @@ payments at once.
 This document contains common traits of the entire API.
 We also have guides for specific use cases:
 
-* [Settlement guide](vipps-report-api-settlement-guide.md) explains the settlement process and the Ledger
+* [Settlement guide](vipps-report-api-settlement-guide.md) explains the settlement process and the ledger
 * Coming later: Endpoints for recent/non-settled transactions.
 
 **Please note:** The information fetched from the Report API is
@@ -54,11 +54,16 @@ Vipps APIs as the source of truth for the status of an operation.
 
 ## Authenticating to the Report API
 
-There are currently two ways to connect to the Report API:
+There are currently three ways to connect to the Report API:
 
 * Using the merchant's own API keys for the sale unit.
 * Using the partner's API keys, called
   [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-keys).
+* Using the Accounting partner's API keys.
+
+See
+[Which API keys give access to the API?](vipps-report-api-faq.md#which-api-keys-give-access-to-the-api)
+for details about these.
 
 See:
 [Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
@@ -67,8 +72,8 @@ See:
 
 Individual merchants that have API keys
 for using the eCom/ePayment APIs may use this to access a single
-Ledger connected to the sale unit (identified with MSN). If there
-is more than one sale unit connected to the Ledger, access will be denied.
+ledger connected to the sale unit (identified with MSN). If there
+is more than one sale unit connected to the ledger, access will be denied.
 
 ### Using the partner's partner keys
 
