@@ -36,7 +36,7 @@ and make sure we are developing the right solution.
 
 ## Which API keys give access to the API?
 
-In short: These API keys give access to the Report API:
+In short: The following API keys give access to the Report API:
 * The merchant's own API keys (the same API keys that are used to make payments)
 * Partner keys (the same API keys that are used to make payments)
 * Accounting partners' API keys (after the merchant has given the accounting partner access)
