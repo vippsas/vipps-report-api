@@ -16,10 +16,11 @@ END_METADATA -->
 
 💥 DRAFT! Unfinished work in progress. API specification changes are still coming. 💥
 
-The report API gives you or a third-party acting on your behalf the ability to
+The Report API gives you, or a third-party acting on your behalf, the ability to
 fetch information about payment events that have been processed by Vipps.
 
 If you are interested in this not-yet-available API:
+
 * Partners: Please contact your partner manager.
 * Merchants: Please send us an email, on the address
  [here](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
@@ -31,7 +32,7 @@ If you are interested in this not-yet-available API:
 
 See
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
-for information about API keys, product activation, how to make API calls.
+for information about API keys, product activation, how to make API calls, etc.
 
 ## Report API documentation
 
@@ -39,7 +40,7 @@ for information about API keys, product activation, how to make API calls.
 * [API Guide: Settlements](vipps-report-api-settlement-guide.md)
 * [API Spec](https://vippsas.github.io/vipps-report-api/)
 * [API Quick start](vipps-report-api-quick-start.md)
-* [API FAQ](vipps-report-api-faq.md): Frequently asked questions
+* [API Frequently asked questions](vipps-report-api-faq.md)
 
 ## Questions?
 
