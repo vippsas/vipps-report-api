@@ -19,11 +19,12 @@ END_METADATA -->
 ## Table of contents
 
 * [When will the API be available?](#when-will-the-api-be-available)
+* [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
 * [Questions?](#questions)
 
 <!-- END_TOC -->
 
-Document version: 0.0.2.
+Document version: 0.0.3.
 
 ## When will the API be available?
 
@@ -32,6 +33,43 @@ We can not give a date, month or any kind of ETA yet.
 We are still quite early in the planning and design phase and will use the
 draft documentation here to discuss with potential users of the API
 and make sure we are developing the right solution.
+
+## Which API keys give access to the API?
+
+In short:
+* The merchant's own API keys (used to make payments)
+* Partner keys (used to make payments)
+* Accounting partners' API keys
+
+### The merchant's own API keys
+
+The merchant's own API keys give full access to the Report API.
+
+If the merchant uses an integration partner (see
+[partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types)),
+it is the same as using the merchant's own API keys.
+
+When a merchant shares it's API keys for a sale unit with an integration partner,
+Vipps has no way of knowing whether the API calls are made by the merchant or
+the integration partner.
+
+### Partner keys
+
+If the merchant has a sale unit that is configured with a platform partner (see
+[partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types)),
+the platform partner can use
+[partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
+to make requests to the Report API.
+
+## Specifying a accounting partner
+
+In addition to the above, the merchant may add one or more accounting partners.
+An accounting partner will get access to the Report API, but will not be allowed
+to make payments, or move money in any way. The accounting partner can only see
+reports of the payments that have been made.
+
+See:
+[Give access to an accounting partner](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api/vipps-report-api#give-access-to-an-accounting-partner)
 
 ## Questions?
 
