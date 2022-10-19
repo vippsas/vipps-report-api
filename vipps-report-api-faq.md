@@ -52,6 +52,8 @@ it is the same as using the merchant's own API keys.
 When a merchant shares it's API keys for a sale unit with an integration partner,
 Vipps has no way of knowing whether the API calls are made by the merchant or
 the integration partner.
+This is why we require that all API requests made by a partner on behalf of a
+merchant are done using the partner's own API keys (the partner keys).
 
 ### Partner keys
 
