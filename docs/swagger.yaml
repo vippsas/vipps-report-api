@@ -10,6 +10,7 @@ paths:
 
   "/v1/ledgers":
     get:
+      summary: Returns the ledgers you have access to
       description: |
         Returns the ledgers you have access to.
 
@@ -109,6 +110,7 @@ paths:
 
   "/v1/ledgers/{ledgerId}/transactions":
     get:
+      summary: Returns a list of payments/transactions.
       description: |
         Returns a list of payments/transactions.
       parameters:
