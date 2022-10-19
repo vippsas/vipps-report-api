@@ -73,7 +73,7 @@ to make payments, or move money in any way. The accounting partner can only see
 reports of the payments that have been made.
 
 See:
-[Give access to an accounting partner](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api/vipps-report-api#give-access-to-an-accounting-partner)
+[Give access to an accounting partner](vipps-report-api#give-access-to-an-accounting-partner)
 
 ## Questions?
 
