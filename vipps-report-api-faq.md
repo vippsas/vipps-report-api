@@ -20,11 +20,14 @@ END_METADATA -->
 
 * [When will the API be available?](#when-will-the-api-be-available)
 * [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
+  * [The merchant's own API keys](#the-merchants-own-api-keys)
+  * [Partner keys](#partner-keys)
+  * [Specifying a accounting partner](#specifying-a-accounting-partner)
 * [Questions?](#questions)
 
 <!-- END_TOC -->
 
-Document version: 0.0.3.
+Document version: 0.0.4.
 
 ## When will the API be available?
 
@@ -70,7 +73,7 @@ to make requests to the Report API.
 lets a partner make payments on behalf of a merchant, and the same API keys
 also give access to the Report API.
 
-## Specifying a accounting partner
+### Specifying a accounting partner
 
 In addition to the above, the merchant may add one or more accounting partners.
 An accounting partner will get access to the Report API, but will not be allowed
