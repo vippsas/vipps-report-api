@@ -186,6 +186,7 @@ paths:
                 - grossAmount
                 - fee
                 - msn
+                - vippsnummer
                 - time
                 - price.description
       responses:
@@ -338,21 +339,24 @@ components:
           enum:
             - refund
             - capture
-            - invoice
-            - payout
+            # - invoice
+            # - payout
         orderId:
           type: string
           description: |-
             Is also called End-To-End-Reference
           example: acme-shop-123-order123abc
+        currency:
+          type: string
+          example: 'NOK'
         ledgerAmount:
-          $ref : "#/components/schemas/Money"
+          type: number
           description: |-
             Contribution to the ledger balance.
         grossAmount:
-          $ref : "#/components/schemas/Money"
+          type: number
         fee:
-          $ref : "#/components/schemas/Money"
+          type: number
         priceRate:
           type: number
           format: double
@@ -360,15 +364,12 @@ components:
           description: |-
             The percentage rate used.
         priceFixed:
-          $ref : "#/components/schemas/Money"
-        storeId:
-          type: string
-          example: msn/123456
-          description: |-
-            The store id. Can be 'msn/123456' or 'vippsnummer/123456'.
-        storeName:
-          type: string
-          example: "Lokalbutikk Løkka"
+          type: number
+        vippsNumber:
+          type: number
+        msn:
+          type: number
+
     Organization:
       type: object
       properties:
