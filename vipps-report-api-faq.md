@@ -64,15 +64,14 @@ merchant are done using the partner's own API keys (the partner keys).
 
 ### Partner keys
 
-If the merchant has a sale unit that is configured with a platform partner (see
-[partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types)),
+Partner keys let a partner make payments on behalf of a merchant, and the same API keys
+also give access to the Report API.
+
+If the merchant has a sale unit that is configured with a
+[platform partner](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types),
 the platform partner can use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
 to make requests to the Report API.
-
-[Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
-lets a partner make payments on behalf of a merchant, and the same API keys
-also give access to the Report API.
 
 ### Specifying a accounting partner
 

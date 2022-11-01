@@ -58,7 +58,7 @@ There are currently three ways to connect to the Report API:
 
 * Using the merchant's own API keys for the sale unit.
 * Using the partner's API keys, called
-  [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-keys).
+  [partner keys](https://github.com/vippsas/vipps-partner/blob/main/partner-keys.md).
 * Using the Accounting partner's API keys.
 
 See
