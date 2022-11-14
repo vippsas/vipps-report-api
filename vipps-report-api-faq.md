@@ -14,6 +14,17 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
+Here are the Report API FAQs.
+See the
+[Vipps Report API guide](vipps-report-api.md)
+for all the details.
+
+For more common Vipps questions, see:
+
+* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
+
+Document version: 0.0.6.
+
 <!-- START_TOC -->
 
 ## Table of contents
@@ -26,8 +37,6 @@ END_METADATA -->
 * [Questions?](#questions)
 
 <!-- END_TOC -->
-
-Document version: 0.0.4.
 
 ## When will the API be available?
 
