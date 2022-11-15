@@ -31,7 +31,7 @@ If you are interested in this not-yet-available API:
 ## Getting started
 
 See
-[Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
+[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 ## Report API documentation
@@ -47,4 +47,4 @@ for information about API keys, product activation, how to make API calls, etc.
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
 a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-report/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).

@@ -288,7 +288,7 @@ Some notes:
   is blank and instead the `vippsnummer` column can be requested.
 
 For more details about individual columns available, please consult the
-Swagger [TODO].
+OpenAPI Spec [TODO].
 
 **Please note**: Data is not available in the API until some time after
 the `ledgerDate` has ended. This is primarily because Vipps in some

@@ -32,7 +32,7 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version: 0.0.7.
+Document version: 0.0.8.
 
 ## About the Report API
 
@@ -58,7 +58,7 @@ There are currently three ways to connect to the Report API:
 
 * Using the merchant's own API keys for the sale unit.
 * Using the partner's API keys, called
-  [partner keys](https://github.com/vippsas/vipps-partner/blob/main/partner-keys.md).
+  [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys).
 * Using the Accounting partner's API keys.
 
 See
