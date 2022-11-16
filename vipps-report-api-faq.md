@@ -55,7 +55,7 @@ In short: The following API keys give access to the Report API:
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
   API keys only work for sale units after the merchant has
-  [given access to the accounting partner](vipps-report-api#give-access-to-an-accounting-partner).
+  [given access to the accounting partner](vipps-report-api.md#give-access-to-an-accounting-partner).
 
 ### The merchant's own API keys
 
@@ -90,7 +90,7 @@ to make payments, or move money in any way. The accounting partner can only see
 reports of the payments that have been made.
 
 See:
-[Give access to an accounting partner](vipps-report-api#give-access-to-an-accounting-partner)
+[Give access to an accounting partner](vipps-report-api.md#give-access-to-an-accounting-partner)
 
 ## Questions?
 
