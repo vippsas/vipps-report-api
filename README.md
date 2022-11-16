@@ -38,7 +38,7 @@ for information about API keys, product activation, how to make API calls, etc.
 
 * [API Guide: Overview](vipps-report-api.md)
 * [API Guide: Settlements](vipps-report-api-settlement-guide.md)
-* [API Spec](https://vippsas.github.io/vipps-report-api/)
+* [API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
 * [API Quick start](vipps-report-api-quick-start.md)
 * [API Frequently asked questions](vipps-report-api-faq.md)
 
