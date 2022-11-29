@@ -143,20 +143,6 @@ paths:
             example: 2022-01-22
         - in: query
           required: false
-          name: fromTimestamp
-          schema:
-            type: string
-            format: DateTime
-            example: 2022-09-22T08:00:00+00:00
-        - in: query
-          required: false
-          name: toTimestamp
-          schema:
-            type: string
-            format: DateTime
-            example: 2022-09-22T10:00:00+00:00
-        - in: query
-          required: false
           name: inPayout
           schema:
             type: string
@@ -167,28 +153,6 @@ paths:
           schema:
             type: string
             example: 2000010
-        - in: query
-          required: false
-          name: columns
-          schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - transactionId
-                - timestamp
-                - transactionType
-                - reference
-                - orderId
-                - ledgerId
-                - ledgerDate
-                - ledgerAmount
-                - grossAmount
-                - fee
-                - msn
-                - vippsnummer
-                - time
-                - price.description
       responses:
         500:
           "$ref": "#/components/responses/500"
