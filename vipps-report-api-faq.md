@@ -92,6 +92,14 @@ reports of the payments that have been made.
 See:
 [Give access to an accounting partner](vipps-report-api.md#give-access-to-an-accounting-partner)
 
+### I keep getting an empty list in response when calling one of the endpoints
+
+If you keep getting an empty list in a response where you expect data to be available, you should first check these things before filing an issue:
+
+* Check if your query-parameters is correct. Are you filtering on the correct date?
+* Do you have access to the resource you are trying to retrieve? If you are trying to retrieve the transactions connected to a ledger you do not have access to, you will be given an empty list
+
+
 ## Questions?
 
 We're always happy to help with code or other questions you might have!
