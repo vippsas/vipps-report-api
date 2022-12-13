@@ -106,33 +106,22 @@ is:
         "jurisdiction": "NO",
         "id": "987654321"
       },
-      "settlesFor": [
-        {
-          "type": "epayment",
-          "msn": "123455"
-        }
-      ]
+      "settlesForRecipientHandles": [ "api/123455"]
     }
   ]
 }
 ```
 
-A Vippsnummer will have a different `settlesFor` structure:
+A Vippsnummer will use the same `settlesForRecipientHandles` structure, but have a different prefix:
 
 ```json
 {
-  "settlesFor": [
-    {
-      "type": "vippsnummer",
-      "country": "NO",
-      "vippsnummer": "123455"
-    }
-  ]
+  "settlesForRecipientHandles": [ "NO/123455" ] 
 }
 ```
 
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
-may use the `msn` or `vippsnummer` arguments to filter the response.
+may use the `settlesForRecipientHandles` argument to filter the response.
 
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
@@ -243,35 +232,80 @@ above:
 
 One can request a report from this ledger by
 calling
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
+[`GET:/report/v1/transactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
 for instance:
 
 ```HTTP
-GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
+GET https://api.vipps.no/report/v1/transactions?ledgerId=302321&ledgerDate=2022-10-01
 ```
 
 The endpoint can return either CSV or JSON depending on the `Accept` header;
 both always contain the exactly same data just in different representations. An
 example CSV response for the call above that matches the illustration above:
 
-```csv
-transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
-3343121302,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T10:23:43.422143+02:00,3.00% + 0.00
-2342128799,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T11:04:12.234234+02:00,3.00% + 0.00
-2442145459,capture,purchase-13,2022-10-01,194.00,200.00,6.00,123455,2022-10-01T13:11:40.234234+02:00,3.00% + 0.00
-2049872323,refund,purchase-12,2022-10-01,-100.00,-100.00,0.00,123455,2022-10-01T14:32:17.324342+02:00,
-18000302321002000045,payout,2000045,2022-10-01,-288.00,-288.00,0.00,,2022-10-02T00:00:00.000000+02:00,
+```json
+{
+  "cursor": "",
+  "items": [
+    {
+      "transactionId": "3343121302",
+      "timestamp": "2022-10-01T16:33:00.824993Z",
+      "ledgerDate": "2022-10-01",
+      "ledgerId": "302321",
+      "transactionType": "capture",
+      "orderId": "purchase-12",
+      "currency": "NOK",
+      "ledgerAmount": 7.89,
+      "grossAmount": 9,
+      "fee": 1.11,
+      "priceRate": 0.001,
+      "priceFixed": 1.1,
+      "recipientHandle": "NO/57860",
+      "payoutNumber": "2000009"
+    },
+    {
+      "transactionId": "2370000000",
+      "timestamp": "2022-10-01T18:37:55.982497Z",
+      "ledgerDate": "2022-10-01",
+      "ledgerId": "302321",
+      "transactionType": "refund",
+      "orderId": "purchase-12",
+      "currency": "NOK",
+      "ledgerAmount": -6,
+      "grossAmount": -6,
+      "fee": 0,
+      "priceRate": 0.001,
+      "priceFixed": 1.1,
+      "recipientHandle": "NO/57860",
+      "payoutNumber": "2000009"
+    },
+    {
+      "transactionId": "1000002731792000009",
+      "timestamp": "2022-10-01T22:00:00.00Z",
+      "ledgerDate": "2022-10-01",
+      "ledgerId": "273179",
+      "transactionType": "payout",
+      "orderId": null,
+      "currency": "NOK",
+      "ledgerAmount": -1.89,
+      "grossAmount": -1.89,
+      "fee": 0.00,
+      "priceRate": null,
+      "priceFixed": null,
+      "recipientHandle": null,
+      "payoutNumber": "2000009"
+    }
+  ]
+}
 ```
 
 Formatted as a table:
 
-| transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | msn    | time                              | price.description |
-|----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------|-----------------------------------|--------------|
-| 3343121302           | capture         | purchase-12 | 2022-10-01  |        97.00 |      100.00 | 3.00 | 123455 | 2022-10-01T10:23:43.422143+02:00 | 3.00% + 0.00 |
-| 2342128799           | capture         | purchase-12 | 2022-10-01  |        97.00 |      100.00 | 3.00 | 123455 | 2022-10-01T11:04:12.234234+02:00 | 3.00% + 0.00 |
-| 2442145459           | capture         | purchase-13 | 2022-10-01  |       194.00 |      200.00 | 3.00 | 123455 | 2022-10-01T13:11:40.234234+02:00 | 3.00% + 0.00 |
-| 2049872323           | refund          | purchase-12 | 2022-10-01  |      -100.00 |     -100.00 | 3.00 | 123455 | 2022-10-01T14:32:17.324342+02:00 |              |
-| 18000302321002000045 | payout          | 2000045     | 2022-10-01  |      -288.00 |     -288.00 | 0.00 |        | 2022-10-02T00:00:00.000000+02:00 |              |
+| transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | recipientHandle    | time                              |
+|----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------------------|-----------------------------------|
+| 3343121302           | capture         | purchase-12 | 2022-10-01  |         7.89 |           9 | 1.11 |           NO/57860 |       2022-10-01T16:33:00.824993Z |
+| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |           NO/57860 |       2022-10-01T18:37:55.982497Z | 
+| 1000002731792000009  | payout          | 2000045     | 2022-10-01  |        -1.89 |       -1.89 | 0.00 |                    |       2022-10-01T22:00:00.00Z     |
 
 Some notes:
 
@@ -283,11 +317,10 @@ Some notes:
 * *ledgerDate* is the accounting date used to group transactions for payouts. In
   the future it may be possible to set this to something else than midnight
   local time, and in that case this will deviate from `time`.
-* The payout transaction does not have an `msn`. The `msn` is not a required
-  field, it represents metadata about a transaction. For Vippsnummer, `msn`
-  is blank and instead the `vippsnummer` column can be requested.
+* The payout transaction does not have an `recipientHandle`. The `recipientHandle` is not a required
+  field, it represents metadata about a transaction. The `recipientHandle` can be either the `msn` or the `vippsnummer`.
 
-For more details about individual columns available, please consult the
+For more details and descriptions about the individual columns, please consult the
 OpenAPI Spec [TODO].
 
 **Please note**: Data is not available in the API until some time after
@@ -299,13 +332,13 @@ has ended.
 ### Periodization
 
 The
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/transactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint has several parameters for selecting a range of
 transactions to return, which can be used for an initial data import.
 
 Most users of the API will want to set up an automated job to call
 the
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/transactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint on a daily basis to download the data for the
 preceding day. Such synchronization can be done in two ways: Date-based indexing
 and payout-based indexing. Often they will give the same results; the difference
