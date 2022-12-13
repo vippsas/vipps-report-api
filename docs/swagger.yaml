@@ -2,19 +2,17 @@
 openapi: 3.0.2
 info:
   title: Report API
-  version: '0.2'
+  version: '1.0'
 servers:
   - url: https://apitest.vipps.no
   - url: https://api.vipps.no
 paths:
 
-  "/v1/ledgers":
+  "/settlement/v1/ledgers":
     get:
       summary: Returns the ledgers you have access to
       description: |
         Returns the ledgers you have access to.
-
-        For a description of ledgers see TODO.
 
         If you are integrating a single
         merchant it may be enough to hit this endpoint once manually to identify
@@ -27,24 +25,14 @@ paths:
         units and Vippsnummer. For eCom it looks like this:
         ```json
         {
-          "settlesFor": [
-              {
-               "type": "epayment",
-               "msn": "123455"
-              }
-            ]
+          "settlesForRecipientHandles": [ "api/123455" ]
         }
         ```
         while for a Vippsnummer you will get
 
         ```json
         {
-          "settlesFor": [
-            {
-              "type": "vippsnummer",
-              "vippsnummer": "NO/123455"
-            }
-          ]
+          "settlesForRecipientHandles": [ "NO/123455" ]
         }
         ```
 
@@ -53,19 +41,12 @@ paths:
       parameters:
         - $ref: "#/components/parameters/JWT"
         - in: query
-          name: msn
+          name: settlesForRecipientHandles
           required: false
           schema:
             type: string
-            example: 123456
-            description: Filters for ledgers that settles for the given MSN
-        - in: query
-          name: vippsnummer
-          required: false
-          schema:
-            type: string
-            example: 123456
-            description: Filters for ledgers that settles for the given Vippsnummer
+            example: "api/123456"
+            description: Filters for ledgers that settles for the given settlesForRecipientHandle
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -96,19 +77,12 @@ paths:
                           "jurisdiction": "NO",
                           "id": "987654321"
                         },
-                        "settlesFor": [
-                          {
-                            "type": "epayment",
-                            "msn": "123455"
-                          }
-                        ]
+                        "settlesForRecipientHandles": [ "api/123455" ]
                       }
                     ]
                   }
 
-
-
-  "/v1/ledgers/{ledgerId}/transactions":
+  "/report/v1/transactions?ledgerId={ledgerId}":
     get:
       summary: Returns a list of payments/transactions.
       description: |
@@ -153,6 +127,14 @@ paths:
           schema:
             type: string
             example: 2000010
+        - in: query
+          required: false
+          name: cursor
+          schema:
+            type: string
+            description: |-
+              A cursor that can be used to fetch the next transactions.
+              If this is used, no other parameters other than ledgerId is needed.
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -163,19 +145,15 @@ paths:
               schema:
                 type: object
                 properties:
+                  cursor:
+                    type: string
+                    description: |-
+                      A cursor that can be used to fetch the next transactions. 
+                      It is empty if there are no more rows to fetch after the current one.
                   items:
                     type: array
                     items:
                       "$ref": "#/components/schemas/Transaction"
-            text/csv:
-              schema:
-                type: string
-              examples:
-                csv table:
-                  summary: List of transactions
-                  value: |-
-                    transactionId, timestamp, ledgerDate, ledgerId, transactionType, orderId, ledgerAmount.value, ledgerAmount.currency, grossAmount.value, grossAmount.currency, fee.value, fee.currency, priceRate, priceFixed.value, priceFixed.currency, storeId, storeName
-                    2000001, 2022-09-22T09:31:28+00:00, 2022-09-22, 1, refund, 1, 0, NOK, 0, NOK, 0, NOK, 1.25, 0, NOK, msn/123456, Lokalbutikk Løkka
 
 components:
   parameters:
@@ -252,35 +230,11 @@ components:
           example: "2000045"
         owner:
           $ref: "#/components/schemas/Organization"
-        settlesFor:
+        settlesForRecipientHandles:
           type: array
           items:
-            oneOf:
-              - $ref: "#/components/schemas/LedgerSettlesForEpayment"
-              - $ref: "#/components/schemas/LedgerSettlesForVippsnummer"
-    LedgerSettlesForEpayment:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - epayment
-        msn:
-          type: string
-          example: "123456"
-    LedgerSettlesForVippsnummer:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - vippsnummer
-        vippsnummer:
-          type: string
-          example: "123456"
-        country:
-          type: string
-          example: 'NO'
+            type: string
+            example: "NO/123455"
     Transaction:
       type: object
       properties:
@@ -290,11 +244,11 @@ components:
         timestamp:
           type: string
           format: DateTime
-          example: '2022-09-22T09:31:28+00:00'
+          example: '2020-10-05T10:21:54.141089Z'
         ledgerDate:
           type: string
           format: Date
-          example: '2022-09-22'
+          example: '2020-10-05'
         ledgerId:
           type: string
           example: '1'
@@ -303,8 +257,8 @@ components:
           enum:
             - refund
             - capture
+            - payout
             # - invoice
-            # - payout
         orderId:
           type: string
           description: |-
@@ -319,8 +273,10 @@ components:
             Contribution to the ledger balance.
         grossAmount:
           type: number
+          format: double
         fee:
           type: number
+          format: double
         priceRate:
           type: number
           format: double
@@ -329,10 +285,12 @@ components:
             The percentage rate used.
         priceFixed:
           type: number
-        vippsNumber:
-          type: number
-        msn:
-          type: number
+          format: double
+        payoutNumber:
+          type: string
+        recipientHandle:
+          type: string
+          example: "NO/123455"
 
     Organization:
       type: object
