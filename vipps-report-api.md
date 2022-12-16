@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: "API Guide: Overview"
-sidebar_position: 5
+sidebar_position: 3
 ---
 END_METADATA -->
 

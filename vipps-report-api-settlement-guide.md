@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: "API Guide: Settlements"
-sidebar_position: 7
+sidebar_position: 4
 ---
 END_METADATA -->
 # Vipps Report API: Settlements
