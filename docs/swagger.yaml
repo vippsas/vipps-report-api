@@ -21,7 +21,7 @@ paths:
         There is no need to specify the merchant or sale unit.
         The response contains all ledgers that are available for the API keys used.
 
-        The `settlesFor` part of the response looks a bit different for eCom sales
+        The `settlesForRecipientHandles` part of the response looks a bit different for eCom sales
         units and Vippsnummer. For eCom it looks like this:
         ```json
         {
@@ -177,15 +177,15 @@ components:
           schema:
             type: object
             properties:
-              type:
-                type: string
-                description: An URI-reference that identities the problem type
-                example: "https://example.net/validation-error"
-              title:
+              errorCode:
+                type: number
+                description: The error-code for the problem
+                example: 100001
+              errorMessage:
                 type: string
                 description: A human readable summary of the problem
                 example: "Your request parameters didn't validate."
-              instance:
+              contextId:
                 type: string
                 description: Unique id for the request which can be used to find related events (logs)
                 example: "123e4567-e89b-12d3-a456-426655440000"
@@ -267,16 +267,13 @@ components:
         currency:
           type: string
           example: 'NOK'
+          description: Currency code as defined in ISO 4217
         ledgerAmount:
-          type: number
-          description: |-
-            Contribution to the ledger balance.
+          $ref: "#/components/schemas/Money"
         grossAmount:
-          type: number
-          format: double
+          $ref: "#/components/schemas/Money"
         fee:
-          type: number
-          format: double
+          $ref: "#/components/schemas/Money"
         payoutNumber:
           type: string
         recipientHandle:
@@ -295,17 +292,9 @@ components:
             - "NO"
           example: "NO"
     Money:
-      type: object
-      properties:
-        value:
-          type: number
-          format: int32
-          description: |-
-            Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-          example: 49900
-        currency:
-          type: string
-          example: 'NOK'
-          description: |-
-            Currency code as defined in ISO 4217
+      type: number
+      format: int32
+      description: |-
+        Amounts are specified in minor units.
+        For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+      example: 49900
