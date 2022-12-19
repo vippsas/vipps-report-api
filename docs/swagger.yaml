@@ -277,15 +277,6 @@ components:
         fee:
           type: number
           format: double
-        priceRate:
-          type: number
-          format: double
-          example: 1.25
-          description: |-
-            The percentage rate used.
-        priceFixed:
-          type: number
-          format: double
         payoutNumber:
           type: string
         recipientHandle:

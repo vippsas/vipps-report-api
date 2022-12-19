@@ -256,8 +256,6 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": 7.89,
       "grossAmount": 9,
       "fee": 1.11,
-      "priceRate": 0.001,
-      "priceFixed": 1.1,
       "recipientHandle": "NO/57860",
       "payoutNumber": "2000009"
     },
@@ -272,8 +270,6 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": -6,
       "grossAmount": -6,
       "fee": 0,
-      "priceRate": 0.001,
-      "priceFixed": 1.1,
       "recipientHandle": "NO/57860",
       "payoutNumber": "2000009"
     },
@@ -288,8 +284,6 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": -1.89,
       "grossAmount": -1.89,
       "fee": 0.00,
-      "priceRate": null,
-      "priceFixed": null,
       "recipientHandle": null,
       "payoutNumber": "2000009"
     }
