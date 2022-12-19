@@ -23,7 +23,6 @@ END_METADATA -->
   * [Using the merchant's API keys](#using-the-merchants-api-keys)
   * [Using the partner's partner keys](#using-the-partners-partner-keys)
 * [About report endpoints](#about-report-endpoints)
-  * [CSV vs JSON](#csv-vs-json)
 * [Field/column documentation](#fieldcolumn-documentation)
 * [Give access to an accounting partner](#give-access-to-an-accounting-partner)
   * [Overview of accounting partners](#overview-of-accounting-partners)
@@ -95,59 +94,15 @@ request server side, so it is OK if the download takes several
 minutes and is multiple megabytes. We may provide features
 for downloading in *pages* of data at a later point.
 
-### CSV vs JSON
+### JSON structure
 
-For report endpoints, both CSV and JSON response is available.
-The response format is controlled by whether
-the `Accept` header is set to `application/json` or `text/csv`.
-It is indicated in the
-[API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
-whether the CSV format is available.
-
-For report endpoints a large number of columns (CSV)/fields(JSON)
-may be available, and we will keep adding new ones from more sources
-of data. Therefore, the caller always pass inn all the columns it wants
-to receive back, so that only the data the caller wants is returned.
-
-The CSV and JSON formats always contain the same data. For instance,
-if this is the CSV response:
-
-```text
-transactionId,reference,price.description
-2023432783,payment-123,3% + 0.00
-3023423423,payment-124,3% + 0.00
-```
-
-then we can know that the JSON will look like this:
-
-```json
-{
-  "items": [
-    {
-      "transactionId": "2023432783",
-      "reference": "payment-123",
-      "price": {
-        "description": "3% + 0.00",
-      }
-    },
-    {
-      "transactionId": "3023423423",
-      "reference": "payment-124",
-      "price": {
-        "description": "3% + 0.00",
-      }
-    }
-  ]
-}
-```
-
-The only difference is that in JSON, the fields do not have a given
-order and that the distinction between numbers and strings disappear in CSV.
-JSON sub-structures become dotted column names in CSV.
+For report endpoints, the response is given as a JSON structure.
+More detailed destription of the endpoint can be seen here
+[API Spec](https://vippsas.github.io/vipps-developer-docs/api/report).
 
 ## Field/column documentation
 
-This table lists all of the fields (or columns, in CSV) available for
+This table lists all of the fields available for
 all of the reports. Not all fields apply to all kinds of data, so the
 table indicates in which contexts the fields are available.
 
@@ -158,22 +113,23 @@ be passed as strings in JSON, and because some JSON parsers and JavaScript
 can only handle numbers as floating point (so, restricted to 2^53). However,
 it is safe to parse these and use them as a 64-bit integer key in a database.
 
-TODO: Add the missing documentation.
-
-| Field name        | Type       | Description                                                                     |
-|-------------------|------------|---------------------------------------------------------------------------------|
-| **Common/**       |            |                                                                                 |
-| reference         |            |                                                                                 |
-| **ledger/**       |            |                                                                                 |
-| transactionId     | Numeric ID |                                                                                 |
-| transactionType   | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) |
-| ledgerDate        |            |                                                                                 |
-| ledgerAmount      |            |                                                                                 |
-| grossAmount       |            |                                                                                 |
-| fee               |            |                                                                                 |
-| msn               |            |                                                                                 |
-| time              |            |                                                                                 |
-| price.description |            |                                                                                 |
+| Field name      | Type       | Description                                                                     |
+|-----------------|------------|---------------------------------------------------------------------------------|
+| **Common/**     |            |                                                                                 |
+| reference       |            |                                                                                 |
+| **ledger/**     |            |                                                                                 |
+| ledgerId        | Numeric ID |                                                                                 |
+| transactionId   | Numeric ID |                                                                                 |
+| transactionType | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) |
+| timestamp       |            |                                                                                 |
+| ledgerDate      |            |                                                                                 |
+| ledgerAmount    |            |                                                                                 |
+| grossAmount     |            |                                                                                 |
+| currency        |            |                                                                                 |
+| fee             |            |                                                                                 |
+| recipientHandle | String     |                                                                                 |
+| payoutNumber    | String     |                                                                                 |
+| orderID         | String     |                                                                                 |
 
 ## Give access to an accounting partner
 

@@ -239,9 +239,7 @@ for instance:
 GET https://api.vipps.no/report/v1/transactions?ledgerId=302321&ledgerDate=2022-10-01
 ```
 
-The endpoint can return either CSV or JSON depending on the `Accept` header;
-both always contain the exactly same data just in different representations. An
-example CSV response for the call above that matches the illustration above:
+An example JSON response for the call above that matches the illustration above:
 
 ```json
 {
