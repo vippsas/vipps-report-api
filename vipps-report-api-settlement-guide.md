@@ -108,7 +108,8 @@ is:
       },
       "settlesForRecipientHandles": [ "api/123455"]
     }
-  ]
+  ],
+  "cursor": ""
 }
 ```
 
