@@ -57,12 +57,18 @@ paths:
               schema:
                 type: object
                 properties:
+                  cursor:
+                    type: string
+                    description: |-
+                      A cursor that can be used to fetch the next ledgers. 
+                      It is empty if there are no more rows to fetch after the current one.
                   items:
                     type: array
                     items:
                       "$ref": "#/components/schemas/Ledger"
                 example:
                   {
+                    "cursor": "",
                     "items": [
                       {
                         "ledgerId": "302321",
