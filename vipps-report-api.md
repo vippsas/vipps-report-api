@@ -97,7 +97,7 @@ for downloading in *pages* of data at a later point.
 ### JSON structure
 
 For report endpoints, the response is given as a JSON structure.
-More detailed destription of the endpoint can be seen here
+More detailed description of the endpoint can be seen here
 [API Spec](https://vippsas.github.io/vipps-developer-docs/api/report).
 
 ## Field/column documentation
