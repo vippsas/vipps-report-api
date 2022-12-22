@@ -233,11 +233,11 @@ above:
 
 One can request a report from this ledger by
 calling
-[`GET:/report/v1/transactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
 for instance:
 
 ```HTTP
-GET https://api.vipps.no/report/v1/transactions?ledgerId=302321&ledgerDate=2022-10-01
+GET https://api.vipps.no/report/v1/ledgertransactions?ledgerId=302321&ledgerDate=2022-10-01
 ```
 
 An example JSON response for the call above that matches the illustration above:
@@ -257,8 +257,7 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": 7.89,
       "grossAmount": 9,
       "fee": 1.11,
-      "recipientHandle": "NO/57860",
-      "payoutNumber": "2000009"
+      "recipientHandle": "NO/57860"
     },
     {
       "transactionId": "2370000000",
@@ -271,8 +270,7 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": -6,
       "grossAmount": -6,
       "fee": 0,
-      "recipientHandle": "NO/57860",
-      "payoutNumber": "2000009"
+      "recipientHandle": "NO/57860"
     },
     {
       "transactionId": "1000002731792000009",
@@ -285,8 +283,7 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": -1.89,
       "grossAmount": -1.89,
       "fee": 0.00,
-      "recipientHandle": null,
-      "payoutNumber": "2000009"
+      "recipientHandle": null
     }
   ]
 }
@@ -325,13 +322,13 @@ has ended.
 ### Periodization
 
 The
-[`GET:/report/v1/transactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint has several parameters for selecting a range of
 transactions to return, which can be used for an initial data import.
 
 Most users of the API will want to set up an automated job to call
 the
-[`GET:/report/v1/transactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint on a daily basis to download the data for the
 preceding day. Such synchronization can be done in two ways: Date-based indexing
 and payout-based indexing. Often they will give the same results; the difference

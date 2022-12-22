@@ -88,7 +88,7 @@ paths:
                     ]
                   }
 
-  "/report/v1/transactions?ledgerId={ledgerId}":
+  "/report/v1/ledgertransactions?ledgerId={ledgerId}":
     get:
       summary: Returns a list of payments/transactions.
       description: |
@@ -280,8 +280,6 @@ components:
           $ref: "#/components/schemas/Money"
         fee:
           $ref: "#/components/schemas/Money"
-        payoutNumber:
-          type: string
         recipientHandle:
           type: string
           example: "NO/123455"

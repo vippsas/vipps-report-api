@@ -128,7 +128,6 @@ it is safe to parse these and use them as a 64-bit integer key in a database.
 | currency        |            |                                                                                 |
 | fee             |            |                                                                                 |
 | recipientHandle | String     |                                                                                 |
-| payoutNumber    | String     |                                                                                 |
 | orderID         | String     |                                                                                 |
 
 ## Give access to an accounting partner
