@@ -14,19 +14,11 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-💥 DRAFT! Unfinished work in progress. API specification changes are still coming. 💥
-
 The Report API gives you, or a third-party acting on your behalf, the ability to
 fetch information about payment events that have been processed by Vipps.
 
-If you are interested in this not-yet-available API:
-
-* Partners: Please contact your partner manager.
-* Merchants: Please send us an email, on the address
- [here](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-* You can also
-  [submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues)
-  if you have feedback.
+Feedback? Great! You can
+[submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues).
 
 ## Getting started
 
