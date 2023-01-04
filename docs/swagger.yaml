@@ -47,6 +47,17 @@ paths:
             type: string
             example: "api/123456"
             description: Filters for ledgers that settles for the given settlesForRecipientHandle
+        - in: query
+          required: false
+          name: cursor
+          schema:
+            type: string
+            example: "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ=="
+            description: |-
+              We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
+              If the total number of rows is greater than that amount we return a cursor in addition to
+              the rows in the body. This cursor given can be used with this parameter to fetch the next set of ledgers.
+              If this is used, no other parameters is needed.
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -59,16 +70,18 @@ paths:
                 properties:
                   cursor:
                     type: string
+                    example: "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ=="
                     description: |-
-                      A cursor that can be used to fetch the next ledgers. 
+                      A cursor that can be used to fetch the next ledgers.
                       It is empty if there are no more rows to fetch after the current one.
+                      You can insert this value into the url as part of the cursor parameter.
                   items:
                     type: array
                     items:
                       "$ref": "#/components/schemas/Ledger"
                 example:
                   {
-                    "cursor": "",
+                    "cursor": "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ==",
                     "items": [
                       {
                         "ledgerId": "302321",
@@ -138,8 +151,11 @@ paths:
           name: cursor
           schema:
             type: string
+            example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
             description: |-
-              A cursor that can be used to fetch the next transactions.
+              We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
+              If the total number of rows is greater than that amount we return a cursor in addition to
+              the rows in the body. This cursor given can be used with this parameter to fetch the next set of transactions.
               If this is used, no other parameters other than ledgerId is needed.
       responses:
         500:
@@ -153,9 +169,11 @@ paths:
                 properties:
                   cursor:
                     type: string
+                    example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
                     description: |-
-                      A cursor that can be used to fetch the next transactions. 
+                      A cursor that can be used to fetch the next transactions.
                       It is empty if there are no more rows to fetch after the current one.
+                      You can insert this value into the url as part of the cursor parameter.
                   items:
                     type: array
                     items:
