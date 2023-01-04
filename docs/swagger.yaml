@@ -25,14 +25,14 @@ paths:
         units and Vippsnummer. For eCom it looks like this:
         ```json
         {
-          "settlesForRecipientHandles": [ "api/123455" ]
+          "settlesForRecipientHandles": [ "api:123455" ]
         }
         ```
         while for a Vippsnummer you will get
 
         ```json
         {
-          "settlesForRecipientHandles": [ "NO/123455" ]
+          "settlesForRecipientHandles": [ "nor:123455" ]
         }
         ```
 
@@ -45,7 +45,7 @@ paths:
           required: false
           schema:
             type: string
-            example: "api/123456"
+            example: "api:123456"
             description: Filters for ledgers that settles for the given settlesForRecipientHandle
         - in: query
           required: false
@@ -96,7 +96,7 @@ paths:
                           "jurisdiction": "NO",
                           "id": "987654321"
                         },
-                        "settlesForRecipientHandles": [ "api/123455" ]
+                        "settlesForRecipientHandles": [ "api:123455" ]
                       }
                     ]
                   }
@@ -258,7 +258,7 @@ components:
           type: array
           items:
             type: string
-            example: "NO/123455"
+            example: "nor:123455"
     Transaction:
       type: object
       properties:
@@ -300,7 +300,7 @@ components:
           $ref: "#/components/schemas/Money"
         recipientHandle:
           type: string
-          example: "NO/123455"
+          example: "nor:123455"
 
     Organization:
       type: object

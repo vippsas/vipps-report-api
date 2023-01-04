@@ -106,7 +106,7 @@ is:
         "jurisdiction": "NO",
         "id": "987654321"
       },
-      "settlesForRecipientHandles": [ "api/123455"]
+      "settlesForRecipientHandles": [ "api:123455" ]
     }
   ],
   "cursor": ""
@@ -117,7 +117,7 @@ A Vippsnummer will use the same `settlesForRecipientHandles` structure, but have
 
 ```json
 {
-  "settlesForRecipientHandles": [ "NO/123455" ] 
+  "settlesForRecipientHandles": [ "nor:123455" ] 
 }
 ```
 
@@ -257,7 +257,7 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": 7.89,
       "grossAmount": 9,
       "fee": 1.11,
-      "recipientHandle": "NO/57860"
+      "recipientHandle": "nor:57860"
     },
     {
       "transactionId": "2370000000",
@@ -270,7 +270,7 @@ An example JSON response for the call above that matches the illustration above:
       "ledgerAmount": -6,
       "grossAmount": -6,
       "fee": 0,
-      "recipientHandle": "NO/57860"
+      "recipientHandle": "nor:57860"
     },
     {
       "transactionId": "1000002731792000009",
@@ -293,8 +293,8 @@ Formatted as a table:
 
 | transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | recipientHandle    | time                              |
 |----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------------------|-----------------------------------|
-| 3343121302           | capture         | purchase-12 | 2022-10-01  |         7.89 |           9 | 1.11 |           NO/57860 |       2022-10-01T16:33:00.824993Z |
-| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |           NO/57860 |       2022-10-01T18:37:55.982497Z | 
+| 3343121302           | capture         | purchase-12 | 2022-10-01  |         7.89 |           9 | 1.11 |          nor:57860 |       2022-10-01T16:33:00.824993Z |
+| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |          nor:57860 |       2022-10-01T18:37:55.982497Z | 
 | 1000002731792000009  | payout          | 2000045     | 2022-10-01  |        -1.89 |       -1.89 | 0.00 |                    |       2022-10-01T22:00:00.00Z     |
 
 Some notes:
