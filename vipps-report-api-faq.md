@@ -1,7 +1,8 @@
 <!-- START_METADATA
 ---
 title: FAQ
-sidebar_position: 6
+sidebar_position: 60
+pagination_next: null
 ---
 END_METADATA -->
 
