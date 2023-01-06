@@ -97,13 +97,13 @@ is:
       "ledgerId": "302321",
       "currency": "NOK",
       "payoutBankAccount": {
-        "country": "NO",
-        "accountNumber": "86011117947"
+        "scheme": "BBAN:NO",
+        "id": "86011117947"
       },
       "firstPayout": "2000001",
       "lastPayout": "2000045",
       "owner": {
-        "jurisdiction": "NO",
+        "scheme": "NO:ORG",
         "id": "987654321"
       },
       "settlesForRecipientHandles": [ "api:123455" ]
@@ -117,7 +117,7 @@ A Vippsnummer will use the same `settlesForRecipientHandles` structure, but have
 
 ```json
 {
-  "settlesForRecipientHandles": [ "nor:123455" ] 
+  "settlesForRecipientHandles": [ "NO:123455" ] 
 }
 ```
 
