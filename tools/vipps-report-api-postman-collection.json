@@ -18,6 +18,7 @@
 					{
 						"key": "Authorization",
 						"value": "Bearer {{access_token}}",
+						"description": "The access token is a base64-encoded string that is required for all API calls. It is a JWT (JSON Web Token). It is valid for 1 hour in the test environment and 24 hours in the production environment.",
 						"type": "default"
 					}
 				],
@@ -35,11 +36,13 @@
 						{
 							"key": "settlesForRecipientHandles",
 							"value": "",
+							"description": "Filters for ledgers that settles for the given settlesForRecipientHandle",
 							"disabled": true
 						},
 						{
 							"key": "cursor",
 							"value": "",
+							"description": "We limit the amount of rows returned to reduce the amount of data we need to process on each request. If the total number of rows is greater than that amount we return a cursor in addition to the rows in the body. This cursor given can be used with this parameter to fetch the next set of ledgers. If this is used, no other parameters is needed.",
 							"disabled": true
 						}
 					]
@@ -55,6 +58,7 @@
 					{
 						"key": "Authorization",
 						"value": "Bearer {{access_token}}",
+						"description": "The access token is a base64-encoded string that is required for all API calls. It is a JWT (JSON Web Token). It is valid for 1 hour in the test environment and 24 hours in the production environment.",
 						"type": "default"
 					},
 					{
@@ -64,7 +68,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/report/v1/ledgertransactions?ledgerId=xxx",
+					"raw": "{{baseUrl}}/report/v1/ledgertransactions",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -76,12 +80,13 @@
 					"query": [
 						{
 							"key": "ledgerId",
-							"value": "xxx",
-							"description": "One of the ledgerIds fetched with the `Get ledgers` request."
+							"value": "",
+							"description": "One of the ledgerIds fetched with the `Get ledgers` request.",
+							"disabled": true
 						},
 						{
 							"key": "ledgerDate",
-							"value": null,
+							"value": "",
 							"disabled": true
 						},
 						{
@@ -91,17 +96,18 @@
 						},
 						{
 							"key": "inPayout",
-							"value": null,
+							"value": "",
 							"disabled": true
 						},
 						{
 							"key": "sincePayout",
-							"value": null,
+							"value": "",
 							"disabled": true
 						},
 						{
 							"key": "cursor",
-							"value": null,
+							"value": "",
+							"description": "We limit the amount of rows returned to reduce the amount of data we need to process on each request. If the total number of rows is greater than that amount we return a cursor in addition to the rows in the body. This cursor given can be used with this parameter to fetch the next set of transactions. If this is used, no other parameters other than ledgerId is needed.",
 							"disabled": true
 						}
 					]
