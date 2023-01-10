@@ -87,7 +87,7 @@ The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`. An example response from
-[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers/get)
+[`GET:/settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1settlement~1v1~1ledgers/get)
 is:
 
 ```json
@@ -97,13 +97,13 @@ is:
       "ledgerId": "302321",
       "currency": "NOK",
       "payoutBankAccount": {
-        "country": "NO",
-        "accountNumber": "86011117947"
+        "scheme": "BBAN:NO",
+        "id": "86011117947"
       },
       "firstPayout": "2000001",
       "lastPayout": "2000045",
       "owner": {
-        "jurisdiction": "NO",
+        "scheme": "business:NO:ORG",
         "id": "987654321"
       },
       "settlesForRecipientHandles": [ "api:123455" ]
@@ -117,7 +117,7 @@ A Vippsnummer will use the same `settlesForRecipientHandles` structure, but have
 
 ```json
 {
-  "settlesForRecipientHandles": [ "nor:123455" ] 
+  "settlesForRecipientHandles": [ "NO:123455" ] 
 }
 ```
 

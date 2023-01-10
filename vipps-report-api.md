@@ -20,13 +20,6 @@ END_METADATA -->
 
 * [About the Report API](#about-the-report-api)
 * [Authenticating to the Report API](#authenticating-to-the-report-api)
-  * [Using the merchant's API keys](#using-the-merchants-api-keys)
-  * [Using the partner's partner keys](#using-the-partners-partner-keys)
-* [About report endpoints](#about-report-endpoints)
-* [Field/column documentation](#fieldcolumn-documentation)
-* [Give access to an accounting partner](#give-access-to-an-accounting-partner)
-  * [Overview of accounting partners](#overview-of-accounting-partners)
-  * [Adding a new accounting partner](#adding-a-new-accounting-partner)
 * [Questions?](#questions)
 
 <!-- END_TOC -->
@@ -53,16 +46,22 @@ Vipps APIs as the source of truth for the status of an operation.
 
 ## Authenticating to the Report API
 
+Currently, access to the Report API is only provided through
+using the merchant's API key that grant access to a single MSN.
+See
+[Which API keys give access to the API?](vipps-report-api-faq.md#which-api-keys-give-access-to-the-api)
+for details about these.
+
+We are currently working on providing partners access to the API,
+and such support will be launched in the future.
+
+<!--
 There are currently three ways to connect to the Report API:
 
-* Using the merchant's own API keys for the sale unit.
 * Using the partner's API keys, called
   [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys).
 * Using the Accounting partner's API keys.
 
-See
-[Which API keys give access to the API?](vipps-report-api-faq.md#which-api-keys-give-access-to-the-api)
-for details about these.
 
 See:
 [Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
@@ -80,55 +79,6 @@ Partner API users do not have access to any ledgers by default. Such
 access must be granted by the merchant:
 [Adding a new accounting partner](#adding-a-new-accounting-partner).
 
-## About report endpoints
-
-Some of the endpoints in the report API return a "report"; a list of
-payments/transactions. These have a common response format and is
-used in the same way.
-
-**Please note:** Depending on the merchant's traffic volume and
-selected time intervals, some reports can become quite large
-(hundred thousands of rows returned). Currently we only support
-downloading a full report in one go. We will not time out a
-request server side, so it is OK if the download takes several
-minutes and is multiple megabytes. We may provide features
-for downloading in *pages* of data at a later point.
-
-### JSON structure
-
-For report endpoints, the response is given as a JSON structure.
-More detailed description of the endpoint can be seen here
-[API Spec](https://vippsas.github.io/vipps-developer-docs/api/report).
-
-## Field/column documentation
-
-This table lists all of the fields available for
-all of the reports. Not all fields apply to all kinds of data, so the
-table indicates in which contexts the fields are available.
-
-The fields indicated to be "Numeric ID" are returned as **string** in JSON,
-but are positive integers smaller than 2^63.
-We use a string because IDs should in general
-be passed as strings in JSON, and because some JSON parsers and JavaScript
-can only handle numbers as floating point (so, restricted to 2^53). However,
-it is safe to parse these and use them as a 64-bit integer key in a database.
-
-| Field name      | Type       | Description                                                                     |
-|-----------------|------------|---------------------------------------------------------------------------------|
-| **Common/**     |            |                                                                                 |
-| reference       |            |                                                                                 |
-| **ledger/**     |            |                                                                                 |
-| ledgerId        | Numeric ID |                                                                                 |
-| transactionId   | Numeric ID |                                                                                 |
-| transactionType | String     | See [transaction types](vipps-report-api-settlement-guide.md#transaction-types) |
-| timestamp       |            |                                                                                 |
-| ledgerDate      |            |                                                                                 |
-| ledgerAmount    |            |                                                                                 |
-| grossAmount     |            |                                                                                 |
-| currency        |            |                                                                                 |
-| fee             |            |                                                                                 |
-| recipientHandle | String     |                                                                                 |
-| orderID         | String     |                                                                                 |
 
 ## Give access to an accounting partner
 
@@ -151,6 +101,8 @@ shows how to add an accounting partners, and how to specify which ledgers the
 accounting partner will have access to.
 
 ![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Add a new accounting partner")
+
+-->
 
 ## Questions?
 

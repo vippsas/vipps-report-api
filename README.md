@@ -16,7 +16,9 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-The Report API gives you, or a third-party acting on your behalf, the ability to
+💥 **BETA VERSION**: The API is publicly available, but may still have minor changes. 💥
+
+The report API gives you or a third-party acting on your behalf the ability to
 fetch information about payment events that have been processed by Vipps.
 
 Feedback? Great! You can
