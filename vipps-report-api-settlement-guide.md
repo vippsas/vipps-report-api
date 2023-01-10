@@ -103,7 +103,7 @@ is:
       "firstPayout": "2000001",
       "lastPayout": "2000045",
       "owner": {
-        "scheme": "NO:ORG",
+        "scheme": "business:NO:ORG",
         "id": "987654321"
       },
       "settlesForRecipientHandles": [ "api:123455" ]
