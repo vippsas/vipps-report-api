@@ -24,34 +24,46 @@ For more common Vipps questions, see:
 
 * [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
 
-Document version: 0.0.6.
+Document version: 1.0.0.
 
 <!-- START_TOC -->
 
 ## Table of contents
 
 * [When will the API be available?](#when-will-the-api-be-available)
+* [What information can I get hold of?](#what-information-can-i-get-hold-of)
 * [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
   * [The merchant's own API keys](#the-merchants-own-api-keys)
   * [Partner keys](#partner-keys)
   * [Specifying a accounting partner](#specifying-a-accounting-partner)
+  * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
 * [Questions?](#questions)
 
 <!-- END_TOC -->
 
 ## When will the API be available?
 
-We can not give a date, month or any kind of ETA yet.
+The Vipps Report API will be available from January 9 2023.
 
-We are still quite early in the planning and design phase and will use the
-draft documentation here to discuss with potential users of the API
-and make sure we are developing the right solution.
+## What information can I get hold of?
+
+Right now the only data that is available is the same data that is already
+available in the settlement reports on
+[portal.vipps.no](https://portal.vipps.no),
+or on
+[SFTP](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/settlements/sftp-report-service).
+
+The only difference is that the data can be fetched over a more modern REST API.
+We aim to provide more information through this API in the future.
 
 ## Which API keys give access to the API?
 
-In short: The following API keys give access to the Report API:
+For now: The following API keys give access to the Report API:
 
 * The merchant's own API keys: The same API keys that are used to make payments.
+
+Later (we can not give an ETA, but will update here):
+
 * Partner keys: The same API keys that are used to make payments.
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
@@ -99,7 +111,6 @@ If you keep getting an empty list in a response where you expect data to be avai
 
 * Check if your query-parameters is correct. Are you filtering on the correct date?
 * Do you have access to the resource you are trying to retrieve? If you are trying to retrieve the transactions connected to a ledger you do not have access to, you will be given an empty list
-
 
 ## Questions?
 
