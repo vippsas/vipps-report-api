@@ -2,18 +2,17 @@
 openapi: 3.0.2
 info:
   title: Report API
-  version: '0.2'
+  version: '1.0'
 servers:
   - url: https://apitest.vipps.no
   - url: https://api.vipps.no
 paths:
 
-  "/v1/ledgers":
+  "/settlement/v1/ledgers":
     get:
+      summary: Returns the ledgers you have access to
       description: |
         Returns the ledgers you have access to.
-
-        For a description of ledgers see TODO.
 
         If you are integrating a single
         merchant it may be enough to hit this endpoint once manually to identify
@@ -22,28 +21,18 @@ paths:
         There is no need to specify the merchant or sale unit.
         The response contains all ledgers that are available for the API keys used.
 
-        The `settlesFor` part of the response looks a bit different for eCom sales
+        The `settlesForRecipientHandles` part of the response looks a bit different for eCom sales
         units and Vippsnummer. For eCom it looks like this:
         ```json
         {
-          "settlesFor": [
-              {
-               "type": "epayment",
-               "msn": "123455"
-              }
-            ]
+          "settlesForRecipientHandles": [ "api:123455" ]
         }
         ```
         while for a Vippsnummer you will get
 
         ```json
         {
-          "settlesFor": [
-            {
-              "type": "vippsnummer",
-              "vippsnummer": "NO/123455"
-            }
-          ]
+          "settlesForRecipientHandles": [ "nor:123455" ]
         }
         ```
 
@@ -52,19 +41,23 @@ paths:
       parameters:
         - $ref: "#/components/parameters/JWT"
         - in: query
-          name: msn
+          name: settlesForRecipientHandles
           required: false
           schema:
             type: string
-            example: 123456
-            description: Filters for ledgers that settles for the given MSN
+            example: "api:123456"
+            description: Filters for ledgers that settles for the given settlesForRecipientHandle
         - in: query
-          name: vippsnummer
           required: false
+          name: cursor
           schema:
             type: string
-            example: 123456
-            description: Filters for ledgers that settles for the given Vippsnummer
+            example: "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ=="
+            description: |-
+              We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
+              If the total number of rows is greater than that amount we return a cursor in addition to
+              the rows in the body. This cursor given can be used with this parameter to fetch the next set of ledgers.
+              If this is used, no other parameters is needed.
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -75,40 +68,42 @@ paths:
               schema:
                 type: object
                 properties:
+                  cursor:
+                    type: string
+                    example: "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ=="
+                    description: |-
+                      A cursor that can be used to fetch the next ledgers.
+                      It is empty if there are no more rows to fetch after the current one.
+                      You can insert this value into the url as part of the cursor parameter.
                   items:
                     type: array
                     items:
                       "$ref": "#/components/schemas/Ledger"
                 example:
                   {
+                    "cursor": "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ==",
                     "items": [
                       {
                         "ledgerId": "302321",
                         "currency": "NOK",
                         "payoutBankAccount": {
-                          "country": "NO",
-                          "accountNumber": "86011117947"
+                          "scheme": "BBAN:NO",
+                          "id": "86011117947"
                         },
                         "firstPayout": "2000001",
                         "lastPayout": "2000045",
                         "owner": {
-                          "jurisdiction": "NO",
+                          "scheme": "business:NO:ORG",
                           "id": "987654321"
                         },
-                        "settlesFor": [
-                          {
-                            "type": "epayment",
-                            "msn": "123455"
-                          }
-                        ]
+                        "settlesForRecipientHandles": [ "api:123455" ]
                       }
                     ]
                   }
 
-
-
-  "/v1/ledgers/{ledgerId}/transactions":
+  "/report/v1/ledgertransactions?ledgerId={ledgerId}":
     get:
+      summary: Returns a list of payments/transactions.
       description: |
         Returns a list of payments/transactions.
       parameters:
@@ -141,20 +136,6 @@ paths:
             example: 2022-01-22
         - in: query
           required: false
-          name: fromTimestamp
-          schema:
-            type: string
-            format: DateTime
-            example: 2022-09-22T08:00:00+00:00
-        - in: query
-          required: false
-          name: toTimestamp
-          schema:
-            type: string
-            format: DateTime
-            example: 2022-09-22T10:00:00+00:00
-        - in: query
-          required: false
           name: inPayout
           schema:
             type: string
@@ -167,25 +148,15 @@ paths:
             example: 2000010
         - in: query
           required: false
-          name: columns
+          name: cursor
           schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - transactionId
-                - timestamp
-                - transactionType
-                - reference
-                - orderId
-                - ledgerId
-                - ledgerDate
-                - ledgerAmount
-                - grossAmount
-                - fee
-                - msn
-                - time
-                - price.description
+            type: string
+            example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
+            description: |-
+              We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
+              If the total number of rows is greater than that amount we return a cursor in addition to
+              the rows in the body. This cursor given can be used with this parameter to fetch the next set of transactions.
+              If this is used, no other parameters other than ledgerId is needed.
       responses:
         500:
           "$ref": "#/components/responses/500"
@@ -196,19 +167,17 @@ paths:
               schema:
                 type: object
                 properties:
+                  cursor:
+                    type: string
+                    example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
+                    description: |-
+                      A cursor that can be used to fetch the next transactions.
+                      It is empty if there are no more rows to fetch after the current one.
+                      You can insert this value into the url as part of the cursor parameter.
                   items:
                     type: array
                     items:
                       "$ref": "#/components/schemas/Transaction"
-            text/csv:
-              schema:
-                type: string
-              examples:
-                csv table:
-                  summary: List of transactions
-                  value: |-
-                    transactionId, timestamp, ledgerDate, ledgerId, transactionType, orderId, ledgerAmount.value, ledgerAmount.currency, grossAmount.value, grossAmount.currency, fee.value, fee.currency, priceRate, priceFixed.value, priceFixed.currency, storeId, storeName
-                    2000001, 2022-09-22T09:31:28+00:00, 2022-09-22, 1, refund, 1, 0, NOK, 0, NOK, 0, NOK, 1.25, 0, NOK, msn/123456, Lokalbutikk Løkka
 
 components:
   parameters:
@@ -232,15 +201,15 @@ components:
           schema:
             type: object
             properties:
-              type:
-                type: string
-                description: An URI-reference that identities the problem type
-                example: "https://example.net/validation-error"
-              title:
+              errorCode:
+                type: number
+                description: The error-code for the problem
+                example: 100001
+              errorMessage:
                 type: string
                 description: A human readable summary of the problem
                 example: "Your request parameters didn't validate."
-              instance:
+              contextId:
                 type: string
                 description: Unique id for the request which can be used to find related events (logs)
                 example: "123e4567-e89b-12d3-a456-426655440000"
@@ -261,10 +230,10 @@ components:
     BankAccount:
       type: object
       properties:
-        country:
+        scheme:
           type: string
-          example: "NO"
-        accountNumber:
+          example: "BBAN:NO"
+        id:
           type: string
           example: "86011117947"
     Ledger:
@@ -285,35 +254,11 @@ components:
           example: "2000045"
         owner:
           $ref: "#/components/schemas/Organization"
-        settlesFor:
+        settlesForRecipientHandles:
           type: array
           items:
-            oneOf:
-              - $ref: "#/components/schemas/LedgerSettlesForEpayment"
-              - $ref: "#/components/schemas/LedgerSettlesForVippsnummer"
-    LedgerSettlesForEpayment:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - epayment
-        msn:
-          type: string
-          example: "123456"
-    LedgerSettlesForVippsnummer:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - vippsnummer
-        vippsnummer:
-          type: string
-          example: "123456"
-        country:
-          type: string
-          example: 'NO'
+            type: string
+            example: "nor:123455"
     Transaction:
       type: object
       properties:
@@ -323,11 +268,11 @@ components:
         timestamp:
           type: string
           format: DateTime
-          example: '2022-09-22T09:31:28+00:00'
+          example: '2020-10-05T10:21:54.141089Z'
         ledgerDate:
           type: string
           format: Date
-          example: '2022-09-22'
+          example: '2020-10-05'
         ledgerId:
           type: string
           example: '1'
@@ -336,60 +281,40 @@ components:
           enum:
             - refund
             - capture
-            - invoice
             - payout
+            # - invoice
         orderId:
           type: string
           description: |-
             Is also called End-To-End-Reference
           example: acme-shop-123-order123abc
+        currency:
+          type: string
+          example: 'NOK'
+          description: Currency code as defined in ISO 4217
         ledgerAmount:
-          $ref : "#/components/schemas/Money"
-          description: |-
-            Contribution to the ledger balance.
+          $ref: "#/components/schemas/Money"
         grossAmount:
-          $ref : "#/components/schemas/Money"
+          $ref: "#/components/schemas/Money"
         fee:
-          $ref : "#/components/schemas/Money"
-        priceRate:
-          type: number
-          format: double
-          example: 1.25
-          description: |-
-            The percentage rate used.
-        priceFixed:
-          $ref : "#/components/schemas/Money"
-        storeId:
+          $ref: "#/components/schemas/Money"
+        recipientHandle:
           type: string
-          example: msn/123456
-          description: |-
-            The store id. Can be 'msn/123456' or 'vippsnummer/123456'.
-        storeName:
-          type: string
-          example: "Lokalbutikk Løkka"
+          example: "nor:123455"
+
     Organization:
       type: object
       properties:
         id:
           type: string
           example: "987654321"
-        jurisdiction:
+        scheme:
           type: string
-          enum:
-            - "NO"
-          example: "NO"
+          example: "business:NO:ORG"
     Money:
-      type: object
-      properties:
-        value:
-          type: number
-          format: int32
-          description: |-
-            Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-          example: 49900
-        currency:
-          type: string
-          example: 'NOK'
-          description: |-
-            Currency code as defined in ISO 4217
+      type: number
+      format: int32
+      description: |-
+        Amounts are specified in minor units.
+        For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+      example: 49900

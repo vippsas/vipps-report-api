@@ -1,18 +1,16 @@
 <!-- START_METADATA
 ---
 title: "API Guide: Settlements"
-sidebar_position: 7
+sidebar_position: 40
 ---
 END_METADATA -->
-
+# Vipps Report API: Settlements
 <!-- START_COMMENT -->
 
 ℹ️ Please use the new documentation:
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 <!-- END_COMMENT -->
-
-# Vipps Report API: Settlements
 
 <!-- START_TOC -->
 
@@ -31,7 +29,7 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version: 0.0.6.
+Document version: 0.0.7.
 
 ## Overview
 
@@ -54,8 +52,9 @@ processes.
 ## Ledgers
 
 Vipps settlements work in the same way for all Vipps payment products; whether
-one is using Vippsnummer, the eCom/ePayment API, the Checkout API or the
-Recurring API.
+one is using
+[Vippsnummer](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-i-butikk/ta-betalt-med-vipps/#kom-i-gang)
+or one of the Vipps APIs.
 
 Vipps does not transfer money to/from the merchant for every payment made.
 Instead, all transactions are put on a *ledger*
@@ -77,8 +76,8 @@ Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 
 ![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
 
-However, for merchants who require it, Vipps have
-limited support for multiple Vippsnummers/e-com MSNs to be settled together.
+However, for merchants who require it, Vipps has
+limited support for multiple Vippsnummer and eCom MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 
@@ -88,7 +87,7 @@ The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`. An example response from
-[`GET:/report/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers/get)
+[`GET:/settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1settlement~1v1~1ledgers/get)
 is:
 
 ```json
@@ -98,42 +97,32 @@ is:
       "ledgerId": "302321",
       "currency": "NOK",
       "payoutBankAccount": {
-        "country": "NO",
-        "accountNumber": "86011117947"
+        "scheme": "BBAN:NO",
+        "id": "86011117947"
       },
       "firstPayout": "2000001",
       "lastPayout": "2000045",
       "owner": {
-        "jurisdiction": "NO",
+        "scheme": "business:NO:ORG",
         "id": "987654321"
       },
-      "settlesFor": [
-        {
-          "type": "epayment",
-          "msn": "123455"
-        }
-      ]
+      "settlesForRecipientHandles": [ "api:123455" ]
     }
-  ]
+  ],
+  "cursor": ""
 }
 ```
 
-A Vippsnummer will have a different `settlesFor` structure:
+A Vippsnummer will use the same `settlesForRecipientHandles` structure, but have a different prefix:
 
 ```json
 {
-  "settlesFor": [
-    {
-      "type": "vippsnummer",
-      "country": "NO",
-      "vippsnummer": "123455"
-    }
-  ]
+  "settlesForRecipientHandles": [ "NO:123455" ] 
 }
 ```
 
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
-may use the `msn` or `vippsnummer` arguments to filter the response.
+may use the `settlesForRecipientHandles` argument to filter the response.
 
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
@@ -163,6 +152,7 @@ to the merchant through Vipps. Reservations are not relevant to
 the settlement process.
 
 ### Refund transactions
+
 Refunds represent transfers in the other direction. These are
 initiated by the merchant; either by using the API or
 through [portal.vipps.no](https://portal.vipps.no). Refunds are always deducted
@@ -243,35 +233,69 @@ above:
 
 One can request a report from this ledger by
 calling
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
 for instance:
 
-```
-GET https://api.vipps.no/report/v1/ledgers/302321/transactions?ledgerDate=2022-10-01&columns=transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
+```HTTP
+GET https://api.vipps.no/report/v1/ledgertransactions?ledgerId=302321&ledgerDate=2022-10-01
 ```
 
-The endpoint can return either CSV or JSON depending on the `Accept` header;
-both always contain the exactly same data just in different representations. An
-example CSV response for the call above that matches the illustration above:
+An example JSON response for the call above that matches the illustration above:
 
-```
-transactionId,transactionType,reference,ledgerDate,ledgerAmount,grossAmount,fee,msn,time,price.description
-3343121302,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T10:23:43.422143+02:00,3.00% + 0.00
-2342128799,capture,purchase-12,2022-10-01,97.00,100.00,3.00,123455,2022-10-01T11:04:12.234234+02:00,3.00% + 0.00
-2442145459,capture,purchase-13,2022-10-01,194.00,200.00,6.00,123455,2022-10-01T13:11:40.234234+02:00,3.00% + 0.00
-2049872323,refund,purchase-12,2022-10-01,-100.00,-100.00,0.00,123455,2022-10-01T14:32:17.324342+02:00,
-18000302321002000045,payout,2000045,2022-10-01,-288.00,-288.00,0.00,,2022-10-02T00:00:00.000000+02:00,
+```json
+{
+  "cursor": "",
+  "items": [
+    {
+      "transactionId": "3343121302",
+      "timestamp": "2022-10-01T16:33:00.824993Z",
+      "ledgerDate": "2022-10-01",
+      "ledgerId": "302321",
+      "transactionType": "capture",
+      "orderId": "purchase-12",
+      "currency": "NOK",
+      "ledgerAmount": 7.89,
+      "grossAmount": 9,
+      "fee": 1.11,
+      "recipientHandle": "nor:57860"
+    },
+    {
+      "transactionId": "2370000000",
+      "timestamp": "2022-10-01T18:37:55.982497Z",
+      "ledgerDate": "2022-10-01",
+      "ledgerId": "302321",
+      "transactionType": "refund",
+      "orderId": "purchase-12",
+      "currency": "NOK",
+      "ledgerAmount": -6,
+      "grossAmount": -6,
+      "fee": 0,
+      "recipientHandle": "nor:57860"
+    },
+    {
+      "transactionId": "1000002731792000009",
+      "timestamp": "2022-10-01T22:00:00.00Z",
+      "ledgerDate": "2022-10-01",
+      "ledgerId": "273179",
+      "transactionType": "payout",
+      "orderId": null,
+      "currency": "NOK",
+      "ledgerAmount": -1.89,
+      "grossAmount": -1.89,
+      "fee": 0.00,
+      "recipientHandle": null
+    }
+  ]
+}
 ```
 
 Formatted as a table:
 
-| transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | msn    | time                              | price.description |
-|----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------|-----------------------------------|--------------|
-| 3343121302           | capture         | purchase-12 | 2022-10-01  |        97.00 |      100.00 | 3.00 | 123455 | 2022-10-01T10:23:43.422143+02:00 | 3.00% + 0.00 |
-| 2342128799           | capture         | purchase-12 | 2022-10-01  |        97.00 |      100.00 | 3.00 | 123455 | 2022-10-01T11:04:12.234234+02:00 | 3.00% + 0.00 |
-| 2442145459           | capture         | purchase-13 | 2022-10-01  |       194.00 |      200.00 | 3.00 | 123455 | 2022-10-01T13:11:40.234234+02:00 | 3.00% + 0.00 |
-| 2049872323           | refund          | purchase-12 | 2022-10-01  |      -100.00 |     -100.00 | 3.00 | 123455 | 2022-10-01T14:32:17.324342+02:00 |              |
-| 18000302321002000045 | payout          | 2000045     | 2022-10-01  |      -288.00 |     -288.00 | 0.00 |        | 2022-10-02T00:00:00.000000+02:00 |              |
+| transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | recipientHandle    | time                              |
+|----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------------------|-----------------------------------|
+| 3343121302           | capture         | purchase-12 | 2022-10-01  |         7.89 |           9 | 1.11 |          nor:57860 |       2022-10-01T16:33:00.824993Z |
+| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |          nor:57860 |       2022-10-01T18:37:55.982497Z | 
+| 1000002731792000009  | payout          | 2000045     | 2022-10-01  |        -1.89 |       -1.89 | 0.00 |                    |       2022-10-01T22:00:00.00Z     |
 
 Some notes:
 
@@ -283,12 +307,11 @@ Some notes:
 * *ledgerDate* is the accounting date used to group transactions for payouts. In
   the future it may be possible to set this to something else than midnight
   local time, and in that case this will deviate from `time`.
-* The payout transaction does not have an `msn`. The `msn` is not a required
-  field, it represents metadata about a transaction. For Vippsnummer, `msn`
-  is blank and instead the `vippsnummer` column can be requested.
+* The payout transaction does not have an `recipientHandle`. The `recipientHandle` is not a required
+  field, it represents metadata about a transaction. The `recipientHandle` can be either the `msn` or the `vippsnummer`.
 
-For more details about individual columns available, please consult the
-Swagger [TODO].
+For more details and descriptions about the individual columns, please consult the
+OpenAPI Spec [TODO].
 
 **Please note**: Data is not available in the API until some time after
 the `ledgerDate` has ended. This is primarily because Vipps in some
@@ -299,13 +322,13 @@ has ended.
 ### Periodization
 
 The
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint has several parameters for selecting a range of
 transactions to return, which can be used for an initial data import.
 
 Most users of the API will want to set up an automated job to call
 the
-[`GET:/report/v1/ledgers/{ledgerId}/transactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint on a daily basis to download the data for the
 preceding day. Such synchronization can be done in two ways: Date-based indexing
 and payout-based indexing. Often they will give the same results; the difference
@@ -335,11 +358,18 @@ transaction by transaction based on `reference`.
 
 ![Settlement](./images/report-periods.png)
 
+### Using cursors
+Since the amount of data that can be returned in any of the endpoints in this api can be quite large, we limit the amount of rows returned in each request to a set amount. Right now this is `1000` rows. 
+
+If the total number of rows is greater than this amount, we return a cursor in addition to the rows in the body. 
+
+This cursor value can be inserted into the url with the parameter named `cursor` to fetch the next set of items. 
+
 ## Questions?
 
 We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-ecom-api/issues),
-a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
+a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

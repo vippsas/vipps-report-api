@@ -2,6 +2,8 @@
 ---
 title: Introduction
 sidebar_position: 1
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -14,13 +16,19 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-💥 DRAFT! Unfinished work in progress. API specification changes are still coming. 💥
+💥 **BETA VERSION**: The API is publicly available, but may still have minor changes. 💥
 
-The report API gives you or a third-party acting on your behalf the ability to fetch information about payment events that have been processed by Vipps.
+The report API gives you or a third-party acting on your behalf the ability to
+fetch information about payment events that have been processed by Vipps.
+
+Feedback? Great! You can
+[submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues).
 
 ## Getting started
 
-Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, contribution guidelines, etc.
+See
+[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
+for information about API keys, product activation, how to make API calls, etc.
 
 ## Report API documentation
 
@@ -28,11 +36,11 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 * [API Guide: Settlements](vipps-report-api-settlement-guide.md)
 * [API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
 * [API Quick start](vipps-report-api-quick-start.md)
-* [API FAQ](vipps-report-api-faq.md): Frequently asked questions
+* [API Frequently asked questions](vipps-report-api-faq.md)
 
 ## Questions?
 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
 a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-report/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
