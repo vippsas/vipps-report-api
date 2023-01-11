@@ -358,6 +358,13 @@ transaction by transaction based on `reference`.
 
 ![Settlement](./images/report-periods.png)
 
+### Using cursors
+Since the amount of data that can be returned in any of the endpoints in this api can be quite large, we limit the amount of rows returned in each request to a set amount. Right now this is `1000` rows. 
+
+If the total number of rows is greater than this amount, we return a cursor in addition to the rows in the body. 
+
+This cursor value can be inserted into the url with the parameter named `cursor` to fetch the next set of items. 
+
 ## Questions?
 
 We're always happy to help with code or other questions you might have!
