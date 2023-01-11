@@ -14,7 +14,10 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-💥 Unfinished, and possibly unusable. 🙈 💥
+Use the Report API to get details for their own sale units and merchants.
+In addition, you can order products on behalf of your merchants.
+
+Be aware that these are running on the production server.
 
 ## Postman
 
@@ -46,25 +49,23 @@ Save the following files to your computer:
    * `client_secret` - Merchant key is required for getting the access token.
    * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
    * `merchantSerialNumber` - Merchant id.
+   * `baseUrl` - Set to: `https://api.vipps.no`.
 
 ## Make API calls
 
-For all of the following, you will start by sending request `Get Access Token`.
-This provides you with access to the API.
+Be aware that these requests can only be run on the production server.
 
-The access token is valid for 1 hour in the test environment
-and 24 hours in the production environment.
-See the
-[API reference](https://vippsas.github.io/vipps-developer-docs/api/report)
-for details about the calls.
+1. Send request `Get Access Token`. This provides you with access to the API.
+   Be sure to use the address to the production server and provide keys for a production sale unit.
+   The access token is valid for 24 hours in the production environment.
 
-### Get ledgers
+1. Send request `Get ledgers` to get the ledgers you have access to.
+See
+[`GET:/settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1settlement~1v1~1ledgers/get),
 
-[`GET:/settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers/get),
+1. Send request `Get ledger transactions` for a list of payments/transactions. See
+[`GET:/report/v1/ledgertransactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
 
-### Get transactions
-
-[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1ledgers~1%7BledgerId%7D~1transactions/get)
 
 ## Questions?
 
