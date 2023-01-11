@@ -230,10 +230,10 @@ components:
     BankAccount:
       type: object
       properties:
-        country:
+        scheme:
           type: string
-          example: "NO"
-        accountNumber:
+          example: "BBAN:NO"
+        id:
           type: string
           example: "86011117947"
     Ledger:
@@ -308,11 +308,9 @@ components:
         id:
           type: string
           example: "987654321"
-        jurisdiction:
+        scheme:
           type: string
-          enum:
-            - "NO"
-          example: "NO"
+          example: "business:NO:ORG"
     Money:
       type: number
       format: int32
