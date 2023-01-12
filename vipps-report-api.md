@@ -12,19 +12,13 @@ END_METADATA -->
 ℹ️ Please use the new documentation:
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
-<!-- END_COMMENT -->
-
-<!-- START_TOC -->
-
 ## Table of contents
 
 * [About the Report API](#about-the-report-api)
 * [Authenticating to the Report API](#authenticating-to-the-report-api)
 * [Questions?](#questions)
 
-<!-- END_TOC -->
-
-Document version: 0.0.8.
+<!-- END_COMMENT -->
 
 ## About the Report API
 

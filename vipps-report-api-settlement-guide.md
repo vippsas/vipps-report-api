@@ -10,10 +10,6 @@ END_METADATA -->
 ℹ️ Please use the new documentation:
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
-<!-- END_COMMENT -->
-
-<!-- START_TOC -->
-
 ## Table of contents
 
 * [Overview](#overview)
@@ -27,9 +23,8 @@ END_METADATA -->
   * [Periodization](#periodization)
 * [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
-Document version: 0.0.7.
 
 ## Overview
 

@@ -8,13 +8,6 @@ END_METADATA -->
 
 # Vipps Report API: Frequently Asked Questions
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-<!-- END_COMMENT -->
-
 Here are the Report API FAQs.
 See the
 [Vipps Report API guide](vipps-report-api.md)
@@ -24,9 +17,10 @@ For more common Vipps questions, see:
 
 * [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
 
-Document version: 1.0.0.
+<!-- START_COMMENT -->
 
-<!-- START_TOC -->
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 ## Table of contents
 
@@ -39,7 +33,7 @@ Document version: 1.0.0.
   * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
 * [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## When will the API be available?
 
