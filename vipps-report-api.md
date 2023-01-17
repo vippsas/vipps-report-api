@@ -1,10 +1,8 @@
-## <!-- START_METADATA
-
+<!-- START_METADATA
+---
 title: "API Guide: Overview"
 sidebar_position: 30
-
 ---
-
 END_METADATA -->
 
 # Vipps Report API: Overview
