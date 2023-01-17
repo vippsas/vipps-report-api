@@ -38,9 +38,3 @@ for information about API keys, product activation, how to make API calls, etc.
 * [API Quick start](vipps-report-api-quick-start.md)
 * [API Frequently asked questions](vipps-report-api-faq.md)
 
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
-a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).

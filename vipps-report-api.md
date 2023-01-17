@@ -18,7 +18,6 @@ END_METADATA -->
 
 - [About the Report API](#about-the-report-api)
 - [Authenticating to the Report API](#authenticating-to-the-report-api)
-- [Questions?](#questions)
 
 <!-- END_COMMENT -->
 
@@ -87,12 +86,3 @@ shows how to add an accounting partners, and how to specify which ledgers the
 accounting partner will have access to.
 
 ![Add a new accounting-partner](./images/portal-regnskapspartnere-legg-til.png "Add a new accounting partner")
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
-a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
