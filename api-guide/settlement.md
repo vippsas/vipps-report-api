@@ -1,14 +1,18 @@
 <!-- START_METADATA
 ---
-title: "API Guide: Settlements"
-sidebar_position: 40
+title: Settlements
+sidebar_position: 32
+pagination_prev: Null
+pagination_next: Null
 ---
 END_METADATA -->
+
 # Vipps Report API: Settlements
+
 <!-- START_COMMENT -->
 
 ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
 
 ## Table of contents
 
@@ -62,19 +66,19 @@ The following illustration shows an example day at a low traffic merchant.
 ledger, changing the balance of funds that Vipps owes the merchant. In the end,
 the balance is paid out. The payout is itself a transaction on the ledger,
 adjusting the balance down to zero.
-![ledger balance illustration](./images/ledger-balance-simple.png)
+![ledger balance illustration](../images/ledger-balance-simple.png)
 
 For the large majority of merchants, there is a direct correspondence between a
 Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 
-![ledger vs units, one to one](./images/ledger-vs-units-one-to-one.png)
+![ledger vs units, one to one](../images/ledger-vs-units-one-to-one.png)
 
 However, for merchants who require it, Vipps has
 limited support for multiple Vippsnummer and eCom MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 
-![ledgers vs units, many to one](./images/ledger-vs-units-one-to-many.png)
+![ledgers vs units, many to one](../images/ledger-vs-units-one-to-many.png)
 
 The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
@@ -120,7 +124,7 @@ may use the `settlesForRecipientHandles` argument to filter the response.
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
 ledgers appear for different customers as they
-[grant your accounting system access to their data](vipps-report-api.md#give-access-to-an-accounting-partner).
+[grant your accounting system access to their data](overview.md#give-access-to-an-accounting-partner-).
 
 ## Transaction types
 
@@ -222,7 +226,7 @@ transaction types.
 To perform reconciliation you download a *report* that lists the transactions
 that has happened on a specific ledger. To continue with our simple example from
 above:
-![ledger balance illustration](./images/ledger-balance-simple.png)
+![ledger balance illustration](../images/ledger-balance-simple.png)
 
 One can request a report from this ledger by
 calling
@@ -349,7 +353,7 @@ Both modes can be useful depending on the specifics of your reconciliation
 routines, but in general we recommend fetching by date, and to do reconciliation
 transaction by transaction based on `reference`.
 
-![Settlement](./images/report-periods.png)
+![Settlement](../images/report-periods.png)
 
 ### Using cursors
 

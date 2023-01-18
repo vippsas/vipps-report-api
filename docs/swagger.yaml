@@ -1,7 +1,9 @@
 ---
 openapi: 3.0.2
 info:
-  title: Report API
+  title: Vipps Report API
+  description: |
+    For details, see the [API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
   version: '1.0'
 servers:
   - url: https://apitest.vipps.no

@@ -1,7 +1,9 @@
 <!-- START_METADATA
 ---
 title: Errors
-sidebar_position: 50
+sidebar_position: 37
+pagination_prev: Null
+pagination_next: Null
 ---
 END_METADATA -->
 
@@ -9,7 +11,7 @@ END_METADATA -->
 
 Here are the Report API Errors with description.
 See the
-[Vipps Report API guide](vipps-report-api.md)
+[Vipps Report API guide](overview.md)
 for all the details.
 
 For more common Vipps questions, see:

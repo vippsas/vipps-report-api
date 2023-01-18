@@ -1,7 +1,7 @@
 {
   "name": "vipps-report-api",
   "version": "1.0.0",
-  "description": "<!-- START_METADATA --- title: Introduction sidebar_position: 1 --- END_METADATA -->",
+  "description": "The report API gives you or a third-party acting on your behalf the ability to fetch information about payment events that have been processed by Vipps.",
   "main": "index.js",
   "directories": {
     "doc": "docs"
