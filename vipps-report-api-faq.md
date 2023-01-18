@@ -15,7 +15,7 @@ for all the details.
 
 For more common Vipps questions, see:
 
-* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
+* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
 
 <!-- START_COMMENT -->
 
@@ -31,7 +31,6 @@ For more common Vipps questions, see:
   * [Partner keys](#partner-keys)
   * [Specifying a accounting partner](#specifying-a-accounting-partner)
   * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
-* [Questions?](#questions)
 
 <!-- END_COMMENT -->
 
@@ -105,12 +104,3 @@ If you keep getting an empty list in a response where you expect data to be avai
 
 * Check if your query-parameters is correct. Are you filtering on the correct date?
 * Do you have access to the resource you are trying to retrieve? If you are trying to retrieve the transactions connected to a ledger you do not have access to, you will be given an empty list
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
-a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
