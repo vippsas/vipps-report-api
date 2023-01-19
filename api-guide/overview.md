@@ -28,7 +28,7 @@ for details about these.
 See:
 [Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
 
-### Planned Accounting partner functionality
+### Planned accounting partner functionality
 
 (DRAFT)
 
@@ -62,7 +62,9 @@ shows the accounting partners for one sale unit.
 
 ![Overview over accounting-partners](../images/portal-regnskapspartnere-oversikt.png "Accounting Partners overview")
 
-### Adding a new accounting partner (DRAFT)
+### Adding a new accounting partner
+
+(DRAFT)
 
 This page on
 [portal.vipps.no](https://portal.vipps.no)

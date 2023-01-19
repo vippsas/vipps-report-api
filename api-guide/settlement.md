@@ -128,7 +128,7 @@ may use the `settlesForRecipientHandles` argument to filter the response.
 If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
 ledgers appear for different customers as they
-[grant your accounting system access to their data](overview.md#give-access-to-an-accounting-partner-).
+[grant your accounting system access to their data](overview.md#give-access-to-an-accounting-partner).
 
 ## Transaction types
 
