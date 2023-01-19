@@ -65,7 +65,7 @@ has in Vipps and thus the *ledger balance*. Periodically, usually daily, the
 balance of the ledger is paid out to a configured account number and the balance
 is reset.
 
-The following illustration shows an example day at a low traffic merchant.
+The following illustration shows an example day at a low-traffic merchant.
 *Captures* and *refunds* (described in further detail below) are added to the
 ledger, changing the balance of funds that Vipps owes the merchant. In the end,
 the balance is paid out. The payout is itself a transaction on the ledger,
@@ -140,9 +140,9 @@ captures are indicated by a gross amount and a fee to Vipps for the service
 provided; the balance is typically increased by the gross amount less the fee
 (*net settlement*).
 
-In exceptional cases Vipps can configure *gross settlements*.
-In this case the fees are not added to the ledger balance,
-but instead invoiced at the end of the month.
+In exceptional cases, Vipps can configure *gross settlements*.
+In this case, the fees are not deducted from the ledger balance,
+but are instead invoiced at the end of the month.
 
 In some of the other APIs we distinguish between two
 types of payment flows: The "sale" flow for an immediate purchase,
