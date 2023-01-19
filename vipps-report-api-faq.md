@@ -15,7 +15,7 @@ for all the details.
 
 For more common Vipps questions, see:
 
-* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
+* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
 
 <!-- START_COMMENT -->
 
@@ -29,7 +29,10 @@ For more common Vipps questions, see:
 * [Can a merchant find the Ledger ID for a MSN on portal.vipps.no?](#can-a-merchant-find-the-ledger-id-for-a-msn-on-portalvippsno)
 * [How do I get the settlements for multiple MSNs in the same ledger?](#how-do-i-get-the-settlements-for-multiple-msns-in-the-same-ledger)
 * [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
-* [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
+  * [The merchant's own API keys](#the-merchants-own-api-keys)
+  * [Partner keys](#partner-keys)
+  * [Specifying a accounting partner](#specifying-a-accounting-partner)
+ * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
 
 <!-- END_COMMENT -->
 
@@ -78,7 +81,7 @@ configuration is not yet generally available.
 However, accounting partners should take into account that this feature
 *could* see more use in the future when integrations are developed.
 
-### If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
+## If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
 
 Once a transaction has appeared on a ledger, it belongs to that ledger forever.
 When an MSN is moved to another ledger, it means that *future* transactions
@@ -134,18 +137,9 @@ reports of the payments that have been made.
 See:
 [Give access to an accounting partner](vipps-report-api.md#give-access-to-an-accounting-partner)
 
-### I keep getting an empty list in response when calling one of the endpoints
+## I keep getting an empty list in response when calling one of the endpoints
 
 If you keep getting an empty list in a response where you expect data to be available, you should first check these things before filing an issue:
 
 * Check if your query-parameters is correct. Are you filtering on the correct date?
 * Do you have access to the resource you are trying to retrieve? If you are trying to retrieve the transactions connected to a ledger you do not have access to, you will be given an empty list
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
-a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

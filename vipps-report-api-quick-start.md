@@ -65,13 +65,3 @@ See
 
 1. Send request `Get ledger transactions` for a list of payments/transactions. See
 [`GET:/report/v1/ledgertransactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
-
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-report-api/issues),
-a [pull request](https://github.com/vippsas/vipps-report-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
