@@ -34,7 +34,3 @@ by a second or so, but if there are operational problems, it could, in the worst
 case, be behind by several hours. Therefore, you should always use other
 Vipps APIs as the source of truth for the status of an operation.
 
-
-
-
-
