@@ -7,7 +7,7 @@ pagination_next: Null
 ---
 END_METADATA -->
 
-# Vipps Report API: Errors
+# Errors
 
 Here are the Report API Errors with description.
 See the

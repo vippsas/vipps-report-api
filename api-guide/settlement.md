@@ -7,7 +7,7 @@ pagination_next: Null
 ---
 END_METADATA -->
 
-# Vipps Report API: Settlements
+# Settlements
 
 <!-- START_COMMENT -->
 
@@ -31,7 +31,7 @@ END_METADATA -->
 ## Overview
 
 Merchants using Vipps will receive the money in bulk payments, usually one per
-day. In these bulk payment we have summed together all payments for the day,
+day. In these, bulk payment we have summed together all payments for the day,
 subtracting refunds and fees to Vipps. It is therefore necessary to download
 reports that explain the bulk payment, so that it can be correctly filed in the
 merchant's accounting system. Such reports can be fetched either
@@ -45,6 +45,10 @@ We recommended that you do this by matching per transaction on transaction IDs.
 This guide will focus on using the Report API, but may also be useful reading
 for those who rely on using reports from the portal for their reconciliation
 processes.
+
+See
+[Common topics: Settlements](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/settlements)
+for details about settlements, in general.
 
 ## Ledgers
 
@@ -291,7 +295,7 @@ Formatted as a table:
 | transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | recipientHandle    | time                              |
 |----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------------------|-----------------------------------|
 | 3343121302           | capture         | purchase-12 | 2022-10-01  |         7.89 |           9 | 1.11 |          nor:57860 |       2022-10-01T16:33:00.824993Z |
-| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |          nor:57860 |       2022-10-01T18:37:55.982497Z | 
+| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |          nor:57860 |       2022-10-01T18:37:55.982497Z |
 | 1000002731792000009  | payout          | 2000045     | 2022-10-01  |        -1.89 |       -1.89 | 0.00 |                    |       2022-10-01T22:00:00.00Z     |
 
 Some notes:
@@ -357,8 +361,8 @@ transaction by transaction based on `reference`.
 
 ### Using cursors
 
-Since the amount of data that can be returned in any of the endpoints in this api can be quite large, we limit the amount of rows returned in each request to a set amount. Right now this is `1000` rows. 
+Since the amount of data that can be returned in any of the endpoints in this api can be quite large, we limit the amount of rows returned in each request to a set amount. Right now this is `1000` rows.
 
-If the total number of rows is greater than this amount, we return a cursor in addition to the rows in the body. 
+If the total number of rows is greater than this amount, we return a cursor in addition to the rows in the body.
 
-This cursor value can be inserted into the url with the parameter named `cursor` to fetch the next set of items. 
+This cursor value can be inserted into the url with the parameter named `cursor` to fetch the next set of items.

@@ -8,7 +8,7 @@ pagination_next: Null
 ---
 END_METADATA -->
 
-# Vipps Report API: Overview
+# Overview
 
 <!-- START_COMMENT -->
 

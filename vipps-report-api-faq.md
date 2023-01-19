@@ -7,7 +7,7 @@ pagination_next: Null
 ---
 END_METADATA -->
 
-# Vipps Report API: Frequently Asked Questions
+# Frequently asked questions
 
 Here are the Report API FAQs.
 See the
