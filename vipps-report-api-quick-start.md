@@ -2,6 +2,8 @@
 ---
 title: Quick start
 sidebar_position: 20
+pagination_prev: Null
+pagination_next: Null
 ---
 END_METADATA -->
 
@@ -10,7 +12,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
 
 <!-- END_COMMENT -->
 

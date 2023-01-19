@@ -2,15 +2,16 @@
 ---
 title: FAQ
 sidebar_position: 60
-pagination_next: null
+pagination_prev: Null
+pagination_next: Null
 ---
 END_METADATA -->
 
-# Vipps Report API: Frequently Asked Questions
+# Frequently asked questions
 
 Here are the Report API FAQs.
 See the
-[Vipps Report API guide](vipps-report-api.md)
+[Vipps Report API guide](./api-guide/README.md)
 for all the details.
 
 For more common Vipps questions, see:
@@ -20,7 +21,7 @@ For more common Vipps questions, see:
 <!-- START_COMMENT -->
 
 ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
 
 ## Table of contents
 
@@ -100,7 +101,7 @@ Later (we can not give an ETA, but will update here):
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
   API keys only work for sale units after the merchant has
-  [given access to the accounting partner](vipps-report-api.md#give-access-to-an-accounting-partner).
+  [given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
 
 ### The merchant's own API keys
 
@@ -135,7 +136,7 @@ to make payments, or move money in any way. The accounting partner can only see
 reports of the payments that have been made.
 
 See:
-[Give access to an accounting partner](vipps-report-api.md#give-access-to-an-accounting-partner)
+[Give access to an accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner)
 
 ## I keep getting an empty list in response when calling one of the endpoints
 

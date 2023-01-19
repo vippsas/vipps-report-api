@@ -12,7 +12,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
 
 <!-- END_COMMENT -->
 
@@ -32,9 +32,7 @@ for information about API keys, product activation, how to make API calls, etc.
 
 ## Report API documentation
 
-* [API Guide: Overview](vipps-report-api.md)
-* [API Guide: Settlements](vipps-report-api-settlement-guide.md)
+* [API Guide](./api-guide/README.md)
 * [API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
 * [API Quick start](vipps-report-api-quick-start.md)
 * [API Frequently asked questions](vipps-report-api-faq.md)
-
