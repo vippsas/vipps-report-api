@@ -24,19 +24,27 @@ For more common Vipps questions, see:
 
 ## Table of contents
 
-* [When will the API be available?](#when-will-the-api-be-available)
+* [What is the status of the API?](#what-is-the-status-of-the-api)
 * [What information can I get hold of?](#what-information-can-i-get-hold-of)
+* [Can a merchant find the Ledger ID for a MSN on portal.vipps.no?](#can-a-merchant-find-the-ledger-id-for-a-msn-on-portalvippsno)
+* [How do I get the settlements for multiple MSNs in the same ledger?](#how-do-i-get-the-settlements-for-multiple-msns-in-the-same-ledger)
 * [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
   * [The merchant's own API keys](#the-merchants-own-api-keys)
   * [Partner keys](#partner-keys)
   * [Specifying a accounting partner](#specifying-a-accounting-partner)
-  * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
+ * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
 
 <!-- END_COMMENT -->
 
-## When will the API be available?
+## What is the status of the API?
 
-The Vipps Report API will be available from January 9 2023.
+The Report API is currently in public beta.
+It is unlikely to change, but
+there may be smaller changes made still. We expect a final freeze of the
+API before summer 2023.
+
+Currently we only support single-MSN API keys (see the question below
+on API keys for more information on future plans for partner keys).
 
 ## What information can I get hold of?
 
@@ -48,6 +56,37 @@ or on
 
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
+
+## Can a merchant find the Ledger ID for a MSN on portal.vipps.no?
+
+No, not currently. For now,
+the only way to get the Ledger ID is to call `GET:settlement/v1/ledgers`.
+The Ledger ID does not in general change, so you may store it in configuration
+in the same way that you store the MSN.
+We may add display of the Ledger ID on portal.vipps.no in the future.
+
+## How do I get the settlements for multiple MSNs in the same ledger?
+
+Joint settlement for multiple MSNs is supported, and may be relevant
+in cases such as:
+* You are changing the technical integration and getting a new MSN
+  for this purpose, but you do not want to disrupt the settlement
+  series
+* You are launching a Point of Sale system in a large number of distinct
+  physical stores that should have different MSNs, but want to have
+  combined settlements for these.
+
+In practice, this feature is little used in a few pilot cases, and
+configuration is not yet generally available.
+However, accounting partners should take into account that this feature
+*could* see more use in the future when integrations are developed.
+
+## If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
+
+Once a transaction has appeared on a ledger, it belongs to that ledger forever.
+When an MSN is moved to another ledger, it means that *future* transactions
+will appear on the new ledger. The old transactions appear on the old ledger,
+since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
 
 ## Which API keys give access to the API?
 
@@ -88,7 +127,7 @@ the platform partner can use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
 to make requests to the Report API.
 
-### Specifying a accounting partner
+### Specifying an accounting partner
 
 In addition to the above, the merchant may add one or more accounting partners.
 An accounting partner will get access to the Report API, but will not be allowed
@@ -98,7 +137,7 @@ reports of the payments that have been made.
 See:
 [Give access to an accounting partner](vipps-report-api.md#give-access-to-an-accounting-partner)
 
-### I keep getting an empty list in response when calling one of the endpoints
+## I keep getting an empty list in response when calling one of the endpoints
 
 If you keep getting an empty list in a response where you expect data to be available, you should first check these things before filing an issue:
 
