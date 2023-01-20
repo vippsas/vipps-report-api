@@ -27,13 +27,15 @@ For more common Vipps questions, see:
 
 * [What is the status of the API?](#what-is-the-status-of-the-api)
 * [What information can I get hold of?](#what-information-can-i-get-hold-of)
+* [What are the benefits of the Report API over the SFTP service?](#what-are-the-benefits-of-the-report-api-over-the-sftp-service)
 * [Can a merchant find the Ledger ID for a MSN on portal.vipps.no?](#can-a-merchant-find-the-ledger-id-for-a-msn-on-portalvippsno)
 * [How do I get the settlements for multiple MSNs in the same ledger?](#how-do-i-get-the-settlements-for-multiple-msns-in-the-same-ledger)
+* [If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?](#if-a-ledger-is-used-for-two-msn-msn-1-and-msn-2-what-happens-when-msn-2-gets-its-own-ledger)
 * [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
   * [The merchant's own API keys](#the-merchants-own-api-keys)
   * [Partner keys](#partner-keys)
-  * [Specifying a accounting partner](#specifying-a-accounting-partner)
- * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
+  * [Specifying an accounting partner](#specifying-an-accounting-partner)
+* [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
 
 <!-- END_COMMENT -->
 
@@ -57,6 +59,28 @@ or on
 
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
+
+## What are the benefits of the Report API over the SFTP service?
+
+The
+[Vipps SFTP Report Service](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/settlements/sftp-report-service)
+lets merchants and partners download settlement files by SFTP.
+
+The Report API has some benefits over this:
+- Data can be retrieved at any time.
+- Data is available regardless of whether the balance is positive or negative,
+  so even if there has only been refunds there will be data available.
+  The SFTP service only provides settlement files if the balance is positive.
+- It is possible to retrieve data for more than one day in one request, so
+  it is possible to retrieve an entire weekend, week, month, etc. in one request.
+  The SFTP service provides one ´file per day.
+- The data is in JSON format, making it easy to use it in many different ways.
+- Later: Support for
+  [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys),
+  so an accounting partner can use its API keys for all its merchants.
+  The merchant only needs to
+  [give access to an accounting partner](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api/api-guide/overview#give-access-to-an-accounting-partner)
+  on [portal.vipps.no](https://portal.vipps.no).
 
 ## Can a merchant find the Ledger ID for a MSN on portal.vipps.no?
 
