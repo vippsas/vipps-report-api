@@ -31,6 +31,7 @@ For more common Vipps questions, see:
 * [Can a merchant find the Ledger ID for a MSN on portal.vipps.no?](#can-a-merchant-find-the-ledger-id-for-a-msn-on-portalvippsno)
 * [How do I get the settlements for multiple MSNs in the same ledger?](#how-do-i-get-the-settlements-for-multiple-msns-in-the-same-ledger)
 * [If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?](#if-a-ledger-is-used-for-two-msn-msn-1-and-msn-2-what-happens-when-msn-2-gets-its-own-ledger)
+* [How can I see which payment a payment is included in?](#how-can-i-see-which-payment-a-payment-is-included-in)
 * [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
   * [The merchant's own API keys](#the-merchants-own-api-keys)
   * [Partner keys](#partner-keys)
@@ -70,7 +71,8 @@ The only way to test the Report API is in the production environment.
 ## Can a merchant find the Ledger ID for a MSN on portal.vipps.no?
 
 No, not currently. For now,
-the only way to get the Ledger ID is to call `GET:settlement/v1/ledgers`.
+the only way to get the Ledger ID is to call
+[`GET:settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1settlement~1v1~1ledgers/get).
 The Ledger ID does not in general change, so you may store it in configuration
 in the same way that you store the MSN.
 We may add display of the Ledger ID on portal.vipps.no in the future.
@@ -97,6 +99,17 @@ Once a transaction has appeared on a ledger, it belongs to that ledger forever.
 When an MSN is moved to another ledger, it means that *future* transactions
 will appear on the new ledger. The old transactions appear on the old ledger,
 since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
+
+## How can I see which payment a payment is included in?
+
+You can use the `inPayout` query parameter for the
+[GET:/report/v1/ledgertransactions?ledgerId={ledgerId}](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
+endpoint to retrieve payments that are part of a specific payout.
+The `sincePayout` works in a similar way.
+
+**Please note:** Vipps may at some point implement a "rolling reserve", where
+an amount is always withheld to compensate for high risk, etc. Due to this, each
+payment may not always be connected to a specific payout.
 
 ## Which API keys give access to the API?
 
