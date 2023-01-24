@@ -27,13 +27,15 @@ For more common Vipps questions, see:
 
 * [What is the status of the API?](#what-is-the-status-of-the-api)
 * [What information can I get hold of?](#what-information-can-i-get-hold-of)
+* [Is the Report API available for the test environment.](#is-the-report-api-available-for-the-test-environment)
 * [Can a merchant find the Ledger ID for a MSN on portal.vipps.no?](#can-a-merchant-find-the-ledger-id-for-a-msn-on-portalvippsno)
 * [How do I get the settlements for multiple MSNs in the same ledger?](#how-do-i-get-the-settlements-for-multiple-msns-in-the-same-ledger)
+* [If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?](#if-a-ledger-is-used-for-two-msn-msn-1-and-msn-2-what-happens-when-msn-2-gets-its-own-ledger)
 * [Which API keys give access to the API?](#which-api-keys-give-access-to-the-api)
   * [The merchant's own API keys](#the-merchants-own-api-keys)
   * [Partner keys](#partner-keys)
-  * [Specifying a accounting partner](#specifying-a-accounting-partner)
- * [I keep getting an empty list in response when calling one of the endpoints](#i-keep-getting-an-empty-list-in-response-when-calling-one-of-the-endpoints)
+  * [Specifying an accounting partner](#specifying-an-accounting-partner)
+* [Why do I get an empty list in response when calling one of the endpoints?](#why-do-i-get-an-empty-list-in-response-when-calling-one-of-the-endpoints)
 
 <!-- END_COMMENT -->
 
@@ -57,6 +59,13 @@ or on
 
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
+
+## Is the Report API available for the test environment.
+
+Nope. The
+[Vipps test environment](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment)
+does not have the backend systems necessary to offer the Report API.
+The only way to test the Report API is in the production environment.
 
 ## Can a merchant find the Ledger ID for a MSN on portal.vipps.no?
 
@@ -138,7 +147,7 @@ reports of the payments that have been made.
 See:
 [Give access to an accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner)
 
-## I keep getting an empty list in response when calling one of the endpoints
+## Why do I get an empty list in response when calling one of the endpoints?
 
 If you keep getting an empty list in a response where you expect data to be available, you should first check these things before filing an issue:
 
