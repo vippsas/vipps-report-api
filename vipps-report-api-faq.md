@@ -141,6 +141,12 @@ merchant are done using the partner's own API keys (the partner keys).
 
 ### Partner keys
 
+**Please note:** Partner keys are not yet supported by the Report API.
+This notice will be removed when it is.
+Subscribe to the
+[Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters)
+for updates.
+
 Partner keys let a partner make payments on behalf of a merchant, and the same API keys
 also give access to the Report API.
 
