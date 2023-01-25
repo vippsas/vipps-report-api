@@ -103,7 +103,7 @@ since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
 ## How can I see which payment a payment is included in?
 
 You can use the `inPayout` query parameter for the
-[GET:/report/v1/ledgertransactions?ledgerId={ledgerId}](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
 endpoint to retrieve payments that are part of a specific payout.
 The `sincePayout` works in a similar way.
 
