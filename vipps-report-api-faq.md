@@ -148,7 +148,8 @@ only [the merchant's own API keys](#the-merchants-own-api-keys)
 can be used.
 This notice will be removed when partner keys are supported.
 Subscribe to the
-[Technical newsletter](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
+[Technical newsletter](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters)
+for updates.
 
 Partner keys let a partner make payments on behalf of a merchant, and the same API keys
 also give access to the Report API.
