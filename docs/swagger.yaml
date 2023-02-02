@@ -103,7 +103,7 @@ paths:
                     ]
                   }
 
-  "/report/v1/ledgertransactions?ledgerId={ledgerId}":
+  "/report/v1/ledgertransactions":
     get:
       summary: Returns a list of payments/transactions.
       description: |
