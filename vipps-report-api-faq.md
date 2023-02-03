@@ -81,6 +81,7 @@ The Report API has some benefits over this:
   The merchant only needs to
   [give access to an accounting partner](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api/api-guide/overview#give-access-to-an-accounting-partner)
   on [portal.vipps.no](https://portal.vipps.no).
+  <!-- END_COMMENT -->
 
 ## Can a merchant find the Ledger ID for a MSN on portal.vipps.no?
 
