@@ -103,7 +103,7 @@ paths:
                     ]
                   }
 
-  "/report/v1/ledgertransactions?ledgerId={ledgerId}":
+  "/report/v1/ledgertransactions":
     get:
       summary: Returns a list of payments/transactions.
       description: |
@@ -269,8 +269,10 @@ components:
           example: '2000001'
         timestamp:
           type: string
-          format: DateTime
-          example: '2020-10-05T10:21:54.141089Z'
+          description: |-
+            Transaction date and time together with an offset (difference from UTC time in hours)
+          format: DateTimeOffset
+          example: '2020-10-05T10:21:54.141089+0200'
         ledgerDate:
           type: string
           format: Date

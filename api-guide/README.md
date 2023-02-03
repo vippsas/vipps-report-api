@@ -8,7 +8,7 @@ pagination_next: Null
 ---
 END_METADATA -->
 
-# Report API guide
+# API guide
 
 <!-- START_COMMENT -->
 

@@ -249,7 +249,7 @@ An example JSON response for the call above that matches the illustration above:
   "items": [
     {
       "transactionId": "3343121302",
-      "timestamp": "2022-10-01T16:33:00.824993Z",
+      "timestamp": "2022-10-01T16:33:00.824993+0200",
       "ledgerDate": "2022-10-01",
       "ledgerId": "302321",
       "transactionType": "capture",
@@ -262,7 +262,7 @@ An example JSON response for the call above that matches the illustration above:
     },
     {
       "transactionId": "2370000000",
-      "timestamp": "2022-10-01T18:37:55.982497Z",
+      "timestamp": "2022-10-01T18:37:55.982497+0200",
       "ledgerDate": "2022-10-01",
       "ledgerId": "302321",
       "transactionType": "refund",
@@ -275,7 +275,7 @@ An example JSON response for the call above that matches the illustration above:
     },
     {
       "transactionId": "1000002731792000009",
-      "timestamp": "2022-10-01T22:00:00.00Z",
+      "timestamp": "2022-10-01T22:00:00.000000+0200",
       "ledgerDate": "2022-10-01",
       "ledgerId": "273179",
       "transactionType": "payout",
@@ -292,11 +292,11 @@ An example JSON response for the call above that matches the illustration above:
 
 Formatted as a table:
 
-| transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | recipientHandle    | time                              |
-|----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------------------|-----------------------------------|
-| 3343121302           | capture         | purchase-12 | 2022-10-01  |         7.89 |           9 | 1.11 |          nor:57860 |       2022-10-01T16:33:00.824993Z |
-| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |          nor:57860 |       2022-10-01T18:37:55.982497Z |
-| 1000002731792000009  | payout          | 2000045     | 2022-10-01  |        -1.89 |       -1.89 | 0.00 |                    |       2022-10-01T22:00:00.00Z     |
+| transactionId        | transactionType | reference   | ledgerDate  | ledgerAmount | grossAmount |  fee | recipientHandle    | time                            |
+|----------------------|-----------------|-------------|-------------|-------------:|------------:|-----:|--------------------|---------------------------------|
+| 3343121302           | capture         | purchase-12 | 2022-10-01  |         7.89 |           9 | 1.11 |          nor:57860 | 2022-10-01T16:33:00.824993+0200 |
+| 2370000000           | refund          | purchase-12 | 2022-10-01  |           -6 |          -6 |    0 |          nor:57860 | 2022-10-01T18:37:55.982497+0200 |
+| 1000002731792000009  | payout          | 2000045     | 2022-10-01  |        -1.89 |       -1.89 | 0.00 |                    | 2022-10-01T22:00:00.000000+0200 |
 
 Some notes:
 
