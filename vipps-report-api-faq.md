@@ -60,6 +60,7 @@ or on
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
+<!-- START_COMMENT -->
 ## What are the benefits of the Report API over the SFTP service?
 
 The
