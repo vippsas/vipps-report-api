@@ -26,7 +26,7 @@ See
 for details about these.
 
 See:
-[Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token).
+[Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/APIs/access-token-api#get-an-access-token).
 
 ### Planned accounting partner functionality
 
