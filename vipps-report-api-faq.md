@@ -142,7 +142,7 @@ Later (we can not give an ETA, but will update here):
 The merchant's own API keys give full access to the Report API.
 
 If the merchant uses an integration partner (see
-[partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types)),
+[partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner#partner-types)),
 it is the same as using the merchant's own API keys.
 
 When a merchant shares its API keys for a sale unit with an integration partner,
@@ -167,7 +167,7 @@ Partner keys let a partner make payments on behalf of a merchant, and the same A
 also give access to the Report API.
 
 If the merchant has a sale unit that is configured with a
-[platform partner](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types),
+[platform partner](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner#partner-types),
 the platform partner can use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
 to make requests to the Report API.
