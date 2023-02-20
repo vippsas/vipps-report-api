@@ -75,14 +75,33 @@ adjusting the balance down to zero.
 For the large majority of merchants, there is a direct correspondence between a
 Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 
-![ledger vs units, one to one](../images/ledger-vs-units-one-to-one.png)
+``` mermaid
+flowchart LR
+    PaymentVN[Payments]
+    PaymentLedger[Payments]
+    PaymentVN --> Vippsnummer[Vippsnummer #123456]
+    PaymentLedger --> ecomMSN[eCOM MSN 23456789]
+    Vippsnummer --> LedgerVN[Ledger 123456]
+    ecomMSN --> LedgerMSN[Ledger 23456789]
+    LedgerVN --> BulkVN[Bulk payout]
+    LedgerMSN --> BulkMSN[Bulk payout]
+```
 
 However, for merchants who require it, Vipps has
 limited support for multiple Vippsnummer and eCom MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 
-![ledgers vs units, many to one](../images/ledger-vs-units-one-to-many.png)
+``` mermaid
+flowchart LR
+    Payment1[Payments]
+    Payment2[Payments]
+    Payment1 --> ecomMSN1[eCOM MSN 800002]
+    Payment2 --> ecomMSN2[eCOM MSN 800002]
+    ecomMSN1 --> Ledger[Ledger Acme Central Clearing]
+    ecomMSN2 --> Ledger
+    Ledger --> Bulk[Bulk payout]
+```
 
 The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
