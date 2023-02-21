@@ -83,8 +83,8 @@ flowchart LR
     CustomerLedger-- Payments -->ecomMSN["eCom MSN #quot;654321#quot;"]
     Vippsnummer --> LedgerVN["Ledger #quot;123456#quot;"]
     ecomMSN --> LedgerMSN["Ledger #quot;654321#quot;"]
-    LedgerVN-- Bulk payout -->BankVN([Bank account])
-    LedgerMSN-- Bulk payout -->BankMSN([Bank account])
+    LedgerVN-- Bulk payout -->BankVN([Merchant's bank account])
+    LedgerMSN-- Bulk payout -->BankMSN([Merchant's bank account])
 ```
 
 However, for merchants who require it, Vipps has
@@ -100,7 +100,7 @@ flowchart LR
     Customer2-- Payments -->ecomMSN2[eCom MSN 800002]
     ecomMSN1 --> Ledger["Ledger #quot;Acme Central Clearing#quot;"]
     ecomMSN2 --> Ledger
-    Ledger-- Bulk payout -->Bank([Bank account])
+    Ledger-- Bulk payout -->Bank([Merchant's bank account])
 ```
 
 The ledger has its own `ledgerId`, so the first step in using the report API is
