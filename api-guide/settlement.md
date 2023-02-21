@@ -75,14 +75,33 @@ adjusting the balance down to zero.
 For the large majority of merchants, there is a direct correspondence between a
 Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 
-![ledger vs units, one to one](../images/ledger-vs-units-one-to-one.png)
+``` mermaid
+flowchart LR
+    CustomerVN([Customer])
+    CustomerLedger([Customer])
+    CustomerVN-- Payments -->Vippsnummer["Vippsnummer #quot;#123456#quot;"]
+    CustomerLedger-- Payments -->ecomMSN["eCom MSN #quot;654321#quot;"]
+    Vippsnummer --> LedgerVN["Ledger #quot;123456#quot;"]
+    ecomMSN --> LedgerMSN["Ledger #quot;654321#quot;"]
+    LedgerVN-- Bulk payout -->BankVN([Merchant's bank account])
+    LedgerMSN-- Bulk payout -->BankMSN([Merchant's bank account])
+```
 
 However, for merchants who require it, Vipps has
 limited support for multiple Vippsnummer and eCom MSNs to be settled together.
 The payments to multiple different units are then combined in a
 single settlement payout:
 
-![ledgers vs units, many to one](../images/ledger-vs-units-one-to-many.png)
+``` mermaid
+flowchart LR
+    Customer1([Customer])
+    Customer2([Customer])
+    Customer1-- Payments -->ecomMSN1[eCom MSN 800002]
+    Customer2-- Payments -->ecomMSN2[eCom MSN 800002]
+    ecomMSN1 --> Ledger["Ledger #quot;Acme Central Clearing#quot;"]
+    ecomMSN2 --> Ledger
+    Ledger-- Bulk payout -->Bank([Merchant's bank account])
+```
 
 The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
