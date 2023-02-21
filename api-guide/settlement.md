@@ -81,8 +81,8 @@ flowchart LR
     PaymentLedger[Payments]
     PaymentVN --> Vippsnummer[Vippsnummer #123456]
     PaymentLedger --> ecomMSN[eCOM MSN 23456789]
-    Vippsnummer --> LedgerVN[Ledger 123456]
-    ecomMSN --> LedgerMSN[Ledger 23456789]
+    Vippsnummer --> LedgerVN[Ledger: #123456]
+    ecomMSN --> LedgerMSN[Ledger: 23456789]
     LedgerVN --> BulkVN[Bulk payout]
     LedgerMSN --> BulkMSN[Bulk payout]
 ```
@@ -98,7 +98,7 @@ flowchart LR
     Payment2[Payments]
     Payment1 --> ecomMSN1[eCOM MSN 800002]
     Payment2 --> ecomMSN2[eCOM MSN 800002]
-    ecomMSN1 --> Ledger[Ledger Acme Central Clearing]
+    ecomMSN1 --> Ledger[Ledger: Acme Central Clearing]
     ecomMSN2 --> Ledger
     Ledger --> Bulk[Bulk payout]
 ```
