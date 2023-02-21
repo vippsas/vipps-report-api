@@ -77,14 +77,14 @@ Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
 
 ``` mermaid
 flowchart LR
-    PaymentVN[Payments]
-    PaymentLedger[Payments]
-    PaymentVN --> Vippsnummer[Vippsnummer #123456]
-    PaymentLedger --> ecomMSN[eCOM MSN 23456789]
-    Vippsnummer --> LedgerVN[Ledger: #123456]
-    ecomMSN --> LedgerMSN[Ledger: 23456789]
-    LedgerVN --> BulkVN[Bulk payout]
-    LedgerMSN --> BulkMSN[Bulk payout]
+    PaymentVN([Payments])
+    PaymentLedger([Payments])
+    PaymentVN --> Vippsnummer["Vippsnummer #quot;#123456#quot;"]
+    PaymentLedger --> ecomMSN["eCOM MSN #quot;654321#quot;"]
+    Vippsnummer --> LedgerVN["Ledger #quot;123456#quot;"]
+    ecomMSN --> LedgerMSN["Ledger #quot;654321#quot;"]
+    LedgerVN --> BulkVN([Bulk payout])
+    LedgerMSN --> BulkMSN([Bulk payout])
 ```
 
 However, for merchants who require it, Vipps has
@@ -94,13 +94,13 @@ single settlement payout:
 
 ``` mermaid
 flowchart LR
-    Payment1[Payments]
-    Payment2[Payments]
-    Payment1 --> ecomMSN1[eCOM MSN 800002]
-    Payment2 --> ecomMSN2[eCOM MSN 800002]
-    ecomMSN1 --> Ledger[Ledger: Acme Central Clearing]
+    Payment1([Payments])
+    Payment2([Payments])
+    Payment1 --> ecomMSN1[eCom MSN 800002]
+    Payment2 --> ecomMSN2[eCom MSN 800002]
+    ecomMSN1 --> Ledger["Ledger #quot;Acme Central Clearing#quot;"]
     ecomMSN2 --> Ledger
-    Ledger --> Bulk[Bulk payout]
+    Ledger --> Bulk([Bulk payout])
 ```
 
 The ledger has its own `ledgerId`, so the first step in using the report API is
