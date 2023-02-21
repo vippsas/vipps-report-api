@@ -80,7 +80,7 @@ flowchart LR
     PaymentVN([Payments])
     PaymentLedger([Payments])
     PaymentVN --> Vippsnummer["Vippsnummer #quot;#123456#quot;"]
-    PaymentLedger --> ecomMSN["eCOM MSN #quot;654321#quot;"]
+    PaymentLedger --> ecomMSN["eCom MSN #quot;654321#quot;"]
     Vippsnummer --> LedgerVN["Ledger #quot;123456#quot;"]
     ecomMSN --> LedgerMSN["Ledger #quot;654321#quot;"]
     LedgerVN --> BulkVN([Bulk payout])
