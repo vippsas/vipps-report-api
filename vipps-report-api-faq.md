@@ -35,6 +35,29 @@ API before summer 2023.
 Currently we only support single-MSN API keys (see the question below
 on API keys for more information on future plans for partner keys).
 
+## What are the benefits of the Report API over the SFTP service?
+
+The
+[Vipps SFTP Report Service](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/settlements/sftp-report-service)
+lets merchants and partners download settlement files by SFTP.
+
+The Report API has some benefits over this:
+* Data can be retrieved at any time.
+* Data is available regardless of whether the balance is positive or negative,
+  so even if there has only been refunds there will be data available.
+* The SFTP service only provides settlement files if the balance is positive.
+* It is possible to retrieve data for more than one day in one request, so
+  it is possible to retrieve an entire weekend, week, month, etc. in one request.
+* The SFTP service only provides one file per day.
+* The data is in JSON format, making it easy to use it in many different ways.
+
+Later: Support for
+* [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys),
+   so an accounting partner can use its API keys for all its merchants.
+* The merchant only needs to
+  [give access to an accounting partner](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api/api-guide/overview#give-access-to-an-accounting-partner) on
+  [portal.vipps.no](https://portal.vipps.no).
+
 ## What information can I get hold of?
 
 Right now the only data that is available is the same data that is already
