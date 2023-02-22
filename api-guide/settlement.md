@@ -137,7 +137,7 @@ A Vippsnummer will use the same `settlesForRecipientHandles` structure, but have
 
 ```json
 {
-  "settlesForRecipientHandles": [ "NO:123455" ] 
+  "settlesForRecipientHandles": [ "NO:123455" ]
 }
 ```
 
