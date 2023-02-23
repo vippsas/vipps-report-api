@@ -44,7 +44,7 @@ lets merchants and partners download settlement files by SFTP.
 The Report API has some benefits over this:
 * Data can be retrieved at any time.
 * Data is available regardless of whether the balance is positive or negative,
-  so even if there has only been refunds there will be data available.
+  so even if there have only been refunds, there will be data available.
 * The SFTP service only provides settlement files if the balance is positive.
 * It is possible to retrieve data for more than one day in one request, so
   it is possible to retrieve an entire weekend, week, month, etc. in one request.
