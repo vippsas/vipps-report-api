@@ -23,7 +23,6 @@ For more common Vipps questions, see:
 ℹ️ Please use the new documentation:
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
 
-
 <!-- END_COMMENT -->
 
 ## What is the status of the API?
@@ -36,6 +35,29 @@ API before summer 2023.
 Currently we only support single-MSN API keys (see the question below
 on API keys for more information on future plans for partner keys).
 
+## What are the benefits of the Report API over the SFTP service?
+
+The
+[Vipps SFTP Report Service](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/settlements/sftp-report-service)
+lets merchants and partners download settlement files by SFTP.
+
+The Report API has some benefits over this:
+* Data can be retrieved at any time.
+* Data is available regardless of whether the balance is positive or negative,
+  so even if there have only been refunds, there will be data available.
+* The SFTP service only provides settlement files if the balance is positive.
+* It is possible to retrieve data for more than one day in a request,
+  so you could, for example, retrieve an entire weekend, week, or month."
+* The SFTP service only provides one file per day.
+* The data is in JSON format, making it easy to use in many different ways.
+
+Later: Support for
+* [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys),
+   so an accounting partner can use its API keys for all its merchants.
+* The merchant only needs to
+  [give access to an accounting partner](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api/api-guide/overview#give-access-to-an-accounting-partner) on
+  [portal.vipps.no](https://portal.vipps.no).
+
 ## What information can I get hold of?
 
 Right now the only data that is available is the same data that is already
@@ -47,31 +69,6 @@ or on
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
-
-<!-- START_COMMENT -->
-## What are the benefits of the Report API over the SFTP service?
-
-The
-[Vipps SFTP Report Service](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/settlements/sftp-report-service)
-lets merchants and partners download settlement files by SFTP.
-
-The Report API has some benefits over this:
-- Data can be retrieved at any time.
-- Data is available regardless of whether the balance is positive or negative,
-  so even if there has only been refunds there will be data available.
-  The SFTP service only provides settlement files if the balance is positive.
-- It is possible to retrieve data for more than one day in one request, so
-  it is possible to retrieve an entire weekend, week, month, etc. in one request.
-  The SFTP service provides one ´file per day.
-- The data is in JSON format, making it easy to use it in many different ways.
-- Later: Support for
-  [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys),
-  so an accounting partner can use its API keys for all its merchants.
-  The merchant only needs to
-  [give access to an accounting partner](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api/api-guide/overview#give-access-to-an-accounting-partner)
-  on [portal.vipps.no](https://portal.vipps.no).
-  <!-- END_COMMENT -->
-
 ## Is the Report API available for the test environment.
 
 Nope. The
@@ -79,15 +76,19 @@ Nope. The
 does not have the backend systems necessary to offer the Report API.
 The only way to test the Report API is in the production environment.
 
-
 ## Can a merchant find the Ledger ID for a MSN on portal.vipps.no?
 
-No, not currently. For now,
+No, not currently.
+
+For now,
 the only way to get the Ledger ID is to call
 [`GET:settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1settlement~1v1~1ledgers/get).
+
 The Ledger ID does not in general change, so you may store it in configuration
 in the same way that you store the MSN.
-We may add display of the Ledger ID on portal.vipps.no in the future.
+We may add display of the Ledger ID on
+[portal.vipps.no](https://portal.vipps.no)
+in the future.
 
 ## How do I get the settlements for multiple MSNs in the same ledger?
 
@@ -123,15 +124,26 @@ The `sincePayout` works in a similar way.
 an amount is always withheld to compensate for high risk, etc. Due to this, each
 payment may not always be connected to a specific payout.
 
+## How can I get access to the API?
+
+The API is available for sale units that already have access to a
+[Vipps API](https://vippsas.github.io/vipps-developer-docs/docs/APIs).
+
+If you do not already have API access, you cannot get access to the Report API.
+This is the case if you only have a "Vippsnummer" sale unit, since those
+sale units have no API access.
+
 ## Which API keys give access to the API?
 
 For now: The following API keys give access to the Report API:
 
-* The merchant's own API keys: The same API keys that are used to make payments.
+* The merchant's own API keys: The same API keys that are used to make payments, etc. See
+  [API keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/api-keys).
 
 Later (we can not give an ETA, but will update here):
 
-* Partner keys: The same API keys that are used to make payments.
+* [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys):
+  The API keys that are used by partners to make payments on behalf of their merchants.
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
   API keys only work for sale units after the merchant has
