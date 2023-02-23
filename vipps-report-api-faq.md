@@ -129,7 +129,7 @@ payment may not always be connected to a specific payout.
 The API is available for sale units that already have access to a
 [Vipps API](https://vippsas.github.io/vipps-developer-docs/docs/APIs).
 
-If you do not already have API access, you can not get access to the Report API.
+If you do not already have API access, you cannot get access to the Report API.
 This is the case if you only have a "Vippsnummer" sale unit, since those
 sale units have no API access.
 
@@ -143,7 +143,7 @@ For now: The following API keys give access to the Report API:
 Later (we can not give an ETA, but will update here):
 
 * [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys):
-  The same API keys that are used by partner to make payments on behalf of their merchants.
+  The API keys that are used by partners to make payments on behalf of their merchants.
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
   API keys only work for sale units after the merchant has
@@ -154,7 +154,7 @@ Later (we can not give an ETA, but will update here):
 The merchant's own API keys give full access to the Report API.
 
 If the merchant uses an integration partner (see
-[partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types)),
+[partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner#partner-types)),
 it is the same as using the merchant's own API keys.
 
 When a merchant shares its API keys for a sale unit with an integration partner,
