@@ -129,7 +129,7 @@ payment may not always be connected to a specific payout.
 The API is available for sale units that already have access to a
 [Vipps API](https://vippsas.github.io/vipps-developer-docs/docs/APIs).
 
-If you do not already have API access, you can not get access to the Report API.
+If you do not already have API access, you cannot get access to the Report API.
 This is the case if you only have a "Vippsnummer" sale unit, since those
 sale units have no API access.
 
