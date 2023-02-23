@@ -46,8 +46,8 @@ The Report API has some benefits over this:
 * Data is available regardless of whether the balance is positive or negative,
   so even if there have only been refunds, there will be data available.
 * The SFTP service only provides settlement files if the balance is positive.
-* It is possible to retrieve data for more than one day in one request, so
-  it is possible to retrieve an entire weekend, week, month, etc. in one request.
+* It is possible to retrieve data for more than one day in a request,
+  so you could, for example, retrieve an entire weekend, week, or month."
 * The SFTP service only provides one file per day.
 * The data is in JSON format, making it easy to use it in many different ways.
 
@@ -138,7 +138,7 @@ sale units have no API access.
 For now: The following API keys give access to the Report API:
 
 * The merchant's own API keys: The same API keys that are used to make payments, etc. See
-  [Vipps APIs]([Vipps API](https://vippsas.github.io/vipps-developer-docs/docs/APIs).
+  [API keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/api-keys).
 
 Later (we can not give an ETA, but will update here):
 
@@ -179,7 +179,7 @@ Partner keys let a partner make payments on behalf of a merchant, and the same A
 also give access to the Report API.
 
 If the merchant has a sale unit that is configured with a
-[platform partner](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#partner-types),
+[platform partner](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner#partner-types),
 the platform partner can use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
 to make requests to the Report API.
