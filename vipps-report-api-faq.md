@@ -143,7 +143,7 @@ For now: The following API keys give access to the Report API:
 Later (we can not give an ETA, but will update here):
 
 * [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys):
-  The same API keys that are used by partner to make payments on behalf of their merchants.
+  The API keys that are used by partners to make payments on behalf of their merchants.
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
   API keys only work for sale units after the merchant has
