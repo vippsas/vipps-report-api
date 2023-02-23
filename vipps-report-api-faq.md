@@ -49,7 +49,7 @@ The Report API has some benefits over this:
 * It is possible to retrieve data for more than one day in a request,
   so you could, for example, retrieve an entire weekend, week, or month."
 * The SFTP service only provides one file per day.
-* The data is in JSON format, making it easy to use it in many different ways.
+* The data is in JSON format, making it easy to use in many different ways.
 
 Later: Support for
 * [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys),
