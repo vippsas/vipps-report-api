@@ -96,7 +96,7 @@ single settlement payout:
 flowchart LR
     Customer1([Customer])
     Customer2([Customer])
-    Customer1-- Payments -->ecomMSN1[eCom MSN 800002]
+    Customer1-- Payments -->ecomMSN1[eCom MSN 800001]
     Customer2-- Payments -->ecomMSN2[eCom MSN 800002]
     ecomMSN1 --> Ledger["Ledger #quot;Acme Central Clearing#quot;"]
     ecomMSN2 --> Ledger
