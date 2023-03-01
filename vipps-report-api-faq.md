@@ -126,12 +126,12 @@ payment may not always be connected to a specific payout.
 
 ## How can I get access to the API?
 
-The API is available for sale units that already have access to a
+The API is available for sales units that already have access to a
 [Vipps API](https://vippsas.github.io/vipps-developer-docs/docs/APIs).
 
 If you do not already have API access, you cannot get access to the Report API.
-This is the case if you only have a "Vippsnummer" sale unit, since those
-sale units have no API access.
+This is the case if you only have a "Vippsnummer" sales unit, since those
+sales units have no API access.
 
 ## Which API keys give access to the API?
 
@@ -146,7 +146,7 @@ Later (we can not give an ETA, but will update here):
   The API keys that are used by partners to make payments on behalf of their merchants.
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
-  API keys only work for sale units after the merchant has
+  API keys only work for sales units after the merchant has
   [given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
 
 ### The merchant's own API keys
@@ -157,7 +157,7 @@ If the merchant uses an integration partner (see
 [partner types](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner#partner-types)),
 it is the same as using the merchant's own API keys.
 
-When a merchant shares its API keys for a sale unit with an integration partner,
+When a merchant shares its API keys for a sales unit with an integration partner,
 Vipps has no way of knowing whether the API calls are made by the merchant or
 the integration partner.
 This is why we require that all API requests made by a partner on behalf of a
@@ -178,7 +178,7 @@ for updates.
 Partner keys let a partner make payments on behalf of a merchant, and the same API keys
 also give access to the Report API.
 
-If the merchant has a sale unit that is configured with a
+If the merchant has a sales unit that is configured with a
 [platform partner](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner#partner-types),
 the platform partner can use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
