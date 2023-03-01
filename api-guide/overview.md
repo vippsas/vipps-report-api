@@ -44,8 +44,8 @@ There is a second planned way to connect to the Report API:
 
 Individual merchants that have API keys
 for using the eCom/ePayment APIs may use this to access a single
-ledger connected to the sale unit (identified with MSN). If there
-is more than one sale unit connected to the ledger, access will be denied.
+ledger connected to the sales unit (identified with MSN). If there
+is more than one sales unit connected to the ledger, access will be denied.
 
 ## Give access to an accounting partner
 
@@ -60,7 +60,7 @@ Merchants must give access to their accounting partner on
 
 A merchant may have zero or more accounting partners. This page on
 [portal.vipps.no](https://portal.vipps.no)
-shows the accounting partners for one sale unit.
+shows the accounting partners for one sales unit.
 
 ![Overview over accounting-partners](../images/portal-regnskapspartnere-oversikt.png "Accounting Partners overview")
 

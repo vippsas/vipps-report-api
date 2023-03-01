@@ -20,7 +20,7 @@ paths:
         merchant it may be enough to hit this endpoint once manually to identify
         the `ledgerId`.
 
-        There is no need to specify the merchant or sale unit.
+        There is no need to specify the merchant or sales unit.
         The response contains all ledgers that are available for the API keys used.
 
         The `settlesForRecipientHandles` part of the response looks a bit different for eCom sales

@@ -16,7 +16,7 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-Use the Report API to get details for their own sale units and merchants.
+Use the Report API to get details for their own sales units and merchants.
 In addition, you can order products on behalf of your merchants.
 
 Be aware that these are running on the production server.
@@ -58,7 +58,7 @@ Save the following files to your computer:
 Be aware that these requests can only be run on the production server.
 
 1. Send request `Get Access Token`. This provides you with access to the API.
-   Be sure to use the address to the production server and provide keys for a production sale unit.
+   Be sure to use the address to the production server and provide keys for a production sales unit.
    The access token is valid for 24 hours in the production environment.
 
 1. Send request `Get ledgers` to get the ledgers you have access to.
