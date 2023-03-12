@@ -1,9 +1,11 @@
 <!-- START_METADATA
 ---
-title: FAQ
+title: Report API Frequently Asked Questions
+sidebar_label: FAQ
 sidebar_position: 60
-pagination_prev: Null
-pagination_next: Null
+description: Frequently asked questions for the Report API.
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -14,9 +16,9 @@ See the
 [Vipps Report API guide](./api-guide/README.md)
 for all the details.
 
-For more common Vipps questions, see:
+For more common questions, see:
 
-* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
+* [API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
 
 <!-- START_COMMENT -->
 
