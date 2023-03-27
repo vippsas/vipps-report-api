@@ -13,7 +13,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
 
 <!-- END_COMMENT -->
 
@@ -28,7 +28,7 @@ for details about these.
 See:
 
 * [How can I get access to the API?](../vipps-report-api-faq.md#how-can-i-get-access-to-the-api)
-* [Getting started: Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started#get-an-access-token).
+* [Getting started: Get an access token](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started#get-an-access-token).
 
 ### Planned accounting partner functionality
 

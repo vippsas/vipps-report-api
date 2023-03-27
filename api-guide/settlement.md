@@ -12,7 +12,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
 
 ## Table of contents
 
@@ -47,7 +47,7 @@ for those who rely on using reports from the portal for their reconciliation
 processes.
 
 See
-[Common topics: Settlements](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/settlements)
+[Common topics: Settlements](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements)
 for details about settlements, in general.
 
 ## Ledgers
@@ -107,7 +107,7 @@ The ledger has its own `ledgerId`, so the first step in using the report API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`. An example response from
-[`GET:/settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1settlement~1v1~1ledgers/get)
+[`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get)
 is:
 
 ```json
@@ -253,7 +253,7 @@ above:
 
 One can request a report from this ledger by
 calling
-[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://developer.vippsmobilepay.com/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
 for instance:
 
 ```HTTP
@@ -342,13 +342,13 @@ has ended.
 ### Periodization
 
 The
-[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://developer.vippsmobilepay.com/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint has several parameters for selecting a range of
 transactions to return, which can be used for an initial data import.
 
 Most users of the API will want to set up an automated job to call
 the
-[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://developer.vippsmobilepay.com/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get)
 endpoint on a daily basis to download the data for the
 preceding day. Such synchronization can be done in two ways: Date-based indexing
 and payout-based indexing. Often they will give the same results; the difference
