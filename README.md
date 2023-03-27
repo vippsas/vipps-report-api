@@ -15,7 +15,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
 
 <!-- END_COMMENT -->
 
@@ -30,12 +30,12 @@ Feedback? Great! You can
 ## Getting started
 
 See
-[Vipps MobilePay Getting Started guide](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
+[Vipps MobilePay Getting Started guide](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 ## Report API documentation
 
 * [API Guide](./api-guide/README.md)
-* [API Spec](https://vippsas.github.io/vipps-developer-docs/api/report)
+* [API Spec](https://developer.vippsmobilepay.com/api/report)
 * [API Quick start](vipps-report-api-quick-start.md)
 * [API Frequently asked questions](vipps-report-api-faq.md)

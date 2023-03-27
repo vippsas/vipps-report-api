@@ -12,7 +12,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/report-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
 
 <!-- END_COMMENT -->
 
@@ -26,7 +26,7 @@ Be aware that these are running on the production server.
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/quick-start-guides)
+[Vipps quick start guides](https://developer.vippsmobilepay.com/docs/vipps-developers/quick-start-guides)
 for information about getting your test environment set up.
 
 ### Step 1: Get the Vipps Postman collection and environment
@@ -63,7 +63,7 @@ Be aware that these requests can only be run on the production server.
 
 1. Send request `Get ledgers` to get the ledgers you have access to.
 See
-[`GET:/settlement/v1/ledgers`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1settlement~1v1~1ledgers/get),
+[`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get),
 
 1. Send request `Get ledger transactions` for a list of payments/transactions. See
-[`GET:/report/v1/ledgertransactions`](https://vippsas.github.io/vipps-developer-docs/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
+[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
