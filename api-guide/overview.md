@@ -28,7 +28,7 @@ for details about these.
 See:
 
 * [How can I get access to the API?](../vipps-report-api-faq.md#how-can-i-get-access-to-the-api)
-* [Getting started: Get an access token](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started#get-an-access-token).
+* [Getting started: Get an access token](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started#get-an-access-token)
 
 ### Planned accounting partner functionality
 
@@ -38,7 +38,7 @@ We are currently working on providing partners access to the API,
 and such support will be launched in the future.
 There is a second planned way to connect to the Report API:
 
-- Using an Accounting partner's API keys.
+- Using an Accounting partner's API keys
 
 ### Using the merchant's API keys
 
