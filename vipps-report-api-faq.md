@@ -71,6 +71,10 @@ or on
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
+**Important:** It is not yet possible to use the Report API to retrieve data
+for "Vippsnummer" sale units. The Report API can only be used to sale units
+that have API access (which "Vippsnummer" sale units do not have.)
+
 ## Is the Report API available for the test environment.
 
 Nope. The
@@ -125,6 +129,23 @@ The `sincePayout` works in a similar way.
 **Please note:** Vipps may at some point implement a "rolling reserve", where
 an amount is always withheld to compensate for high risk, etc. Due to this, each
 payment may not always be connected to a specific payout.
+
+## Where can I find the settlement id?
+
+The "payout" corresponds to the `SettlementID` from the
+[XML](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements/xml)
+files in the
+[SFTP report service](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements/sftp-report-service).
+
+## How can I find the value to use with `inPayout`?
+
+The value for `inPayout` is a sequential number, starting with `2000001`, and
+incrementing by one for every payout.
+
+You can find the latest number in the sequence used so far from
+[`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get).
+Each Ledger has both the first and last payout used on it:
+`firstPayout` and `lastPayout`.
 
 ## How can I get access to the API?
 
