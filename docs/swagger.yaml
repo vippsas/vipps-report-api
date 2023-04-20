@@ -42,6 +42,10 @@ paths:
 
       parameters:
         - $ref: "#/components/parameters/JWT"
+        - $ref: '#/components/parameters/Vipps-System-Name'
+        - $ref: '#/components/parameters/Vipps-System-Version'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
         - in: query
           name: settlesForRecipientHandles
           required: false
@@ -110,7 +114,11 @@ paths:
         Returns a list of payments/transactions.
       parameters:
         - $ref: "#/components/parameters/JWT"
-        - in: path
+        - $ref: '#/components/parameters/Vipps-System-Name'
+        - $ref: '#/components/parameters/Vipps-System-Version'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
+        - in: query
           required: true
           name: ledgerId
           schema:
@@ -197,6 +205,48 @@ components:
       schema:
         type: string
         example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
+    Vipps-System-Name:
+      name: Vipps-System-Name
+      in: header
+      description: |-
+        The name of the ecommerce solution.
+        One word in lowercase letters is good.
+        See [http-headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+      schema:
+        type: string
+        maxLength: 30
+        example: woocommerce
+    Vipps-System-Version:
+      name: Vipps-System-Version
+      in: header
+      description: |-
+        The version number of the ecommerce solution.
+        See [http-headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+      schema:
+        type: string
+        maxLength: 30
+        example: '5.4.0'
+    Vipps-System-Plugin-Name:
+      name: Vipps-System-Plugin-Name
+      in: header
+      description: |-
+        The name of the ecommerce plugin (if applicable).
+        One word in lowercase letters is good.
+        See [http-headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+      schema:
+        type: string
+        maxLength: 30
+        example: "vipps-woocommerce"
+    Vipps-System-Plugin-Version:
+      name: Vipps-System-Plugin-Version
+      in: header
+      description: |-
+        The version number of the ecommerce plugin (if applicable).
+        See [http-headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+      schema:
+        type: string
+        maxLength: 30
+        example: "1.2.1"
 
   responses:
     500:
