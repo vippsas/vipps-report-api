@@ -1,20 +1,11 @@
-<!-- START_METADATA
 ---
 title: Quick start
 sidebar_position: 20
 pagination_prev: Null
 pagination_next: Null
 ---
-END_METADATA -->
 
 # Quick start
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
-
-<!-- END_COMMENT -->
 
 Use the Report API to get details for their own sales units and merchants.
 In addition, you can order products on behalf of your merchants.

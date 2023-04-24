@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Report API Frequently Asked Questions
 sidebar_label: FAQ
@@ -7,7 +6,6 @@ description: Frequently asked questions for the Report API.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Frequently asked questions
 
@@ -20,13 +18,6 @@ For more common questions, see:
 
 * [API General FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
-
-<!-- END_COMMENT -->
-
 ## What is the status of the API?
 
 The Report API is currently in public beta.
@@ -34,7 +25,7 @@ It is unlikely to change, but
 there may be smaller changes made still. We expect a final freeze of the
 API before summer 2023.
 
-Currently we only support single-MSN API keys (see the question below
+Currently, we only support single-MSN API keys (see the question below
 on API keys for more information on future plans for partner keys).
 
 ## What are the benefits of the Report API over the SFTP service?
@@ -44,16 +35,18 @@ The
 lets merchants and partners download settlement files by SFTP.
 
 The Report API has some benefits over this:
+
 * Data can be retrieved at any time.
 * Data is available regardless of whether the balance is positive or negative,
   so even if there have only been refunds, there will be data available.
 * The SFTP service only provides settlement files if the balance is positive.
 * It is possible to retrieve data for more than one day in a request,
-  so you could, for example, retrieve an entire weekend, week, or month."
+  so you could, for example, retrieve an entire weekend, week, or month.
 * The SFTP service only provides one file per day.
-* The data is in JSON format, making it easy to use in many different ways.
+* The data is in JSON format, making it easy to use in different ways.
 
 Later:
+
 * Support for
   [Partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys),
   so an accounting partner can use its API keys for all its merchants.
@@ -77,14 +70,14 @@ We aim to provide more information through this API in the future.
 for "Vippsnummer" sale units. The Report API can only be used to sale units
 that have API access (which "Vippsnummer" sale units do not have.)
 
-## Is the Report API available for the test environment.
+## Is the Report API available for the test environment?
 
 Nope. The
 [Vipps test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment)
 does not have the backend systems necessary to offer the Report API.
 The only way to test the Report API is in the production environment.
 
-## Can a merchant find the Ledger ID for a MSN on portal.vipps.no?
+## Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
 
 No, not currently.
 
@@ -102,11 +95,12 @@ in the future.
 
 Joint settlement for multiple MSNs is supported, and may be relevant
 in cases such as:
+
 * You are changing the technical integration and getting a new MSN
   for this purpose, but you do not want to disrupt the settlement
   series
-* You are launching a Point of Sale system in a large number of distinct
-  physical stores that should have different MSNs, but want to have
+* You are launching a Point of Sale system in many physical distinct
+  stores that should have different MSNs, but want to have
   combined settlements for these.
 
 In practice, this feature is little used in a few pilot cases, and
@@ -132,7 +126,7 @@ The `sincePayout` works in a similar way.
 an amount is always withheld to compensate for high risk, etc. Due to this, each
 payment may not always be connected to a specific payout.
 
-## Where can I find the settlement id?
+## Where can I find the settlement ID?
 
 The "payout" corresponds to the `SettlementID` from the
 [XML](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements/xml)

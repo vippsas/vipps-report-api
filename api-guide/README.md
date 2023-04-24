@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Introduction
 sidebar_label: API guide
@@ -6,16 +5,8 @@ sidebar_position: 30
 pagination_prev: Null
 pagination_next: Null
 ---
-END_METADATA -->
 
 # API guide
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
-
-<!-- END_COMMENT -->
 
 The Report API can provide you with information about your payments with Vipps. In particular, it is used to
 aggregate information across the Vipps APIs and it can contain data for many
