@@ -9,7 +9,6 @@ servers:
   - url: https://apitest.vipps.no
   - url: https://api.vipps.no
 paths:
-
   "/settlement/v1/ledgers":
     get:
       summary: Returns the ledgers you have access to
@@ -46,7 +45,6 @@ paths:
         - $ref: '#/components/parameters/Vipps-System-Version'
         - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
         - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
-        - $ref: '#/components/parameters/Merchant-Serial-Number'
         - in: query
           name: settlesForRecipientHandles
           required: false
@@ -119,7 +117,6 @@ paths:
         - $ref: '#/components/parameters/Vipps-System-Version'
         - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
         - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
-        - $ref: '#/components/parameters/Merchant-Serial-Number'
         - in: query
           required: true
           name: ledgerId
@@ -207,15 +204,6 @@ components:
       schema:
         type: string
         example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-    Merchant-Serial-Number:
-      name: Merchant-Serial-Number
-      in: header
-      required: false
-      schema:
-        type: string
-      description: |-
-        The merchant serial number (MSN) for the sales unit. 
-        See [http-headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
     Vipps-System-Name:
       name: Vipps-System-Name
       in: header
