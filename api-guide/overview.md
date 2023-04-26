@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Overview
 sidebar_position: 31
@@ -6,16 +5,8 @@ sidebar_label: Overview
 pagination_prev: Null
 pagination_next: Null
 ---
-END_METADATA -->
 
 # Overview
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
-
-<!-- END_COMMENT -->
 
 ## Authenticating to the Report API
 

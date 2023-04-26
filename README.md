@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Introduction to the Report API
 sidebar_label: Introduction
@@ -8,16 +7,8 @@ description: Use the Report API to fetch information about payment events.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Report API
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
-
-<!-- END_COMMENT -->
 
 💥 **BETA VERSION**: The API is publicly available, but may still have minor changes. 💥
 

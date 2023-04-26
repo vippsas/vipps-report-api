@@ -1,11 +1,9 @@
-<!-- START_METADATA
 ---
 title: Errors
 sidebar_position: 37
 pagination_prev: Null
 pagination_next: Null
 ---
-END_METADATA -->
 
 # Errors
 

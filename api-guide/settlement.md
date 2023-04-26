@@ -1,32 +1,11 @@
-<!-- START_METADATA
 ---
 title: Settlements
 sidebar_position: 32
 pagination_prev: Null
 pagination_next: Null
 ---
-END_METADATA -->
 
 # Settlements
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/report-api).
-
-## Table of contents
-
-* [Overview](#overview)
-* [Ledgers](#ledgers)
-* [Transaction types](#transaction-types)
-  * [Capture transactions](#capture-transactions)
-  * [Refund transactions](#refund-transactions)
-  * [Payout transactions](#payout-transactions)
-  * [Other transactions](#other-transactions)
-* [Reports](#reports)
-  * [Periodization](#periodization)
-
-<!-- END_COMMENT -->
 
 ## Overview
 
@@ -253,7 +232,7 @@ above:
 
 One can request a report from this ledger by
 calling
-[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://developer.vippsmobilepay.com/api/report#/paths/~1v1~1ledgers~1%7BledgerId%7D~1transactions/get),
+[`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions/get),
 for instance:
 
 ```HTTP
@@ -327,11 +306,11 @@ Some notes:
 * *ledgerDate* is the accounting date used to group transactions for payouts. In
   the future it may be possible to set this to something else than midnight
   local time, and in that case this will deviate from `time`.
-* The payout transaction does not have an `recipientHandle`. The `recipientHandle` is not a required
+* The payout transaction does not have a `recipientHandle`. The `recipientHandle` is not a required
   field, it represents metadata about a transaction. The `recipientHandle` can be either the `msn` or the `vippsnummer`.
 
 For more details and descriptions about the individual columns, please consult the
-OpenAPI Spec [TODO].
+[OpenAPI Spec](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions/get).
 
 **Please note**: Data is not available in the API until some time after
 the `ledgerDate` has ended. This is primarily because Vipps in some
@@ -368,7 +347,7 @@ generated for `ledgerDate=2022-09-02`.
   settlements and negative balance.
 
 * By fetching transactions by `?inPayout=`, transactions for several days
-  may be returned in the same report. See the red bands at the bottom
+  may be provided in the same report. See the red bands at the bottom
   of the figure below. The advantage is that the sum of `ledgerAmount` in the
   report will exactly match the payout bank transfer amount.
 
@@ -380,8 +359,8 @@ transaction by transaction based on `reference`.
 
 ### Using cursors
 
-Since the amount of data that can be returned in any of the endpoints in this api can be quite large, we limit the amount of rows returned in each request to a set amount. Right now this is `1000` rows.
+Since the amount of data that can be returned in any of the endpoints in this API can be quite large, we limit the amount of rows returned in each request to a set amount. Right now this is `1000` rows.
 
 If the total number of rows is greater than this amount, we return a cursor in addition to the rows in the body.
 
-This cursor value can be inserted into the url with the parameter named `cursor` to fetch the next set of items.
+This cursor value can be inserted into the URL with the parameter named `cursor` to fetch the next set of items.
