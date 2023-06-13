@@ -29,7 +29,7 @@ We are currently working on providing partners access to the API,
 and such support will be launched in the future.
 There is a second planned way to connect to the Report API:
 
-- Using an Accounting partner's API keys
+* Using an Accounting partner's API keys
 
 ### Using the merchant's API keys
 

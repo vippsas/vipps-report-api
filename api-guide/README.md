@@ -14,10 +14,10 @@ payments at once.
 
 The following topics are described:
 
-- [Overview](overview.md) contains descriptions of common traits of the entire Report API.
-- [Settlement guide](settlement.md) explains the Report API settlement process and the ledger.
-- [Errors description](errors.md) shows the Report API errors with descriptions.
-- Coming later: Endpoints for recent/non-settled transactions.
+* [Overview](overview.md) contains descriptions of common traits of the entire Report API.
+* [Settlement guide](settlement.md) explains the Report API settlement process and the ledger.
+* [Errors description](errors.md) shows the Report API errors with descriptions.
+* Coming later: Endpoints for recent/non-settled transactions.
 
 **Please note:** The information fetched from the Report API is
 asynchronous and trailing behind the other APIs. It is usually behind
