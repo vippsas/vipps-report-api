@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/vippsas/vipps-report-api/issues"
   },
-  "homepage": "https://github.com/vippsas/vipps-report-api#readme"
+  "homepage": "https://github.com/vippsas/vipps-report-api#readme",
+  "dependencies": {
+    "@vippsno/vipps-sdk": "^0.9.0"
+  }
 }
