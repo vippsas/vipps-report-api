@@ -10,10 +10,10 @@ pagination_prev: null
 
 # Report API
 
-💥 **BETA VERSION**: The API is publicly available, but may still have minor changes. 💥
-
-The report API gives you, or a third-party acting on your behalf, the ability to
-fetch information about payment events that have been processed by Vipps.
+💥 **BETA VERSION**: The API is publicly available, but may still have minor changes.
+For example: We think it's a good idea to split the endpoints for retrieving
+funds and the fees, to simplify reconciliation.
+We aim to have the final specification ready in August. 💥
 
 Feedback? Great! You can
 [submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues).
