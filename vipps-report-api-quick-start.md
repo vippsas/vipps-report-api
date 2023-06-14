@@ -41,7 +41,7 @@ Save the following files to your computer:
    * `client_id` - Merchant key is required for getting the access token.
    * `client_secret` - Merchant key is required for getting the access token.
    * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
-   * `merchantSerialNumber` - Merchant id.
+   * `merchantSerialNumber` - Merchant ID.
    * `baseUrl` - Set to: `https://api.vipps.no`.
 
 ## Make API calls

@@ -120,7 +120,7 @@ since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
 You can use the `inPayout` query parameter for the
 [`GET:/report/v1/ledgertransactions?ledgerId={ledgerId}`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
 endpoint to retrieve payments that are part of a specific payout.
-The `sincePayout` works in a similar way.
+The `sincePayout` works similarly.
 
 **Please note:** Vipps may at some point implement a "rolling reserve", where
 an amount is always withheld to compensate for high risk, etc. Due to this, each
