@@ -19,7 +19,7 @@ for details about these.
 See:
 
 * [How can I get access to the API?](../vipps-report-api-faq.md#how-can-i-get-access-to-the-api)
-* [Getting started: Get an access token](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started#get-an-access-token)
+* [Getting started: Get an access token](https://developer.vippsmobilepay.com/docs/getting-started#get-an-access-token)
 
 ### Planned accounting partner functionality
 
