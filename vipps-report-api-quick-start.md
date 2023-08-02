@@ -17,7 +17,7 @@ Be aware that these are running on the production server.
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://developer.vippsmobilepay.com/docs/vipps-developers/quick-start-guides)
+[Vipps quick start guides](https://developer.vippsmobilepay.com/docs/quick-start-guides)
 for information about getting your test environment set up.
 
 ### Step 1: Get the Vipps Postman collection and environment

@@ -16,7 +16,7 @@ for all the details.
 
 For more common questions, see:
 
-* [API General FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
+* [API General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
 
 ## What is the status of the API?
 
@@ -31,7 +31,7 @@ on API keys for more information on future plans for partner keys).
 ## What are the benefits of the Report API over the SFTP service?
 
 The
-[Vipps SFTP Report Service](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements/sftp-report-service)
+[Vipps SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
 lets merchants and partners download settlement files by SFTP.
 
 The Report API has some benefits over this:
@@ -48,7 +48,7 @@ The Report API has some benefits over this:
 Later:
 
 * Support for
-  [Partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys),
+  [Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys),
   so an accounting partner can use its API keys for all its merchants.
 * Functionality on
   [portal.vipps.no](https://portal.vipps.no).
@@ -61,7 +61,7 @@ Right now the only data that is available is the same data that is already
 available in the settlement reports on
 [portal.vipps.no](https://portal.vipps.no),
 or on
-[SFTP](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements/sftp-report-service).
+[SFTP](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
@@ -73,7 +73,7 @@ that have API access (which "Vippsnummer" sale units do not have.)
 ## Is the Report API available for the test environment?
 
 Nope. The
-[Vipps test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment)
+[Vipps test environment](https://developer.vippsmobilepay.com/docs/test-environment)
 does not have the backend systems necessary to offer the Report API.
 The only way to test the Report API is in the production environment.
 
@@ -129,9 +129,9 @@ payment may not always be connected to a specific payout.
 ## Where can I find the settlement ID?
 
 The "payout" corresponds to the `SettlementID` from the
-[XML](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements/xml)
+[XML](https://developer.vippsmobilepay.com/docs/settlements/xml)
 files in the
-[SFTP report service](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements/sftp-report-service).
+[SFTP report service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
 ## How can I find the value to use with `inPayout`?
 
@@ -157,11 +157,11 @@ sales units have no API access.
 For now: The following API keys give access to the Report API:
 
 * The merchant's own API keys: The same API keys that are used to make payments, etc. See
-  [API keys](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/api-keys).
+  [API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys).
 
 Later (we can not give an ETA, but will update here):
 
-* [Partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys):
+* [Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys):
   The API keys that are used by partners to make payments on behalf of their merchants.
 * Accounting partner's API keys: The API keys provided to the accounting partner
   when the partner signed a contract with Vipps. The accounting partner's
@@ -173,7 +173,7 @@ Later (we can not give an ETA, but will update here):
 The merchant's own API keys give full access to the Report API.
 
 If the merchant uses an integration partner (see
-[partner types](https://developer.vippsmobilepay.com/docs/vipps-partner#partner-types)),
+[partner types](https://developer.vippsmobilepay.com/docs/partner#partner-types)),
 it is the same as using the merchant's own API keys.
 
 When a merchant shares its API keys for a sales unit with an integration partner,
@@ -185,22 +185,22 @@ merchant are done using the partner's own API keys (the partner keys).
 ### Partner keys
 
 **Please note:**
-[Partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys)
+[Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
 are not yet supported by the Report API,
 only [the merchant's own API keys](#the-merchants-own-api-keys)
 can be used.
 This notice will be removed when partner keys are supported.
 Subscribe to the
-[Technical newsletter](https://developer.vippsmobilepay.com/docs/vipps-developers/newsletters)
+[Technical newsletter](https://developer.vippsmobilepay.com/docs/newsletters)
 for updates.
 
 Partner keys let a partner make payments on behalf of a merchant, and the same API keys
 also give access to the Report API.
 
 If the merchant has a sales unit that is configured with a
-[platform partner](https://developer.vippsmobilepay.com/docs/vipps-partner#partner-types),
+[platform partner](https://developer.vippsmobilepay.com/docs/partner#partner-types),
 the platform partner can use
-[partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys)
+[partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
 to make requests to the Report API.
 
 ### Specifying an accounting partner

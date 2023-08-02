@@ -14,7 +14,7 @@ for all the details.
 
 For more common Vipps questions, see:
 
-* [Vipps API General FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
+* [Vipps API General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
 
 ## Error-codes
 

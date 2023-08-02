@@ -26,7 +26,7 @@ for those who rely on using reports from the portal for their reconciliation
 processes.
 
 See
-[Common topics: Settlements](https://developer.vippsmobilepay.com/docs/vipps-developers/settlements)
+[Common topics: Settlements](https://developer.vippsmobilepay.com/docs/settlements)
 for details about settlements, in general.
 
 ## Ledgers
