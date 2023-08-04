@@ -54,7 +54,7 @@ Be aware that these requests can only be run on the production server.
 
 1. Send request `Get ledgers` to get the ledgers you have access to.
 See
-[`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get),
+[`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get).
 
 1. Send request `Get ledger transactions` for a list of payments/transactions. See
-[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
+[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get).
