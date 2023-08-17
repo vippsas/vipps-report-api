@@ -43,7 +43,7 @@ values={[
 To use Postman, import the following files:
 
 * [Vipps Report API Postman collection](/tools/vipps-report-api-postman-collection.json)
-* [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [Vipps API Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
 In Postman, tweak the environment with your own values (see
 [API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
@@ -60,8 +60,6 @@ No setup needed :)
 
 </TabItem>
 </Tabs>
-
-
 
 ### Step 2 - Authentication
 
