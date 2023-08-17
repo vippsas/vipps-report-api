@@ -13,11 +13,9 @@ import TabItem from '@theme/TabItem';
 
 # Quick start
 
-Be aware that these are running on the production server, <https://api.vipps.no>.
-
 ## Before you begin
 
-This document covers the quick steps for getting started with the ePayment API.
+This document covers the quick steps for getting started with the Report API.
 You must have already signed up as an organization with Vipps MobilePay and have
 your test credentials from the merchant portal, as described in the
 [Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
@@ -25,7 +23,9 @@ your test credentials from the merchant portal, as described in the
 **Important:** The examples use standard example values that you must change to
 use *your* values. This includes API keys, HTTP headers, reference, etc.
 
-## Getting your ledgers for the first time
+## Getting your ledgers
+
+Be aware that these are running on the production server, <https://api.vipps.no>.
 
 ### Step 1 - Setup
 
@@ -40,7 +40,7 @@ values={[
 
 **Please note:** Postman is discontinuing their offline version. Use only your test keys and delete them after testing. Ensure that your company allows for cloud use before continuing.
 
-If you wish to use Postman, import the following files:
+To use Postman, import the following files:
 
 * [Vipps Report API Postman collection](/tools/vipps-report-api-postman-collection.json)
 * [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
@@ -52,7 +52,6 @@ In Postman, tweak the environment with your own values (see
 * `client_secret` - Merchant key required for getting the access token.
 * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
 * `merchantSerialNumber` - Merchant ID.
-* `baseUrl` - Set to: `https://api.vipps.no`.
 
 </TabItem>
 <TabItem value="curl">
