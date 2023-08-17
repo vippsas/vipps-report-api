@@ -93,8 +93,6 @@ curl https://api.vipps.no/accessToken/get \
 -H "Merchant-Serial-Number: 123456" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
 -X POST \
 --data ''
 ```
@@ -133,8 +131,6 @@ curl https://api.vipps.no/settlement/v1/ledgers \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
 -X GET
 ```
 
@@ -170,8 +166,6 @@ curl https://api.vipps.no/report/v1/ledgertransactions \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
 -X GET
 ```
 
