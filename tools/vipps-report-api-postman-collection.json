@@ -1,10 +1,81 @@
 {
 	"info": {
-		"_postman_id": "5c26a574-bafd-4b4c-aa6a-6a12cf99b274",
+		"_postman_id": "42e25ba8-4b1f-4c94-8551-32bc2c8e1b1a",
 		"name": "Report API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Get access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"access_token\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "client_id",
+						"value": "{{client_id}}"
+					},
+					{
+						"key": "client_secret",
+						"value": "{{client_secret}}"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}"
+					},
+					{
+						"key": "Merchant-Serial-Number",
+						"value": "{{merchantSerialNumber}}",
+						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Name",
+						"value": "{{vipps_system_name}}",
+						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Version",
+						"value": "{{vipps_system_version}}",
+						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Plugin-Name",
+						"value": "{{vipps_system_plugin_name}}",
+						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Plugin-Version",
+						"value": "{{vipps_system_plugin_version}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url_production}}/accessToken/get",
+					"host": [
+						"{{base_url_production}}"
+					],
+					"path": [
+						"accessToken",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Get ledgers",
 			"request": {
@@ -20,12 +91,22 @@
 						"value": "Bearer {{access_token}}",
 						"description": "The access token is a base64-encoded string that is required for all API calls. It is a JWT (JSON Web Token). It is valid for 1 hour in the test environment and 24 hours in the production environment.",
 						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Name",
+						"value": "{{vipps_system_name}}",
+						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Version",
+						"value": "{{vipps_system_version}}",
+						"type": "default"
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/settlement/v1/ledgers",
+					"raw": "{{base_url_production}}/settlement/v1/ledgers",
 					"host": [
-						"{{baseUrl}}"
+						"{{base_url_production}}"
 					],
 					"path": [
 						"settlement",
@@ -65,12 +146,22 @@
 						"key": "Ocp-Apim-Subscription-Key",
 						"value": "{{Ocp-Apim-Subscription-Key}}",
 						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Name",
+						"value": "{{vipps_system_name}}",
+						"type": "default"
+					},
+					{
+						"key": "Vipps-System-Version",
+						"value": "{{vipps_system_version}}",
+						"type": "default"
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/report/v1/ledgertransactions",
+					"raw": "{{base_url_production}}/report/v1/ledgertransactions",
 					"host": [
-						"{{baseUrl}}"
+						"{{base_url_production}}"
 					],
 					"path": [
 						"report",
