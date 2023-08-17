@@ -52,6 +52,7 @@ In Postman, tweak the environment with your own values (see
 * `client_secret` - Merchant key required for getting the access token.
 * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
 * `merchantSerialNumber` - Merchant ID.
+* `base_url_production` - Set to: `https://api.vipps.no`.
 
 </TabItem>
 <TabItem value="curl">
