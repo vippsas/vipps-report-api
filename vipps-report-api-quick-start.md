@@ -140,7 +140,7 @@ curl https://api.vipps.no/settlement/v1/ledgers \
 ### Step 4 - Get all ledgers
 
 Send
-[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get)
+[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions/get)
 for a list of payments/transactions.
 
 <Tabs
@@ -159,8 +159,11 @@ Send request Get ledger transactions
 </TabItem>
 <TabItem value="curl">
 
+Set `ledgerDate` to a value in format YYYY-MM-DD `2022-10-01`.
+Set `ledgerId` to a 6-digit value (e.g., `302321`).
+
 ```bash
-curl https://api.vipps.no/report/v1/ledgertransactions \
+curl https://api.vipps.no/report/v1/ledgertransactions?ledgerDate={ledgerDate}&ledgerId={ledgerId} \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
@@ -171,7 +174,6 @@ curl https://api.vipps.no/report/v1/ledgertransactions \
 
 </TabItem>
 </Tabs>
-
 
 ## Next Steps
 
