@@ -1,60 +1,180 @@
 ---
-title: Quick start
+title: Quick start for the Report API
+sidebar_label: Quick start
 sidebar_position: 20
+description: Quick steps for getting started with the Report API.
 pagination_prev: Null
 pagination_next: Null
 ---
 
+import ApiSchema from '@theme/ApiSchema';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Quick start
 
-Use the Report API to get details for their own sales units and merchants.
-In addition, you can order products on behalf of your merchants.
+## Before you begin
 
-Be aware that these are running on the production server.
+This document covers the quick steps for getting started with the Report API.
+You must have already signed up as an organization with Vipps MobilePay and have
+your test credentials from the merchant portal, as described in the
+[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
 
-## Postman
+**Important:** The examples use standard example values that you must change to
+use *your* values. This includes API keys, HTTP headers, reference, etc.
 
-### Prerequisites
+## Getting your ledgers
 
-Review
-[Vipps quick start guides](https://developer.vippsmobilepay.com/docs/quick-start-guides)
-for information about getting your test environment set up.
+Be aware that these are running on the production server, <https://api.vipps.no>.
 
-### Step 1: Get the Vipps Postman collection and environment
+### Step 1 - Setup
 
-Save the following files to your computer:
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+**Please note:** Postman is discontinuing their offline version. Use only your test keys and delete them after testing. Ensure that your company allows for cloud use before continuing.
+
+To use Postman, import the following files:
 
 * [Vipps Report API Postman collection](/tools/vipps-report-api-postman-collection.json)
-* [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [Vipps API Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
-### Step 2: Import the Vipps Postman files
+In Postman, tweak the environment with your own values (see
+[API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
 
-1. In Postman, click *Import* in the upper-left corner.
-1. In the dialog that opens, with *File* selected, click *Upload Files*.
-1. Select the two files you have just downloaded and click *Import*.
+* `client_id` - Merchant key required for getting the access token.
+* `client_secret` - Merchant key required for getting the access token.
+* `Ocp-Apim-Subscription-Key` - Merchant subscription key.
+* `merchantSerialNumber` - Merchant ID.
+* `base_url_production` - Set to: `https://api.vipps.no`.
 
-### Step 3: Set up Postman environment
+</TabItem>
+<TabItem value="curl">
 
-1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
-2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
-3. Fill in the `Current Value` for the following fields to get started. For the first three keys, go to *Vipps Portal* > *Utvikler* ->  *Test Keys*.
-   * `client_id` - Merchant key is required for getting the access token.
-   * `client_secret` - Merchant key is required for getting the access token.
-   * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
-   * `merchantSerialNumber` - Merchant ID.
-   * `baseUrl` - Set to: `https://api.vipps.no`.
+No setup needed :)
 
-## Make API calls
+</TabItem>
+</Tabs>
 
-Be aware that these requests can only be run on the production server.
+### Step 2 - Authentication
 
-1. Send request `Get Access Token`. This provides you with access to the API.
-   Be sure to use the address to the production server and provide keys for a production sales unit.
-   The access token is valid for 24 hours in the production environment.
+For all the following, you will need an `access_token` from the
+[Access token API](https://developer.vippsmobilepay.com/docs/APIs/access-token-api):
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).
+This provides you with access to the API.
 
-1. Send request `Get ledgers` to get the ledgers you have access to.
-See
-[`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get).
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-1. Send request `Get ledger transactions` for a list of payments/transactions. See
-[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions?ledgerId=%7BledgerId%7D/get).
+```bash
+Send request Get Access Token
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://api.vipps.no/accessToken/get \
+-H "client_id: YOUR-CLIENT-ID" \
+-H "client_secret: YOUR-CLIENT-SECRET" \
+-H "Ocp-Apim-Subscription-Key: YOUR-SUBSCRIPTION-KEY" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-X POST \
+--data ''
+```
+
+</TabItem>
+</Tabs>
+
+The property `access_token` should be used for all other API requests in the `Authorization` header as the Bearer token.
+
+### Step 3 - Get all ledgers
+
+Send
+[`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get)
+to get the ledgers you have access to.
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Get ledgers
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://api.vipps.no/settlement/v1/ledgers \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-X GET
+```
+
+</TabItem>
+</Tabs>
+
+### Step 4 - Get all ledgers
+
+Send
+[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions/get)
+for a list of payments/transactions.
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Get ledger transactions
+```
+
+</TabItem>
+<TabItem value="curl">
+
+Set `ledgerDate` to a value in format YYYY-MM-DD `2022-10-01`.
+Set `ledgerId` to a 6-digit value (e.g., `302321`).
+
+```bash
+curl https://api.vipps.no/report/v1/ledgertransactions?ledgerDate={ledgerDate}&ledgerId={ledgerId} \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-X GET
+```
+
+</TabItem>
+</Tabs>
+
+## Next Steps
+
+See the [Report API guide](./api-guide/README.md) to read about the concepts and details.

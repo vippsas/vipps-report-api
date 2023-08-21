@@ -20,7 +20,7 @@ Feedback? Great! You can
 
 ## Report API documentation
 
-* [API quick start](vipps-report-api-quick-start.md): Run the basic examples in Postman.
+* [API quick start](vipps-report-api-quick-start.md): Run the basic examples in curl and Postman.
 * [API guide](./api-guide/README.md): Learn about the Report API features.
 * [API FAQ](vipps-report-api-faq.md): Look for your question among those people have asked before.
 * [API reference](https://developer.vippsmobilepay.com/api/report): Go straight to the endpoint specifications.
