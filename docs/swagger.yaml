@@ -8,6 +8,7 @@ info:
 servers:
   - url: https://apitest.vipps.no
   - url: https://api.vipps.no
+tags: []
 paths:
   "/settlement/v1/ledgers":
     get:
@@ -39,6 +40,9 @@ paths:
 
         The full response example below displays the eCom case.
 
+      tags:
+        - Ledgers
+      operationId: getLedgers
       parameters:
         - $ref: "#/components/parameters/JWT"
         - $ref: '#/components/parameters/Vipps-System-Name'
@@ -105,88 +109,100 @@ paths:
                       }
                     ]
                   }
-
-  "/report/v1/ledgertransactions":
+  "/settlement/v1/ledgers/{ledgerId}/dates/{LedgerDate}/{Account}":
     get:
-      summary: Returns a list of payments/transactions.
-      description: |
-        Returns a list of payments/transactions.
+      tags:
+        - Ledgers
+      summary: Fetch report by date
+      description: |-
+        Complete report for the `ledger date`.
+        Normally a ledger date lasts from midnight to midnight in the timezone of the merchant; but it can be configured
+        to other cutoffs such as 04:00 to 04:00.
+        Periodically poll for a report for the next date you do not have a report on, and interpret HTTP 404 as a signal
+        to try again later.
+
       parameters:
-        - $ref: "#/components/parameters/JWT"
-        - $ref: '#/components/parameters/Vipps-System-Name'
-        - $ref: '#/components/parameters/Vipps-System-Version'
-        - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
-        - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
-        - in: query
-          required: true
+        - in: path
           name: ledgerId
           schema:
             type: string
-        - in: query
-          required: false
-          name: ledgerDate
+            required: true
+            description: Ledger id provided by /settlement/v1/ledgers
+        - in: path
+          name: LedgerDate
           schema:
             type: string
-            format: Date
-            example: 2022-01-20
-        - in: query
-          required: false
-          name: fromLedgerDate
+            required: true
+            pattern: '^\d{4}-\d{2}-\d{2}'
+            description: Date in format yyyy-MM-dd
+        - in: path
+          name: Account
           schema:
             type: string
-            format: Date
-            example: 2022-01-19
-        - in: query
-          required: false
-          name: toLedgerDate
-          schema:
-            type: string
-            format: Date
-            example: 2022-01-22
-        - in: query
-          required: false
-          name: inPayout
-          schema:
-            type: string
-            example: 2000010
-        - in: query
-          required: false
-          name: sincePayout
-          schema:
-            type: string
-            example: 2000010
+            enum: ["funds", "fees"]
+            required: true
+            description: One of `funds`, `fees`
         - in: query
           required: false
           name: cursor
           schema:
             type: string
-            example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
+            example: "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ=="
             description: |-
               We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
               If the total number of rows is greater than that amount we return a cursor in addition to
-              the rows in the body. This cursor given can be used with this parameter to fetch the next set of transactions.
-              If this is used, no other parameters other than ledgerId is needed.
+              the rows in the body. This cursor given can be used with this parameter to fetch the next set of ledgers.
+              If this is used, no other parameters is needed.
       responses:
-        500:
-          "$ref": "#/components/responses/500"
         200:
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  cursor:
-                    type: string
-                    example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
-                    description: |-
-                      A cursor that can be used to fetch the next transactions.
-                      It is empty if there are no more rows to fetch after the current one.
-                      You can insert this value into the url as part of the cursor parameter.
-                  items:
-                    type: array
-                    items:
-                      "$ref": "#/components/schemas/Transaction"
+          $ref: "#/components/responses/200"
+        404:
+          description: The report for this date is not available yet
+        401:
+          $ref: "#/components/responses/401"
+        500:
+          $ref: "#/components/responses/500"
+  "/settlement/v1/ledgers/{ledgerId}/feed/{Account}":
+    get:
+      tags:
+        - Ledgers
+      summary: Fetch report by feed
+      description: |-
+        Continuous stream of data. Upon reaching the end of the feed the `cursor` will not become empty and `items` can 
+        become en empty list. One should retry to fetch the same `cursor` until new data and a new `cursor` will be returned.
+        Unless in the need of data with low latency try not to poll the endpoint too often and effectively batch your reports.
+      parameters:
+        - in: path
+          name: ledgerId
+          schema:
+            type: string
+            required: true
+            description: Ledger id provided by /settlement/v1/ledgers
+        - in: path
+          name: Account
+          schema:
+            type: string
+            enum: ["funds", "fees"]
+            required: true
+            description: One of `funds`, `fees`
+        - in: query
+          required: false
+          name: cursor
+          schema:
+            type: string
+            example: "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ=="
+            description: |-
+              We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
+              If the total number of rows is greater than that amount we return a cursor in addition to
+              the rows in the body. This cursor given can be used with this parameter to fetch the next set of ledgers.
+              If this is used, no other parameters is needed.
+      responses:
+        200:
+          $ref: "#/components/responses/200"
+        401:
+          $ref: "#/components/responses/401"
+        500:
+          $ref: "#/components/responses/500"
 
 components:
   parameters:
@@ -246,8 +262,25 @@ components:
         type: string
         maxLength: 30
         example: "1.2.1"
-
   responses:
+    200:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cursor:
+                type: string
+                example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
+                description: |-
+                  A cursor that can be used to fetch the next transactions.
+                  It is empty if there are no more rows to fetch after the current one.
+                  You can insert this value into the url as part of the cursor parameter.
+              items:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Transaction"
     500:
       description: Server error
       content:
