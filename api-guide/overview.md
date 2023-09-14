@@ -53,7 +53,7 @@ A merchant may have zero or more accounting partners. This page on
 [portal.vipps.no](https://portal.vipps.no)
 shows the accounting partners for one sales unit.
 
-![Overview over accounting-partners](../images/portal-regnskapspartnere-oversikt.png "Accounting Partners overview")
+![Overview over accounting-partners](../images/portal-accounting-partners-overview.png "Accounting Partners overview")
 
 ### Adding a new accounting partner
 
@@ -64,4 +64,4 @@ This page on
 shows how to add an accounting partners, and how to specify which ledgers the
 accounting partner will have access to.
 
-![Add a new accounting-partner](../images/portal-regnskapspartnere-legg-til.png "Add a new accounting partner")
+![Add a new accounting-partner](../images/portal-accounting-partners-edit.png "Add a new accounting partner")
