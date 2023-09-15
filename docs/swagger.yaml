@@ -349,10 +349,10 @@ components:
     Transaction:
       type: object
       properties:
-        transactionId:
+        pspReference:
           type: string
-          example: '2000001'
-        timestamp:
+          example: '3343121302'
+        time:
           type: string
           description: |-
             Transaction date and time together with an offset (difference from UTC time in hours)
@@ -362,30 +362,28 @@ components:
           type: string
           format: Date
           example: '2020-10-05'
-        ledgerId:
-          type: string
-          example: '1'
-        transactionType:
+        entryType:
           type: string
           enum:
             - refund
             - capture
-            - payout
-            # - invoice
-        orderId:
+            - fees-retained
+            - fees-invoiced
+            - scheduled-for-payout
+        reference:
           type: string
           description: |-
             Is also called End-To-End-Reference
-          example: acme-shop-123-order123abc
+          example: Vipps utbet. 2000023
         currency:
           type: string
           example: 'NOK'
           description: Currency code as defined in ISO 4217
-        ledgerAmount:
+        amount:
           $ref: "#/components/schemas/Money"
-        grossAmount:
+        balanceBefore:
           $ref: "#/components/schemas/Money"
-        fee:
+        balanceAfter:
           $ref: "#/components/schemas/Money"
         recipientHandle:
           type: string
