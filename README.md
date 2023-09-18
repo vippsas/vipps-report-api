@@ -10,13 +10,16 @@ pagination_prev: null
 
 # Report API
 
-💥 **BETA VERSION**: The API is publicly available, but may still have minor changes.
-For example: We think it's a good idea to split the endpoints for retrieving
-funds and the fees, to simplify reconciliation.
-We aim to have the final specification ready in August. 💥
-
 Feedback? Great! You can
 [submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues).
+
+## Versions
+
+* This documents version 2 of the API, `report/v2`. The documentation for `report/v1`
+  is [available here](https://github.com/vippsas/vipps-report-api/tree/v1).
+* As of this writing, only version 1 is available in production. The version 1
+  is considered a *beta version* and support will be removed within some months. 💥 
+* Version 2 of the API will be available within some weeks.
 
 ## Report API documentation
 
