@@ -23,12 +23,12 @@ To learn about API versioning, see
 * Instead of query parameters to `/ledgertransactions` implying different modes
   of using the endpoint, we provide different endpoints for different ways
   of fetching/synchronizing the data.
-* In total `GET:/ledgertransactions` is replaced by the following:
+* In total, `GET:/ledgertransactions` is replaced by the following:
   * `GET:/ledgers/<ledgerId>/funds/feed` 
   * `GET:/ledgers/<ledgerId>/funds/dates/<ledgerDate>`
   * `GET:/ledgers/<ledgerId>/fees/feed`
   * `GET:/ledgers/<ledgerId>/fees/dates/<ledgerDate>`
-* While all the above endpoint are very similar to the old `/ledgertransactions` endpoint, there are some cosmetic:
+* While all the above endpoints are very similar to the old `/ledgertransactions` endpoint, there are some cosmetic changes:
   * `transactionId` has been renamed `pspReference` to be consistent with the [ePayment API](https://developer.vippsmobilepay.com/api/epayment/).
   * `orderId` has been renamed `reference` to be consistent with the [ePayment API](https://developer.vippsmobilepay.com/api/epayment/).
   * `ledgerAmount` is simply `amount`
@@ -38,8 +38,8 @@ To learn about API versioning, see
   * The `grossAmount` and `fee` columns are removed from this endpoint and replaced with:
     * Detailed information about fees available on the `/fees` endpoint; both for cases where
       fees are retained ("net settlements") and not ("gross settlements")
-    * For net settlements, an adjustment of the ledger balance is included as a sum row;
-      typically once such row per day although details of this will vary according to when
+    * For net settlements, an adjustment of the ledger balance is included as a sum row.
+      There is typically once such row per day, although details of this will vary according to when
       Vipps MobilePay legally collects the fees (`entryType` of `fees-retained`).
   * The `?inPayout` feature has been removed; we recommend to instead fetch data per
     date.
@@ -47,7 +47,6 @@ To learn about API versioning, see
       in that case as a separate `payouts` path alongside `feed`
       and `dates`.
   * The `?sincePayout` has been removed and appears to be unused
-
 
 ## History
 
