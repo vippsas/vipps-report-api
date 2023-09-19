@@ -13,14 +13,6 @@ pagination_prev: null
 Feedback? Great! You can
 [submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues).
 
-## Versions
-
-* This documents version 2 of the API, `report/v2`. The documentation for `report/v1`
-  is available on GitHub at <https://github.com/vippsas/vipps-report-api/tree/v1>.
-* As of this writing, only version 1 is available in production. The version 1
-  is considered a *beta version* and support will be removed within some months. 💥
-* Version 2 of the API will be available within some weeks.
-
 ## Report API documentation
 
 * [API quick start](vipps-report-api-quick-start.md): Run the basic examples in curl and Postman.
@@ -31,3 +23,11 @@ Feedback? Great! You can
 If you're new to the platform, see
 [Getting started](https://developer.vippsmobilepay.com/docs/getting-started/)
 for information about API keys, product activation, and the test environment.
+
+## Versions
+
+* This documents version 2 of the API, `report/v2`. The documentation for `report/v1`
+  is available on GitHub at <https://github.com/vippsas/vipps-report-api/tree/v1>.
+* As of this writing, only version 1 is available in production. The version 1
+  is considered a *beta version* and support will be removed within some months.
+* Version 2 of the API will be available within some weeks.
