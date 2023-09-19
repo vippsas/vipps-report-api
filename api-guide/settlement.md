@@ -63,7 +63,7 @@ as a table:
 Please note that monetary values are returned from the endpoint in cents/øre.
 This example shows:
 
-* 3 sales (captures) and refunds for a total of 300,- in turnover for the day
+* Three sales captures minus one refund brings the daily total to 300.00
 * The sum of fees for the captures, 12.00, is retained by Vipps MobilePay
 * The remaining balance of 288.00 being *scheduled* for payout. The actual payout
   may not happen after waiting some days, reflecting delays in the bank networks, and
@@ -475,7 +475,7 @@ The `reference` has the same value as the corresponding capture.
 
 #### returned-disputed-capture
 
-In the event that the merchant wins the dispute process, money previously.
+In the event that the merchant wins the dispute process, money previously captured is returned.
 The retained/returned cycle may in theory occur several times for the same capture.
 
 The `reference` has the same value as the corresponding capture.
