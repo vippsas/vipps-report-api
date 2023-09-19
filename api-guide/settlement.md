@@ -11,16 +11,16 @@ pagination_next: Null
 
 Merchants using Vipps MobilePay receive the money for their sales in bulk bank transfers (settlements),
 usually one per day. It is therefore necessary to download
-a specification reports that explain the bulk bank transfer, so that it can be correctly filed in the
+a specification reports that explains the bulk bank transfer, so it can be correctly filed in the
 merchant's accounting system. Such reports can be fetched either
-in [the portal](https://portal.vipps.no) or by using the Report API.
+in the [merchant portal](https://portal.vipps.no) or by using this API.
 
 Usually, you will wish to implement a *reconciliation process*, where
 you download a report from Vipps MobilePay each day, and check that contents
 of the report match the data you have on your own side.
 We recommended that you do this by matching per transaction on transaction IDs.
 
-This guide will focus on using the Report API, but may also be useful reading
+This guide will focus on using this API, but may also be useful reading
 for those who rely on using reports from the portal for their reconciliation
 processes.
 
@@ -33,7 +33,7 @@ for more details about settlements in general.
 
 Vipps MobilePay does not transfer money to/from the merchant for every payment made.
 Instead, all transactions are put on a *ledger*
-that track the funds that Vipps MobilePay owes the merchant. During the day transactions
+that tracks the funds that Vipps MobilePay owes the merchant. During the day, transactions
 occur that usually increase, and sometimes decrease, the balance the merchant
 has in Vipps MobilePay. Periodically (daily/weekly/monthly depending on configuration), the
 balance of the ledger is paid out to a configured account number and the balance
@@ -47,7 +47,7 @@ is paid out. The payout is itself an entry on the ledger,
 adjusting the balance down to zero.
 ![Funds account illustration](../images/ledger-balance-simple.png)
 
-The example above may look as follows if the data returned from
+This example may look as follows if the data returned from
 `GET:https://api.vipps.no/report/v2/ledgers/12345/funds/dates/2022-10-01` is displayed
 as a table:
 
@@ -64,10 +64,10 @@ Please note that monetary values are returned from the endpoint in cents/øre.
 This example shows:
 
 * 3 sales (captures) and refunds for a total of 300,- in turnover for the day
-* The sum of fees for the captures, 12.00, being retained by Vipps MobilePay
+* The sum of fees for the captures, 12.00, is retained by Vipps MobilePay
 * The remaining balance of 288.00 being *scheduled* for payout. The actual payout
   may not happen after waiting some days, reflecting delays in the bank networks, and
-  subject to the Merchant's agreement with Vipps MobilePay. Once the payout is scheduled
+  subject to the merchant's agreement with Vipps MobilePay. Once the payout is scheduled,
   the money is gone from the ledger balance.
 
 Above, only the total fees for the settlement period are included.
@@ -104,10 +104,10 @@ there are some possible complicating factors.
 
 Fees for the services from Vipps MobilePay can be charged in two ways:
 
-* Net settlements, in which case the fees are retained from the settlement
+* Net settlements - The fees are retained from the settlement
   payouts. The `fees-retained` entry is used to settle the fees, as shown
   in the example above.
-* Gross settlements, in which case the fees are invoiced. In this case there
+* Gross settlements - The fees are invoiced. In this case, there
   is no mention of the fees in `.../funds`, while on the `/fees` account
   a `fees-invoiced` entry indicate that an invoice has been sent for the fees.
 
@@ -123,9 +123,9 @@ in the example above.
 
 #### Negative balance
 
-If the sum of refunds and fees are larger than the sum of captures
-the balance of the ledger can be become negative. As an example, consider
-a concert that sells tickets for months in advance, and that this money
+If the sum of refunds and fees are larger than the sum of captures,
+the balance of the ledger can be become negative. For example, consider
+a concert that sells tickets months in advance, and that this money
 is continuously paid out on a daily basis. Then, if the concert is cancelled
 and all tickets refunded, all of that money is refunded at once, likely
 leading to a negative balance.
@@ -136,17 +136,17 @@ is sent or when it is paid; details may vary).
 
 #### Account diagram
 
-To correctly model these complicating factors we can use the following *account diagram*:
+To correctly model these complicating factors, we can use the following *account diagram*:
 ![illustration of all accounts](../images/account-diagram.png)
 
 Note that:
 
-* When sales (captures) happen the balance of `/funds` account is increased.
+* When sales (captures) happen, the balance of `/funds` account is increased.
   Refunds decrease the balance of `/funds`.
-* As fees are charged throughout the day they are deducted from the `/fees` account.
+* As fees are charged throughout the day, they are deducted from the `/fees` account.
 * Fees are *settled* in one of two ways:
-  * i) They are either transferred from `/funds` to `/fees` ...
-  * ii) ...or they are invoiced from the merchant
+  * i) They are transferred from `/funds` to `/fees`, or
+  * ii) They are invoiced from the merchant
 * Periodically, `/funds` is packaged/batched and scheduled for payout.
   This is indicated in the figure with a transfer to the `/payouts` account,
   where money is waiting to be paid out.
@@ -156,7 +156,7 @@ Note that:
     even if the actual payout did not succeed. If money does not arrive within
     the agreed-upon delay, please contact customer service.
   
-The API described further below directly represents the diagram above:
+The API endpoints are described further below:
 
 * The `.../funds` endpoints report on the entries on the `/funds` account
 * The `.../fees` endpoints report on the entries on the `/fees` account
@@ -175,12 +175,13 @@ We recommend that the merchant's accounting system reflects the structure above:
 
 ### Retrieving the LedgerId
 
-In order to call the endpoints containing settlement information you will
-need a *LedgerId*. A "ledger" is an "instance" of the set of accounts described
-above, and determines which payments are grouped together for settlement.
+In order to call the endpoints containing settlement information, you will
+need a *LedgerId*. A *ledger* is an *instance* of the set of accounts described
+in the [Account diagram](#account-diagram).
+The ledger determines which payments are grouped together for settlement.
 
 For the large majority of merchants, there is a direct correspondence
-between a Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
+between a Vippsnummer or eCom Merchant Serial Number (MSNs) to a ledger:
 
 ``` mermaid
 flowchart LR
@@ -210,7 +211,7 @@ flowchart LR
     Ledger-- Bulk payout -->Bank([Merchant's bank account])
 ```
 
-The ledger has its own `ledgerId`, so the first step in using the report API is
+The ledger has its own `ledgerId`, so the first step in using this API is
 to fetch the list of ledgers you have access to. If you are integrating a single
 merchant it may be enough to hit this endpoint once manually to identify
 the `ledgerId`. An example response from
@@ -281,28 +282,28 @@ as the cursor, the end of the report has been reached.
 
 ### Retries of downloads and polling for new data
 
-We recommend that the user of the Report API implements a robust
+We recommend that users of this API implement a robust
 retry mechanism. Sometimes reports can be delayed, or there can be network issues
 or temporary downtime either at the integrator or at Vipps MobilePay. Rather
 than, e.g., scheduling a job to run at 08:00 every morning, we instead recommend
 a pattern where a job is run *once every hour of every day*. The job should
-then be programmed to downloads whatever data is available which has not yet
+then be programmed to download whatever data is available which has not yet
 been fetched. This pattern gracefully handles temporary downtime and delays.
 
-If you do set up a job every hour, please do everyone a favor and pick
+If you set up a job every hour, please pick
 a random minute during the hour when your job runs.
 If one integrator runs
-their jobs at :14 after each hour and another at :48, they do not have to
-compete for resources from our Report API, and both get a better experience
+their jobs at :14 after each hour and another at :48, they don't have to
+compete for resources from this API, and both get a better experience
 than if they both started their job on :00.
-Do not choose to run your time between :00 and :10, as that time integrators
+Don't choose to run your time between :00 and :10, as that time integrators
 who did not read this paragraph will use the API.
 
 ### Immutability of data
 
-Regardless of which kind of report is fetched, once data is available and have
+Regardless of which kind of report is fetched, once data is available and has
 been returned it will be
-*immutable*; the same report fetched at a later point will always contain the
+*immutable*. The same report fetched at a later point will always contain the
 same data. If something needs to be corrected, this will be done by adding new
 correction entries, leaving the old incorrect entries unmodified.
 
@@ -320,22 +321,22 @@ diagram:
 
 The endpoints `GET:/report/v2/ledgers/<ledgerId>/<Account>/dates/<LedgerDate>`
 offer a complete report per *ledger date*; indicated by blue in the diagram
-above. Normally a ledger date
-lasts from midnight to midnight in the timezone of the merchant; but it
+above. Normally, a ledger date
+lasts from midnight to midnight in the timezone of the merchant, but it
 can be configured to other cutoffs such as 04:00 to 04:00.
 
 On this endpoint, no data is available until the entire ledger date is complete.
 Your code should be written to periodically poll for a report for the next
 date you do not have a report on, and interpret HTTP 404 as a signal to try
 again later. For instance, if you have data until the point 2023-08-01, then you want to
-periodically do a request to
+periodically do a request to:
 
 ```sh
 GET:/report/v2/ledgers/<ledgerId>/funds/dates/2023-08-02
 ```
 
-This will return an HTTP status code of 404, until the data is available at which
-point HTTP status 200 and the first page of data is returned.
+This will return an HTTP status code of `404` until the data is available, at which
+point it will return HTTP status `200` and the first page of data.
 
 In the most typical scenario, the balance is zero at the start of a day, funds
 are accumulated, and the day ends with a `scheduled-for-payout` entry that
@@ -359,9 +360,9 @@ at Vipps MobilePay at any time.
 
 The other option is to continuously stream data as it becomes available.
 You would normally use this to synchronize the data from Vipps MobilePay to your
-own database, and then it is your own responsibility to do any periodization
-(if wanted).
-We recommend this way of fetching data in general; just be aware that it
+own database, and then it is your own responsibility to do any periodization,
+if desired.
+We recommend this way of fetching data in general. Just be aware that it
 may require some more sophistication in the logic for fetching reports.
 
 The endpoint indicates single "infinite" report, the "feed":
@@ -389,7 +390,7 @@ with low latency, we recommend just downloading new data relatively seldom
 
 What about a specification for the payout to the bank account of the merchant?
 
-We do not recommend relying on such a report because it will lead to
+We don't recommend relying on such a report because it will lead to
 sudden "radio silence" if there is negative balance for an extended period of time.
 However, if you need such a specification anyway, it is easy enough to
 do yourself using the  `.../dates/...` endpoint.
@@ -415,7 +416,7 @@ Using the example figure above, these steps will produce:
 
 ## Entry type reference
 
-Users of this API has to account for the possibility of
+Users of this API must account for the possibility of
 more entry types being added in the future. Such new entry types will not cause
 upgrade of the API version.
 
@@ -433,16 +434,16 @@ balance of a given account (`/funds` or `/fees`).
 Captures represent money being transferred from the customer,
 through Vipps MobilePay, to the merchant. Captures increase the ledger `/funds` balance.
 
-In some of the other APIs we distinguish between two
-types of payment flows: The "sale" flow for an immediate purchase,
-and "reserve/capture" flow for where one first receives a reservation,
-and then capture it fully or partially at a later point. In the `/funds` endpoint
-both of these are denoted with a `entryType` of `capture``.
+In some other APIs, we distinguish between two
+types of payment flows: The *sale* flow for an immediate purchase,
+and the *reserve/capture* flow for cases when one first receives a reservation,
+and then captures it fully or partially at a later point. In the `/funds` endpoint,
+both of these are denoted with a `entryType` of `capture`.
 
 #### refund
 
 Refunds represent transfers in the other direction. These are
-initiated by the merchant; either by using the API or
+initiated by the merchant, either by using the API or
 through [portal.vipps.no](https://portal.vipps.no). Refunds are always deducted
 from the next settlement payout, also if you have a gross settlement setup.
 Currently, refunds always have zero fees.
@@ -467,7 +468,7 @@ a negative balance on the subsequent day.
 #### retained-disputed-capture
 
 If a capture that has previously been put on the ledger
-is *disputed* by the issuer (e.g., suspicion of fraud, damaged goods)
+is *disputed* by the issuer (e.g., suspicion of fraud, damaged goods),
 then Vipps MobilePay may deduct the capture from the ledger.
 
 The `reference` has the same value as the corresponding capture.
@@ -482,17 +483,17 @@ The `reference` has the same value as the corresponding capture.
 #### correction
 
 A `correction` entry type indicates a fully manual adjustment of the balance
-to resolve some unexpected problem. Normally you should expect to have received
+to resolve some unexpected problem. Normally, you should expect to have received
 communication about the nature of the incident if this is ever
 present. Feel free to contact Vipps MobilePay support for further details
-if you see this and do not know why.
+if you see this and don't know why.
 
 #### top-up
 
-A deposit ("top-up") of the account, by the merchant directly transferring
-funds to it. For instance if the merchant's balance on the ledger is negative
+This represents a deposit ("top-up") of the account, by the merchant directly transferring
+funds to it. For instance, if the merchant's balance on the ledger is negative
 for a while, an invoice can be sent prompting the merchant to pay money to
-Vipps MobilePay; i.e., topping up their account so that the balance becomes positive.
+Vipps MobilePay (i.e., topping up their account so that the balance becomes positive).
 
 ### /fees entry types
 
