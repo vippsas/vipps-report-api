@@ -11,7 +11,7 @@ pagination_prev: null
 
 Here are the Report API FAQs.
 See the
-[Vipps Report API guide](./api-guide/README.md)
+[Report API guide](./api-guide/README.md)
 for all the details.
 
 For more common questions, see:
@@ -31,7 +31,7 @@ on API keys for more information on future plans for partner keys).
 ## What are the benefits of the Report API over the SFTP service?
 
 The
-[Vipps SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
+[SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
 lets merchants and partners download settlement files by SFTP.
 
 The Report API has some benefits over this:
@@ -67,19 +67,19 @@ The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
 **Important:** It is not yet possible to use the Report API to retrieve data
-for "Vippsnummer" sale units. The Report API can only be used to sale units
-that have API access (which "Vippsnummer" sale units do not have.)
+for *Vippsnummer* sale units. The Report API can only be used to sale units
+that have API access (which *Vippsnummer* sale units do not have.)
 
 ## Is the Report API available for the test environment?
 
-Nope. The
-[Vipps test environment](https://developer.vippsmobilepay.com/docs/test-environment)
+Unfortunately not because the
+[test environment](https://developer.vippsmobilepay.com/docs/test-environment)
 does not have the backend systems necessary to offer the Report API.
 The only way to test the Report API is in the production environment.
 
 ## Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
 
-No, not currently.
+This is not possibly currently.
 
 For now,
 the only way to get the Ledger ID is to call
@@ -122,7 +122,7 @@ You can use the `inPayout` query parameter for the
 endpoint to retrieve payments that are part of a specific payout.
 The `sincePayout` works similarly.
 
-**Please note:** Vipps may at some point implement a "rolling reserve", where
+**Please note:** We may at some point implement a "rolling reserve", where
 an amount is always withheld to compensate for high risk, etc. Due to this, each
 payment may not always be connected to a specific payout.
 
@@ -145,11 +145,10 @@ Each Ledger has both the first and last payout used on it:
 
 ## How can I get access to the API?
 
-The API is available for sales units that already have access to a
-[Vipps API](https://developer.vippsmobilepay.com/docs/APIs).
+The API is available for sales units that already have access to any other Vipps MobilePay API.
 
 If you do not already have API access, you cannot get access to the Report API.
-This is the case if you only have a "Vippsnummer" sales unit, since those
+This is the case if you only have a *Vippsnummer* sales unit, since those
 sales units have no API access.
 
 ## Which API keys give access to the API?
@@ -164,7 +163,7 @@ Later (we can not give an ETA, but will update here):
 * [Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys):
   The API keys that are used by partners to make payments on behalf of their merchants.
 * Accounting partner's API keys: The API keys provided to the accounting partner
-  when the partner signed a contract with Vipps. The accounting partner's
+  when the partner signed a contract with Vipps MobilePay. The accounting partner's
   API keys only work for sales units after the merchant has
   [given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
 
@@ -177,7 +176,7 @@ If the merchant uses an integration partner (see
 it is the same as using the merchant's own API keys.
 
 When a merchant shares its API keys for a sales unit with an integration partner,
-Vipps has no way of knowing whether the API calls are made by the merchant or
+we have no way of knowing whether the API calls are made by the merchant or
 the integration partner.
 This is why we require that all API requests made by a partner on behalf of a
 merchant are done using the partner's own API keys (the partner keys).
