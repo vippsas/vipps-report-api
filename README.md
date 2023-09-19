@@ -16,9 +16,9 @@ Feedback? Great! You can
 ## Versions
 
 * This documents version 2 of the API, `report/v2`. The documentation for `report/v1`
-  is [available here](https://github.com/vippsas/vipps-report-api/tree/v1).
+  is available on GitHub at <https://github.com/vippsas/vipps-report-api/tree/v1>.
 * As of this writing, only version 1 is available in production. The version 1
-  is considered a *beta version* and support will be removed within some months. 💥 
+  is considered a *beta version* and support will be removed within some months. 💥
 * Version 2 of the API will be available within some weeks.
 
 ## Report API documentation
