@@ -9,7 +9,6 @@ pagination_next: Null
 
 ## Overview of the settlement process
 
-
 Merchants using Vipps MobilePay receive the money for their sales in bulk bank transfers (settlements),
 usually one per day. It is therefore necessary to download
 a specification reports that explain the bulk bank transfer, so that it can be correctly filed in the
@@ -27,7 +26,7 @@ processes.
 
 The exact details of the settlement process (e.g., the delay before the money
 is received) is subject to the agreement between the merchant and Vipps MobilePay.
-Plese see [Common topics: Settlements](https://developer.vippsmobilepay.com/docs/settlements)
+Please see [Common topics: Settlements](https://developer.vippsmobilepay.com/docs/settlements)
 for more details about settlements in general.
 
 ### Ledger transactions and balances
@@ -46,7 +45,7 @@ ledger, changing the balance of funds that Vipps MobilePay owes the merchant.
 At the end of the day, Vipps MobilePay deducts some fees and the remaining balance
 is paid out. The payout is itself an entry on the ledger,
 adjusting the balance down to zero.
-![funds account illustration](../images/ledger-balance-simple.png)
+![Funds account illustration](../images/ledger-balance-simple.png)
 
 The example above may look as follows if the data returned from
 `GET:https://api.vipps.no/report/v2/ledgers/12345/funds/dates/2022-10-01` is displayed
@@ -71,8 +70,8 @@ This example shows:
   subject to the Merchant's agreement with Vipps MobilePay. Once the payout is scheduled
   the money is gone from the ledger balance.
 
-Above only the total fees for the settlement period are included.
-If you require further specification of the fees charged these are available on
+Above, only the total fees for the settlement period are included.
+If you require further specification of the fees charged, these are available on
 a separate endpoint `.../fees`.
 Continuing on the example above, this may be the result of a call to
 `GET:https://api.vipps.no/report/v2/ledgers/12345/fees/dates/2022-10-01`:
@@ -85,15 +84,16 @@ Continuing on the example above, this may be the result of a call to
 | 2022-10-01 | fees-retained        |   1200 | 01H7W7Q6Y5R3G58CTAZX0MHKV2  | 01H7W7Q6Y5R3G58CTAZX0MHKV2 |                 | 2022-10-02T00:00:00.000000+0200 |          1200 |            0 |
 
 Note that:
+
 * `pspReference` can be used to correlate between `/funds` and `/fees`.
-    * Note that while each `capture` on `/funds` has a unique `pspReference`, it is possible
-      to have *several* fees on `/fees` related to the same `pspReference`.
+  * Note that, while each `capture` on `/funds` has a unique `pspReference`, it is possible
+    to have *several* fees on `/fees` related to the same `pspReference`.
 * The `fees-retained` entry will always appear at the same time on both endpoints and have opposing
   signs (money is moved from the `/funds` *account* and put on the `/fees` account).
 
 **Please note:** In general for both `/fees` and `/funds`, it is important to
 be prepared for new entry types. The reference of entry types is at the bottom
-of this page; *but new types can be added to the API later without prior warning*.
+of this page, *but new types can be added to the API later without prior warning*.
 
 ### Complicating factors and account diagram
 
@@ -131,7 +131,7 @@ and all tickets refunded, all of that money is refunded at once, likely
 leading to a negative balance.
 
 If a balance is negative for too long, an invoice will be sent to the merchant.
-This will lead to a `top-up` entry on the funds ledger (either when the invoice
+This will lead to a `top-up` entry on the *funds* ledger (either when the invoice
 is sent or when it is paid; details may vary).
 
 #### Account diagram
@@ -145,8 +145,8 @@ Note that:
   Refunds decrease the balance of `/funds`.
 * As fees are charged throughout the day they are deducted from the `/fees` account.
 * Fees are *settled* in one of two ways:
-    * i) They are either transferred from `/funds` to `/fees` ...
-    * ii) ...or they are invoiced from the merchant
+  * i) They are either transferred from `/funds` to `/fees` ...
+  * ii) ...or they are invoiced from the merchant
 * Periodically, `/funds` is packaged/batched and scheduled for payout.
   This is indicated in the figure with a transfer to the `/payouts` account,
   where money is waiting to be paid out.
@@ -156,14 +156,15 @@ Note that:
     even if the actual payout did not succeed. If money does not arrive within
     the agreed-upon delay, please contact customer service.
   
-
 The API described further below directly represents the diagram above:
+
 * The `.../funds` endpoints report on the entries on the `/funds` account
 * The `.../fees` endpoints report on the entries on the `/fees` account
 * There is currently no endpoint to report on `/payouts`, but we hope to add
   this in the future.
 
 We recommend that the merchant's accounting system reflects the structure above:
+
 * An account for fees owed to Vipps MobilePay
 * An account for funds stored at Vipps MobilePay
   * When sales are made, book the income towards this account
@@ -171,11 +172,12 @@ We recommend that the merchant's accounting system reflects the structure above:
   two funds accounts, both belonging to the merchant.
 
 ## Downloading reports
+
 ### Retrieving the LedgerId
 
 In order to call the endpoints containing settlement information you will
 need a *LedgerId*. A "ledger" is an "instance" of the set of accounts described
-above, and determines which payments are grouped together for settlement. 
+above, and determines which payments are grouped together for settlement.
 
 For the large majority of merchants, there is a direct correspondence
 between a Vippsnummer or e-com Merchant Serial Number (MSNs) to a ledger:
@@ -245,11 +247,13 @@ A Vippsnummer will use the same `settlesForRecipientHandles` structure, but have
   "settlesForRecipientHandles": [ "NO:123455" ]
 }
 ```
-Similarly a MyShop instance will have a handle `DK:123456` (Denmark) or `FI:123456` (Finland).
+
+Similarly, a MyShop instance will have a handle `DK:123456` (Denmark) or `FI:123456` (Finland).
 
 If you only want to look up the `ledgerId` from an MSN or Vippsnummer, you
 may use the `settlesForRecipientHandles` argument:
-```
+
+```sh
 GET:/settlement/v1/ledgers?settlesForRecipientHandles=DK:123456
 ```
 
@@ -257,7 +261,6 @@ If you are integrating an accounting system for many customers, it can be
 relevant to poll this endpoint many times as you will continue to see new
 ledgers appear for different customers as they
 [grant your accounting system access to their data](overview.md#give-access-to-an-accounting-partner).
-
 
 ### Paging and cursors
 
@@ -270,11 +273,11 @@ All the report endpoints at
   "items": [{}, {}]
 }
 ```
+
 There will be up to 1000 items returned in each request. After storing or processing
 the `items`, a new request should be done where the value from `cursor` is passed
 in order to continue on the next *page* of data. Once an empty string `""` is returned
 as the cursor, the end of the report has been reached.
-
 
 ### Retries of downloads and polling for new data
 
@@ -287,7 +290,7 @@ then be programmed to downloads whatever data is available which has not yet
 been fetched. This pattern gracefully handles temporary downtime and delays.
 
 If you do set up a job every hour, please do everyone a favor and pick
-a random minute during the hour where your job runs.
+a random minute during the hour when your job runs.
 If one integrator runs
 their jobs at :14 after each hour and another at :48, they do not have to
 compete for resources from our Report API, and both get a better experience
@@ -313,8 +316,6 @@ diagram:
 
 ![Settlement](../images/report-periods.png)
 
-
-
 #### Method 1: Fetching a complete report for each date
 
 The endpoints `GET:/report/v2/ledgers/<ledgerId>/<Account>/dates/<LedgerDate>`
@@ -328,9 +329,11 @@ Your code should be written to periodically poll for a report for the next
 date you do not have a report on, and interpret HTTP 404 as a signal to try
 again later. For instance, if you have data until the point 2023-08-01, then you want to
 periodically do a request to
-```
+
+```sh
 GET:/report/v2/ledgers/<ledgerId>/funds/dates/2023-08-02
 ```
+
 This will return an HTTP status code of 404, until the data is available at which
 point HTTP status 200 and the first page of data is returned.
 
@@ -350,23 +353,24 @@ There are however other cases:
 By fetching daily reports, you will always get more data every day, even
 if payouts are scheduled on a weekly/monthly basis, or if the balance is negative.
 The `balanceAfter` field represents the balance the merchant owns that is sitting
-at Vipps MobilePay at any time. 
-
+at Vipps MobilePay at any time.
 
 #### Method 2: Continuous feed of data
 
 The other option is to continuously stream data as it becomes available.
 You would normally use this to synchronize the data from Vipps MobilePay to your
-own database, and then it is your own responsibility to do any periodiziation
+own database, and then it is your own responsibility to do any periodization
 (if wanted).
 We recommend this way of fetching data in general; just be aware that it
 may require some more sophistication in the logic for fetching reports.
 
 The endpoint indicates single "infinite" report, the "feed":
-```
+
+```sh
 GET:/report/v2/ledgers/<ledgerId>/funds/feed
 ```
-The big difference from the other access methods is that the `cursor` 
+
+The big difference from the other access methods is that the `cursor`
 *will never become empty*. However, once you have read to the end of the feed
 and there is no new data available, you will receive the same cursor over again
 and an empty `items` list. In this case, wait for some time (seconds or minutes
@@ -398,17 +402,16 @@ entry on the ledger date, *if* a payout is made. So:
 * Fetch data for that date from `GET:/report/v2/ledgers/<ledgerId>/funds/dates/<date>`
 * Does the funds report for that date end with a `scheduled-for-payout` entry?
   * If yes, stop.
-  * If no, no payout was made at the end of the day (eg.., negative balance, weekly/monthly settlement, etc.)
+  * If no, no payout was made at the end of the day (e.g., negative balance, weekly/monthly settlement, etc.)
     Proceed to the next date and include this in the *same* report.
 
 Using the example figure above, these steps will produce:
 
 * Report for payout 2000101:
-    * `.../dates/2022-09-01/funds`
+  * `.../dates/2022-09-01/funds`
 * Report for payout 2000102:
-    * `.../dates/2022-09-02/funds`
-    * `.../dates/2022-09-03/funds`
-
+  * `.../dates/2022-09-02/funds`
+  * `.../dates/2022-09-03/funds`
 
 ## Entry type reference
 
@@ -417,7 +420,7 @@ more entry types being added in the future. Such new entry types will not cause
 upgrade of the API version.
 
 **Please note:**
-You should be prepared to receive a new *entryType* that you do not
+You should be prepared to receive a new `entryType` that you do not
 already know about. The introduction of a new
 entry type will not be considered an API change.
 The important thing is always the contribution that `amount` makes to the
@@ -434,7 +437,7 @@ In some of the other APIs we distinguish between two
 types of payment flows: The "sale" flow for an immediate purchase,
 and "reserve/capture" flow for where one first receives a reservation,
 and then capture it fully or partially at a later point. In the `/funds` endpoint
-both of these are denoted with a entryType of "capture".
+both of these are denoted with a `entryType` of `capture``.
 
 #### refund
 
@@ -451,8 +454,8 @@ This entry type is present *both* on the `/funds` reports (negative) and the `/f
 
 #### scheduled-for-payout
 
-Indicates that a payout has been scheduled from the ledger;
-as [described above](#payout-scheduling-and-delays).
+Indicates that a payout has been scheduled from the ledger,
+as described in [Payout delay](#payout-delay).
 
 #### payout-aborted
 
@@ -478,10 +481,10 @@ The `reference` has the same value as the corresponding capture.
 
 #### correction
 
-A `correction` entryType indicates a fully manual adjustment of the balance
+A `correction` entry type indicates a fully manual adjustment of the balance
 to resolve some unexpected problem. Normally you should expect to have received
 communication about the nature of the incident if this is ever
-present. Feel free to contact Vipps Mobilepay support for further details
+present. Feel free to contact Vipps MobilePay support for further details
 if you see this and do not know why.
 
 #### top-up
@@ -490,7 +493,6 @@ A deposit ("top-up") of the account, by the merchant directly transferring
 funds to it. For instance if the merchant's balance on the ledger is negative
 for a while, an invoice can be sent prompting the merchant to pay money to
 Vipps MobilePay; i.e., topping up their account so that the balance becomes positive.
-
 
 ### /fees entry types
 
