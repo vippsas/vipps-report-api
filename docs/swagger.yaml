@@ -125,6 +125,10 @@ paths:
         and interpret HTTP 404 as a signal to try again later.
 
       parameters:
+        - $ref: '#/components/parameters/Vipps-System-Name'
+        - $ref: '#/components/parameters/Vipps-System-Version'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
         - in: path
           name: LedgerId
           required: true
@@ -175,6 +179,10 @@ paths:
         become en empty list. One should retry to fetch the same `cursor` until new data and a new `cursor` will be returned.
         Unless in the need of data with low latency try not to poll the endpoint too often and effectively batch your reports.
       parameters:
+        - $ref: '#/components/parameters/Vipps-System-Name'
+        - $ref: '#/components/parameters/Vipps-System-Version'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
         - in: path
           name: LedgerId
           required: true
