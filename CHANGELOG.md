@@ -41,12 +41,12 @@ To learn about API versioning, see
     * For net settlements, an adjustment of the ledger balance is included as a sum row.
       There is typically once such row per day, although details of this will vary according to when
       Vipps MobilePay legally collects the fees (`entryType` of `fees-retained`).
-  * The `?inPayout` feature has been removed; we recommend to instead fetch data per
+  * The `inPayout` argument to `/ledgertransactions` has no equivalent in the new API. We recommend to instead fetch data per
     date.
     * We *may* add the feature back if there is enough popular demand for it,
       in that case as a separate `payouts` path alongside `feed`
       and `dates`.
-  * The `?sincePayout` has been removed and appears to be unused
+  * The `sincePayout` argument to `/ledgertransactions` has been removed and appears to be unused.
 
 ## History
 
