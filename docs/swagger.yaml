@@ -127,23 +127,23 @@ paths:
       parameters:
         - in: path
           name: LedgerId
+          required: true
           schema:
             type: string
-            required: true
             description: Ledger ID provided by GET:/settlement/v1/ledgers
         - in: path
           name: LedgerDate
+          required: true
           schema:
             type: string
-            required: true
             pattern: '^\d{4}-\d{2}-\d{2}'
             description: Date in format yyyy-MM-dd
         - in: path
           name: Account
+          required: true
           schema:
             type: string
             enum: ["funds", "fees"]
-            required: true
             description: One of `funds`, `fees`
         - in: query
           required: false
@@ -177,16 +177,16 @@ paths:
       parameters:
         - in: path
           name: LedgerId
+          required: true
           schema:
             type: string
-            required: true
             description: Ledger ID provided by GET:/settlement/v1/ledgers
         - in: path
           name: Account
+          required: true
           schema:
             type: string
             enum: ["funds", "fees"]
-            required: true
             description: One of `funds`, `fees`
         - in: query
           required: false
