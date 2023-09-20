@@ -10,8 +10,9 @@ pagination_prev: null
 
 # Report API
 
-Feedback? Great! You can
-[submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues).
+![Vipps](./images/vipps.png) *All the features are available for Vipps.*
+
+![MobilePay](./images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
 ## Report API documentation
 
@@ -31,3 +32,6 @@ for information about API keys, product activation, and the test environment.
 * As of this writing, only version 1 is available in production. The version 1
   is considered a *beta version* and support will be removed within some months.
 * Version 2 of the API will be available within some weeks.
+
+Feedback? Great! You can
+[submit an issue on GitHub](https://github.com/vippsas/vipps-report-api/issues).
