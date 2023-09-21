@@ -8,7 +8,7 @@ pagination_next: Null
 
 # API guide
 
-![Vipps](../images/vipps.png) *All the features are available for Vipps.*
+![Vipps](../images/vipps.png) *Available for Vipps. New features may be provided in the future.*
 
 ![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
