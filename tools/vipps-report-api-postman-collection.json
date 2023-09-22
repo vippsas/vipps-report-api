@@ -31,7 +31,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{OcpApimSubscriptionKey}}"
 					},
 					{
 						"key": "Merchant-Serial-Number",
@@ -83,7 +83,7 @@
 				"header": [
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"value": "{{OcpApimSubscriptionKey}}",
 						"type": "default"
 					},
 					{
@@ -144,7 +144,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"value": "{{OcpApimSubscriptionKey}}",
 						"type": "default"
 					},
 					{
