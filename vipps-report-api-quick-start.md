@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 Be aware that these are running on the production server, <https://api.vipps.no>.
 
-🔥 **Don't store production keys in the cloud version of Postman, because this introduces a risk of exposure.** 🔥
+🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
 
 The examples use standard example values that you must change to
 use *your* values. This includes API keys, HTTP headers, reference, etc.
