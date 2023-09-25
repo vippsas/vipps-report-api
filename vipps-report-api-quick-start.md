@@ -19,8 +19,8 @@ Be aware that these are running on the production server, <https://api.vipps.no>
 
 🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
 
-The examples use standard example values that you must change to
-use *your* values. This includes API keys, HTTP headers, reference, etc.
+The provided example values in this guide must be changed with the values for your test sales unit and user.
+This applies for API keys, HTTP headers, reference, phone number, etc.
 
 ## Getting your ledgers
 
