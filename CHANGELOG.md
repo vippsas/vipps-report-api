@@ -24,10 +24,10 @@ To learn about API versioning, see
   of using the endpoint, we provide different endpoints for different ways
   of fetching/synchronizing the data.
 * In total, `GET:/ledgertransactions` is replaced by the following:
-  * `GET:/ledgers/<ledgerId>/funds/feed` 
-  * `GET:/ledgers/<ledgerId>/funds/dates/<ledgerDate>`
-  * `GET:/ledgers/<ledgerId>/fees/feed`
-  * `GET:/ledgers/<ledgerId>/fees/dates/<ledgerDate>`
+  * `GET:/ledgers/{ledgerId}/funds/feed`
+  * `GET:/ledgers/{ledgerId}/funds/dates/{ledgerDate}`
+  * `GET:/ledgers/{ledgerId}/fees/feed`
+  * `GET:/ledgers/{ledgerId}/fees/dates/{ledgerDate}`
 * While all the above endpoints are very similar to the old `/ledgertransactions` endpoint, there are some cosmetic changes:
   * `transactionId` has been renamed `pspReference` to be consistent with the [ePayment API](https://developer.vippsmobilepay.com/api/epayment/).
   * `orderId` has been renamed `reference` to be consistent with the [ePayment API](https://developer.vippsmobilepay.com/api/epayment/).

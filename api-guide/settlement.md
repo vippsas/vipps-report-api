@@ -27,7 +27,7 @@ processes.
 The exact details of the settlement process (e.g., the delay before the money
 is received) is subject to the agreement between the merchant and Vipps MobilePay.
 Please see [Common topics: Settlements](https://developer.vippsmobilepay.com/docs/settlements)
-for more details about settlements in general.
+for more general details about settlements.
 
 ### Ledger transactions and balances
 
@@ -266,7 +266,7 @@ ledgers appear for different customers as they
 ### Paging and cursors
 
 All the report endpoints at
-`GET:/report/v2/ledgers/<ledgerId>/...` have a response on this form:
+`GET:/report/v2/ledgers/{ledgerId}/...` have a response on this form:
 
 ```json
 {
@@ -319,7 +319,7 @@ diagram:
 
 #### Method 1: Fetching a complete report for each date
 
-The endpoints `GET:/report/v2/ledgers/<ledgerId>/<Account>/dates/<LedgerDate>`
+The endpoints `GET:/report/v2/ledgers/{ledgerId}/{account}/dates/{ledgerDate}`
 offer a complete report per *ledger date*; indicated by blue in the diagram
 above. Normally, a ledger date
 lasts from midnight to midnight in the timezone of the merchant, but it
@@ -332,7 +332,7 @@ again later. For instance, if you have data until the point 2023-08-01, then you
 periodically do a request to:
 
 ```sh
-GET:/report/v2/ledgers/<ledgerId>/funds/dates/2023-08-02
+GET:/report/v2/ledgers/{ledgerId}/funds/dates/2023-08-02
 ```
 
 This will return an HTTP status code of `404` until the data is available, at which
@@ -368,7 +368,7 @@ may require some more sophistication in the logic for fetching reports.
 The endpoint indicates single "infinite" report, the "feed":
 
 ```sh
-GET:/report/v2/ledgers/<ledgerId>/funds/feed
+GET:/report/v2/ledgers/{ledgerId}/funds/feed
 ```
 
 The big difference from the other access methods is that the `cursor`
@@ -400,7 +400,7 @@ of ledger dates. And, the `scheduled-for-payout` entry will always be the last
 entry on the ledger date, *if* a payout is made. So:
 
 * Look up the last date for which you do not have a report
-* Fetch data for that date from `GET:/report/v2/ledgers/<ledgerId>/funds/dates/<date>`
+* Fetch data for that date from `GET:/report/v2/ledgers/{ledgerId}/funds/dates/<date>`
 * Does the funds report for that date end with a `scheduled-for-payout` entry?
   * If yes, stop.
   * If no, no payout was made at the end of the day (e.g., negative balance, weekly/monthly settlement, etc.)
