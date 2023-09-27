@@ -31,29 +31,34 @@ on API keys for more information on future plans for partner keys).
 ## What are the benefits of the Report API over the SFTP service?
 
 The
-[SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
+[Vipps SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
 lets merchants and partners download settlement files by SFTP.
 
 The Report API has some benefits over this:
 
-* Data can be retrieved at any time.
+* Accounting partners have one set of API keys for all their merchants:
+  [Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/#types-of-partner-keys).
+  The accounting keys can not be used to make payments, and merchants are therefore
+  allowed to share them with the accounting partner (API keys that can be used for payments must never be shared).
+* Merchant can easily
+  [give access to an accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner)
+  on
+  [portal.vipps.no](https://portal.vipps.no)
+  with no coding by the merchant or the accounting partner.
+  * The SFTP service required each merchant to enter the accounting partner's SSH key.
+    Some merchants even shared their API keys, which enable the accounting partner to
+    make payments, which is not allowed.
+* Data can be retrieved at any time, for any time period.
+  * The SFTP service only offered daily data: One file per day.
 * Data is available regardless of whether the balance is positive or negative,
   so even if there have only been refunds, there will be data available.
-* The SFTP service only provides settlement files if the balance is positive.
+  * The SFTP service only provided settlement data when the balance was positive.
 * It is possible to retrieve data for more than one day in a request,
-  so you could, for example, retrieve an entire weekend, week, or month.
-* The SFTP service only provides one file per day.
+  for example for an entire weekend, week, or month.
+  * The SFTP service only provided one file per day.
 * The data is in JSON format, making it easy to use in different ways.
+  * The SFTP service offered XML, XSLX, CSV and PDF, but most users now want JSON.
 
-Later:
-
-* Support for
-  [Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys),
-  so an accounting partner can use its API keys for all its merchants.
-* Functionality on
-  [portal.vipps.no](https://portal.vipps.no).
-  for merchants to
-  [give access to an accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview#give-access-to-an-accounting-partner).
 
 ## What information can I get hold of?
 
