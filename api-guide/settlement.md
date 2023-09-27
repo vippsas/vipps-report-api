@@ -319,7 +319,7 @@ diagram:
 
 #### Method 1: Fetching a complete report for each date
 
-The endpoints `GET:/report/v2/ledgers/{ledgerId}/{account}/dates/{ledgerDate}`
+The endpoints `GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`
 offer a complete report per *ledger date*; indicated by blue in the diagram
 above. Normally, a ledger date
 lasts from midnight to midnight in the timezone of the merchant, but it
