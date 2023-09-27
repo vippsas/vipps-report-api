@@ -340,15 +340,15 @@ GET:/report/v2/ledgers/{ledgerId}/funds/dates/2023-08-02
 Response:
 ```json
 {
-  "tryLater": true, 
-  "items": []
+  "cursor": "",
+  "items": [],
+  "tryLater": true
 }
 ```
 Eventually when the report is ready, you will instead receive a response with data,
 such as:
 ```json
 {
-  "tryLater": false,
   "cursor": "Mw==",
   "items": [
     {
@@ -372,8 +372,9 @@ such as:
       "recipientHandle": "NO:12345",
       "balanceAfter": 30000,
       "balanceBefore": 10000
-    },
-  ]
+    }
+  ],
+  "tryLater": false,
 }
 ```
 **Please note**: In this example, `"cursor"` is not an empty string but contains a value.
