@@ -20,13 +20,8 @@ For more common questions, see:
 
 ## What is the status of the API?
 
-The Report API is currently in public beta.
-It is unlikely to change, but
-there may be smaller changes made still. We expect a final freeze of the
-API before summer 2023.
-
-Currently, we only support single-MSN API keys (see the question below
-on API keys for more information on future plans for partner keys).
+The Report API v2 will be available in October 2023.
+The API documentation is available now.
 
 ## What are the benefits of the Report API over the SFTP service?
 
@@ -158,7 +153,7 @@ You can find the latest number in the sequence used so far from
 Each Ledger has both the first and last payout used on it:
 `firstPayout` and `lastPayout`.
 
-## How can I get access to the API?
+## How can a merchant get access to the API?
 
 The API is available for sales units that already have access to any other Vipps MobilePay API.
 
@@ -166,18 +161,30 @@ If you do not already have API access, you cannot get access to the Report API.
 This is the case if you only have a *Vippsnummer* sales unit, since those
 sales units have no API access.
 
+## How can an accounting partner get access to the API?
+
+Accounting partners must use their
+[accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/#types-of-partner-keys).
+
+**Important:** Merchants are not allowed to share API keys with partners that have not been approved by
+Vipps MobilePay, as we are strictly regulated and must know who can make payments using our APIs.
+
+Accounting companies can use the
+[form on vipps.no](https://www.vipps.no/developer/become-a-partner/)
+to become an accounting partner.
+
+Merchants select their accounting partner on portal.vipps.no as described here:
+[Give access to an accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner).
+
 ## Which API keys give access to the API?
 
-For now: The following API keys give access to the Report API:
+The following API keys give access to the Report API:
 
 * The merchant's own API keys: The same API keys that are used to make payments, etc. See
   [API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys).
-
-Later (we can not give an ETA, but will update here):
-
-* [Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys):
-  The API keys that are used by partners to make payments on behalf of their merchants.
-* Accounting partner's API keys: The API keys provided to the accounting partner
+  Only the merchant can use these API keys with the Report API.
+* [Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys):
+  The API keys provided to the accounting partner
   when the partner signed a contract with Vipps MobilePay. The accounting partner's
   API keys only work for sales units after the merchant has
   [given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
@@ -194,28 +201,7 @@ When a merchant shares its API keys for a sales unit with an integration partner
 we have no way of knowing whether the API calls are made by the merchant or
 the integration partner.
 This is why we require that all API requests made by a partner on behalf of a
-merchant are done using the partner's own API keys (the partner keys).
-
-### Partner keys
-
-**Please note:**
-[Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
-are not yet supported by the Report API,
-only [the merchant's own API keys](#the-merchants-own-api-keys)
-can be used.
-This notice will be removed when partner keys are supported.
-Subscribe to the
-[Technical newsletter](https://developer.vippsmobilepay.com/docs/newsletters)
-for updates.
-
-Partner keys let a partner make payments on behalf of a merchant, and the same API keys
-also give access to the Report API.
-
-If the merchant has a sales unit that is configured with a
-[platform partner](https://developer.vippsmobilepay.com/docs/partner#partner-types),
-the platform partner can use
-[partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
-to make requests to the Report API.
+merchant are done using the partner's own API keys (the accounting keys).
 
 ### Specifying an accounting partner
 
