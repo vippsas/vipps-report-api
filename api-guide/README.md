@@ -8,8 +8,12 @@ pagination_next: Null
 
 # API guide
 
+![Vipps](../images/vipps.png) *Available for Vipps. New features may be provided in the future.*
+
+![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
+
 The Report API can provide you with information about your payments with Vipps. In particular, it is used to
-aggregate information across the Vipps APIs and it can contain data for many
+aggregate information across the API platform, and it can contain data for many
 payments at once.
 
 The following topics are described:
@@ -24,4 +28,3 @@ asynchronous and trailing behind the other APIs. It is usually behind
 by a second or so, but if there are operational problems, it could, in the worst
 case, be behind by several hours. Therefore, you should always use other
 Vipps APIs as the source of truth for the status of an operation.
-

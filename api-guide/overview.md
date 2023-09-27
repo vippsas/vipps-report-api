@@ -10,20 +10,19 @@ pagination_next: Null
 
 ## Authenticating to the Report API
 
-Currently, access to the Report API is only provided through
-using the merchant's API key that grant access to a single MSN.
-See
-[Which API keys give access to the API?](../vipps-report-api-faq.md#which-api-keys-give-access-to-the-api)
-for details about these.
+The Report API is available for sales units that have access to the Vipps MobilePay API platform.
+If you are new to the platform, see [Getting started](https://developer.vippsmobilepay.com/docs/getting-started).
 
-See:
+Access to the Report API is provided through the merchant's API keys which grant access to a single Merchant Serial Number (MSN).
 
-* [How can I get access to the API?](../vipps-report-api-faq.md#how-can-i-get-access-to-the-api)
-* [Getting started: Get an access token](https://developer.vippsmobilepay.com/docs/getting-started#get-an-access-token)
+Individual merchants may use their API keys to access a single ledger connected to the sales unit (identified with MSN).
+A ledger may have multiple sales unit associated; however, access will only be provided to the ledger connected to the MSN.
 
-### Planned accounting partner functionality
+Note, *Vippsnummer* sales units don't have API access and thus have no availability to use this API.
 
-(DRAFT)
+## Planned accounting partner functionality
+
+(*Available approximately Q4 2023*)
 
 We are currently working on providing partners access to the API,
 and such support will be launched in the future.
@@ -31,23 +30,17 @@ There is a second planned way to connect to the Report API:
 
 * Using an Accounting partner's API keys
 
-### Using the merchant's API keys
 
-Individual merchants that have API keys
-for using the eCom/ePayment APIs may use this to access a single
-ledger connected to the sales unit (identified with MSN). If there
-is more than one sales unit connected to the ledger, access will be denied.
+### Give access to an accounting partner
 
-## Give access to an accounting partner
-
-(DRAFT)
+(*Available approximately Q4 2023*)
 
 Merchants must give access to their accounting partner on
 [portal.vipps.no](https://portal.vipps.no).
 
 ### Overview of accounting partners
 
-(DRAFT)
+(*Available approximately Q4 2023*)
 
 A merchant may have zero or more accounting partners. This page on
 [portal.vipps.no](https://portal.vipps.no)
@@ -57,7 +50,7 @@ shows the accounting partners for one sales unit.
 
 ### Adding a new accounting partner
 
-(DRAFT)
+(*Available approximately Q4 2023*)
 
 This page on
 [portal.vipps.no](https://portal.vipps.no)
@@ -65,3 +58,4 @@ shows how to add an accounting partners, and how to specify which ledgers the
 accounting partner will have access to.
 
 ![Add a new accounting-partner](../images/portal-accounting-partners-edit.png "Add a new accounting partner")
+<!-- END_COMMENT -->
