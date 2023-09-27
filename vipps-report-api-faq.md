@@ -80,7 +80,17 @@ that have API access (which *Vippsnummer* sale units do not have.)
 Unfortunately not because the
 [test environment](https://developer.vippsmobilepay.com/docs/test-environment)
 does not have the backend systems necessary to offer the Report API.
+
 The only way to test the Report API is in the production environment.
+
+Since the Report API is read-only, and the overall logic is very simple
+(first ask for data, then receive that data), developing and testing in
+the production environment is straight-forward.
+
+Implementing the Report API in the test environment is a big effort,
+as there are no settlements being made in that environment. The data that
+the Report API needs is simply not available.
+It is unlikely that we'll be able to prioritize this over other development efforts.
 
 ## Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
 
