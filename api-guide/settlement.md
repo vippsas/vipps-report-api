@@ -332,16 +332,53 @@ can be configured to other cutoffs such as 04:00 to 04:00.
 
 On this endpoint, no data is available until the entire ledger date is complete.
 Your code should be written to periodically poll for a report for the next
-date you do not have a report on, and interpret HTTP 404 as a signal to try
-again later. For instance, if you have data until the point 2023-08-01, then you want to
-periodically do a request to:
-
+date you do not have a report on. You will then initially recieve a response
+indicating that the report is not yet ready; example call:
 ```sh
 GET:/report/v2/ledgers/{ledgerId}/funds/dates/2023-08-02
 ```
-
-This will return an HTTP status code of `404` until the data is available, at which
-point it will return HTTP status `200` and the first page of data.
+Response:
+```json
+{
+  "tryLater": true, 
+  "items": []
+}
+```
+Eventually when the report is ready, you will instead receive a response with data,
+such as:
+```json
+{
+  "tryLater": false,
+  "cursor": "Mw==",
+  "items": [
+    {
+      "pspReference": "22342342342",
+      "time": "2023-09-27T14:11:12.640000Z",
+      "entryType": "capture",
+      "reference": "order-123",
+      "currency": "NOK",
+      "amount": 10000,
+      "recipientHandle": "NO:12345",
+      "balanceAfter": 10000,
+      "balanceBefore": 0
+    },
+    {
+      "pspReference": "22342342342",
+      "time": "2023-09-27T14:11:12.640000Z",
+      "entryType": "refund",
+      "reference": "order-123",
+      "currency": "NOK",
+      "amount": 20000,
+      "recipientHandle": "NO:12345",
+      "balanceAfter": 30000,
+      "balanceBefore": 10000
+    },
+  ]
+}
+```
+**Please note**: In this example, `"cursor"` is not an empty string but contains a value.
+This indicates that the provided `items` is not the full list of data, and that you need
+to do another call to continue fetching more data. See the section on [paging and cursors](#paging-and-cursors).
 
 In the most typical scenario, the balance is zero at the start of a day, funds
 are accumulated, and the day ends with a `scheduled-for-payout` entry that
@@ -378,12 +415,17 @@ GET:/report/v2/ledgers/{ledgerId}/funds/feed
 ```
 
 The big difference from the other access methods is that the `cursor`
-*will never become empty*. However, once you have read to the end of the feed
-and there is no new data available, you will receive the same cursor over again
-and an empty `items` list. In this case, wait for some time (seconds or minutes
-or hours depending on your
-traffic level) and then retry using the same cursor; once new data is available
-(if only a single capture) it will be returned.
+*will never become empty*. Once you have read to the end of the feed
+and there will be no more data available, you will receive:
+1) the same cursor over again
+2) the `tryLater` field will be set to `true`
+
+It may or may not be that the `items` list is empty when hitting the
+end of the feed in this manner. If you get a response where `tryLater` is true,
+please wait some time (seconds or minutes
+or hours depending on your traffic level) and then retry using the same cursor.
+If `tryLater` is false more data is immediately available if you pass in the provided
+cursor.
 
 If you poll the endpoint too often, and unless you represent a very high volume
 merchant, you will end up downloading either 0 or 1 entries

@@ -312,6 +312,16 @@ components:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Transaction"
+              tryLater:
+                type: boolean
+                example: false
+                description: |-
+                  Indicates that data is not yet available, and that you should pause for some time
+                  before trying again. For the `.../feed` endpoint this means you are at the
+                  end of the feed; wait at least a second before continuing to consume the feed
+                  like normal. For the `.../dates/...` endpoint it means that the date has not
+                  yet been "closed" so that the report is not complete; try the same request
+                  again in at least half an hour.
     500:
       description: Server error
       content:
