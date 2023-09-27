@@ -59,16 +59,6 @@ The Report API has some benefits over this:
 * The data is in JSON format, making it easy to use in different ways.
   * The SFTP service offered XML, XSLX, CSV and PDF, but most users now want JSON.
 
-Later:
-
-* Support for
-  [Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys),
-  so an accounting partner can use its API keys for all its merchants.
-* Functionality on
-  [portal.vipps.no](https://portal.vipps.no).
-  for merchants to
-  [give access to an accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview#give-access-to-an-accounting-partner).
-
 ## What information can I get hold of?
 
 Right now the only data that is available is the same data that is already
