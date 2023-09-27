@@ -18,15 +18,11 @@ For more common questions, see:
 
 * [API General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
 
-## What is the status of the API?
-
-The Report API v2 will be available in October 2023.
-The API documentation is available now.
 
 ## What are the benefits of the Report API over the SFTP service?
 
 The
-[Vipps SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
+[SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
 lets merchants and partners download settlement files by SFTP.
 
 The Report API has some benefits over this:
@@ -161,11 +157,14 @@ The following API keys give access to the Report API:
 * The merchant's own API keys: The same API keys that are used to make payments, etc. See
   [API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys).
   Only the merchant can use these API keys with the Report API.
-* [Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys):
-  The API keys provided to the accounting partner
-  when the partner signed a contract with Vipps MobilePay. The accounting partner's
-  API keys only work for sales units after the merchant has
-  [given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
+
+In the future, *approximately Q4 2023*,
+[Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys) will provide access.
+The API keys provided to the accounting partner
+when the partner signed a contract with Vipps MobilePay. The accounting partner's
+API keys only work for sales units after the merchant has
+[given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
+
 
 ### The merchant's own API keys
 
