@@ -189,7 +189,7 @@ paths:
         - /report/v2/ledgers
       summary: Fetch report by feed
       description: |-
-        Continuous stream of data. Upon reaching the end of the feed the `cursor` will not become empty and `items` can 
+        Continuous stream of data. Upon reaching the end of the feed, the `cursor` will not become empty and `items` can 
         become en empty list. One should retry to fetch the same `cursor` until new data and a new `cursor` will be returned.
         Unless in the need of data with low latency try not to poll the endpoint too often and effectively batch your reports.
       parameters:
