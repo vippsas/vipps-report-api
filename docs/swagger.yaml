@@ -137,20 +137,20 @@ paths:
         - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
         - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
         - in: path
-          name: LedgerId
+          name: ledgerId
           required: true
           schema:
             type: string
             description: Ledger ID provided by GET:/settlement/v1/ledgers
         - in: path
-          name: LedgerDate
+          name: ledgerDate
           required: true
           schema:
             type: string
             pattern: '^\d{4}-\d{2}-\d{2}'
             description: Date in format yyyy-MM-dd
         - in: path
-          name: Account
+          name: account
           required: true
           schema:
             type: string
@@ -198,13 +198,13 @@ paths:
         - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
         - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
         - in: path
-          name: LedgerId
+          name: ledgerId
           required: true
           schema:
             type: string
             description: Ledger ID provided by GET:/settlement/v1/ledgers
         - in: path
-          name: Account
+          name: account
           required: true
           schema:
             type: string
