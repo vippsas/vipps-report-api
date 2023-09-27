@@ -33,8 +33,7 @@ The Report API has some benefits over this:
 
 * Accounting partners have one set of API keys for all their merchants:
   [Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/#types-of-partner-keys).
-  The accounting keys can not be used to make payments, and merchants are therefore
-  allowed to share them with the accounting partner (API keys that can be used for payments must never be shared).
+  The accounting keys can not be used to make payments.
 * Merchant can easily
   [give access to an accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner)
   on
