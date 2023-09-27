@@ -48,7 +48,7 @@ adjusting the balance down to zero.
 ![Funds account illustration](../images/ledger-balance-simple.png)
 
 This example may look as follows if the data returned from
-`GET:https://api.vipps.no/report/v2/ledgers/12345/funds/dates/2022-10-01` is displayed
+[`GET:/report/v2/ledgers/12345/funds/dates/2022-10-01`][fetch-report-by-date-endpoint] is displayed
 as a table:
 
 | ledgerDate | entryType            |  amount | reference                          | pspReference               | recipientHandle | time                            | balanceBefore | balanceAfter |
@@ -71,10 +71,12 @@ This example shows:
   the money is gone from the ledger balance.
 
 Above, only the total fees for the settlement period are included.
-If you require further specification of the fees charged, these are available on
-a separate endpoint `.../fees`.
+If you require further specification of the fees charged, these are available from
+the [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BLedgerId%7D~1%7BAccount%7D~1dates~1%7BLedgerDate%7D/get) endpoint,
+where `{topic}` is `fees`.
+
 Continuing on the example above, this may be the result of a call to
-`GET:https://api.vipps.no/report/v2/ledgers/12345/fees/dates/2022-10-01`:
+`GET:/report/v2/ledgers/12345/fees/dates/2022-10-01`:
 
 | ledgerDate | entryType            | amount | reference                   | pspReference               | recipientHandle | time                            | balanceBefore | balanceAfter |
 |------------|----------------------|-------:|-----------------------------|----------------------------|-----------------|---------------------------------|--------------:|-------------:|
@@ -85,13 +87,13 @@ Continuing on the example above, this may be the result of a call to
 
 Note that:
 
-* `pspReference` can be used to correlate between `/funds` and `/fees`.
-  * Note that, while each `capture` on `/funds` has a unique `pspReference`, it is possible
-    to have *several* fees on `/fees` related to the same `pspReference`.
+* `pspReference` can be used to correlate between `funds` and `fees`.
+  * Note that, while each `capture` shown for the topic of `funds` has a unique `pspReference`, it is possible
+    to have *several* fees on `fees` related to the same `pspReference`.
 * The `fees-retained` entry will always appear at the same time on both endpoints and have opposing
-  signs (money is moved from the `/funds` *account* and put on the `/fees` account).
+  signs (money is moved from the `funds` *account* and put on the `fees` account).
 
-**Please note:** In general for both `/fees` and `/funds`, it is important to
+**Please note:** In general, for both `fees` and `funds`, it is important to
 be prepared for new entry types. The reference of entry types is at the bottom
 of this page, *but new types can be added to the API later without prior warning*.
 
@@ -265,8 +267,10 @@ ledgers appear for different customers as they
 
 ### Paging and cursors
 
-All the report endpoints at
-`GET:/report/v2/ledgers/{ledgerId}/...` have a response on this form:
+The
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
+endpoint has a response in this form:
+
 
 ```json
 {
@@ -319,8 +323,9 @@ diagram:
 
 #### Method 1: Fetching a complete report for each date
 
-The endpoints `GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`
-offer a complete report per *ledger date*; indicated by blue in the diagram
+The
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
+endpoint offers a complete report per *ledger date*; indicated by blue in the diagram
 above. Normally, a ledger date
 lasts from midnight to midnight in the timezone of the merchant, but it
 can be configured to other cutoffs such as 04:00 to 04:00.
@@ -365,7 +370,8 @@ if desired.
 We recommend this way of fetching data in general. Just be aware that it
 may require some more sophistication in the logic for fetching reports.
 
-The endpoint indicates single "infinite" report, the "feed":
+The [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
+endpoint indicates single "infinite" report, the "feed":
 
 ```sh
 GET:/report/v2/ledgers/{ledgerId}/funds/feed
@@ -393,14 +399,17 @@ What about a specification for the payout to the bank account of the merchant?
 We don't recommend relying on such a report because it will lead to
 sudden "radio silence" if there is negative balance for an extended period of time.
 However, if you need such a specification anyway, it is easy enough to
-do yourself using the  `.../dates/...` endpoint.
+do yourself using the
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
+endpoint.
 
 Each payout (settlement bank transfer) will always consist of a whole number
 of ledger dates. And, the `scheduled-for-payout` entry will always be the last
 entry on the ledger date, *if* a payout is made. So:
 
 * Look up the last date for which you do not have a report
-* Fetch data for that date from `GET:/report/v2/ledgers/{ledgerId}/funds/dates/<date>`
+* Fetch data for that date from
+  [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint], where `{topic}` is `funds`.
 * Does the funds report for that date end with a `scheduled-for-payout` entry?
   * If yes, stop.
   * If no, no payout was made at the end of the day (e.g., negative balance, weekly/monthly settlement, etc.)
@@ -510,3 +519,8 @@ A fee charged for a capture.
 If *gross/non-retained settlements* has been configured, then the fees
 are invoiced on a monthly basis, and the fees balance is adjusted
 using this entry type.
+
+
+[get-ledgers-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/settlementv1/operation/getLedgers
+[fetch-report-by-date-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BLedgerId%7D~1%7BAccount%7D~1dates~1%7BLedgerDate%7D/get
+[fetch-report-by-feed-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BLedgerId%7D~1%7BAccount%7D~1feed/get
