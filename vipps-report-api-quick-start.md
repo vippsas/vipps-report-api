@@ -77,7 +77,7 @@ curl https://api.vipps.no/settlement/v1/ledgers \
 ### Step 4 - Get all ledgers
 
 Send
-[`GET:/report/v1/ledgertransactions`](https://developer.vippsmobilepay.com/api/report#/paths/~1report~1v1~1ledgertransactions/get)
+[`GET:/report/v1/ledgertransactions`][get-ledgers-endpoint]
 for a list of payments/transactions.
 
 Set `ledgerDate` to a value in format YYYY-MM-DD `2022-10-01`.
@@ -96,3 +96,9 @@ curl https://api.vipps.no/report/v1/ledgertransactions?ledgerDate={ledgerDate}&l
 ## Next Steps
 
 See the [Report API guide](./api-guide/README.md) to read about the concepts and details.
+
+
+
+[get-ledgers-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/settlementv1/operation/getLedgers
+[fetch-report-by-date-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1dates~1%7BledgerDate%7D/get
+[fetch-report-by-feed-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get
