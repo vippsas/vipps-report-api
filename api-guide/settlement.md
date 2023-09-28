@@ -332,12 +332,15 @@ can be configured to other cutoffs such as 04:00 to 04:00.
 
 On this endpoint, no data is available until the entire ledger date is complete.
 Your code should be written to periodically poll for a report for the next
-date you do not have a report on. You will then initially recieve a response
-indicating that the report is not yet ready; example call:
+date you don't already have one. You will then initially receive a response
+indicating that the report is not yet ready.
+
+Here is an example call:
 ```sh
 GET:/report/v2/ledgers/{ledgerId}/funds/dates/2023-08-02
 ```
 Response:
+
 ```json
 {
   "cursor": "",
@@ -345,8 +348,9 @@ Response:
   "tryLater": true
 }
 ```
-Eventually when the report is ready, you will instead receive a response with data,
+Eventually when the report is ready, you will receive a response with data,
 such as:
+
 ```json
 {
   "cursor": "Mw==",
