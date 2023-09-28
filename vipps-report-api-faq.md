@@ -86,9 +86,8 @@ It is unlikely that we'll be able to prioritize this over other development effo
 
 This is not possibly currently.
 
-For now,
-the only way to get the Ledger ID is to call
-[`GET:settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get).
+For now, the only way to get the Ledger ID is to call
+[`GET:settlement/v1/ledgers`][get-ledgers-endpoint].
 
 The Ledger ID does not in general change, so you may store it in configuration
 in the same way that you store the MSN.
@@ -196,3 +195,8 @@ If you keep getting an empty list in a response where you expect data to be avai
 
 * Check if your query-parameters is correct. Are you filtering on the correct date?
 * Do you have access to the resource you are trying to retrieve? If you are trying to retrieve the transactions connected to a ledger you do not have access to, you will be given an empty list
+
+
+[get-ledgers-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/settlementv1/operation/getLedgers
+[fetch-report-by-date-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1dates~1%7BledgerDate%7D/get
+[fetch-report-by-feed-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get
