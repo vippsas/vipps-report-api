@@ -150,7 +150,7 @@ paths:
             pattern: '^\d{4}-\d{2}-\d{2}'
             description: Date in format yyyy-MM-dd
         - in: path
-          name: account
+          name: topic
           required: true
           schema:
             type: string
@@ -204,7 +204,7 @@ paths:
             type: string
             description: Ledger ID provided by GET:/settlement/v1/ledgers
         - in: path
-          name: account
+          name: topic
           required: true
           schema:
             type: string
