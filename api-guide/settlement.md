@@ -91,7 +91,7 @@ Note that:
   * Note that, while each `capture` shown for the topic of `funds` has a unique `pspReference`, it is possible
     to have *several* fees on `fees` related to the same `pspReference`.
 * The `fees-retained` entry will always appear at the same time on both endpoints and have opposing
-  signs (money is moved from the `funds` *account* and put on the `fees` account).
+  signs (money is moved from the `funds` account and put on the `fees` account).
 
 **Please note:** In general, for both `fees` and `funds`, it is important to
 be prepared for new entry types. The reference of entry types is at the bottom
@@ -110,8 +110,8 @@ Fees for the services from Vipps MobilePay can be charged in two ways:
   payouts. The `fees-retained` entry is used to settle the fees, as shown
   in the example above.
 * Gross settlements - The fees are invoiced. In this case, there
-  is no mention of the fees in `.../funds`, while on the `/fees` account
-  a `fees-invoiced` entry indicate that an invoice has been sent for the fees.
+  is no mention of the fees in `/funds`, while on the `/fees` account
+  a `fees-invoiced` entry indicates that an invoice has been sent for the fees.
 
 #### Payout delay
 
@@ -138,7 +138,7 @@ is sent or when it is paid; details may vary).
 
 #### Account diagram
 
-To correctly model these complicating factors, we can use the following *account diagram*:
+To correctly model these complicating factors, we can use the following account diagram:
 ![illustration of all accounts](../images/account-diagram.png)
 
 Note that:
@@ -158,10 +158,12 @@ Note that:
     even if the actual payout did not succeed. If money does not arrive within
     the agreed-upon delay, please contact customer service.
   
-The API endpoints are described further below:
+The topics available at this
+[endpoint](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BLedgerId%7D~1%7BAccount%7D~1dates~1%7BLedgerDate%7D/get) 
+ are described further:
 
-* The `.../funds` endpoints report on the entries on the `/funds` account
-* The `.../fees` endpoints report on the entries on the `/fees` account
+* The `funds` topic reports on the entries on the `/funds` account
+* The `fees` topic reports on the entries on the `/fees` account
 * There is currently no endpoint to report on `/payouts`, but we hope to add
   this in the future.
 
@@ -215,7 +217,7 @@ flowchart LR
 
 The ledger has its own `ledgerId`, so the first step in using this API is
 to fetch the list of ledgers you have access to. If you are integrating a single
-merchant it may be enough to hit this endpoint once manually to identify
+merchant it may be enough to hit [this endpoint][get-ledgers-endpoint] once manually to identify
 the `ledgerId`. An example response from
 [`GET:/settlement/v1/ledgers`][get-ledgers-endpoint]
 is:
@@ -261,7 +263,7 @@ GET:/settlement/v1/ledgers?settlesForRecipientHandles=DK:123456
 ```
 
 If you are integrating an accounting system for many customers, it can be
-relevant to poll this endpoint many times as you will continue to see new
+relevant to poll [this endpoint][get-ledgers-endpoint] many times as you will continue to see new
 ledgers appear for different customers as they
 [grant your accounting system access to their data](overview.md#give-access-to-an-accounting-partner).
 
