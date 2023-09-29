@@ -74,7 +74,7 @@ curl https://api.vipps.no/settlement/v1/ledgers \
 -X GET
 ```
 
-### Step 4 - Get all ledgers
+### Step 4 - Get all ledger transactions
 
 Send
 [`GET:/report/v1/ledgertransactions`][get-ledgers-endpoint]
