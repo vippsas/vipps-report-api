@@ -8,11 +8,11 @@ pagination_next: Null
 
 # API guide
 
-![Vipps](../images/vipps.png) *Available for Vipps. New features may be provided in the future.*
+![Vipps](./images/vipps.png) *Version 1 is available for Vipps. Version 2 is expected in early October 2023.*
 
 ![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
-The Report API can provide you with information about your payments with Vipps. In particular, it is used to
+The Report API can provide you with information about your payments with Vipps MobilePay. In particular, it is used to
 aggregate information across the API platform, and it can contain data for many
 payments at once.
 
