@@ -516,6 +516,11 @@ This entry type is present *both* on the `/funds` reports (negative) and the `/f
 Indicates that a payout has been scheduled from the ledger,
 as described in [Payout delay](#payout-delay).
 
+The `reference` field is set to the reference the bank transfer
+will have in your bank account; for instance:
+
+* Norway: `Utbet. 2000101 Vippsnr 123456`
+
 #### payout-aborted
 
 Indicates that a payout was aborted, and the money put back on the ledger.

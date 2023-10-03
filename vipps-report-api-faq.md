@@ -18,6 +18,15 @@ For more common questions, see:
 
 * [API General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
 
+## How can I match the transfers on the bank account with the reports provided here?
+
+The (settlement) payout to the merchant's bank account will have a unique
+reference on it. For instance in Norway it will typically look like
+`Utb. 2000101 Vippsnr 123456`.
+
+This can be compared with the `reference` field of the `scheduled-for-payout`
+event available in the [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{date}`][fetch-report-by-date-endpoint]
+endpoint.
 
 ## What are the benefits of the Report API over the SFTP service?
 
@@ -67,7 +76,7 @@ that have API access (which *Vippsnummer* sale units do not have.)
 
 ## Is the Report API available for the test environment?
 
-Unfortunately not because the
+Unfortunately not, because the
 [test environment](https://developer.vippsmobilepay.com/docs/test-environment)
 does not have the backend systems necessary to offer the Report API.
 
@@ -84,7 +93,7 @@ It is unlikely that we'll be able to prioritize this over other development effo
 
 ## Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
 
-This is not possibly currently.
+This is not possible currently.
 
 For now, the only way to get the Ledger ID is to call
 [`GET:settlement/v1/ledgers`][get-ledgers-endpoint].
@@ -118,13 +127,6 @@ Once a transaction has appeared on a ledger, it belongs to that ledger forever.
 When an MSN is moved to another ledger, it means that *future* transactions
 will appear on the new ledger. The old transactions appear on the old ledger,
 since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
-
-## Where can I find the settlement ID?
-
-The "payout" corresponds to the `SettlementID` from the
-[XML](https://developer.vippsmobilepay.com/docs/settlements/xml)
-files in the
-[SFTP report service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
 ## How can a merchant get access to the API?
 
@@ -195,7 +197,6 @@ If you keep getting an empty list in a response where you expect data to be avai
 
 * Check if your query-parameters is correct. Are you filtering on the correct date?
 * Do you have access to the resource you are trying to retrieve? If you are trying to retrieve the transactions connected to a ledger you do not have access to, you will be given an empty list
-
 
 [get-ledgers-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/settlementv1/operation/getLedgers
 [fetch-report-by-date-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1dates~1%7BledgerDate%7D/get
