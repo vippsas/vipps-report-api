@@ -8,14 +8,14 @@ pagination_next: Null
 
 # Overview
 
-**Please note:** The Report API is mainly for accounting partners: They will use the API to integrate
-with their accounting systems, enabling their merchants to log in on
-[portal.vipps.no](https://portal.vipps.no)
-and
-[give access to the accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner)
-(without the merchant doing any development).
-Merchants with API access (and API keys) may integrate with the Report API
-directly, but since all merchants should have an accounting system, such integration should not be necessary.
+**Please note:** 
+Please note: The Report API is primarily for accounting partners who will use the API to integrate
+with their accounting systems, allowing them to provide the accounting information to their merchants. 
+Merchants can then simply
+[give access to the accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner),
+without doing any development themselves.
+Merchants who already have API keys for Vipps MobilePay APIs may still integrate with the Report API directly,
+but since all merchants should have an accounting system, such integration should not be necessary.
 
 ## Authenticating to the Report API
 
