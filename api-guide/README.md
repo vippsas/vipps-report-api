@@ -12,8 +12,7 @@ pagination_next: Null
 
 ![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
-The Report API can provide you with information about your payments with Vipps MobilePay. In particular, it is used to
-aggregate information across the API platform, and it can contain data for many
+The Report API provides accounting partners you with information about their merchant's payments. It's used to aggregate information across the API platform, and it can contain data for many
 payments at once.
 
 The following topics are described:

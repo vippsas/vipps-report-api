@@ -14,6 +14,13 @@ pagination_prev: null
 
 ![MobilePay](./images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
+**Please note:**
+The Report API is primarily for accounting partners who will use the API to integrate
+with their accounting systems, allowing them to provide the accounting information to their merchants. 
+Merchants can then simply
+[give access to the accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner),
+without doing any development themselves.
+
 ## Report API documentation
 
 * [API quick start](vipps-report-api-quick-start.md): Run the basic examples in curl and Postman.
