@@ -12,17 +12,7 @@ pagination_next: Null
 
 ![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
-**Please note:** 
-Please note: The Report API is primarily for accounting partners who will use the API to integrate
-with their accounting systems, allowing them to provide the accounting information to their merchants. 
-Merchants can then simply
-[give access to the accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner),
-without doing any development themselves.
-Merchants with API access (and API keys) may still integrate with the Report API directly,
-but since all merchants should have an accounting system, such integration should not be necessary.
-
-The Report API can provide you with information about your payments with Vipps MobilePay. In particular, it is used to
-aggregate information across the API platform, and it can contain data for many
+The Report API provides accounting partners you with information about their merchant's payments. It's used to aggregate information across the API platform, and it can contain data for many
 payments at once.
 
 The following topics are described:
