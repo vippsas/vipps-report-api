@@ -49,7 +49,6 @@ The Report API has some benefits over this:
 * The data is in JSON format, making it easy to use in different ways.
   * The SFTP service offered XML, XSLX, CSV and PDF, but most users now want JSON.
 
-
 ## What information can I get hold of?
 
 Right now the only data that is available is the same data that is already
@@ -94,6 +93,22 @@ in the same way that you store the MSN.
 We may add display of the Ledger ID on
 [portal.vipps.no](https://portal.vipps.no)
 in the future.
+
+## How can I get the details for a payment I see in my bank?
+
+The payout details can be found with the `/funds` endpoint, either under date or
+using the feed. Match the settlement id in the bank with `pspReference`.
+
+The Report API is designed to provide updated data independently of the bank payments. There are several reasons for this, including:
+
+1. A merchant can have a negative balance and not get settlement payouts for a long time.
+   Periodic checks of settlements would thus not make sense until the merchant has a positive again.
+1. Merchants have different risk profiles (or could have at least). If we deemed that we would hold
+   back some of the balance from payouts to an airline company.
+   Let's say they sell three tickets at 5000 NOK each. We then change their risk profile saying we
+   need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
+   (if there are no fees). Now: What captures will then be part of that settlement?
+1. We may, in rare cases, manually correct payouts. 
 
 ## How do I get the settlements for multiple MSNs in the same ledger?
 
