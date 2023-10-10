@@ -41,7 +41,7 @@ paths:
         }
         ```
 
-        The full response example below displays the epayment and eCom case.
+        The full response example below displays the ePayment and eCom case.
 
       tags:
         - /settlement/v1
