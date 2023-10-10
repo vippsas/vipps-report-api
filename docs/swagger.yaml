@@ -449,7 +449,7 @@ components:
           example: '2020-10-05'
         entryType:
           type: string
-          description: The type of transaction..
+          description: The type of transaction.
           enum:
             - refund
             - capture
@@ -483,7 +483,7 @@ components:
           type: string
           description: |-
             Identification of the sales unit that this payment was made to/from.
-            Comtains a country code and id, separated by a colon (':').
+            Contains a country code and id, separated by a colon (':').
           example: "NO:123455"
 
     Organization:
