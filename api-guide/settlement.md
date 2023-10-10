@@ -26,7 +26,7 @@ processes.
 
 The exact details of the settlement process (e.g., the delay before the money
 is received) is subject to the agreement between the merchant and Vipps MobilePay.
-Please see [Common topics: Settlements](https://developer.vippsmobilepay.com/docs/settlements)
+Please see [Knowledge base: Settlements](https://developer.vippsmobilepay.com/docs/settlements)
 for more general details about settlements.
 
 ### Ledger transactions and balances

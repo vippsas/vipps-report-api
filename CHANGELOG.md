@@ -12,7 +12,7 @@ END_METADATA -->
 
 All notable changes to the current API will be documented in this file.
 To learn about API versioning, see
-[Common topics: API Lifecycle](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/api-lifecycle/).
+[API Lifecycle](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/api-lifecycle/).
 
 ## Version 2 compared to version 1
 
