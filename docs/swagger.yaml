@@ -400,7 +400,7 @@ components:
             type: string
             description: |-
               Identification of the sales unit that this payment was made to/from.
-              Comtains a country code and id, separated by a colon (':').
+              Contains a country code and id, separated by a colon (':').
             example: "NO:123455"
     Problem:
       title: Problem
