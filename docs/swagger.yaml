@@ -13,6 +13,7 @@ paths:
   "/settlement/v1/ledgers":
     get:
       summary: Get ledgers
+      deprecated: true
       description: |
         Returns the ledgers you have access to.
 
@@ -46,6 +47,7 @@ paths:
       tags:
         - /settlement/v1
       operationId: getLedgers
+      deprecated: true
       parameters:
         - $ref: "#/components/parameters/JWT"
         - $ref: '#/components/parameters/Vipps-System-Name'
@@ -248,10 +250,11 @@ paths:
   "/report/v1/ledgertransactions":
     get:
       summary: Returns a list of payments/transactions.
+      deprecated: true
       description: |
         Returns a list of payments/transactions.
       tags:
-        - /report/v1 (deprecated)
+        - /report/v1
       parameters:
         - $ref: "#/components/parameters/JWT"
         - $ref: '#/components/parameters/Vipps-System-Name'
