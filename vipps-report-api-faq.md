@@ -122,7 +122,7 @@ This is only available on
 but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
-## How can I get the details for my shopping basket product nad their different VAT rates?
+## How can I get the details for my shopping basket product and their different VAT rates?
 
 This is only available on
 [portal.vipps.no](https://portal.vipps.no),
