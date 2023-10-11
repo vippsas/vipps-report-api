@@ -129,6 +129,13 @@ This is only available on
 but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
+## How can I get details about my customers' tax deductions?
+
+This is only available on
+[portal.vipps.no](https://portal.vipps.no),
+but we may extend the Report API top include more details.
+There are no specific plans to do this yet.
+
 ## How do I get the settlements for multiple MSNs in the same ledger?
 
 Joint settlement for multiple MSNs is supported, and may be relevant
