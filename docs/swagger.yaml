@@ -367,7 +367,7 @@ components:
           type: string
           description: |-
             The scheme for the bank account, typically account identifier type (BBAN) and
-            country code (NO), separated by a colon (':').
+            country code (`NO`, `DK`, `FI`, etc), separated by a colon (':').
           example: "BBAN:NO"
         id:
           type: string
@@ -496,7 +496,11 @@ components:
           example: "987654321"
         scheme:
           type: string
-          description: The type of organization identifier.
+          description: |-
+            The type of organization identifier.
+            For businesses this is typically
+            `business:countryCode:type`, for example
+            `business:NO:org`, `business:DK:org`, `business:FI:org`, etc.
           example: "business:NO:ORG"
     Money:
       type: number
