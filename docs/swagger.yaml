@@ -13,6 +13,7 @@ paths:
   "/settlement/v1/ledgers":
     get:
       summary: Get ledgers
+      operationId: getLedgers
       deprecated: true
       description: |
         Returns the ledgers you have access to.
@@ -46,7 +47,6 @@ paths:
 
       tags:
         - /settlement/v1
-      operationId: getLedgers
       parameters:
         - $ref: "#/components/parameters/JWT"
         - $ref: '#/components/parameters/Vipps-System-Name'
@@ -135,7 +135,6 @@ paths:
         You can get two different types of ledgers with this endpoint. The funds ledger, which
         tracks the sales, refunds, and a total of fees for the time period, and the fees ledger, which
         provides details about the fees you have been charged.
-
       parameters:
         - $ref: '#/components/parameters/Vipps-System-Name'
         - $ref: '#/components/parameters/Vipps-System-Version'
