@@ -8,16 +8,18 @@ pagination_next: Null
 
 # API guide
 
-![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
+![Vipps](../images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
 
 ![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
 The Report API provides accounting partners you with information about their merchant's payments. It's used to aggregate information across the API platform, and it can contain data for many
-payments at once.
+payments at once. *Accounting partners will be available in Q4 2023.
+See
+[Planned accounting partner functionality](overview.md#planned-accounting-partner-functionality) for more details.*
 
 The following topics are described:
 
-* [Overview](overview.md) contains descriptions of common traits of the entire Report API.
+* [Authenticating to the Report API](overview.md) contains descriptions of common traits of the entire Report API.
 * [Settlement guide](settlement.md) explains the Report API settlement process and the ledger.
 * [Errors description](errors.md) shows the Report API errors with descriptions.
 * Coming later: Endpoints for recent/non-settled transactions.

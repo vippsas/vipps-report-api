@@ -253,7 +253,7 @@ paths:
       description: |
         Returns a list of payments/transactions.
       tags:
-        - /report/v1
+        - /report/v1 (deprecated)
       parameters:
         - $ref: "#/components/parameters/JWT"
         - $ref: '#/components/parameters/Vipps-System-Name'

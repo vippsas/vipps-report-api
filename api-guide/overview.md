@@ -1,23 +1,31 @@
 ---
-title: Overview
+title: Authenticating to the Report API
 sidebar_position: 31
-sidebar_label: Overview
+sidebar_label: Authentication
 pagination_prev: Null
 pagination_next: Null
 ---
 
-# Overview
 
-![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
+# Authenticating to the Report API
+
+![Vipps](../images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
 
 The Report API is primarily for accounting partners who will use the API to integrate
 with their accounting systems, allowing them to provide the accounting information to their merchants.
 Merchants can then simply
-[give access to the accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner),
+give access to the accounting partner,
 without doing any development themselves.
+**Please note:**
+The Report API is primarily for accounting partners who will use the API to integrate
+with their accounting systems, allowing them to provide the accounting information to their merchants.
+Merchants can then simply
+[give access to the accounting partner](#give-access-to-the-accounting-partner),
+without doing any development themselves.
+*This will be available in Q4 2023.
+See
+[Planned accounting partner functionality](#planned-accounting-partner-functionality) for more details.*
 
-
-## Authenticating to the Report API
 
 The Report API is available for sales units that have access to the Vipps MobilePay API platform.
 If you are new to the platform, see [Getting started](https://developer.vippsmobilepay.com/docs/getting-started).
@@ -37,6 +45,8 @@ We are currently working on providing accounting partners access to the API.
 There is a second planned way to connect to the Report API:
 
 * Using an Accounting partner's API keys
+
+### Give access to the accounting partner
 
 A merchant can have any number accounting partners. The merchant portal
 shows the accounting partners for each sales unit.
