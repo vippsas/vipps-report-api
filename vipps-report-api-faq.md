@@ -115,14 +115,14 @@ The Report API is designed to provide updated data independently of the bank pay
    (if there are no fees). Now: What captures will then be part of that settlement?
 1. We may, in rare cases, manually correct payouts. 
 
-## How can I get the data for VM-number with shopping basket?
+## How can I get the data for VM-number sales units with shopping basket?
 
 This is only available on
 [portal.vipps.no](https://portal.vipps.no),
 but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
-## How can I get the details for my shopping basket product and their different VAT rates?
+## How can I get the details for my shopping basket products and their different VAT rates?
 
 This is only available on
 [portal.vipps.no](https://portal.vipps.no),
@@ -130,6 +130,9 @@ but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
 ## How can I get details about my customers' tax deductions?
+
+This is used for fundraising, where users may give consent to share their
+national identity number and automatically get tax deductions.
 
 This is only available on
 [portal.vipps.no](https://portal.vipps.no),
