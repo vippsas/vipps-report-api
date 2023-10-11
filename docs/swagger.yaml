@@ -47,7 +47,6 @@ paths:
       tags:
         - /settlement/v1
       operationId: getLedgers
-      deprecated: true
       parameters:
         - $ref: "#/components/parameters/JWT"
         - $ref: '#/components/parameters/Vipps-System-Name'
