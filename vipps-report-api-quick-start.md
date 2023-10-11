@@ -13,6 +13,10 @@ import TabItem from '@theme/TabItem';
 
 # Quick start
 
+
+![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
+
+
 ## Before you begin
 
 Be aware that these are running on the production server, <https://api.vipps.no>.
@@ -60,6 +64,7 @@ The property `access_token` should be used for all other API requests in the `Au
 
 ### Step 3 - Get all ledgers
 
+**Please note:** This is for v1. V2 is being prepared now.
 Send
 [`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get)
 to get the ledgers you have access to.
@@ -74,17 +79,58 @@ curl https://api.vipps.no/settlement/v1/ledgers \
 -X GET
 ```
 
-### Step 4 - Get all ledger transactions
+### Step 4 - Get a funds ledger
 
 Send
-[`GET:/report/v1/ledgertransactions`][get-ledgers-endpoint]
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][get-ledgers-endpoint]
 for a list of payments/transactions.
 
-Set `ledgerDate` to a value in format YYYY-MM-DD `2022-10-01`.
-Set `ledgerId` to a 6-digit value (e.g., `302321`).
+Set `topic` to `funds`.
+Set `ledgerId` to the 6-digit value that is the unique ledger ID for the ledger you want.
+Set `ledgerDate` to a value in format YYYY-MM-DD (e.g., `2022-10-01`).
 
 ```bash
-curl https://api.vipps.no/report/v1/ledgertransactions?ledgerDate={ledgerDate}&ledgerId={ledgerId} \
+curl https://api.vipps.no/report/v2/ledgers/{ledgerId}/funds/dates/2022-10-01 \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-X GET
+```
+
+### Step 5 - Get a fees ledger
+
+Send
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][get-ledgers-endpoint]
+for a list of payments/transactions.
+
+Set `topic` to `fees`.
+Set `ledgerId` to the 6-digit value that is the unique ledger ID for the ledger you want.
+Set `ledgerDate` to a value in format YYYY-MM-DD (e.g., `2022-10-01`).
+
+```bash
+curl https://api.vipps.no/report/v2/ledgers/{ledgerId}/fees/dates/2022-10-01 \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-X GET
+```
+
+### Step 6 - Get a continuous feed of data (optional)
+
+If you want to continuously stream data as it becomes available, use the
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
+endpoint.
+
+Set `topic` to `funds` or `fees`, for the type of ledger you require.
+Set `ledgerId` to the 6-digit value that is the unique ledger ID for the ledger you want.
+
+
+```bash
+curl https://api.vipps.no/report/v2/ledgers/{ledgerId}/{topic}/feed \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
