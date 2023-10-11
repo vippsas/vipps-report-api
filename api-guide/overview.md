@@ -8,6 +8,8 @@ pagination_next: Null
 
 # Overview
 
+![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
+
 The Report API is primarily for accounting partners who will use the API to integrate
 with their accounting systems, allowing them to provide the accounting information to their merchants.
 Merchants can then simply

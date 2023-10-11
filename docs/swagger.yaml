@@ -4,7 +4,7 @@ info:
   title: Report API
   description: |
     For details, see the [API Guide](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/).
-  version: '1.0'
+  version: '2.0'
 servers:
   - url: https://apitest.vipps.no
   - url: https://api.vipps.no
@@ -13,6 +13,7 @@ paths:
   "/settlement/v1/ledgers":
     get:
       summary: Get ledgers
+      deprecated: true
       description: |
         Returns the ledgers you have access to.
 
@@ -27,13 +28,13 @@ paths:
         The response contains all ledgers that are available for the API keys used.
 
         The `settlesForRecipientHandles` part of the response looks a bit different for eCom sales
-        units and Vippsnummer. For eCom it looks like this:
+        units and Vippsnummer. For ePayment and eCom it looks like this:
         ```json
         {
           "settlesForRecipientHandles": [ "api:123455" ]
         }
         ```
-        while for a Vippsnummer you will get
+        while for a Vippsnummer and MyShop (VM-number) you will get:
 
         ```json
         {
@@ -41,11 +42,12 @@ paths:
         }
         ```
 
-        The full response example below displays the eCom case.
+        The full response example below displays the ePayment and eCom case.
 
       tags:
         - /settlement/v1
       operationId: getLedgers
+      deprecated: true
       parameters:
         - $ref: "#/components/parameters/JWT"
         - $ref: '#/components/parameters/Vipps-System-Name'
@@ -57,8 +59,9 @@ paths:
           required: false
           schema:
             type: string
+            description: |-
+              Filters for ledgers that settles for the given `settlesForRecipientHandle`.
             example: "api:123456"
-            description: Filters for ledgers that settles for the given settlesForRecipientHandle
         - in: query
           required: false
           name: cursor
@@ -130,6 +133,9 @@ paths:
         of the merchant; but it can be configured to other cutoffs such as 04:00 to 04:00.
         The caller should periodically poll for a report for the next date to download,
         and interpret HTTP 404 as a signal to try again later.
+        You can get two different types of ledgers with this endpoint. The funds ledger, which
+        tracks the sales, refunds, and a total of fees for the time period, and the fees ledger, which
+        provides details about the fees you have been charged.
 
       parameters:
         - $ref: '#/components/parameters/Vipps-System-Name'
@@ -154,8 +160,12 @@ paths:
           required: true
           schema:
             type: string
-            enum: ["funds", "fees"]
-            description: One of `funds`, `fees`
+            enum:
+              - funds
+              - fees
+            description: |-
+              `funds` provides the funds ledger which tracks the sales, refunds, and a total of fees for the time period. `fees` 
+              provides the fees ledger with details about the fees you have been charged.
         - in: query
           required: false
           name: cursor
@@ -164,7 +174,7 @@ paths:
             example: "eyJhZnRlckxlZGdlcklkIjoieHh4eCIsInNldHRsZXNGb3JSZWNpcGllbnRIYW5kbGVzIjpudWxsfQ=="
             description: |-
               We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
-              If the total number of rows is greater 'than that amount we return a cursor in addition to
+              If the total number of rows is greater than that amount we return a cursor in addition to
               the rows in the body. This cursor given can be used with this parameter to fetch the next set of ledgers.
               If this is used, no other parameters is needed.
       responses:
@@ -208,7 +218,9 @@ paths:
           required: true
           schema:
             type: string
-            enum: ["funds", "fees"]
+            enum: 
+              - funds
+              - fees
             description: One of `funds`, `fees`
         - in: query
           required: false
@@ -234,6 +246,91 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+
+  "/report/v1/ledgertransactions":
+    get:
+      summary: Returns a list of payments/transactions.
+      deprecated: true
+      description: |
+        Returns a list of payments/transactions.
+      tags:
+        - /report/v1
+      parameters:
+        - $ref: "#/components/parameters/JWT"
+        - $ref: '#/components/parameters/Vipps-System-Name'
+        - $ref: '#/components/parameters/Vipps-System-Version'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
+        - in: query
+          required: true
+          name: ledgerId
+          schema:
+            type: string
+        - in: query
+          required: false
+          name: ledgerDate
+          schema:
+            type: string
+            format: Date
+            example: 2022-01-20
+        - in: query
+          required: false
+          name: fromLedgerDate
+          schema:
+            type: string
+            format: Date
+            example: 2022-01-19
+        - in: query
+          required: false
+          name: toLedgerDate
+          schema:
+            type: string
+            format: Date
+            example: 2022-01-22
+        - in: query
+          required: false
+          name: inPayout
+          schema:
+            type: string
+            example: 2000010
+        - in: query
+          required: false
+          name: sincePayout
+          schema:
+            type: string
+            example: 2000010
+        - in: query
+          required: false
+          name: cursor
+          schema:
+            type: string
+            example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
+            description: |-
+              We limit the amount of rows returned to reduce the amount of data we need to process on each request. 
+              If the total number of rows is greater than that amount we return a cursor in addition to
+              the rows in the body. This cursor given can be used with this parameter to fetch the next set of transactions.
+              If this is used, no other parameters other than ledgerId is needed.
+      responses:
+        500:
+          "$ref": "#/components/responses/500"
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cursor:
+                    type: string
+                    example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
+                    description: |-
+                      A cursor that can be used to fetch the next transactions.
+                      It is empty if there are no more rows to fetch after the current one.
+                      You can insert this value into the url as part of the cursor parameter.
+                  items:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/Transaction"
 
 components:
   parameters:
@@ -360,24 +457,31 @@ components:
       properties:
         scheme:
           type: string
+          description: |-
+            The scheme for the bank account, typically account identifier type (BBAN) and
+            country code (`NO`, `DK`, `FI`, etc), separated by a colon (':').
           example: "BBAN:NO"
         id:
           type: string
+          description: The bank account id, typically the account number.
           example: "86011117947"
     Ledger:
       type: object
       properties:
         ledgerId:
           type: string
+          description: The id for the ledger.
           example: "302321"
         payoutBankAccount:
           $ref: "#/components/schemas/BankAccount"
         firstPayout:
           type: string
+          description: The first payout (bank transfer) in this ledger.
           nullable: true
           example: "2000001"
         lastPayout:
           type: string
+          description: The last payout (bank transfer) in this ledger.
           nullable: true
           example: "2000045"
         owner:
@@ -386,6 +490,9 @@ components:
           type: array
           items:
             type: string
+            description: |-
+              Identification of the sales unit that this payment was made to/from.
+              Contains a country code and id, separated by a colon (':').
             example: "NO:123455"
     Problem:
       title: Problem
@@ -417,19 +524,25 @@ components:
       properties:
         pspReference:
           type: string
+          description: |-
+            A reference automatically generated by Vipps MobilePay for this payment.
+            One `reference` may have several `pspReference`s, since one `reference`
+            may - for example - both be captured and refunded.
+            This is the same id that has previously been called `transactionId`.
           example: '3343121302'
         time:
           type: string
           description: |-
-            Transaction date and time together with an offset (difference from UTC time in hours)
+            Transaction date and time together with an offset (difference from UTC time in hours).
           format: DateTimeOffset
           example: '2020-10-05T10:21:54.141089+0200'
         ledgerDate:
           type: string
-          format: Date
+          format: Date in YYYY-MM-DD format.
           example: '2020-10-05'
         entryType:
           type: string
+          description: The type of transaction.
           enum:
             - refund
             - capture
@@ -445,12 +558,14 @@ components:
         reference:
           type: string
           description: |-
-            Is also called End-To-End-Reference
-          example: Vipps utbet. 2000023
+            The unique id provided by the merchant (or partner) when initiating the paymemt.
+            In the ePayment API this is called `reference`, and in the older eCom API it is called `orderId`.
+            Is sometimes called "end to end reference", since this id identifies the payment from start to finish.
+          example: acme-shop-123-order123abc
         currency:
           type: string
           example: 'NOK'
-          description: Currency code as defined in ISO 4217
+          description: Currency code as defined in ISO 4217.
         amount:
           $ref: "#/components/schemas/Money"
         balanceBefore:
@@ -459,6 +574,9 @@ components:
           $ref: "#/components/schemas/Money"
         recipientHandle:
           type: string
+          description: |-
+            Identification of the sales unit that this payment was made to/from.
+            Contains a country code and id, separated by a colon (':').
           example: "NO:123455"
 
     Organization:
@@ -466,9 +584,15 @@ components:
       properties:
         id:
           type: string
+          description: The identifier for this organization.
           example: "987654321"
         scheme:
           type: string
+          description: |-
+            The type of organization identifier.
+            For businesses this is typically
+            `business:countryCode:type`, for example
+            `business:NO:org`, `business:DK:org`, `business:FI:org`, etc.
           example: "business:NO:ORG"
     Money:
       type: number
