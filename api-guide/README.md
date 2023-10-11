@@ -8,7 +8,7 @@ pagination_next: Null
 
 # API guide
 
-![Vipps](../images/vipps.png) *Version 1 is available for Vipps. Version 2 is expected in early October 2023.*
+![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
 
 ![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
