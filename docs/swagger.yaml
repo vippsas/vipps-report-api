@@ -361,7 +361,7 @@ components:
       description: |-
         The name of the ecommerce solution.
         One word in lowercase letters is good.
-        See [http-headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -371,7 +371,7 @@ components:
       in: header
       description: |-
         The version number of the ecommerce solution.
-        See [http-headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -382,7 +382,7 @@ components:
       description: |-
         The name of the ecommerce plugin (if applicable).
         One word in lowercase letters is good.
-        See [http-headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -392,7 +392,7 @@ components:
       in: header
       description: |-
         The version number of the ecommerce plugin (if applicable).
-        See [http-headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
