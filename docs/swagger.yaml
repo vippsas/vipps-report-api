@@ -572,7 +572,7 @@ components:
         currency:
           type: string
           example: 'NOK'
-          description: Currency code as defined in ISO 4217.
+          description: Currency code as defined in ISO 4217. Typically `NOK`, `DKK` or `EUR.`
         amount:
           $ref: "#/components/schemas/Money"
         balanceBefore:
