@@ -111,7 +111,7 @@ characters for the payment text.
 ## How can I get the details for a payment I see in my bank?
 
 **Please note:** The payout from Vipps MobilePay to the merchant is
-the balance at the time of the payout. The sum in the payont, which is what
+the balance at the time of the payout. The sum in the payout, which is what
 the merchant sees in the bank, does not contain specific payments -
 it is simply the balance at the time the payout was made.
 

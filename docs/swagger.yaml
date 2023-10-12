@@ -565,7 +565,7 @@ components:
         reference:
           type: string
           description: |-
-            The unique id provided by the merchant (or partner) when initiating the paymemt.
+            The unique id provided by the merchant (or partner) when initiating the payment.
             In the ePayment API this is called `reference`, and in the older eCom API it is called `orderId`.
             Is sometimes called "end to end reference", since this id identifies the payment from start to finish.
           example: acme-shop-123-order123abc
