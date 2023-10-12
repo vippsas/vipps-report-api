@@ -103,7 +103,7 @@ This example shows:
 
 Above, only the total fees for the settlement period are included.
 If you require further specification of the fees charged, these are available from
-the [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BLedgerId%7D~1%7BAccount%7D~1dates~1%7BLedgerDate%7D/get) endpoint,
+the [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint] endpoint,
 where `{topic}` is `fees`.
 
 Continuing on the example above, this may be the result of a call to
@@ -189,12 +189,12 @@ Note that:
     even if the actual payout did not succeed. If money does not arrive within
     the agreed-upon delay, please contact customer service.
   
-The topics available at this
-[endpoint](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BLedgerId%7D~1%7BAccount%7D~1dates~1%7BLedgerDate%7D/get) 
+The topics available at the
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
  are described further:
 
-* The `funds` topic reports on the entries on the *funds* account.
-* The `fees` topic reports on the entries on the *fees* account.
+* The `funds` topic reports on the *funds* account.
+* The `fees` topic reports on the *fees* account.
 * There is currently no endpoint to report on *payouts*, but we hope to add
   this in the future.
 

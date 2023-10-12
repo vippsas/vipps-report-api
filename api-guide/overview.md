@@ -20,7 +20,7 @@ without doing any development themselves.
 The Report API is primarily for accounting partners who will use the API to integrate
 with their accounting systems, allowing them to provide the accounting information to their merchants.
 Merchants can then simply
-[give access to the accounting partner](#give-access-to-the-accounting-partner),
+[give access to the accounting partner](#give-access-to-an-accounting-partner),
 without doing any development themselves.
 *This will be available in Q4 2023.
 See
@@ -46,7 +46,7 @@ There is a second planned way to connect to the Report API:
 
 * Using an Accounting partner's API keys
 
-### Give access to the accounting partner
+### Give access to an accounting partner
 
 A merchant can have any number accounting partners. The merchant portal
 shows the accounting partners for each sales unit.
