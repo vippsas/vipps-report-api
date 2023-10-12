@@ -22,7 +22,7 @@ For more common questions, see:
 ## What are the benefits of the Report API over the SFTP service?
 
 The
-[SFTP Report Service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
+[SFTP Report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
 lets merchants and partners download settlement files by SFTP.
 
 The Report API has some benefits over this:
@@ -55,7 +55,7 @@ Right now the only data that is available is the same data that is already
 available in the settlement reports on
 [portal.vipps.no](https://portal.vipps.no),
 or on
-[SFTP](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
+[SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
@@ -184,9 +184,9 @@ since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
 ## Where can I find the settlement ID?
 
 The "payout" corresponds to the `SettlementID` from the
-[XML](https://developer.vippsmobilepay.com/docs/settlements/xml)
+[XML](https://developer.vippsmobilepay.com/docs/settlements/#xmlsettlements/xml)
 files in the
-[SFTP report service](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
+[SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
 ## How can a merchant get access to the API?
 
