@@ -94,6 +94,15 @@ We may add display of the Ledger ID on
 [portal.vipps.no](https://portal.vipps.no)
 in the future.
 
+## What text is shown for the payouts in my bank?
+
+We send text on this format to all banks: `Utb. <settlement_number> Vippsnr <serial_no>`.
+
+Example: `Utb. 2000810 Vippsnr 117703`.
+
+We have no control over, or infomration about, how banks handle this on their side,
+or how it is displayed in reports online or in print.
+
 ## How can I get the details for a payment I see in my bank?
 
 **Please note:** The payout from Vipps MobilePay to the merchant is
