@@ -105,8 +105,8 @@ or how it is displayed in reports online or in print.
 
 The file format used to transfer information to the bank is the
 [ISO 20022](https://www.iso20022.org)
- PAIN (PAyment INitiation) format, which - among other things - has a limit of 35
- characters for the payment text.
+PAIN (PAyment INitiation) format, which - among other things - has a limit of 35
+characters for the payment text.
 
 ## How can I get the details for a payment I see in my bank?
 
