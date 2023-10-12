@@ -111,12 +111,16 @@ characters for the payment text.
 ## How can I get the details for a payment I see in my bank?
 
 **Please note:** The payout from Vipps MobilePay to the merchant is
-the balance at the time of the payout. The sum in the payont, which is what
+the balance at the time of the payout. The sum in the payout, which is what
 the merchant sees in the bank, does not contain specific payments -
 it is simply the balance at the time the payout was made.
 
-The payout details can be found with the `/funds` endpoint, either under date or
-using the feed. Match the settlement id in the bank with `pspReference`.
+The payout details can be found with these endpoints, where `{topic}` is `funds`:
+
+* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
+* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
+
+Match the settlement ID in the bank with `pspReference`.
 
 The Report API is designed to provide updated data independently of the bank payments. There are several reasons for this, including:
 
@@ -127,7 +131,7 @@ The Report API is designed to provide updated data independently of the bank pay
    Let's say they sell three tickets at 5000 NOK each. We then change their risk profile saying we
    need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
    (if there are no fees). Now: What captures will then be part of that settlement?
-1. We may, in rare cases, manually correct payouts. 
+1. We may, in rare cases, manually correct payouts.
 
 ## How can I get the data for VM-number sales units with shopping basket?
 
