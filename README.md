@@ -10,19 +10,19 @@ pagination_prev: null
 
 # Report API
 
-![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
+![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in October 2023.*
 
 ![MobilePay](./images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
 **Please note:**
 The Report API is primarily for accounting partners who will use the API to integrate
 with their accounting systems, allowing them to provide the accounting information to their merchants.
+Accounting partners use their
+[accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/),
+and are not allowed to use the merchant's own API keys.
 Merchants can then simply
-[give access to the accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner),
+[give access to the accounting partner](#give-access-to-an-accounting-partner),
 without doing any development themselves.
-*This will be available in Q4 2023.
-See
-[Planned accounting partner functionality](./api-guide/overview.md#planned-accounting-partner-functionality) for more details.*
 
 ## Report API documentation
 

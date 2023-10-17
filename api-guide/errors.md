@@ -20,9 +20,10 @@ For more common Vipps questions, see:
 
 ### Code: 10001
 
-Unknown or undocumented error. This is a catch-all error that we in time want to reduce the frequency of as much possible. The reason of the error might be because of an ephemeral issue on our end,
-and you should be able to retry the same query again.
+Unknown or undocumented error. This is a catch-all error that we in time want to reduce the frequency of as much possible.
+The reason of the error might be because of an ephemeral issue on our end, and you should be able to retry the same query again.
 
 ### Code: 10002
 
-Input validation error. One of your inputs did not get parsed properly or is missing. The message in the response should give you a better description about which field is required.
+Input validation error. One of your inputs did not get parsed properly or is missing.
+The message in the response should give you a better description about which field is required.
