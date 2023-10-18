@@ -19,7 +19,7 @@ Accounting partners use their
 [accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/),
 and are not allowed to use the merchant's own API keys.
 Merchants can then simply
-[give access to the accounting partner](#give-access-to-an-accounting-partner),
+[give access to the accounting partner](overview.md#give-access-to-an-accounting-partner),
 without doing any development themselves.
 
 The Report API provides accounting partners you with information about their merchant's payments.
