@@ -8,9 +8,9 @@ pagination_next: Null
 
 # API guide
 
-![Vipps](../images/vipps.png) *Version 1 is deprecated. Version 2 will be available in October 2023.*
+![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 will be available in October 2023.*
 
-![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
+![MobilePay](./images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
 **Please note:**
 The Report API is primarily for accounting partners who will use the API to integrate
@@ -19,7 +19,7 @@ Accounting partners use their
 [accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/),
 and are not allowed to use the merchant's own API keys.
 Merchants can then simply
-[give access to the accounting partner](#give-access-to-an-accounting-partner),
+[give access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner),
 without doing any development themselves.
 
 The Report API provides accounting partners you with information about their merchant's payments.
@@ -304,7 +304,7 @@ GET:/settlement/v1/ledgers?settlesForRecipientHandles=DK:123456
 If you are integrating an accounting system for many customers, it can be
 relevant to poll [this endpoint][get-ledgers-endpoint] many times as you will continue to see new
 ledgers appear for different customers as they
-[grant your accounting system access to their data](overview.md#give-access-to-an-accounting-partner).
+[grant your accounting system access to their data](./api-guide/overview.md#give-access-to-an-accounting-partner).
 
 ### Paging and cursors
 
@@ -634,8 +634,8 @@ using this entry type.
 
 See:
 
-* [Authenticating to the Report API](overview.md)
-* [Errors](errors.md)
+* [Authenticating to the Report API](./api-guide/overview.md)
+* [Errors](./api-guide/errors.md)
 
 
 [get-ledgers-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/settlementv1/operation/getLedgers

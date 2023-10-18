@@ -12,7 +12,7 @@ See the
 [API guide](overview.md)
 for all the details.
 
-For more common Vipps questions, see:
+For more common questions, see:
 
 * [General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
 
