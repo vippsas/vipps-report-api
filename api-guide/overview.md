@@ -35,10 +35,8 @@ A ledger may have multiple sales unit associated; however, access will only be p
 
 ## Sales units that do not have API access
 
-Vippsnummer sales units don't have API access and there is no way for a merchant to
-access the API using its own API keys - there are none.
-
-Vippsnummer sales units can only use the Report API through an accounting partner.
+Although Vippsnummer sales units don't have API access, they can designate an accounting partner that does.
+Their accounting partner can then use the Report API to provide them with their accounting information.
 
 ### Give access to an accounting partner
 
