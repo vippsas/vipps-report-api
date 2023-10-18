@@ -8,15 +8,23 @@ pagination_next: Null
 
 # API guide
 
-![Vipps](../images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
+![Vipps](../images/vipps.png) *Version 1 is deprecated. Version 2 will be available in October 2023.*
 
 ![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
+**Please note:**
+The Report API is primarily for accounting partners who will use the API to integrate
+with their accounting systems, allowing them to provide the accounting information to their merchants.
+Accounting partners use their
+[accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/),
+and are not allowed to use the merchant's own API keys.
+Merchants can then simply
+[give access to the accounting partner](overview.md#give-access-to-an-accounting-partner),
+without doing any development themselves.
+
 The Report API provides accounting partners you with information about their merchant's payments.
 It's used to aggregate information across the API platform, and it can contain data for many
-payments at once. *Accounting partners will be available in Q4 2023.
-See
-[Planned accounting partner functionality](overview.md#planned-accounting-partner-functionality) for more details.*
+payments at once.
 
 **Please note:** The information fetched from the Report API is
 asynchronous and trailing behind the other APIs. It is usually behind
@@ -30,7 +38,7 @@ Merchants using Vipps MobilePay receive the money for their sales in bulk bank t
 usually one per day. It is therefore necessary to download
 a specification reports that explains the bulk bank transfer, so it can be correctly filed in the
 merchant's accounting system. Such reports can be fetched either
-in the [merchant portal](https://portal.vipps.no) or by using this API.
+on [portal.vipps.no](https://portal.vipps.no) or by using this API.
 
 Usually, you will wish to implement a *reconciliation process*, where
 you download a report from Vipps MobilePay each day, and check that contents
@@ -38,8 +46,9 @@ of the report match the data you have on your own side.
 We recommended that you do this by matching per transaction on transaction IDs.
 
 This guide will focus on using this API, but may also be useful reading
-for those who rely on using reports from the portal for their reconciliation
-processes.
+for those who rely on using reports from
+[portal.vipps.no](https://portal.vipps.no)
+for their reconciliation processes.
 
 The exact details of the settlement process (e.g., the delay before the money
 is received) is subject to the agreement between the merchant and Vipps MobilePay.
@@ -547,8 +556,9 @@ both of these are denoted with an entry type of `capture`.
 #### refund
 
 Refunds represent transfers from the *funds* account back to the customer. These are
-initiated by the merchant, either by using the API or
-through the [merchant portal](https://portal.vipps.no). Refunds are always deducted
+initiated by the merchant, either by using the API or on
+[portal.vipps.no](https://portal.vipps.no).
+Refunds are always deducted
 from the next settlement payout, even if you have a gross settlement setup.
 Currently, refunds always have zero fees.
 
