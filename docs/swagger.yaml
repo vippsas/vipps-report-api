@@ -597,9 +597,8 @@ components:
           type: string
           description: |-
             The type of organization identifier.
-            For businesses this is typically
-            `business:countryCode:type`, for example
-            `business:NO:org`, `business:DK:org`, `business:FI:org`, etc.
+            For Norway this is `business:NO:ORG`, for Denmark
+            it is `business:DK:CVR` and for Finland `business:FI:Y-tunnus`.
           example: "business:NO:ORG"
     Money:
       type: number
