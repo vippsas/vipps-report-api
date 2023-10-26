@@ -76,6 +76,12 @@ We aim to provide more information through this API in the future.
 for *Vippsnummer* sale units. The Report API can only be used to sale units
 that have API access (which *Vippsnummer* sale units do not have.)
 
+## Can I get realtime data?
+
+No. The Report API _may_ be extended to contain more information later, and this FAQ
+will be updated if there are any changes.
+There are no specific plans to do this yet.
+
 ## Why are the users' names, transaction texts, etc. not available in the Report API?
 
 The Report API is primarily for accounting partners who will use the API to integrate
