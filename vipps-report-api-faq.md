@@ -95,7 +95,7 @@ There are no specific plans to do this yet.
 
 ## Is the Report API available for the test environment?
 
-Nope. The
+No. The
 [test environment](https://developer.vippsmobilepay.com/docs/test-environment)
 does not have the backend systems necessary to offer the Report API.
 
