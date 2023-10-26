@@ -58,7 +58,7 @@ to provide this access and consent to sharing the sata with the accounting partn
 
 ## Can a partner specify the accounting partner for a sales unit?
 
-Nope. See
+No, please see
 [Why does a merchant need to log in on portal.vipps.no to select accounting partner?](#why-does-a-merchant-need-to-log-in-on-portalvippsno-to-select-accounting-partner).
 
 ## What information can I get hold of?
