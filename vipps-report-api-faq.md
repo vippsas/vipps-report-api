@@ -14,9 +14,8 @@ See the
 [Report API guide](./api-guide/README.md)
 for all the details.
 
-For more common questions, see:
-
-* [API General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
+For general information and questions, please check in the
+[Knowledge base](https://developer.vippsmobilepay.com/docs/common-topics/).
 
 
 ## What are the benefits of the Report API over the SFTP service?
