@@ -10,7 +10,7 @@ pagination_next: Null
 
 ![Vipps](../images/vipps.png) *Version 1 is deprecated. Version 2 will be available in October 2023.*
 
-![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
+![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/about).*
 
 **Please note:**
 The Report API is primarily for accounting partners who will use the API to integrate
