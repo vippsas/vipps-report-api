@@ -637,7 +637,7 @@ using this entry type.
 See:
 
 * [Authenticating to the Report API](overview.md)
-* [Errors](errors.md)
+* [HTTP response codes and errors](errors.md)
 
 
 [get-ledgers-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/settlementv1/operation/getLedgers
