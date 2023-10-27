@@ -48,6 +48,18 @@ The Report API has some benefits over this:
 * The data is in JSON format, making it easy to use in different ways.
   * The SFTP service offered XML, XSLX, CSV and PDF, but most users now want JSON.
 
+## Why does a merchant need to log in on portal.vipps.no to select accounting partner?
+
+An accounting partner gets access to the merchant's sales unit's data.
+We require the merchant to log in securely on
+[portal.vipps.no](https://portal.vipps.no)
+to provide this access and consent to sharing the sata with the accounting partner.
+
+## Can a partner specify the accounting partner for a sales unit?
+
+No, please see
+[Why does a merchant need to log in on portal.vipps.no to select accounting partner?](#why-does-a-merchant-need-to-log-in-on-portalvippsno-to-select-accounting-partner).
+
 ## What information can I get hold of?
 
 Right now the only data that is available is the same data that is already
@@ -63,16 +75,39 @@ We aim to provide more information through this API in the future.
 for *Vippsnummer* sale units. The Report API can only be used to sale units
 that have API access (which *Vippsnummer* sale units do not have.)
 
+## Can I get realtime data?
+
+No. The Report API _may_ be extended to contain more information later, and this FAQ
+will be updated if there are any changes.
+There are no specific plans to do this yet.
+
+## Why are the users' names, transaction texts, etc. not available in the Report API?
+
+The Report API is primarily for accounting partners who will use the API to integrate
+with their accounting systems, allowing them to provide the accounting information to their merchants.
+
+The reports on
+[portal.vipps.no](https://portal.vipps.no)
+provide more details.
+The users' names, transaction texts and other information may be regulated by GDPR
+and therefore require consent from the merchant. This consent may be given on
+[portal.vipps.no](https://portal.vipps.no),
+but not when using the Report API.
+
+The Report API _may_ be extended to contain more information later, and this FAQ
+will be updated if there are any changes.
+There are no specific plans to do this yet.
+
 ## Is the Report API available for the test environment?
 
-Unfortunately not because the
+No. The
 [test environment](https://developer.vippsmobilepay.com/docs/test-environment)
 does not have the backend systems necessary to offer the Report API.
 
 The only way to test the Report API is in the production environment.
 
 Since the Report API is read-only, and the overall logic is very simple
-(first ask for data, then receive that data), developing and testing in
+(first you ask for data, then you receive that data), developing and testing in
 the production environment is straight-forward.
 
 Implementing the Report API in the test environment is a big effort,
