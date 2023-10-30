@@ -15,7 +15,7 @@ See the
 for all the details.
 
 For general information and questions, please check in the
-[Knowledge base](https://developer.vippsmobilepay.com/docs/common-topics/).
+[Knowledge base](https://developer.vippsmobilepay.com/docs/knowledge-base/).
 
 
 ## What are the benefits of the Report API over the SFTP service?
@@ -250,7 +250,7 @@ Merchants select their accounting partner on portal.vipps.no as described here:
 The following API keys give access to the Report API:
 
 * The merchant's own API keys: The same API keys that are used to make payments, etc. See
-  [API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys).
+  [API keys](https://developer.vippsmobilepay.com/docs/knowledge-base/api-keys).
   Only the merchant can use these API keys with the Report API.
 
 In the future, *approximately Q4 2023*,
