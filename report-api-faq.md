@@ -255,54 +255,15 @@ The `payout` corresponds to the `SettlementID` from the
 files in the
 [SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
-## How can a merchant get access to the API?
-
-See:
-[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
-
-## How can an accounting partner get access to the API?
+## How can a merchant or partner get access to the API?
 
 See:
 [Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
 
 ## Which API keys give access to the API?
 
-The following API keys give access to the Report API:
-
-* The merchant's own API keys: The same API keys that are used to make payments, etc. See
-  [API keys](https://developer.vippsmobilepay.com/docs/knowledge-base/api-keys).
-  Only the merchant can use these API keys with the Report API.
-
-In the future, *approximately Q4 2023*,
-[Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys) will provide access.
-The API keys provided to the accounting partner
-when the partner signed a contract with Vipps MobilePay. The accounting partner's
-API keys only work for sales units after the merchant has
-[given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
-
-### The merchant's own API keys
-
-The merchant's own API keys give full access to the Report API.
-
-If the merchant uses an integration partner (see
-[partner types](https://developer.vippsmobilepay.com/docs/partner#partner-types)),
-it is the same as using the merchant's own API keys.
-
-When a merchant shares its API keys for a sales unit with an integration partner,
-we have no way of knowing whether the API calls are made by the merchant or
-the integration partner.
-This is why we require that all API requests made by a partner on behalf of a
-merchant are done using the partner's own API keys (the accounting keys).
-
-### Specifying an accounting partner
-
-In addition to the above, the merchant may add one or more accounting partners.
-An accounting partner will get access to the Report API, but will not be allowed
-to make payments, or move money in any way. The accounting partner can only see
-reports of the payments that have been made.
-
 See:
-[Give access to an accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner)
+[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
 
 ## Why do I get an empty list in response when calling one of the endpoints?
 
