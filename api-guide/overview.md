@@ -40,15 +40,25 @@ Their accounting partner can then use the Report API to provide them with their 
 
 ### Give access to an accounting partner
 
-A merchant can have any number accounting partners: One accounting partner for each sales unit.
-A sales unit can only have one accounting partner.
+**Important:** Merchants are not allowed to share API keys with partners that have not been approved by
+Vipps MobilePay, as we are strictly regulated and must know who can make payments using our APIs.
 
-The merchant portal shows the accounting partners for each sales unit.
-Merchants must add accounting partners and give them access to a sales unit on
-[portal.vipps.no](https://portal.vipps.no).
+Merchants must specify which ledgers the accounting partner will have access to on
+[portal.vipps.no](https://portal.vipps.no)
+as described here:
+[Give access to an accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner).
 
 ![Overview over accounting-partners](../images/portal-accounting-partners-overview.png)
 
-Merchants must specify which ledgers the accounting partner will have access to.
+The merchant portal shows the accounting partner(s) for each sales unit.
+A merchant can have any number accounting partners, and it's possible to have multiple accounting partners for each sales unit.
 
 ![Add a new accounting-partner](../images/portal-accounting-partners-edit.png)
+
+Accounting partners must use their
+[accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/#types-of-partner-keys).
+
+Accounting companies can use the
+[form on vipps.no](https://www.vipps.no/developer/become-a-partner/)
+to become an accounting partner.
+
