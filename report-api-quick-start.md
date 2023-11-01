@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 # Quick start
 
-![Vipps](../images/vipps.png) *Version 2 is available. Version 1 is deprecated.*
+![Vipps](./images/vipps.png) *Version 2 is available. Version 1 is deprecated.*
 
 ## Before you begin
 
