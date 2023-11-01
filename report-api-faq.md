@@ -24,7 +24,7 @@ The
 [SFTP Report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
 lets merchants and partners download settlement files by SFTP.
 
-The Report API has several benefits over the SFTP sercvice:
+The Report API has several benefits over the SFTP service:
 
 * Accounting partners have one set of API keys for all their merchants:
   [Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/#types-of-partner-keys).
