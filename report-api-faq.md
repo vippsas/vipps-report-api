@@ -211,7 +211,7 @@ for the payment. See:
 - eCom API: [Get payment details]](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api/#get-payment-details)
 - ePayment API: [Get payment](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_info/)
   and [Get payment event log](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_event_log/)
-- Recurring API: [Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api/#retrieve-a-charge)
+- Recurring API: [Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide/#retrieve-a-charge)
 
 If you use the
 [Order Management API](https://developer.vippsmobilepay.com/docs/APIs/order-management-api/)
