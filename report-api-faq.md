@@ -24,7 +24,7 @@ The
 [SFTP Report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service)
 lets merchants and partners download settlement files by SFTP.
 
-The Report API has some benefits over this:
+The Report API has several benefits over the SFTP sercvice:
 
 * Accounting partners have one set of API keys for all their merchants:
   [Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/#types-of-partner-keys).
@@ -60,6 +60,16 @@ to provide this access and consent to sharing the sata with the accounting partn
 No, please see
 [Why does a merchant need to log in on portal.vipps.no to select accounting partner?](#why-does-a-merchant-need-to-log-in-on-portalvippsno-to-select-accounting-partner).
 
+## Can one sales unit have multiple accounting partners?
+
+Yes. One sales unit may give access to several accounting partners,
+and the "accounting partner" may be a CRM systems vendor or something other than
+a pure _accounting_ vendor.
+
+As long as the external party has applied to become a partner, and is visible in
+the list of accounting partners, the merchant may give it access to one or more sales
+units.
+
 ## What information can I get hold of?
 
 Right now the only data that is available is the same data that is already
@@ -77,8 +87,8 @@ that have API access (which *Vippsnummer* sale units do not have.)
 
 ## Can I get realtime data?
 
-No. The Report API _may_ be extended to contain more information later, and this FAQ
-will be updated if there are any changes.
+No. The Report API _may_ be extended to contain more information later,
+and this FAQ will be updated if there are any changes.
 There are no specific plans to do this yet.
 
 ## Why are the users' names, transaction texts, etc. not available in the Report API?
@@ -94,8 +104,8 @@ and therefore require consent from the merchant. This consent may be given on
 [portal.vipps.no](https://portal.vipps.no),
 but not when using the Report API.
 
-The Report API _may_ be extended to contain more information later, and this FAQ
-will be updated if there are any changes.
+The Report API _may_ be extended to contain more information later,
+and this FAQ will be updated if there are any changes.
 There are no specific plans to do this yet.
 
 ## Is the Report API available for the test environment?
@@ -117,12 +127,10 @@ It is unlikely that we'll be able to prioritize this over other development effo
 
 ## Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
 
-This is not possibly currently.
-
-For now, the only way to get the Ledger ID is to call
+No. For now, the only way to get the Ledger ID is to call
 [`GET:settlement/v1/ledgers`][get-ledgers-endpoint].
 
-The Ledger ID does not in general change, so you may store it in configuration
+The Ledger ID does not (in general) change, so you may store it in configuration
 in the same way that you store the MSN.
 We may add display of the Ledger ID on
 [portal.vipps.no](https://portal.vipps.no)
@@ -130,12 +138,13 @@ in the future.
 
 ## What text is shown for the payouts in my bank?
 
-We send text on this format to all banks: `Utb. <settlement_number> Vippsnr <serial_no>`.
+We send text on this format to all banks:
+`Utb. <settlement_number> Vippsnr <serial_no>`.
 
 Example: `Utb. 2000810 Vippsnr 117703`.
 
 We have no control over, or information about, how banks handle this on their side,
-or how it is displayed in reports online or in print.
+or how it is displayed in their reports online or in print.
 
 The file format used to transfer information to the bank is the
 [ISO 20022](https://www.iso20022.org)
@@ -156,7 +165,8 @@ The payout details can be found with these endpoints, where `{topic}` is `funds`
 
 Match the settlement ID in the bank with `pspReference`.
 
-The Report API is designed to provide updated data independently of the bank payments. There are several reasons for this, including:
+The Report API is designed to provide updated data independently of the bank payments.
+There are several reasons for this, including:
 
 1. A merchant can have a negative balance and not get settlement payouts for a long time.
    Periodic checks of settlements would thus not make sense until the merchant has a positive again.
@@ -191,6 +201,28 @@ This is only available on
 but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
+## How can I get the details for each payment?
+
+The Report API is primarily for accounting partners who will use the API to integrate
+with their accounting systems, allowing them to provide the accounting information to their merchants.
+
+The API used to initiate the payment may be used to get the details
+for the payment. See:
+- eCom API: [Get payment details]](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api/#get-payment-details)
+- ePayment API: [Get payment](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_info/)
+  and [Get payment event log](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_event_log/)
+- Recurring API: [Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide/#retrieve-a-charge)
+
+If you use the
+[Order Management API](https://developer.vippsmobilepay.com/docs/APIs/order-management-api/)
+you can retrieve all details from there too:
+[Fetch Category and Receipt](https://developer.vippsmobilepay.com/docs/APIs/order-management-api/order-management-api-guide/#fetching-category-and-receipt).
+This includes all the receipt details with all the order lines.
+
+The Report API _may_ be extended to contain more information later,
+and this FAQ will be updated if there are any changes.
+There are no specific plans to do this yet.
+
 ## How do I get the settlements for multiple MSNs in the same ledger?
 
 Joint settlement for multiple MSNs is supported, and may be relevant
@@ -198,92 +230,40 @@ in cases such as:
 
 * You are changing the technical integration and getting a new MSN
   for this purpose, but you do not want to disrupt the settlement
-  series
+  series.
 * You are launching a Point of Sale system in many physical distinct
   stores that should have different MSNs, but want to have
   combined settlements for these.
 
-In practice, this feature is little used in a few pilot cases, and
-configuration is not yet generally available.
+In practice, this feature is little used in a few pilot cases,
+and configuration is not yet generally available.
 However, accounting partners should take into account that this feature
 *could* see more use in the future when integrations are developed.
 
 ## If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
 
 Once a transaction has appeared on a ledger, it belongs to that ledger forever.
+
 When an MSN is moved to another ledger, it means that *future* transactions
 will appear on the new ledger. The old transactions appear on the old ledger,
 since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
 
 ## Where can I find the settlement ID?
 
-The "payout" corresponds to the `SettlementID` from the
+The `payout` corresponds to the `SettlementID` from the
 [XML](https://developer.vippsmobilepay.com/docs/settlements/#xmlsettlements/xml)
 files in the
 [SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
-## How can a merchant get access to the API?
+## How can a merchant or partner get access to the API?
 
-The API is available for sales units that already have access to any other Vipps MobilePay API.
-
-If you do not already have API access, you cannot get access to the Report API.
-This is the case if you only have a *Vippsnummer* sales unit, since those
-sales units have no API access.
-
-## How can an accounting partner get access to the API?
-
-Accounting partners must use their
-[accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/#types-of-partner-keys).
-
-**Important:** Merchants are not allowed to share API keys with partners that have not been approved by
-Vipps MobilePay, as we are strictly regulated and must know who can make payments using our APIs.
-
-Accounting companies can use the
-[form on vipps.no](https://www.vipps.no/developer/become-a-partner/)
-to become an accounting partner.
-
-Merchants select their accounting partner on portal.vipps.no as described here:
-[Give access to an accounting partner](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/#give-access-to-an-accounting-partner).
+See:
+[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
 
 ## Which API keys give access to the API?
 
-The following API keys give access to the Report API:
-
-* The merchant's own API keys: The same API keys that are used to make payments, etc. See
-  [API keys](https://developer.vippsmobilepay.com/docs/knowledge-base/api-keys).
-  Only the merchant can use these API keys with the Report API.
-
-In the future, *approximately Q4 2023*,
-[Accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys) will provide access.
-The API keys provided to the accounting partner
-when the partner signed a contract with Vipps MobilePay. The accounting partner's
-API keys only work for sales units after the merchant has
-[given access to the accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner).
-
-
-### The merchant's own API keys
-
-The merchant's own API keys give full access to the Report API.
-
-If the merchant uses an integration partner (see
-[partner types](https://developer.vippsmobilepay.com/docs/partner#partner-types)),
-it is the same as using the merchant's own API keys.
-
-When a merchant shares its API keys for a sales unit with an integration partner,
-we have no way of knowing whether the API calls are made by the merchant or
-the integration partner.
-This is why we require that all API requests made by a partner on behalf of a
-merchant are done using the partner's own API keys (the accounting keys).
-
-### Specifying an accounting partner
-
-In addition to the above, the merchant may add one or more accounting partners.
-An accounting partner will get access to the Report API, but will not be allowed
-to make payments, or move money in any way. The accounting partner can only see
-reports of the payments that have been made.
-
 See:
-[Give access to an accounting partner](./api-guide/overview.md#give-access-to-an-accounting-partner)
+[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
 
 ## Why do I get an empty list in response when calling one of the endpoints?
 
