@@ -49,6 +49,11 @@ paths:
           "settlesForRecipientHandles": [ "NO:123455" ]
         }
         ```
+        It is possible to have merchant configurations where
+        settlements for more than one ePayment MSN in the same settlements,
+        in this case the list has more than one element.
+        This is not a typical configuration and for the majority merchants
+        the lists above only has one element.
 
         The full response example below displays the ePayment and eCom case.
 
@@ -410,12 +415,16 @@ components:
                 example: "eyJsZWRnZXJJZCI6Inh4eCIsInN0YXJ0VHJhbnNhY3Rpb25JZCI6IjAwMDAwMDAwMDEiLCJzdGFydFRpbWUiOiIyMDIwLTExLTIwVDE0OjEzOjM4LjU3MDgzN1oiLCJlbmRUaW1lIjpudWxsLCJzdGFydExlZGdlckRhdGUiOiIyMDIwLTExLTIwIiwiZW5kTGVkZ2VyRGF0ZSI6bnVsbH0="
                 description: |-
                   A cursor that can be used to fetch the next transactions.
-                  It is empty if there are no more rows to fetch after the current one.
-                  You can insert this value into the url as part of the cursor parameter.
-              items:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Transaction"
+                  You insert this value into the url as part of the cursor parameter.
+                  This property is always present on the `.../feed` endpoint and will always
+                  have a value that can be used to try to fetch more data.
+                  On the `.../dates` endpoint, it is only present if `hasMore` is true.
+              hasMore:
+                type: boolean
+                example: false
+                description: |-
+                  Only present on the `.../dates/...` endpoint. Indicates whether the client needs to do another
+                  request with the given `cursor` to fetch the next page of data.
               tryLater:
                 type: boolean
                 example: false
@@ -426,6 +435,10 @@ components:
                   like normal. For the `.../dates/...` endpoint, it means that the date has not
                   yet been "closed" so that the report is not complete; try the same request
                   again in at least half an hour.
+              items:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Transaction"
     500:
       description: Server error
       content:
@@ -495,11 +508,13 @@ components:
           $ref: "#/components/schemas/Organization"
         settlesForRecipientHandles:
           type: array
+          description: |-
+            Identifies the points of sale that this Ledger will settle
+            for. This can either be an ePayment MSN, prefixed by `api:`,
+            or a Vippsnummer/MyShop number, prefixed by `NO:`, `DK:` or `FI:`
+            depending on country.
           items:
             type: string
-            description: |-
-              Identification of the sales unit that this payment was made to/from.
-              Contains a country code and ID, separated by a colon (':').
             example: "NO:123455"
     Problem:
       title: Problem
