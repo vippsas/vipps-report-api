@@ -51,6 +51,8 @@ To learn about API versioning, see
 
 ## History
 
+* November 2023:
+    * Added the `hasMore` field to [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint] to reduce learning curve of API
 * September 2023: Launched final non-Beta version of the Report API, which is named `report/v2`. Version 1 is deprecated.
 * November 2022: Launched Beta of Report API, `report/v1`.
 
