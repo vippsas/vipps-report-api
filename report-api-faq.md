@@ -276,3 +276,12 @@ If you keep getting an empty list in a response where you expect data to be avai
 [get-ledgers-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/settlementv1/operation/getLedgers
 [fetch-report-by-date-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1dates~1%7BledgerDate%7D/get
 [fetch-report-by-feed-endpoint]:https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get
+
+
+## Why is recipientHandle `null`?
+
+This can be for two reasons:
+
+* Not all entry types have this property. For instance `scheduled-for-payout` and `fees-retained` do not have it.
+* For older data (from before 2022), some payment metadata is missing from our API, including `recipientHandle`.
+

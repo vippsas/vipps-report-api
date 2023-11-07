@@ -9,7 +9,7 @@ pagination_next: Null
 
 # Authenticating to the Report API
 
-![Vipps](../images/vipps.png) *Version 1 is deprecated. Version 2 will be available in October 2023.*
+![Vipps](../images/vipps.png) *Version 2 is available. Version 1 is deprecated.*
 
 **Please note:**
 The Report API is primarily for accounting partners who will use the API to integrate
