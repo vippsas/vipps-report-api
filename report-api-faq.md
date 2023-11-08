@@ -163,7 +163,10 @@ The payout details can be found with these endpoints, where `{topic}` is `funds`
 * [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
 * [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
 
-Match the settlement ID in the bank with `pspReference`.
+Match the `reference` in the bank statement with the `pspReference` in the Report API.
+When you retrieve a series of payments with
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get)
+in the Report API, each payment’s `pspReference` is the `reference` for the bank payout.
 
 The Report API is designed to provide updated data independently of the bank payments.
 There are several reasons for this, including:
@@ -176,6 +179,9 @@ There are several reasons for this, including:
    need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
    (if there are no fees). Now: What captures will then be part of that settlement?
 1. We may, in rare cases, manually correct payouts.
+
+See:
+[A report for each payout?](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/#a-report-for-each-payout)
 
 ## How can I get the data for VM-number sales units with shopping basket?
 

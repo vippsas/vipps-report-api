@@ -363,7 +363,8 @@ same data. If something needs to be corrected, this will be done by adding new
 correction entries, leaving the old incorrect entries unmodified.
 
 Note however that through upgrades to the API, more types of data (more columns/JSON fields)
-may become available in historical reports.
+may become available in historical reports. See:
+[API Lifecycle](https://developer.vippsmobilepay.com/docs/knowledge-base/api-lifecycle/).
 
 ### Reporting periods
 
