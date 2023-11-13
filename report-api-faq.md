@@ -164,9 +164,9 @@ The payout details can be found with these endpoints, where `{topic}` is `funds`
 * [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
 
 Match the reference on the transfer from your bank statement with the `reference` in the Report API.
-When you retrieve a series of payments with
+When you retrieve a series of payments (made by users in the app) with
 [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get)
-in the Report API, each payment’s `pspReference` is the `reference` for the bank payout.
+in the Report API, each of those payments' `pspReference` is the `reference` for the bank payout.
 
 The Report API is designed to provide updated data independently of the bank payments.
 There are several reasons for this, including:
