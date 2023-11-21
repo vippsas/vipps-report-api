@@ -48,19 +48,31 @@ The Report API has several benefits over the SFTP service:
 * The data is in JSON format, making it easy to use in different ways.
   * The SFTP service offered XML, XSLX, CSV and PDF, but most users now want JSON.
 
-## Why does a merchant need to log in on portal.vipps.no to select accounting partner?
+## How to get access
+
+## How can a merchant or partner get access to the API?
+
+See:
+[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
+
+## Which API keys give access to the API?
+
+See:
+[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
+
+### Why does a merchant need to log in on portal.vipps.no to select accounting partner?
 
 An accounting partner gets access to the merchant's sales unit's data.
 We require the merchant to log in securely on
 [portal.vipps.no](https://portal.vipps.no)
-to provide this access and consent to sharing the sata with the accounting partner.
+to provide this access and consent to sharing the data with the accounting partner.
 
-## Can a partner specify the accounting partner for a sales unit?
+### Can a partner specify the accounting partner for a sales unit?
 
 No, please see
-[Why does a merchant need to log in on portal.vipps.no to select accounting partner?](#why-does-a-merchant-need-to-log-in-on-portalvippsno-to-select-accounting-partner).
+[Why does a merchant need to log in on portal.vipps.no to select accounting partner?](#why-does-a-merchant-need-to-log-in-on-portalvippsno-to-select-accounting-partner)
 
-## Can one sales unit have multiple accounting partners?
+### Can one sales unit have multiple accounting partners?
 
 Yes. One sales unit may give access to several accounting partners,
 and the "accounting partner" may be a CRM systems vendor or something other than
@@ -70,45 +82,7 @@ As long as the external party has applied to become a partner, and is visible in
 the list of accounting partners, the merchant may give it access to one or more sales
 units.
 
-## What information can I get hold of?
-
-Right now the only data that is available is the same data that is already
-available in the settlement reports on
-[portal.vipps.no](https://portal.vipps.no),
-or on
-[SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
-
-The only difference is that the data can be fetched over a more modern REST API.
-We aim to provide more information through this API in the future.
-
-**Important:** It is not yet possible to use the Report API to retrieve data
-for *Vippsnummer* sale units. The Report API can only be used to sale units
-that have API access (which *Vippsnummer* sale units do not have.)
-
-## Can I get realtime data?
-
-No. The Report API _may_ be extended to contain more information later,
-and this FAQ will be updated if there are any changes.
-There are no specific plans to do this yet.
-
-## Why are the users' names, transaction texts, etc. not available in the Report API?
-
-The Report API is primarily for accounting partners who will use the API to integrate
-with their accounting systems, allowing them to provide the accounting information to their merchants.
-
-The reports on
-[portal.vipps.no](https://portal.vipps.no)
-provide more details.
-The users' names, transaction texts and other information may be regulated by GDPR
-and therefore require consent from the merchant. This consent may be given on
-[portal.vipps.no](https://portal.vipps.no),
-but not when using the Report API.
-
-The Report API _may_ be extended to contain more information later,
-and this FAQ will be updated if there are any changes.
-There are no specific plans to do this yet.
-
-## Is the Report API available for the test environment?
+### Is the Report API available for the test environment?
 
 No. The
 [test environment](https://developer.vippsmobilepay.com/docs/test-environment)
@@ -125,73 +99,36 @@ as there are no settlements being made in that environment. The data that
 the Report API needs is simply not available.
 It is unlikely that we'll be able to prioritize this over other development efforts.
 
-## Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
+## What information can I get hold of?
 
-No. For now, the only way to get the Ledger ID is to call
-[`GET:settlement/v1/ledgers`][get-ledgers-endpoint].
+Right now the only data that is available is the same data that is already
+available in the settlement reports on
+[portal.vipps.no](https://portal.vipps.no),
+or on
+[SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
-The Ledger ID does not (in general) change, so you may store it in configuration
-in the same way that you store the MSN.
-We may add display of the Ledger ID on
-[portal.vipps.no](https://portal.vipps.no)
-in the future.
+The only difference is that the data can be fetched over a more modern REST API.
+We aim to provide more information through this API in the future.
 
-## What text is shown for the payouts in my bank?
+**Important:** It is not yet possible to use the Report API to retrieve data
+for *Vippsnummer* sale units. The Report API can only be used to sale units
+that have API access (which *Vippsnummer* sale units do not have.)
 
-We send text on this format to all banks:
-`Utb. <settlement_number> Vippsnr <serial_no>`.
-
-Example: `Utb. 2000810 Vippsnr 117703`.
-
-We have no control over, or information about, how banks handle this on their side,
-or how it is displayed in their reports online or in print.
-
-The file format used to transfer information to the bank is the
-[ISO 20022](https://www.iso20022.org)
-PAIN (PAyment INitiation) format, which - among other things - has a limit of 35
-characters for the payment text.
-
-## How can I get the details for a payment I see in my bank?
-
-**Please note:** The payout from Vipps MobilePay to the merchant is
-the balance at the time of the payout. The sum in the payout, which is what
-the merchant sees in the bank, does not contain specific payments -
-it is simply the balance at the time the payout was made.
-
-The payout details can be found with these endpoints, where `{topic}` is `funds`:
-
-* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
-* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
-
-Match the settlement ID in the bank with `pspReference`.
-
-The Report API is designed to provide updated data independently of the bank payments.
-There are several reasons for this, including:
-
-1. A merchant can have a negative balance and not get settlement payouts for a long time.
-   Periodic checks of settlements would thus not make sense until the merchant has a positive again.
-1. Merchants have different risk profiles (or could have at least). If we deemed that we would hold
-   back some of the balance from payouts to an airline company.
-   Let's say they sell three tickets at 5000 NOK each. We then change their risk profile saying we
-   need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
-   (if there are no fees). Now: What captures will then be part of that settlement?
-1. We may, in rare cases, manually correct payouts.
-
-## How can I get the data for VM-number sales units with shopping basket?
+### How can I get the data for VM-number sales units with shopping basket?
 
 This is only available on
 [portal.vipps.no](https://portal.vipps.no),
 but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
-## How can I get the details for my shopping basket products and their different VAT rates?
+### How can I get the details for my shopping basket products and their different VAT rates?
 
 This is only available on
 [portal.vipps.no](https://portal.vipps.no),
 but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
-## How can I get details about my customers' tax deductions?
+### How can I get details about my customers' tax deductions?
 
 This is used for fundraising, where users may give consent to share their
 national identity number and automatically get tax deductions.
@@ -201,7 +138,7 @@ This is only available on
 but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
-## How can I get the details for each payment?
+### How can I get the details for each payment?
 
 The Report API is primarily for accounting partners who will use the API to integrate
 with their accounting systems, allowing them to provide the accounting information to their merchants.
@@ -226,6 +163,83 @@ This includes all the receipt details with all the order lines.
 The Report API _may_ be extended to contain more information later,
 and this FAQ will be updated if there are any changes.
 There are no specific plans to do this yet.
+
+### Can I get realtime data?
+
+No. The Report API _may_ be extended to contain more information later,
+and this FAQ will be updated if there are any changes.
+There are no specific plans to do this yet.
+
+### Why are the users' names, transaction texts, etc. not available in the Report API?
+
+The Report API is primarily for accounting partners who will use the API to integrate
+with their accounting systems, allowing them to provide the accounting information to their merchants.
+
+The reports on
+[portal.vipps.no](https://portal.vipps.no)
+provide more details.
+The users' names, transaction texts and other information may be regulated by GDPR
+and therefore require consent from the merchant. This consent may be given on
+[portal.vipps.no](https://portal.vipps.no),
+but not when using the Report API.
+
+The Report API _may_ be extended to contain more information later,
+and this FAQ will be updated if there are any changes.
+There are no specific plans to do this yet.
+
+### Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
+
+No. For now, the only way to get the Ledger ID is to call
+[`GET:settlement/v1/ledgers`][get-ledgers-endpoint].
+
+The Ledger ID does not (in general) change, so you may store it in configuration
+in the same way that you store the MSN.
+We may add display of the Ledger ID on
+[portal.vipps.no](https://portal.vipps.no)
+in the future.
+
+## Bank payouts
+
+### What text is shown for the payouts in my bank?
+
+We send text on this format to all banks:
+`Utb. <settlement_number> Vippsnr <serial_no>`.
+
+Example: `Utb. 2000810 Vippsnr 117703`.
+
+We have no control over, or information about, how banks handle this on their side,
+or how it is displayed in their reports online or in print.
+
+The file format used to transfer information to the bank is the
+[ISO 20022](https://www.iso20022.org)
+PAIN (PAyment INitiation) format, which - among other things - has a limit of 35
+characters for the payment text.
+
+### How can I get the details for a payment I see in my bank?
+
+**Please note:** The payout from Vipps MobilePay to the merchant is
+the balance at the time of the payout. The sum in the payout, which is what
+the merchant sees in the bank, does not contain specific payments -
+it is simply the balance at the time the payout was made.
+
+The payout details can be found with these endpoints, where `{topic}` is `funds`:
+
+* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
+* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
+
+Match the settlement ID in the bank with `pspReference`.
+
+The Report API is designed to provide updated data independently of the bank payments.
+There are several reasons for this, including:
+
+1. A merchant can have a negative balance and not get settlement payouts for a long time.
+   Periodic checks of settlements would thus not make sense until the merchant has a positive again.
+1. Merchants have different risk profiles (or could have at least). If we deemed that we would hold
+   back some of the balance from payouts to an airline company.
+   Let's say they sell three tickets at 5000 NOK each. We then change their risk profile saying we
+   need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
+   (if there are no fees). Now: What captures will then be part of that settlement?
+1. We may, in rare cases, manually correct payouts.
 
 ## How do I get the settlements for multiple MSNs in the same ledger?
 
@@ -259,17 +273,9 @@ The `payout` corresponds to the `SettlementID` from the
 files in the
 [SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
-## How can a merchant or partner get access to the API?
+## Common problems
 
-See:
-[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
-
-## Which API keys give access to the API?
-
-See:
-[Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
-
-## Why do I get an empty list in response when calling one of the endpoints?
+### Why do I get an empty list in response when calling one of the endpoints?
 
 If you keep getting an empty list in a response where you expect data to be available, you should first check these things before filing an issue:
 
