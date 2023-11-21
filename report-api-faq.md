@@ -50,12 +50,12 @@ The Report API has several benefits over the SFTP service:
 
 ## How to get access
 
-## How can a merchant or partner get access to the API?
+### How can a merchant or partner get access to the API?
 
 See:
 [Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
 
-## Which API keys give access to the API?
+### Which API keys give access to the API?
 
 See:
 [Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
@@ -187,6 +187,31 @@ The Report API _may_ be extended to contain more information later,
 and this FAQ will be updated if there are any changes.
 There are no specific plans to do this yet.
 
+## How do I get the settlements for multiple MSNs in the same ledger?
+
+Joint settlement for multiple MSNs is supported, and may be relevant
+in cases such as:
+
+* You are changing the technical integration and getting a new MSN
+  for this purpose, but you do not want to disrupt the settlement
+  series.
+* You are launching a Point of Sale system in many physical distinct
+  stores that should have different MSNs, but want to have
+  combined settlements for these.
+
+In practice, this feature is little used in a few pilot cases,
+and configuration is not yet generally available.
+However, accounting partners should take into account that this feature
+*could* see more use in the future when integrations are developed.
+
+## If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
+
+Once a transaction has appeared on a ledger, it belongs to that ledger forever.
+
+When an MSN is moved to another ledger, it means that *future* transactions
+will appear on the new ledger. The old transactions appear on the old ledger,
+since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
+
 ### Can a merchant find the Ledger ID for an MSN on portal.vipps.no?
 
 No. For now, the only way to get the Ledger ID is to call
@@ -215,6 +240,14 @@ The file format used to transfer information to the bank is the
 PAIN (PAyment INitiation) format, which - among other things - has a limit of 35
 characters for the payment text.
 
+### Where can I find the settlement ID?
+
+The `payout` corresponds to the `SettlementID` from the
+[XML](https://developer.vippsmobilepay.com/docs/settlements/#xmlsettlements/xml)
+files in the
+[SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
+
+
 ### How can I get the details for a payment I see in my bank?
 
 **Please note:** The payout from Vipps MobilePay to the merchant is
@@ -240,38 +273,6 @@ There are several reasons for this, including:
    need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
    (if there are no fees). Now: What captures will then be part of that settlement?
 1. We may, in rare cases, manually correct payouts.
-
-## How do I get the settlements for multiple MSNs in the same ledger?
-
-Joint settlement for multiple MSNs is supported, and may be relevant
-in cases such as:
-
-* You are changing the technical integration and getting a new MSN
-  for this purpose, but you do not want to disrupt the settlement
-  series.
-* You are launching a Point of Sale system in many physical distinct
-  stores that should have different MSNs, but want to have
-  combined settlements for these.
-
-In practice, this feature is little used in a few pilot cases,
-and configuration is not yet generally available.
-However, accounting partners should take into account that this feature
-*could* see more use in the future when integrations are developed.
-
-## If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
-
-Once a transaction has appeared on a ledger, it belongs to that ledger forever.
-
-When an MSN is moved to another ledger, it means that *future* transactions
-will appear on the new ledger. The old transactions appear on the old ledger,
-since they contributed to joint settlement payouts of both MSN 1 and MSN 2.
-
-## Where can I find the settlement ID?
-
-The `payout` corresponds to the `SettlementID` from the
-[XML](https://developer.vippsmobilepay.com/docs/settlements/#xmlsettlements/xml)
-files in the
-[SFTP report (deprecated)](https://developer.vippsmobilepay.com/docs/settlements/sftp-report-service).
 
 ## Common problems
 
