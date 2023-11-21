@@ -111,8 +111,8 @@ The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
 **Important:** It is not yet possible to use the Report API to retrieve data
-for *Vippsnummer* sale units. The Report API can only be used to sale units
-that have API access (which *Vippsnummer* sale units do not have.)
+for *Vippsnummer* sales units. The Report API can only be used to fetch data for sales units
+that have API access (which *Vippsnummer* sales units do not have.)
 
 ### How can I get the data for VM-number sales units with shopping basket?
 
