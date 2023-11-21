@@ -47,8 +47,8 @@ If you are new to the platform, see
 
 ## Sales units that do not have API access
 
-It is not possible for a merchants to use the Report API directly with Vippsnummer sales units,
-since there is no API access.
+It is not possible for merchants to use the Report API directly with Vippsnummer sales units,
+since the sales unit doesn't have API access.
 
 Although Vippsnummer sales units don't have API access, they can designate an accounting partner that does.
 Their accounting partner can then use the Report API to provide them with their accounting information.
