@@ -267,12 +267,12 @@ There are several reasons for this, including:
 
 1. A merchant can have a negative balance and not get settlement payouts for a long time.
    Periodic checks of settlements would thus not make sense until the merchant has a positive again.
-1. Merchants have different risk profiles (or could have at least). If we deemed that we would hold
+2. Merchants have different risk profiles (or could have at least). If we deemed that we would hold
    back some of the balance from payouts to an airline company.
    Let's say they sell three tickets at 5000 NOK each. We then change their risk profile saying we
    need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
    (if there are no fees). Now: What captures will then be part of that settlement?
-1. We may, in rare cases, manually correct payouts.
+3. We may, in rare cases, manually correct payouts.
 
 ## Common problems
 
