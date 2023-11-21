@@ -208,7 +208,7 @@ with their accounting systems, allowing them to provide the accounting informati
 
 The Report API does provide information about individual payments made by users in the app, in the
 aggregated response to
-[GET:/report/v2/ledgers/{ledgerId}/{topic}/feed](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get).
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get).
 There is no dedicated endpoint to retrieve details for payments one-by-one, specified by id, etc.
 
 The API used to initiate the payment may be used to get the details for the payment. See:
