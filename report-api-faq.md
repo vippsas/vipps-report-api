@@ -187,7 +187,7 @@ The Report API _may_ be extended to contain more information later,
 and this FAQ will be updated if there are any changes.
 There are no specific plans to do this yet.
 
-## How do I get the settlements for multiple MSNs in the same ledger?
+### How do I get the settlements for multiple MSNs in the same ledger?
 
 Joint settlement for multiple MSNs is supported, and may be relevant
 in cases such as:
@@ -204,7 +204,7 @@ and configuration is not yet generally available.
 However, accounting partners should take into account that this feature
 *could* see more use in the future when integrations are developed.
 
-## If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
+### If a ledger is used for two MSN: MSN 1 and MSN 2. What happens when MSN 2 gets its own ledger?
 
 Once a transaction has appeared on a ledger, it belongs to that ledger forever.
 
