@@ -19,6 +19,9 @@ import TabItem from '@theme/TabItem';
 
 Be aware that these are running on the production server, [https://api.vipps.no](https://api.vipps.no).
 
+**Please note:*  The Management API is not available in the test environment. See
+[Limitations of the test environment](https://developer.vippsmobilepay.com/docs/test-environment/#limitations-of-the-test-environment).
+
 🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
 
 The provided example values in this guide must be changed with the values for your sales unit and user.

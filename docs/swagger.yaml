@@ -14,7 +14,6 @@ info:
     For details, see the [Report API Guide](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/).
   version: '2.0'
 servers:
-  - url: https://apitest.vipps.no
   - url: https://api.vipps.no
 tags: []
 paths:

@@ -212,16 +212,20 @@ There are no specific plans to do this yet.
 The Report API is primarily for accounting partners who will use the API to integrate
 with their accounting systems, allowing them to provide the accounting information to their merchants.
 
-The API used to initiate the payment may be used to get the details
-for the payment. See:
-- eCom API: [Get payment details]](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api/#get-payment-details)
+The Report API does provide information about individual payments made by users in the app, in the
+aggregated response to
+[`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get).
+There is no dedicated endpoint to retrieve details for payments one-by-one, specified by id, etc.
+
+The API used to initiate the payment may be used to get the details for the payment. See:
+- eCom API: [Get payment details](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api/#get-payment-details)
 - ePayment API: [Get payment](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_info/)
   and [Get payment event log](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_event_log/)
 - Recurring API: [Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide/#retrieve-a-charge)
 
 If you use the
 [Order Management API](https://developer.vippsmobilepay.com/docs/APIs/order-management-api/)
-you can retrieve all details from there too:
+you can retrieve details from there too:
 [Fetch Category and Receipt](https://developer.vippsmobilepay.com/docs/APIs/order-management-api/order-management-api-guide/#fetching-category-and-receipt).
 This includes all the receipt details with all the order lines.
 
