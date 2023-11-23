@@ -65,7 +65,6 @@ The property `access_token` should be used for all other API requests in the `Au
 
 ### Step 3 - Get all ledgers
 
-**Please note:** This is for v1. V2 is being prepared now.
 Send
 [`GET:/settlement/v1/ledgers`](https://developer.vippsmobilepay.com/api/report#/paths/~1settlement~1v1~1ledgers/get)
 to get the ledgers you have access to.
