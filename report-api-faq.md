@@ -263,24 +263,50 @@ the balance at the time of the payout. The sum in the payout, which is what
 the merchant sees in the bank, does not contain specific payments -
 it is simply the balance at the time the payout was made.
 
-The payout details can be found with these endpoints, where `{topic}` is `funds`:
-
-* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
-* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
-
-Match the settlement ID in the bank with `pspReference`.
-
-The Report API is designed to provide updated data independently of the bank payments.
+The Report API is designed to provide updated data _independently_ of the bank payouts.
 There are several reasons for this, including:
 
 1. A merchant can have a negative balance and not get settlement payouts for a long time.
    Periodic checks of settlements would thus not make sense until the merchant has a positive again.
 2. Merchants have different risk profiles (or could have at least). If we deemed that we would hold
    back some of the balance from payouts to an airline company.
-   Let's say they sell three tickets at 5000 NOK each. We then change their risk profile saying we
-   need to hold back 7500 NOK and then the settlement run. We will then pay out 7500 NOK
+   Let's say they sell three tickets at 5000 NOK each, for a sum of 15,000 NOK.
+   We then change their risk profile for the merchant, saying we need to hold back 7500 NOK,
+   and then the settlement runs. We will then pay out only 7500 NOK of the 15,000 NOK
    (if there are no fees). Now: What captures will then be part of that settlement?
+   It's simply not possible to say.
 3. We may, in rare cases, manually correct payouts.
+
+The payout details for each payment can be found with these endpoints,
+where `{topic}` is `funds`:
+
+* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
+* [`GET:/report/v2/ledgers/{ledgerId}/{topic}/feed`][fetch-report-by-feed-endpoint]
+
+Examples:
+* `GET:/report/v2/ledgers/12345/dates/2023-31-12`
+* `GET:/report/v2/ledgers/12345/funds/feed`
+
+The response will contain information similar to this for each payment:
+
+```json
+"items":[
+   {
+      "pspReference":"3343121302",
+      "time":"2020-10-05T10:21:54.141089+0200",
+      "ledgerDate":"2020-10-05",
+      "entryType":"refund",
+      "reference":"acme-shop-123-order123abc",
+      "currency":"NOK",
+      "amount":49900,
+      "balanceBefore":49900,
+      "balanceAfter":49900,
+      "recipientHandle":"NO:123455"
+   }
+]
+```
+
+The `pspReference` is the same as the settlement ID shown in the bank.
 
 ## Common problems
 
