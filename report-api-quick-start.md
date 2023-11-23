@@ -17,12 +17,12 @@ import TabItem from '@theme/TabItem';
 
 ## Before you begin
 
-Be aware that these are running on the production server, [https://api.vipps.no](https://api.vipps.no).
-
 **Please note:*  The Management API is not available in the test environment. See
 [Limitations of the test environment](https://developer.vippsmobilepay.com/docs/test-environment/#limitations-of-the-test-environment).
 
-🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
+Be aware that the API requests mentioned here are running on the production server, [https://api.vipps.no](https://api.vipps.no).
+
+🔥 **To reduce the risk of exposure, never store production API keys in Postman or any similar tools.** 🔥
 
 The provided example values in this guide must be changed with the values for your sales unit and user.
 This applies for API keys, HTTP headers, reference, phone number, etc.
@@ -37,10 +37,10 @@ your test credentials from the merchant portal.
 You will need the following values, as described in the
 [Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started):
 
-* `client_id` - Client_id for a test sales unit.
-* `client_secret` - Client_id for a test sales unit.
-* `Ocp-Apim-Subscription-Key` - Subscription key for a test sales unit.
-* `merchantSerialNumber` - The unique ID for a test sales unit.
+* `client_id` - client_id for a sales unit.
+* `client_secret` - client_id for a sales unit.
+* `Ocp-Apim-Subscription-Key` - Subscription key for a sales unit.
+* `merchantSerialNumber` - The unique ID for a sales unit.
 
 ### Step 2 - Authentication
 
