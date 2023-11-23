@@ -377,9 +377,14 @@ diagram:
 The
 [`GET:/report/v2/ledgers/{ledgerId}/{topic}/dates/{ledgerDate}`][fetch-report-by-date-endpoint]
 endpoint offers a complete report per *ledger date*; indicated by blue in the diagram
-above. Normally, a ledger date
-lasts from midnight to midnight in the timezone of the merchant, but it
-can be configured to other cutoffs such as 04:00 to 04:00.
+above. 
+
+Normally, a ledger date lasts from midnight to midnight in the timezone of the merchant,
+but it can be configured to other cutoffs such as 04:00 to 04:00.
+To configure the cutoff: Please contact your key account manager, partner manager,
+or use the
+[contact us](https://developer.vippsmobilepay.com/docs/contact/)
+page. It is not (yet) possible for a merchant or partner to configure this.
 
 On this endpoint, no data is available until the entire ledger date is complete.
 Your code should be written to periodically poll for a report for the next
