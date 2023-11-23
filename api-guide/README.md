@@ -381,7 +381,8 @@ above.
 
 Normally, a ledger date lasts from midnight to midnight in the timezone of the merchant,
 but it can be configured to other cutoffs such as 04:00 to 04:00.
-To configure the cutoff: Please contact your key account manager, partner or use the
+To configure the cutoff: Please contact your key account manager, partner manager,
+or use the
 [contact us](https://developer.vippsmobilepay.com/docs/contact/)
 page. It is not (yet) possible for a merchant or partner to configure this.
 
