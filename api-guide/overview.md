@@ -14,12 +14,17 @@ pagination_next: Null
 **Please note:**
 The Report API is primarily for accounting partners who will use the API to integrate
 with their accounting systems, allowing them to provide the accounting information to their merchants.
-Accounting partners use their
-[accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/),
-and are not allowed to use the merchant's own API keys.
-Merchants can then simply
-[give access to the accounting partner](#give-access-to-an-accounting-partner),
-without doing any development themselves.
+* Accounting partners use their
+ [accounting keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/),
+ and are not allowed to use the merchant's own API keys.
+* Merchants can then simply
+ [give access to the accounting partner](#give-access-to-an-accounting-partner),
+ without doing any development themselves.
+
+## Partners with accounting keys
+
+See:
+[Access token API: Partner authorization](https://developer.vippsmobilepay.com/docs/APIs/access-token-api/#partner-authorization).
 
 ## Sales units that have API access
 
@@ -41,6 +46,9 @@ If you are new to the platform, see
 [Getting started](https://developer.vippsmobilepay.com/docs/getting-started).
 
 ## Sales units that do not have API access
+
+It is not possible for merchants to use the Report API directly with Vippsnummer sales units,
+since the sales unit doesn't have API access.
 
 Although Vippsnummer sales units don't have API access, they can designate an accounting partner that does.
 Their accounting partner can then use the Report API to provide them with their accounting information.
