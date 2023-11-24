@@ -110,6 +110,15 @@ or on
 The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
+**Please note:**
+* The Report API has data from May 2020.
+* The "Transactions" page on
+  [portal.vipps.no](https://portal.vipps.no)
+  has the same limitation.
+* The "Reports" page on
+  [portal.vipps.no](https://portal.vipps.no)
+  has all data.
+
 **Important:** It is not yet possible to use the Report API to retrieve data
 for *Vippsnummer* sales units. The Report API can only be used to fetch data for sales units
 that have API access (which *Vippsnummer* sales units do not have.)
