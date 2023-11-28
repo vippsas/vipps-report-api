@@ -8,9 +8,9 @@ pagination_next: Null
 
 # API guide
 
-![Vipps](./images/vipps.png) *Version 2 is available now. Version 1 is deprecated.*
+![Vipps](../images/vipps.png) *Version 2 is available now. Version 1 is deprecated.*
 
-![MobilePay](./images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/about).*
+![MobilePay](../images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/about).*
 
 **Please note:**
 The Report API is primarily for accounting partners who will use the API to integrate
