@@ -181,12 +181,19 @@ The Report API _may_ be extended to contain more information later,
 and this FAQ will be updated if there are any changes.
 There are no specific plans to do this yet.
 
-### How can I get a sum of all payments made on one date?
+### How can I get a sum of all payments made on one date or for a date interval?
 
 The Report API does not provide a sum of payments.
 It is possible to add together all the `amount`s for all payments in the list of payments in the response from
 [`GET/report/v2/ledgers/{ledgerId}/{topic}/feed`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get)
 (using `funds` for `topic`).
+
+The API used to initiate the payment may be used to get the details for the payment, and if the
+payment was successful:
+- eCom API: [Get payment details](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api/#get-payment-details)
+- ePayment API: [Get payment](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_info/)
+  and [Get payment event log](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_event_log/)
+- Recurring API: [Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide/#retrieve-a-charge)
 
 The Report API _may_ be extended to contain more information later,
 and this FAQ will be updated if there are any changes.
