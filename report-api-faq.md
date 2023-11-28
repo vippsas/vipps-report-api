@@ -100,6 +100,9 @@ It is unlikely that we'll be able to prioritize this over other development effo
 
 ## What information can I get hold of?
 
+The Report API provides information about all payments that are processed by
+Vipps MobilePay. 
+
 Right now the only data that is available is the same data that is already
 available in the settlement reports on
 [portal.vipps.no](https://portal.vipps.no),
@@ -115,16 +118,19 @@ The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
 **Please note:**
-* The Report API has data from May 2020.
+* The Report API has data from May 2020 _for payments made on the Vipps platform_.
 * The "Transactions" page on
   [portal.vipps.no](https://portal.vipps.no)
   has the same limitation.
 * The "Reports" page on
   [portal.vipps.no](https://portal.vipps.no)
   has all data.
+* For payments made with the Mobilepay APIs (and façades): See the
+  [Reporting API to Report API](https://developer.vippsmobilepay.com/docs/mp-migration-guide/reporting/)
+  migration guide details.
 
 **Important:** It is not possible to use the Report API to retrieve data
-for *Vippsnummer* sales units. The Report API can only be used to fetch data for sales units
+for *Vippsnummer* or sales units. The Report API can only be used to fetch data for sales units
 that have API access (which *Vippsnummer* sales units do not have).
 See:
 [Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
@@ -132,29 +138,15 @@ See:
 See:
 [A report for each payout?](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/#a-report-for-each-payout)
 
-### How can I get the data for VM-number sales units with shopping basket?
+### Can I get data for payments processed by a PSP using the PSP API?
 
-This is only available on
-[portal.vipps.no](https://portal.vipps.no),
-but we may extend the Report API top include more details.
-There are no specific plans to do this yet.
+No. The API does _not_ provide data for payments made with the
+[PSP API](https://developer.vippsmobilepay.com/docs/APIs/psp-api/),
+as those payments are processed by the PSP, and the PSP then sends information to us about the status of the payment.
+The settlement data, etc. must be retrieved from the PSP.
 
-### How can I get the details for my shopping basket products and their different VAT rates?
-
-This is only available on
-[portal.vipps.no](https://portal.vipps.no),
-but we may extend the Report API top include more details.
-There are no specific plans to do this yet.
-
-### How can I get details about my customers' tax deductions?
-
-This is used for fundraising, where users may give consent to share their
-national identity number and automatically get tax deductions.
-
-This is only available on
-[portal.vipps.no](https://portal.vipps.no),
-but we may extend the Report API top include more details.
-There are no specific plans to do this yet.
+See:
+[PSP API: How can I get details for a payment?](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api-faq/#how-can-i-get-details-for-a-payment)
 
 ### How can I get the details for each payment?
 
@@ -203,6 +195,51 @@ but not when using the Report API.
 
 The Report API _may_ be extended to contain more information later,
 and this FAQ will be updated if there are any changes.
+There are no specific plans to do this yet.
+
+### How can I get a sum of all payments made on one date or for a date interval?
+
+The Report API does not provide a sum of payments.
+It is possible to add together all the `amount`s for all payments in the list of payments in the response from
+[`GET/report/v2/ledgers/{ledgerId}/{topic}/feed`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get)
+(using `funds` for `topic`).
+
+The API used to initiate the payment may be used to get the details for the payment, and if the
+payment was successful:
+- eCom API: [Get payment details](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api/#get-payment-details)
+- ePayment API: [Get payment](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_info/)
+  and [Get payment event log](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/operations/get_event_log/)
+- Recurring API: [Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide/#retrieve-a-charge)
+
+The Report API _may_ be extended to contain more information later,
+and this FAQ will be updated if there are any changes.
+There are no specific plans to do this yet.
+
+See
+[How can I get the details for each payment?](#how-can-i-get-the-details-for-each-payment)
+
+### How can I get the data for VM-number sales units with shopping basket?
+
+This is only available on
+[portal.vipps.no](https://portal.vipps.no),
+but we may extend the Report API top include more details.
+There are no specific plans to do this yet.
+
+### How can I get the details for my shopping basket products and their different VAT rates?
+
+This is only available on
+[portal.vipps.no](https://portal.vipps.no),
+but we may extend the Report API top include more details.
+There are no specific plans to do this yet.
+
+### How can I get details about my customers' tax deductions?
+
+This is used for fundraising, where users may give consent to share their
+national identity number and automatically get tax deductions.
+
+This is only available on
+[portal.vipps.no](https://portal.vipps.no),
+but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
 ### How do I get the settlements for multiple MSNs in the same ledger?
