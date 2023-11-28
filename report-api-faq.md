@@ -17,7 +17,6 @@ for all the details.
 For general information and questions, please check in the
 [Knowledge base](https://developer.vippsmobilepay.com/docs/knowledge-base/).
 
-
 ## What are the benefits of the Report API over the SFTP service?
 
 The
