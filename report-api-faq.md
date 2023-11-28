@@ -132,30 +132,6 @@ See:
 See:
 [A report for each payout?](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/#a-report-for-each-payout)
 
-### How can I get the data for VM-number sales units with shopping basket?
-
-This is only available on
-[portal.vipps.no](https://portal.vipps.no),
-but we may extend the Report API top include more details.
-There are no specific plans to do this yet.
-
-### How can I get the details for my shopping basket products and their different VAT rates?
-
-This is only available on
-[portal.vipps.no](https://portal.vipps.no),
-but we may extend the Report API top include more details.
-There are no specific plans to do this yet.
-
-### How can I get details about my customers' tax deductions?
-
-This is used for fundraising, where users may give consent to share their
-national identity number and automatically get tax deductions.
-
-This is only available on
-[portal.vipps.no](https://portal.vipps.no),
-but we may extend the Report API top include more details.
-There are no specific plans to do this yet.
-
 ### How can I get the details for each payment?
 
 The Report API is primarily for accounting partners who will use the API to integrate
@@ -203,6 +179,44 @@ but not when using the Report API.
 
 The Report API _may_ be extended to contain more information later,
 and this FAQ will be updated if there are any changes.
+There are no specific plans to do this yet.
+
+### How can I get a sum of all payments made on one date?
+
+The Report API does not provide a sum of payments.
+It is possible to add together all the `amount`s for all payments in the list of payments in the response from
+[`GET/report/v2/ledgers/{ledgerId}/{topic}/feed`](https://developer.vippsmobilepay.com/api/report/#tag/reportv2ledgers/paths/~1report~1v2~1ledgers~1%7BledgerId%7D~1%7Btopic%7D~1feed/get)
+(using `funds` for `topic`).
+
+The Report API _may_ be extended to contain more information later,
+and this FAQ will be updated if there are any changes.
+There are no specific plans to do this yet.
+
+See
+[How can I get the details for each payment?](#how-can-i-get-the-details-for-each-payment)
+
+### How can I get the data for VM-number sales units with shopping basket?
+
+This is only available on
+[portal.vipps.no](https://portal.vipps.no),
+but we may extend the Report API top include more details.
+There are no specific plans to do this yet.
+
+### How can I get the details for my shopping basket products and their different VAT rates?
+
+This is only available on
+[portal.vipps.no](https://portal.vipps.no),
+but we may extend the Report API top include more details.
+There are no specific plans to do this yet.
+
+### How can I get details about my customers' tax deductions?
+
+This is used for fundraising, where users may give consent to share their
+national identity number and automatically get tax deductions.
+
+This is only available on
+[portal.vipps.no](https://portal.vipps.no),
+but we may extend the Report API top include more details.
 There are no specific plans to do this yet.
 
 ### How do I get the settlements for multiple MSNs in the same ledger?
