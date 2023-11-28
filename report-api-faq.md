@@ -100,6 +100,9 @@ It is unlikely that we'll be able to prioritize this over other development effo
 
 ## What information can I get hold of?
 
+The Report API provides information about all payments that are processed by
+Vipps MobilePay. 
+
 Right now the only data that is available is the same data that is already
 available in the settlement reports on
 [portal.vipps.no](https://portal.vipps.no),
@@ -134,6 +137,16 @@ See:
 
 See:
 [A report for each payout?](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/#a-report-for-each-payout)
+
+### Can I get data for payments processed by a PSP using the PSP API?
+
+No. The API does _not_ provide data for payments made with the
+[PSP API](https://developer.vippsmobilepay.com/docs/APIs/psp-api/),
+as those payments are processed by the PSP, and the PSP then sends information to us about the status of the payment.
+The settlement data, etc. must be retrieved from the PSP.
+
+See:
+[PSP API: How can I get details for a payment?](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api-faq/#how-can-i-get-details-for-a-payment)
 
 ### How can I get the details for each payment?
 
