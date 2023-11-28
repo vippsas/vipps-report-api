@@ -115,16 +115,19 @@ The only difference is that the data can be fetched over a more modern REST API.
 We aim to provide more information through this API in the future.
 
 **Please note:**
-* The Report API has data from May 2020.
+* The Report API has data from May 2020 _for payments made on the Vipps platform_.
 * The "Transactions" page on
   [portal.vipps.no](https://portal.vipps.no)
   has the same limitation.
 * The "Reports" page on
   [portal.vipps.no](https://portal.vipps.no)
   has all data.
+* For payments made with the Mobilepay APIs (and façades): See the
+  [Reporting API to Report API](https://developer.vippsmobilepay.com/docs/mp-migration-guide/reporting/)
+  migration guide details.
 
 **Important:** It is not possible to use the Report API to retrieve data
-for *Vippsnummer* sales units. The Report API can only be used to fetch data for sales units
+for *Vippsnummer* or sales units. The Report API can only be used to fetch data for sales units
 that have API access (which *Vippsnummer* sales units do not have).
 See:
 [Authenticating to the Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/api-guide/overview/).
