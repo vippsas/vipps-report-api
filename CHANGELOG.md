@@ -10,7 +10,7 @@ END_METADATA -->
 
 # Changelog
 
-![Vipps](./images/vipps.png) *Version 1 is deprecated. Version 2 is expected in Q4 2023.*
+![Vipps](./images/vipps.png) *Version 2 is available now. Version 1 is deprecated.*
 
 
 All notable changes to the current API will be documented in this file.
