@@ -116,8 +116,6 @@ paths:
                           "scheme": "BBAN:NO",
                           "id": "86011117947"
                         },
-                        "firstPayout": "2000001",
-                        "lastPayout": "2000045",
                         "owner": {
                           "scheme": "business:NO:ORG",
                           "id": "987654321"
@@ -493,16 +491,6 @@ components:
           example: "302321"
         payoutBankAccount:
           $ref: "#/components/schemas/BankAccount"
-        firstPayout:
-          type: string
-          description: The first payout (bank transfer) in this ledger.
-          nullable: true
-          example: "2000001"
-        lastPayout:
-          type: string
-          description: The last payout (bank transfer) in this ledger.
-          nullable: true
-          example: "2000045"
         owner:
           $ref: "#/components/schemas/Organization"
         settlesForRecipientHandles:
@@ -554,9 +542,9 @@ components:
         time:
           type: string
           description: |-
-            Transaction date and time together with an offset (difference from UTC time in hours).
-          format: DateTimeOffset
-          example: '2020-10-05T10:21:54.141089+0200'
+            Transaction time in UTC.
+          format: DateTime
+          example: '2020-10-05T00:00:00.000000Z'
         ledgerDate:
           type: string
           format: Date in YYYY-MM-DD format.
