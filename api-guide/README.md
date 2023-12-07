@@ -274,8 +274,6 @@ is:
         "scheme": "BBAN:NO",
         "id": "86011117947"
       },
-      "firstPayout": "2000001",
-      "lastPayout": "2000045",
       "owner": {
         "scheme": "business:NO:ORG",
         "id": "987654321"
